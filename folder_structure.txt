@@ -1,0 +1,29 @@
+Directory structure for: /Users/jorgecastellonjr./Dev/personal/hotg-battle/packages/app/features
+==================================================
+
+📁 game
+    📁 Card
+        📁 components
+            📄 EnemyCard.tsx
+            📄 PlayCardModal.tsx
+            📄 RangerCard.tsx
+        📁 data
+            📄 cardDatabase.ts
+        📄 types.ts
+        📁 utils
+            📄 effectProcessor.ts
+    📁 components
+        📄 EnemyRow.tsx
+        📄 RangerHand.tsx
+        📄 RangerStatus.tsx
+        📄 RangerStatusOverview.tsx
+        📄 TopBar.tsx
+    📄 gameState.ts
+    📄 screen.tsx
+    📄 types.ts
+    📁 utils
+        📄 enemyActions.ts
+📁 home
+    📄 screen.tsx
+📁 user
+    📄 detail-screen.tsx
