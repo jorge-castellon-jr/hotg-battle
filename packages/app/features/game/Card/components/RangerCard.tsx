@@ -1,6 +1,6 @@
 import React from 'react'
-import { Stack, YStack, Text } from 'tamagui'
-import { RangerCard } from '../types'
+import { Stack, Text } from 'tamagui'
+import { RangerCard } from '../CardTypes'
 
 interface RangerHandProps {
   card: RangerCard

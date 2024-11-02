@@ -1,4 +1,4 @@
-import { RangerCard, CardEffect } from '../types'
+import { RangerCard, CardEffect } from '../CardTypes'
 
 const leadTheChargeEffect: CardEffect = {
   type: 'addDice',

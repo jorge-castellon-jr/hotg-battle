@@ -1,7 +1,7 @@
 import React from 'react'
 import { Stack } from 'tamagui'
 import EnemyCard from '../Card/components/EnemyCard'
-import { EnemyCard as EnemyCardData } from '../Card/types'
+import { EnemyCard as EnemyCardData } from '../Card/CardTypes'
 
 interface EnemyRowProps {
   enemies: EnemyCardData[]

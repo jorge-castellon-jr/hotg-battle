@@ -1,6 +1,6 @@
 import React from 'react'
 import { XStack } from 'tamagui'
-import { RangerDecks } from '../types'
+import { RangerDecks } from '../GameTypes'
 import RangerStatus from './RangerStatus'
 
 interface RangerStatusOverviewProps {

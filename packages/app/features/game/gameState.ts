@@ -1,7 +1,7 @@
 import { create } from 'zustand'
-import { RangerCard, EnemyCard } from './Card/types'
+import { RangerCard, EnemyCard } from './Card/CardTypes'
 import cardDatabase from './Card/data/cardDatabase'
-import { Ranger, RangerDecks } from './types'
+import { RangerDecks } from './GameTypes'
 
 interface GameState {
   rangerDecks: RangerDecks

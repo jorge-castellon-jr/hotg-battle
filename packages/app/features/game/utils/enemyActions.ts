@@ -1,5 +1,5 @@
 import useGameStore from '../gameState'
-import { EnemyCard } from '../Card/types'
+import { EnemyCard } from '../Card/CardTypes'
 
 export function performEnemyActions() {
   const gameStore = useGameStore.getState()

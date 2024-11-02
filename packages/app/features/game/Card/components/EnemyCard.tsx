@@ -1,6 +1,6 @@
 import React from 'react'
-import { Text, Stack, YStack } from 'tamagui'
-import { EnemyCard as EnemyCardData } from '../types'
+import { Text, YStack } from 'tamagui'
+import { EnemyCard as EnemyCardData } from '../CardTypes'
 
 interface EnemyCardProps {
   enemy: EnemyCardData

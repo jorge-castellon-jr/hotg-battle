@@ -1,6 +1,6 @@
 import React from 'react'
 import { ScrollView, YStack } from 'tamagui'
-import { RangerCard as RangerCardData } from '../Card/types'
+import { RangerCard as RangerCardData } from '../Card/CardTypes'
 import RangerCard from '../Card/components/RangerCard'
 
 interface RangerHandProps {

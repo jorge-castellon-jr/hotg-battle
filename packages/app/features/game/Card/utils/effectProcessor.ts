@@ -1,4 +1,4 @@
-import { CardEffect } from '../types'
+import { CardEffect } from '../CardTypes'
 import useGameStore from '../../gameState'
 
 export function applyEffect(effect: CardEffect) {

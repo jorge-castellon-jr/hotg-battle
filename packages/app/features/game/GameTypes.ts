@@ -1,4 +1,4 @@
-import { EnemyCard, RangerCard } from './Card/types'
+import { EnemyCard, RangerCard } from './Card/CardTypes'
 
 interface RangerAbility {
   name: string

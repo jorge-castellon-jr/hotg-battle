@@ -1,6 +1,6 @@
 import React from 'react'
 import { YStack, XStack, Text, Button } from 'tamagui'
-import { Ranger } from '../types'
+import { Ranger } from '../GameTypes'
 import useGameStore from '../gameState'
 
 interface RangerStatusOverviewProps {
