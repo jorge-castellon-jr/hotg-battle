@@ -1,5 +1,3 @@
-// src/data/cardDatabase.ts
-
 import { RangerCard, CardEffect } from '../types'
 
 const leadTheChargeEffect: CardEffect = {

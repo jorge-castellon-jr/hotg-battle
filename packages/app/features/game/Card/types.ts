@@ -1,5 +1,10 @@
 export type RangerCardType = 'attack' | 'maneuver' | 'reaction'
 
+type Attack = {
+  value: number
+  fixed?: boolean
+}
+
 export interface RangerCard {
   id: string // Unique identifier for the card
   name: string // Card name
@@ -7,10 +12,7 @@ export interface RangerCard {
   shields: number // Shield points
   text: string // Description or additional effect text
   owner: string // Ranger who owns the card (e.g., "Red Ranger")
-  attack?: {
-    value: number
-    fixed?: boolean
-  }
+  attack?: Attack
   effects?: CardEffect[]
 }
 
@@ -36,12 +38,14 @@ export interface CardEffect {
   description: string // User-readable effect description
 }
 
+export type EnemyType = 'fast' | 'passive' | 'guard' | 'basic'
+
 export interface EnemyCard {
-  id: string // Unique identifier for the card
-  name: string // Card name
-  type: 'fast' | 'passive' | 'guard' | 'basic' // Keyword for enemy behavior
-  text: string // Description or additional effect text
-  owner: string // Ranger who owns the card (e.g., "Red Ranger")
+  id: string
+  name: string
+  type: EnemyType // Keyword for behavior
+  text: string
+  owner: string // e.g., "Foot Soldier", "Monster"
   health: number
+  attack?: Attack // Optional if attack type varies
 }
-// src/types.ts
