@@ -25,7 +25,7 @@ const RangerStatusOverview: React.FC<RangerStatusOverviewProps> = ({ ranger, pos
       <Text fontSize="$3">Deck: {ranger.cards.length}</Text>
       <Text fontSize="$3">Energy: {ranger.energyUsed ? 'Used' : 'No'}</Text>
       <Text fontSize="$3">Ability: {ranger.abilityUsed ? 'Used' : 'Available'}</Text>
-      <Button onPressIn={() => drawCard(position)}>Draw</Button>
+      <Button onPress={() => drawCard(position)}>Draw</Button>
     </YStack>
   )
 }
