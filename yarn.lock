@@ -12585,6 +12585,7 @@ __metadata:
     check-dependency-version-consistency: "npm:^4.1.0"
     eslint: "npm:^9.3.0"
     husky: "npm:^9.1.6"
+    lucide-react: "npm:^0.454.0"
     node-gyp: "npm:^10.1.0"
     prettier: "npm:^3.3.3"
     react-native-reanimated: "npm:^3.16.1"
@@ -14271,6 +14272,15 @@ __metadata:
   dependencies:
     yallist: "npm:^4.0.0"
   checksum: 10/fc1fe2ee205f7c8855fa0f34c1ab0bcf14b6229e35579ec1fd1079f31d6fc8ef8eb6fd17f2f4d99788d7e339f50e047555551ebd5e434dda503696e7c6591825
+  languageName: node
+  linkType: hard
+
+"lucide-react@npm:^0.454.0":
+  version: 0.454.0
+  resolution: "lucide-react@npm:0.454.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc
+  checksum: 10/90b40271182e15fefc9cbc6aca4645a49691f73b1887daffb0c9d048f61c89a1c1d7eac1096a37ba627bdce91e8aa49fcf43a5cf0ebd255117ce848d71a56dd1
   languageName: node
   linkType: hard
 

@@ -30,6 +30,7 @@ const cardDatabase: RangerCard[] = [
     shields: 1,
     text: 'Attack with 2 dice. ' + leadTheChargeEffect.description,
     owner: 'Red Ranger',
+    color: 'red',
     attack: { value: 2 },
     effects: [leadTheChargeEffect],
   },
@@ -40,6 +41,7 @@ const cardDatabase: RangerCard[] = [
     shields: 1,
     text: 'Deal 3 damage.',
     owner: 'Green Ranger',
+    color: 'green',
     attack: { value: 3, fixed: true },
     effects: [],
   },
@@ -50,6 +52,7 @@ const cardDatabase: RangerCard[] = [
     shields: 1,
     text: gainEnergyEffect.description + ' ' + allowPlayEffect.description,
     owner: 'Red Ranger',
+    color: 'red',
     effects: [gainEnergyEffect, allowPlayEffect],
   },
 ]

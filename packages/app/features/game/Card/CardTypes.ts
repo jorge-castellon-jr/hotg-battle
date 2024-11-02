@@ -12,6 +12,7 @@ export interface RangerCard {
   shields: number // Shield points
   text: string // Description or additional effect text
   owner: string // Ranger who owns the card (e.g., "Red Ranger")
+  color: string
   attack?: Attack
   effects?: CardEffect[]
 }

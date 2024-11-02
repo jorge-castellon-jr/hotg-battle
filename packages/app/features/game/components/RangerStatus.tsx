@@ -2,6 +2,7 @@ import React from 'react'
 import { YStack, XStack, Text, Button } from 'tamagui'
 import { Ranger } from '../GameTypes'
 import useGameStore from '../gameState'
+import { colors } from '../utils/colors'
 
 interface RangerStatusOverviewProps {
   ranger: Ranger
@@ -11,14 +12,13 @@ interface RangerStatusOverviewProps {
 const RangerStatusOverview: React.FC<RangerStatusOverviewProps> = ({ ranger, position }) => {
   const { drawCard } = useGameStore()
 
-  const colors = {
-    red: '$red9Dark',
-    blue: '$blue9Dark',
-    green: '$green9Dark',
-  }
-
   return (
-    <YStack flexGrow={1} alignItems="center" key={ranger.name} backgroundColor={colors[ranger.color]}>
+    <YStack
+      flexGrow={1}
+      alignItems="center"
+      key={ranger.name}
+      backgroundColor={colors[ranger.color]}
+    >
       <Text fontSize="$4" fontWeight="bold">
         {ranger.name}
       </Text>
