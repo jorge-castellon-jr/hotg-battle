@@ -8,6 +8,7 @@ import Head from 'next/head'
 import { NextThemeProvider, useRootTheme } from '@tamagui/next-theme'
 import type { SolitoAppProps } from 'solito'
 import { Provider } from 'app/provider'
+import { PortalProvider } from '@tamagui/portal'
 
 if (process.env.NODE_ENV === 'production') {
   require('../public/tamagui.css')
@@ -18,14 +19,8 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
     <>
       <Head>
         <title>Tamagui • Pages Router</title>
-        <meta
-          name="description"
-          content="Tamagui, Solito, Expo & Next.js"
-        />
-        <link
-          rel="icon"
-          href="/favicon.ico"
-        />
+        <meta name="description" content="Tamagui, Solito, Expo & Next.js" />
+        <link rel="icon" href="/favicon.ico" />
         <script
           dangerouslySetInnerHTML={{
             // avoid flash of animated things on enter:
@@ -34,7 +29,9 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
         />
       </Head>
       <ThemeProvider>
-        <Component {...pageProps} />
+        <PortalProvider shouldAddRootHost>
+          <Component {...pageProps} />
+        </PortalProvider>
       </ThemeProvider>
     </>
   )
@@ -51,11 +48,7 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
         setTheme(next as any)
       }}
     >
-      <Provider
-        disableRootThemeClass
-        disableInjectCSS
-        defaultTheme={theme}
-      >
+      <Provider disableRootThemeClass disableInjectCSS defaultTheme={theme}>
         {children}
       </Provider>
     </NextThemeProvider>
