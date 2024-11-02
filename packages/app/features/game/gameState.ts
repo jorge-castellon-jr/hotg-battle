@@ -60,7 +60,7 @@ const useGameStore = create<GameState>((set) => ({
       discard: [],
     },
   }, // Populate with Ranger-specific cards
-  hand: [],
+  hand: [...getDeck('Red Ranger'), ...getDeck('Green Ranger')],
   enemies: ['Foot Soldier 1', 'Foot Soldier 2', 'Monster'],
   enemyDeck: [
     {

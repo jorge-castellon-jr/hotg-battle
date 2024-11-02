@@ -6,6 +6,7 @@ Directory structure for: /Users/jorgecastellonjr./Dev/personal/hotg-battle/packa
         📄 CardTypes.ts
         📁 components
             📄 EnemyCard.tsx
+            📄 MemoisedRangerCard.tsx
             📄 PlayCardModal.tsx
             📄 RangerCard.tsx
         📁 data
@@ -13,15 +14,20 @@ Directory structure for: /Users/jorgecastellonjr./Dev/personal/hotg-battle/packa
         📁 utils
             📄 effectProcessor.ts
     📄 GameTypes.ts
+    📁 RangerHand
+        📁 components
+            📄 AnimatedCard.tsx
+            📄 HandController.tsx
+            📄 RangerHand.tsx
     📁 components
         📄 EnemyRow.tsx
-        📄 RangerHand.tsx
         📄 RangerStatus.tsx
         📄 RangerStatusOverview.tsx
         📄 TopBar.tsx
     📄 gameState.ts
     📄 screen.tsx
     📁 utils
+        📄 colors.ts
         📄 enemyActions.ts
 📁 home
     📄 screen.tsx

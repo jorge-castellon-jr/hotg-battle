@@ -15,7 +15,7 @@ const RangerStatusOverview: React.FC<RangerStatusOverviewProps> = ({ rangers }) 
     'left' | 'middle' | 'right' | null
   >(null)
 
-  const {drawCard} = useGameStore()
+  const { drawCard } = useGameStore()
 
   return (
     <>
@@ -65,8 +65,9 @@ const RangerStatusOverview: React.FC<RangerStatusOverviewProps> = ({ rangers }) 
               borderColor="white"
               borderWidth={1}
               onPress={() => {
+                drawCard(position as 'left' | 'middle' | 'right')
                 setSelectedPosition(position as 'left' | 'middle' | 'right')
-                setOpen(true)
+                // setOpen(true)
               }}
             >
               <Text color="white" fontSize="$2">

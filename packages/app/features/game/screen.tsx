@@ -3,7 +3,7 @@ import { YStack } from 'tamagui'
 import useGameStore from './gameState'
 import TopBar from './components/TopBar'
 import EnemyRow from './components/EnemyRow'
-import RangerHand from './components/RangerHand'
+import RangerHand from './RangerHand/components/RangerHand'
 import RangerStatusOverview from './components/RangerStatusOverview'
 
 const GameScreen: React.FC = () => {
