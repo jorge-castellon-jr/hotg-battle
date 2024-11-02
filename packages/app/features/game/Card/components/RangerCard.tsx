@@ -1,7 +1,8 @@
+import React from 'react'
 import { Stack, XStack, YStack, Text } from 'tamagui'
 import { Shield, Sword, Zap } from 'lucide-react'
 import { RangerCard } from '../CardTypes'
-import { colors } from '../../utils/colors'
+import { rangerColors } from '../../utils/colors'
 
 interface RangerCardProps {
   card: RangerCard
@@ -9,71 +10,69 @@ interface RangerCardProps {
 }
 
 const RangerCard = ({ card, onPlayCard }: RangerCardProps) => {
-  // Get color based on ranger
-
   return (
     <Stack
-      width={200}
-      height={280}
+      width={140}
+      height={200}
       backgroundColor="$background"
       borderRadius="$6"
       overflow="hidden"
       borderWidth={2}
-      borderColor={colors[card.color]}
+      borderColor={rangerColors[card.color]}
       pressStyle={{ scale: 0.98 }}
       onPress={() => onPlayCard(card)}
     >
       {/* Card Header */}
       <XStack
-        backgroundColor={colors[card.color]}
+        backgroundColor={rangerColors[card.color]}
         padding="$2"
         justifyContent="space-between"
         alignItems="center"
       >
-        <Text color="white" fontSize="$4" fontWeight="bold">
+        <Text color="white" fontSize="$3" fontWeight="bold">
           {card.name}
         </Text>
         <XStack alignItems="center" gap="$1">
-          <Shield size={16} color="white" />
-          <Text color="white" fontSize="$3">
+          <Shield size={14} color="white" />
+          <Text color="white" fontSize="$2">
             {card.shields}
           </Text>
         </XStack>
       </XStack>
 
       {/* Card Type */}
-      <XStack padding="$2" backgroundColor="$gray2" alignItems="center" gap="$2">
-        <Text fontSize="$3" color="$gray11">
+      <XStack padding="$1" backgroundColor="$gray2" alignItems="center" gap="$2">
+        <Text fontSize="$2" color="$gray11">
           {card.type.toUpperCase()}
         </Text>
         {card.attack && (
-          <XStack space="$1" alignItems="center">
-            <Sword size={16} />
-            <Text fontSize="$3">{card.attack.value}</Text>
+          <XStack gap="$1" alignItems="center">
+            <Sword size={14} />
+            <Text fontSize="$2">{card.attack.value}</Text>
           </XStack>
         )}
       </XStack>
 
       {/* Card Content */}
-      <YStack flex={1} padding="$3" gap="$2">
-        <Text fontSize="$3" textAlign="center">
+      <YStack flex={1} padding="$2" gap="$1">
+        <Text fontSize="$2" textAlign="center">
           {card.text}
         </Text>
 
         {/* Effects Section */}
         {card.effects && card.effects.length > 0 && (
-          <YStack gap="$2">
+          <YStack gap="$1">
             {card.effects.map((effect, index) => (
               <XStack
                 key={index}
                 backgroundColor="$gray2"
-                padding="$2"
+                padding="$1"
                 borderRadius="$2"
                 alignItems="center"
-                gap="$2"
+                gap="$1"
               >
-                <Zap size={16} />
-                <Text fontSize="$2" flex={1}>
+                <Zap size={12} />
+                <Text fontSize="$1" flex={1}>
                   {effect.description}
                 </Text>
               </XStack>
@@ -83,8 +82,8 @@ const RangerCard = ({ card, onPlayCard }: RangerCardProps) => {
       </YStack>
 
       {/* Card Footer */}
-      <XStack padding="$2" backgroundColor="$gray2" justifyContent="flex-end">
-        <Text fontSize="$2" color="$gray11">
+      <XStack padding="$1" backgroundColor="$gray2" justifyContent="flex-end">
+        <Text fontSize="$1" color="$gray11">
           {card.owner}
         </Text>
       </XStack>

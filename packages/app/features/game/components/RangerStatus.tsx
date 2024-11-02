@@ -2,7 +2,7 @@ import React from 'react'
 import { YStack, XStack, Text, Button } from 'tamagui'
 import { Ranger } from '../GameTypes'
 import useGameStore from '../gameState'
-import { colors } from '../utils/colors'
+import { rangerColors } from '../utils/colors'
 
 interface RangerStatusOverviewProps {
   ranger: Ranger
@@ -17,7 +17,7 @@ const RangerStatusOverview: React.FC<RangerStatusOverviewProps> = ({ ranger, pos
       flexGrow={1}
       alignItems="center"
       key={ranger.name}
-      backgroundColor={colors[ranger.color]}
+      backgroundColor={rangerColors[ranger.color]}
     >
       <Text fontSize="$4" fontWeight="bold">
         {ranger.name}

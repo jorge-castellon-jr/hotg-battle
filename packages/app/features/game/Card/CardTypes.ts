@@ -39,12 +39,14 @@ export interface CardEffect {
   description: string // User-readable effect description
 }
 
-export type EnemyType = 'fast' | 'passive' | 'guard' | 'basic'
+export type EnemyKeyWordType = 'fast' | 'passive' | 'guard' | 'basic'
+export type EnemyType = 'foot' | 'monster' | 'boss' | 'basic'
 
 export interface EnemyCard {
   id: string
   name: string
-  type: EnemyType // Keyword for behavior
+  type: EnemyKeyWordType // Keyword for behavior
+  enemyType: EnemyType // Keyword for behavior
   text: string
   owner: string // e.g., "Foot Soldier", "Monster"
   health: number

@@ -1,94 +1,106 @@
-import { Stack, XStack, YStack, Text } from 'tamagui'
-import { Heart, Sword } from 'lucide-react'
-import { EnemyCard as EnemyCardType } from '../CardTypes'
+import { Stack, XStack, YStack, Text } from 'tamagui';
+import { Heart, Sword } from 'lucide-react';
+import { EnemyCard as EnemyCardType } from '../CardTypes';
+import { enemyColors } from '../../utils/colors';
 
 interface EnemyCardProps {
-  enemy: EnemyCardType
+  enemy?: EnemyCardType; // Made optional to support empty slots
 }
 
 const EnemyCard = ({ enemy }: EnemyCardProps) => {
-  const getColorByType = (type: string) => {
-    switch (type) {
-      case 'fast':
-        return '#ff9944'
-      case 'guard':
-        return '#44bbff'
-      case 'basic':
-        return '#aaaaaa'
-      case 'passive':
-        return '#44ffaa'
-      default:
-        return '#ffffff'
-    }
+
+  // If no enemy, render an empty slot
+  if (!enemy) {
+    return (
+      <Stack
+        width={120}
+        height={180}
+        backgroundColor="$gray3"
+        borderRadius="$6"
+        borderWidth={2}
+        borderColor="$gray6"
+        borderStyle="dashed"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Text color="$gray8" fontSize="$2">Empty Slot</Text>
+      </Stack>
+    );
   }
 
   return (
     <Stack
-      width={180}
-      height={260}
+      width={120}
+      height={180}
       backgroundColor="$background"
       borderRadius="$6"
       overflow="hidden"
       borderWidth={2}
-      borderColor={getColorByType(enemy.type)}
+      borderColor={enemyColors[enemy.enemyType]}
       pressStyle={{ scale: 0.98 }}
     >
       {/* Card Header */}
       <XStack
-        backgroundColor={getColorByType(enemy.type)}
+        backgroundColor={enemyColors[enemy.enemyType]}
         padding="$2"
         justifyContent="space-between"
         alignItems="center"
       >
-        <Text color="white" fontSize="$4" fontWeight="bold">
+        <Text color="white" fontSize="$3" fontWeight="bold">
           {enemy.name}
         </Text>
       </XStack>
 
       {/* Enemy Type */}
-      <XStack
-        padding="$2"
+      <XStack 
+        padding="$1" 
         backgroundColor="$gray2"
         justifyContent="space-between"
         alignItems="center"
       >
-        <Text fontSize="$3" color="$gray11" textTransform="capitalize">
+        <Text fontSize="$2" color="$gray11" textTransform="capitalize">
           {enemy.type}
         </Text>
       </XStack>
 
       {/* Stats */}
-      <YStack padding="$3" gap="$2">
-        <XStack gap="$2" alignItems="center" justifyContent="center">
-          <Heart size={20} color={getColorByType(enemy.type)} />
-          <Text fontSize="$5" fontWeight="bold">
+      <YStack padding="$2" gap="$1">
+        <XStack gap="$1" alignItems="center" justifyContent="center">
+          <Heart size={16} color={enemyColors[enemy.enemyType]} />
+          <Text fontSize="$4" fontWeight="bold">
             {enemy.health}
           </Text>
         </XStack>
-
+        
         {enemy.attack && (
-          <XStack gap="$2" alignItems="center" justifyContent="center">
-            <Sword size={20} />
-            <Text fontSize="$4">{enemy.attack.value}</Text>
+          <XStack gap="$1" alignItems="center" justifyContent="center">
+            <Sword size={16} />
+            <Text fontSize="$3">
+              {enemy.attack.value}
+            </Text>
           </XStack>
         )}
       </YStack>
 
       {/* Description */}
-      <YStack flex={1} padding="$3">
-        <Text fontSize="$3" textAlign="center">
+      <YStack flex={1} padding="$2">
+        <Text fontSize="$2" textAlign="center" numberOfLines={2}>
           {enemy.text}
         </Text>
       </YStack>
 
       {/* Footer */}
-      <XStack padding="$2" backgroundColor="$gray2" justifyContent="flex-end">
-        <Text fontSize="$2" color="$gray11">
+      <XStack 
+        padding="$1"
+        backgroundColor="$gray2"
+        justifyContent="flex-end"
+      >
+        <Text fontSize="$1" color="$gray11">
           {enemy.owner}
         </Text>
       </XStack>
     </Stack>
-  )
-}
+  );
+};
 
-export default EnemyCard
+export default EnemyCard;
