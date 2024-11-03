@@ -1,7 +1,7 @@
 import React from 'react'
 import { YStack, XStack, useWindowDimensions } from 'tamagui'
 import { EnemyCard as EnemyCardData } from '../Card/CardTypes'
-import EnemyCard from '../Card/components/EnemyCard'
+import AnimatedEnemyCard from '../Card/components/AnimatedEnemyCard'
 
 interface EnemyRowProps {
   enemies: EnemyCardData[]
@@ -31,43 +31,6 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
     }
   })
 
-  // Custom EnemyCard wrapper with controlled animation
-  const AnimatedEnemyCard = ({ enemy, index }: { enemy?: EnemyCardData; index: number }) => {
-    const isNewEnemy = enemy && !mountedEnemies.has(enemy.id)
-
-    React.useEffect(() => {
-      if (enemy && isNewEnemy) {
-        mountedEnemies.add(enemy.id)
-      }
-    }, [enemy, isNewEnemy])
-
-    return (
-      <YStack
-        animation={isNewEnemy ? 'lazy' : null}
-        enterStyle={
-          isNewEnemy
-            ? {
-              opacity: 0,
-              scale: 0.9,
-              y: 20,
-            }
-            : undefined
-        }
-        exitStyle={
-          isNewEnemy
-            ? {
-              opacity: 0,
-              scale: 0.9,
-              y: 20,
-            }
-            : undefined
-        }
-      >
-        <EnemyCard enemy={enemy} width={cardWidth} height={cardHeight} />
-      </YStack>
-    )
-  }
-
   return (
     <YStack padding="$4" gap="$2" width="100%">
       {/* Back row */}
@@ -76,7 +39,8 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
           <AnimatedEnemyCard
             key={`back-${index}-${enemy?.id || 'empty'}`}
             enemy={enemy}
-            index={index}
+            width={cardWidth}
+            height={cardHeight}
           />
         ))}
       </XStack>
@@ -87,7 +51,8 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
           <AnimatedEnemyCard
             key={`front-${index}-${enemy?.id || 'empty'}`}
             enemy={enemy}
-            index={index}
+            width={cardWidth}
+            height={cardHeight}
           />
         ))}
       </XStack>
