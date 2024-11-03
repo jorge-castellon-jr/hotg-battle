@@ -36,8 +36,11 @@ export const AnimatedCard = React.memo(
     hoveredIndex,
   }: AnimatedCardProps) => {
     const isPressed = useSharedValue(false)
-    const dragX = useSharedValue(0)
     const dragY = useSharedValue(0)
+    const startY = useSharedValue(0)
+    const touchOffset = useSharedValue(0)
+
+    const CARD_HEIGHT = 200
 
     // Animation Constants
     const HOVER_LIFT_AMOUNT = -75
@@ -52,20 +55,24 @@ export const AnimatedCard = React.memo(
     const spacing = cardWidth - overlap
 
     const dragGesture = Gesture.Pan()
-      .onBegin(() => {
+      .onBegin((event) => {
         isPressed.value = true
         hoveredIndex.value = index
+        startY.value = event.absoluteY
+
+        // Calculate initial offset to move card up so finger is at bottom
+        touchOffset.value = CARD_HEIGHT - event.y
+
+        // Apply initial offset (negative to move up)
+        dragY.value = -touchOffset.value
       })
       .onUpdate((event) => {
-        dragX.value = event.translationX
-        dragY.value = event.translationY
-        hoveredIndex.value = index
+        // Calculate new position while maintaining offset
+        dragY.value = Math.min(0, event.absoluteY - startY.value - touchOffset.value)
       })
       .onFinalize(() => {
         isPressed.value = false
         hoveredIndex.value = -1
-        // Animate back to original position
-        dragX.value = withSpring(0, springConfig)
         dragY.value = withSpring(0, springConfig)
       })
 
@@ -87,23 +94,20 @@ export const AnimatedCard = React.memo(
       // Determine if this card is being hovered
       const isHovered = hoveredIndex.value === index
 
-      // Calculate final position with spread and drag
-      const x = baseX + spreadEffect + dragX.value
-      const y = (isHovered && !isPressed.value ? HOVER_LIFT_AMOUNT : 0) + dragY.value
+      // Use hover lift or drag position for vertical movement
+      const y = isPressed.value ? dragY.value : isHovered ? HOVER_LIFT_AMOUNT : 0
 
       // Scale based on hover state
       const scale = withSpring(isHovered ? HOVER_SCALE : 1, springConfig)
 
       return {
         position: 'absolute',
-        left: withSpring(isPressed.value ? x : baseX + spreadEffect, springConfig),
-        top: withSpring(isPressed.value ? y : (isHovered ? HOVER_LIFT_AMOUNT : 0), springConfig),
-        transform: [
-          { scale },
-        ],
+        left: withSpring(baseX + spreadEffect, springConfig),
+        top: withSpring(y, springConfig),
+        transform: [{ scale }],
         zIndex: isPressed.value ? 2 : isHovered ? 1 : 0,
       }
-    }, [hoveredIndex, index, spacing, dragX, dragY])
+    }, [hoveredIndex, index, spacing, dragY])
 
     return (
       <GestureDetector gesture={dragGesture}>
