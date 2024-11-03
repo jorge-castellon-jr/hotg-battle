@@ -6,10 +6,9 @@ import { rangerColors } from '../../utils/colors'
 
 interface RangerCardProps {
   card: RangerCard
-  onPlayCard: (card: RangerCard) => void
 }
 
-const RangerCard = ({ card, onPlayCard }: RangerCardProps) => {
+const RangerCard = ({ card }: RangerCardProps) => {
   return (
     <Stack
       width={140}
@@ -21,7 +20,6 @@ const RangerCard = ({ card, onPlayCard }: RangerCardProps) => {
       borderColor={rangerColors[card.color]}
       pressStyle={{ scale: 0.98 }}
       userSelect="none"
-      onPress={() => onPlayCard(card)}
     >
       {/* Card Header */}
       <XStack
@@ -55,31 +53,31 @@ const RangerCard = ({ card, onPlayCard }: RangerCardProps) => {
       </XStack>
 
       {/* Card Content */}
-      <YStack flex={1} padding="$2" gap="$1">
-        <Text fontSize="$2" textAlign="center">
+      <YStack flex={1} padding="$2" gap="$1" justifyContent="center">
+        <Text fontSize={10} textAlign="center">
           {card.text}
         </Text>
 
         {/* Effects Section */}
-        {card.effects && card.effects.length > 0 && (
-          <YStack gap="$1">
-            {card.effects.map((effect, index) => (
-              <XStack
-                key={index}
-                backgroundColor="$gray2"
-                padding="$1"
-                borderRadius="$2"
-                alignItems="center"
-                gap="$1"
-              >
-                <Zap size={12} />
-                <Text fontSize="$1" flex={1}>
-                  {effect.description}
-                </Text>
-              </XStack>
-            ))}
-          </YStack>
-        )}
+        {/* {card.effects && card.effects.length > 0 && ( */}
+        {/*   <YStack gap="$1"> */}
+        {/*     {card.effects.map((effect, index) => ( */}
+        {/*       <XStack */}
+        {/*         key={index} */}
+        {/*         backgroundColor="$gray2" */}
+        {/*         padding="$1" */}
+        {/*         borderRadius="$2" */}
+        {/*         alignItems="center" */}
+        {/*         gap="$1" */}
+        {/*       > */}
+        {/*         <Zap size={12} /> */}
+        {/*         <Text fontSize="$1" flex={1}> */}
+        {/*           {effect.description} */}
+        {/*         </Text> */}
+        {/*       </XStack> */}
+        {/*     ))} */}
+        {/*   </YStack> */}
+        {/* )} */}
       </YStack>
 
       {/* Card Footer */}

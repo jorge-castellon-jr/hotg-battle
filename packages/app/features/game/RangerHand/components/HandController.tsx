@@ -9,8 +9,6 @@ import { useWindowDimensions } from 'react-native'
 const AnimatedYStack = Animated.createAnimatedComponent(YStack)
 
 export interface HandControllerProps {
-  hand: RangerCardType[]
-  onPlayCard: (card: RangerCardType) => void
   children: (props: {
     cardWidth: number
     screenWidth: number
@@ -20,7 +18,7 @@ export interface HandControllerProps {
   }) => React.ReactNode
 }
 
-export const HandController: React.FC<HandControllerProps> = ({ hand, children }) => {
+export const HandController: React.FC<HandControllerProps> = ({ children }) => {
   const { width: windowWidth } = useWindowDimensions()
   const hoveredIndex = useSharedValue(-1)
   const dragTarget = useSharedValue(-1)

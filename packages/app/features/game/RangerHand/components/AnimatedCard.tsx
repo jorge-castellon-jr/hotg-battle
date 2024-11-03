@@ -15,7 +15,7 @@ export interface AnimatedCardProps {
   totalCards: number
   cardWidth: number
   screenWidth: number
-  onPlayCard: (card: RangerCardType) => void
+  onPlayCard: (index: number) => void
   hoveredIndex: SharedValue<number>
   dragTarget: SharedValue<number>
   sharedOffsetY: SharedValue<number>
@@ -72,28 +72,23 @@ export const AnimatedCard = React.memo(
         // Calculate which card we're over
         const cardIndex = Math.floor((touchX - EDGE_PADDING) / spacing)
 
-        // Switch to new card if valid
-        if (cardIndex >= 0 && cardIndex < totalCards && cardIndex !== dragTarget.value) {
-          // Before switching, capture the current values
-          const currentOffset = sharedOffsetY.value
-
-          dragTarget.value = cardIndex
-          hoveredIndex.value = cardIndex
-
-          // When becoming the new target, update our reference points
-          if (index === cardIndex) {
-            startY.value = event.absoluteY
-            initialOffset.value = currentOffset
-          }
-        }
-        console.log('dragTarget', dragTarget.value)
-        console.log('index', index)
-
-        // Update vertical position for any selected card
+        // Update vertical position - no condition needed
         const dragAmount = startY.value - event.absoluteY
         sharedOffsetY.value = initialOffset.value + dragAmount
+
+        if (sharedOffsetY.value > CARD_HEIGHT) return
+
+        // Switch to new card if valid
+        if (cardIndex >= 0 && cardIndex < totalCards && cardIndex !== dragTarget.value) {
+          dragTarget.value = cardIndex
+          hoveredIndex.value = cardIndex
+          isPressed.value = false
+        }
       })
       .onFinalize(() => {
+        if (sharedOffsetY.value > CARD_HEIGHT) {
+          onPlayCard(hoveredIndex.value)
+        }
         isPressed.value = false
         hoveredIndex.value = -1
         dragTarget.value = -1
@@ -138,7 +133,7 @@ export const AnimatedCard = React.memo(
           cursor="grab"
           pressStyle={{ cursor: 'grabbing' }}
         >
-          <RangerCard card={card} onPlayCard={onPlayCard} />
+          <RangerCard card={card} />
         </AnimatedYStack>
       </GestureDetector>
     )

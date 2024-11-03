@@ -9,6 +9,8 @@ Directory structure for: /Users/jorgecastellonjr./Dev/personal/hotg-battle/packa
             📄 PlayCardModal.tsx
             📄 RangerCard.tsx
         📁 data
+            📁 MightyMorphin
+                📄 red.ts
             📄 cardDatabase.ts
         📁 utils
             📄 effectProcessor.ts

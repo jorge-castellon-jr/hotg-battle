@@ -6,13 +6,14 @@ type Attack = {
 }
 
 export interface RangerCard {
-  id: string // Unique identifier for the card
   name: string // Card name
   type: RangerCardType // Card type keyword
   shields: number // Shield points
   text: string // Description or additional effect text
   owner: string // Ranger who owns the card (e.g., "Red Ranger")
+  team: string
   color: string
+  energy: number
   attack?: Attack
   effects?: CardEffect[]
 }
@@ -30,6 +31,9 @@ export type RangerEffectType =
   | 'addEnergy' // Adds energy to the Ranger team
   | 'conditionalBoost' // Provides a bonus if conditions are met (e.g., next Ranger attack)
   | 'allowCardPlay' // Allows another Ranger to play a card immediately
+  | 'blockDamage' // Allows another Ranger to play a card immediately
+  | 'rerollDice' // Allows another Ranger to play a card immediately
+  | 'addDamge' // Allows another Ranger to play a card immediately
 
 export interface CardEffect {
   type: RangerEffectType

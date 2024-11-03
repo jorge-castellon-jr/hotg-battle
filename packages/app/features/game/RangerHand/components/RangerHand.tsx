@@ -5,12 +5,12 @@ import { HandController } from './HandController'
 
 interface RangerHandProps {
   hand: RangerCardType[]
-  onPlayCard: (card: RangerCardType) => void
+  onPlayCard: (index: number) => void
 }
 
 export const RangerHand: React.FC<RangerHandProps> = ({ hand, onPlayCard }) => {
   return (
-    <HandController hand={hand} onPlayCard={onPlayCard}>
+    <HandController>
       {({ cardWidth, screenWidth, hoveredIndex, dragTarget, sharedOffsetY }) => (
         <>
           {hand.map((card, index) => (
