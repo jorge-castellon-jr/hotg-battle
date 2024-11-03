@@ -11,16 +11,18 @@ interface RangerHandProps {
 export const RangerHand: React.FC<RangerHandProps> = ({ hand, onPlayCard }) => {
   return (
     <HandController hand={hand} onPlayCard={onPlayCard}>
-      {(controllerProps) => (
+      {({ cardWidth, screenWidth, hoveredIndex }) => (
         <>
           {hand.map((card, index) => (
             <AnimatedCard
               key={card.id}
               card={card}
               index={index}
-              handLength={hand.length}
+              totalCards={hand.length}
+              cardWidth={cardWidth}
+              screenWidth={screenWidth}
+              hoveredIndex={hoveredIndex}
               onPlayCard={onPlayCard}
-              {...controllerProps}
             />
           ))}
         </>

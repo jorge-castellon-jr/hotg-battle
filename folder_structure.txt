@@ -6,7 +6,6 @@ Directory structure for: /Users/jorgecastellonjr./Dev/personal/hotg-battle/packa
         📄 CardTypes.ts
         📁 components
             📄 EnemyCard.tsx
-            📄 MemoisedRangerCard.tsx
             📄 PlayCardModal.tsx
             📄 RangerCard.tsx
         📁 data
