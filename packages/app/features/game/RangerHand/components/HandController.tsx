@@ -15,14 +15,16 @@ export interface HandControllerProps {
     cardWidth: number
     screenWidth: number
     hoveredIndex: SharedValue<number>
-    dragTarget: SharedValue<number> // Added dragTarget
+    dragTarget: SharedValue<number>
+    sharedOffsetY: SharedValue<number> // Add shared offset
   }) => React.ReactNode
 }
 
 export const HandController: React.FC<HandControllerProps> = ({ hand, children }) => {
   const { width: windowWidth } = useWindowDimensions()
   const hoveredIndex = useSharedValue(-1)
-  const dragTarget = useSharedValue(-1) // Initialize dragTarget
+  const dragTarget = useSharedValue(-1)
+  const sharedOffsetY = useSharedValue(0) // Initialize shared offset
 
   const CARD_WIDTH = 140
   const CARD_HEIGHT = 200
@@ -33,7 +35,8 @@ export const HandController: React.FC<HandControllerProps> = ({ hand, children }
         cardWidth: CARD_WIDTH,
         screenWidth: windowWidth,
         hoveredIndex,
-        dragTarget, // Pass dragTarget to children
+        dragTarget,
+        sharedOffsetY,
       })}
     </AnimatedYStack>
   )

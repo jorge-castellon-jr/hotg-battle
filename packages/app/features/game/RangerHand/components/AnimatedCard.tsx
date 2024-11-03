@@ -18,6 +18,7 @@ export interface AnimatedCardProps {
   onPlayCard: (card: RangerCardType) => void
   hoveredIndex: SharedValue<number>
   dragTarget: SharedValue<number>
+  sharedOffsetY: SharedValue<number>
 }
 
 const springConfig = {
@@ -36,11 +37,11 @@ export const AnimatedCard = React.memo(
     onPlayCard,
     hoveredIndex,
     dragTarget,
+    sharedOffsetY,
   }: AnimatedCardProps) => {
     const isPressed = useSharedValue(false)
-    const dragY = useSharedValue(0)
     const startY = useSharedValue(0)
-    const touchOffset = useSharedValue(0)
+    const initialOffset = useSharedValue(0)
 
     const CARD_HEIGHT = 200
 
@@ -62,45 +63,46 @@ export const AnimatedCard = React.memo(
         hoveredIndex.value = index
         dragTarget.value = index
         startY.value = event.absoluteY
-
-        // Initial offset calculation
-        touchOffset.value = CARD_HEIGHT - event.y
-        dragY.value = -touchOffset.value
+        initialOffset.value = CARD_HEIGHT - event.y
+        sharedOffsetY.value = initialOffset.value
       })
       .onUpdate((event) => {
-        const cardPosition = EDGE_PADDING + index * spacing
         const touchX = event.absoluteX
 
         // Calculate which card we're over
         const cardIndex = Math.floor((touchX - EDGE_PADDING) / spacing)
+
+        // Switch to new card if valid
         if (cardIndex >= 0 && cardIndex < totalCards && cardIndex !== dragTarget.value) {
-          // When switching cards, maintain the current vertical position
-          if (index === cardIndex) {
-            dragY.value = Math.min(0, event.absoluteY - startY.value - touchOffset.value)
-          }
+          // Before switching, capture the current values
+          const currentOffset = sharedOffsetY.value
+
           dragTarget.value = cardIndex
           hoveredIndex.value = cardIndex
-        }
 
-        // Update position only for currently dragged card
-        if (dragTarget.value === index) {
-          dragY.value = Math.min(0, event.absoluteY - startY.value - touchOffset.value)
+          // When becoming the new target, update our reference points
+          if (index === cardIndex) {
+            startY.value = event.absoluteY
+            initialOffset.value = currentOffset
+          }
         }
+        console.log('dragTarget', dragTarget.value)
+        console.log('index', index)
+
+        // Update vertical position for any selected card
+        const dragAmount = startY.value - event.absoluteY
+        sharedOffsetY.value = initialOffset.value + dragAmount
       })
       .onFinalize(() => {
-        // Reset everything
         isPressed.value = false
         hoveredIndex.value = -1
         dragTarget.value = -1
-        // Spring animation back to original positions
-        dragY.value = withSpring(0, springConfig)
+        sharedOffsetY.value = 0
       })
 
     const baseStyle = useAnimatedStyle(() => {
-      // Position each card with calculated overlap
       const baseX = EDGE_PADDING + index * spacing
 
-      // Calculate spread effect when a card is hovered
       const spreadEffect =
         hoveredIndex.value !== -1 && !isPressed.value
           ? interpolate(
@@ -111,30 +113,22 @@ export const AnimatedCard = React.memo(
           ) * Math.sign(index - hoveredIndex.value)
           : 0
 
-      // Determine if this card is being hovered/dragged
       const isHovered = hoveredIndex.value === index
       const isSelected = dragTarget.value === index
 
-      // Use hover lift or drag position for vertical movement
-      const y = isSelected ? dragY.value : isHovered ? HOVER_LIFT_AMOUNT : 0
+      // Use shared offset for selected card, hover lift for hovered cards
+      const y = isSelected ? -sharedOffsetY.value : isHovered ? HOVER_LIFT_AMOUNT : 0
 
-      // Return to original positions when no card is selected
-      const finalX =
-        dragTarget.value === -1
-          ? withSpring(baseX, springConfig)
-          : withSpring(baseX + spreadEffect, springConfig)
-
-      // Scale based on hover state
       const scale = withSpring(isHovered ? HOVER_SCALE : 1, springConfig)
 
       return {
         position: 'absolute',
-        left: finalX,
+        left: withSpring(baseX + spreadEffect, springConfig),
         top: withSpring(y, springConfig),
         transform: [{ scale }],
         zIndex: isSelected ? 2 : isHovered ? 1 : 0,
       }
-    }, [hoveredIndex, index, spacing, dragY, dragTarget])
+    }, [hoveredIndex, index, spacing, dragTarget, sharedOffsetY])
 
     return (
       <GestureDetector gesture={dragGesture}>

@@ -35,7 +35,7 @@ const cardDatabase: RangerCard[] = [
     effects: [leadTheChargeEffect],
   },
   {
-    id: '1',
+    id: '1a',
     name: 'Lead the Charge',
     type: 'attack',
     shields: 1,
@@ -46,7 +46,7 @@ const cardDatabase: RangerCard[] = [
     effects: [leadTheChargeEffect],
   },
   {
-    id: '2',
+    id: '2a',
     name: 'Power Slash',
     type: 'attack',
     shields: 1,
@@ -68,7 +68,7 @@ const cardDatabase: RangerCard[] = [
     effects: [],
   },
   {
-    id: '3',
+    id: '3a',
     name: 'Team Tactics',
     type: 'maneuver',
     shields: 1,
