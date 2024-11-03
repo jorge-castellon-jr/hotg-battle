@@ -15,27 +15,25 @@ export interface HandControllerProps {
     cardWidth: number
     screenWidth: number
     hoveredIndex: SharedValue<number>
+    dragTarget: SharedValue<number> // Added dragTarget
   }) => React.ReactNode
 }
 
 export const HandController: React.FC<HandControllerProps> = ({ hand, children }) => {
   const { width: windowWidth } = useWindowDimensions()
   const hoveredIndex = useSharedValue(-1)
+  const dragTarget = useSharedValue(-1) // Initialize dragTarget
 
   const CARD_WIDTH = 140
   const CARD_HEIGHT = 200
 
   return (
-    <AnimatedYStack
-      height={CARD_HEIGHT + 40}
-      width="100%"
-      position="relative"
-      zIndex={0} // Ensure hand stays behind status
-    >
+    <AnimatedYStack height={CARD_HEIGHT + 40} width="100%" position="relative" zIndex={0}>
       {children({
         cardWidth: CARD_WIDTH,
         screenWidth: windowWidth,
         hoveredIndex,
+        dragTarget, // Pass dragTarget to children
       })}
     </AnimatedYStack>
   )

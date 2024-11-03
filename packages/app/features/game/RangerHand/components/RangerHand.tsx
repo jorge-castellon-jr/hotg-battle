@@ -1,17 +1,17 @@
-import React from 'react';
-import { RangerCard as RangerCardType } from '../../Card/CardTypes';
-import { AnimatedCard } from './AnimatedCard';
-import { HandController } from './HandController';
+import React from 'react'
+import { RangerCard as RangerCardType } from '../../Card/CardTypes'
+import { AnimatedCard } from './AnimatedCard'
+import { HandController } from './HandController'
 
 interface RangerHandProps {
-  hand: RangerCardType[];
-  onPlayCard: (card: RangerCardType) => void;
+  hand: RangerCardType[]
+  onPlayCard: (card: RangerCardType) => void
 }
 
 export const RangerHand: React.FC<RangerHandProps> = ({ hand, onPlayCard }) => {
   return (
     <HandController hand={hand} onPlayCard={onPlayCard}>
-      {({ cardWidth, screenWidth, hoveredIndex }) => (
+      {({ cardWidth, screenWidth, hoveredIndex, dragTarget }) => (
         <>
           {hand.map((card, index) => (
             <AnimatedCard
@@ -22,13 +22,14 @@ export const RangerHand: React.FC<RangerHandProps> = ({ hand, onPlayCard }) => {
               cardWidth={cardWidth}
               screenWidth={screenWidth}
               hoveredIndex={hoveredIndex}
+              dragTarget={dragTarget} // Pass dragTarget
               onPlayCard={onPlayCard}
             />
           ))}
         </>
       )}
     </HandController>
-  );
-};
+  )
+}
 
-export default RangerHand;
+export default RangerHand

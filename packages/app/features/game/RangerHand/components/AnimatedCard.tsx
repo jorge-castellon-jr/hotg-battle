@@ -17,6 +17,7 @@ export interface AnimatedCardProps {
   screenWidth: number
   onPlayCard: (card: RangerCardType) => void
   hoveredIndex: SharedValue<number>
+  dragTarget: SharedValue<number>
 }
 
 const springConfig = {
@@ -34,6 +35,7 @@ export const AnimatedCard = React.memo(
     screenWidth,
     onPlayCard,
     hoveredIndex,
+    dragTarget,
   }: AnimatedCardProps) => {
     const isPressed = useSharedValue(false)
     const dragY = useSharedValue(0)
@@ -58,21 +60,39 @@ export const AnimatedCard = React.memo(
       .onBegin((event) => {
         isPressed.value = true
         hoveredIndex.value = index
+        dragTarget.value = index
         startY.value = event.absoluteY
 
-        // Calculate initial offset to move card up so finger is at bottom
+        // Initial offset calculation
         touchOffset.value = CARD_HEIGHT - event.y
-
-        // Apply initial offset (negative to move up)
         dragY.value = -touchOffset.value
       })
       .onUpdate((event) => {
-        // Calculate new position while maintaining offset
-        dragY.value = Math.min(0, event.absoluteY - startY.value - touchOffset.value)
+        const cardPosition = EDGE_PADDING + index * spacing
+        const touchX = event.absoluteX
+
+        // Calculate which card we're over
+        const cardIndex = Math.floor((touchX - EDGE_PADDING) / spacing)
+        if (cardIndex >= 0 && cardIndex < totalCards && cardIndex !== dragTarget.value) {
+          // When switching cards, maintain the current vertical position
+          if (index === cardIndex) {
+            dragY.value = Math.min(0, event.absoluteY - startY.value - touchOffset.value)
+          }
+          dragTarget.value = cardIndex
+          hoveredIndex.value = cardIndex
+        }
+
+        // Update position only for currently dragged card
+        if (dragTarget.value === index) {
+          dragY.value = Math.min(0, event.absoluteY - startY.value - touchOffset.value)
+        }
       })
       .onFinalize(() => {
+        // Reset everything
         isPressed.value = false
         hoveredIndex.value = -1
+        dragTarget.value = -1
+        // Spring animation back to original positions
         dragY.value = withSpring(0, springConfig)
       })
 
@@ -91,30 +111,36 @@ export const AnimatedCard = React.memo(
           ) * Math.sign(index - hoveredIndex.value)
           : 0
 
-      // Determine if this card is being hovered
+      // Determine if this card is being hovered/dragged
       const isHovered = hoveredIndex.value === index
+      const isSelected = dragTarget.value === index
 
       // Use hover lift or drag position for vertical movement
-      const y = isPressed.value ? dragY.value : isHovered ? HOVER_LIFT_AMOUNT : 0
+      const y = isSelected ? dragY.value : isHovered ? HOVER_LIFT_AMOUNT : 0
+
+      // Return to original positions when no card is selected
+      const finalX =
+        dragTarget.value === -1
+          ? withSpring(baseX, springConfig)
+          : withSpring(baseX + spreadEffect, springConfig)
 
       // Scale based on hover state
       const scale = withSpring(isHovered ? HOVER_SCALE : 1, springConfig)
 
       return {
         position: 'absolute',
-        left: withSpring(baseX + spreadEffect, springConfig),
+        left: finalX,
         top: withSpring(y, springConfig),
         transform: [{ scale }],
-        zIndex: isPressed.value ? 2 : isHovered ? 1 : 0,
+        zIndex: isSelected ? 2 : isHovered ? 1 : 0,
       }
-    }, [hoveredIndex, index, spacing, dragY])
+    }, [hoveredIndex, index, spacing, dragY, dragTarget])
 
     return (
       <GestureDetector gesture={dragGesture}>
         <AnimatedYStack
           style={baseStyle}
           userSelect="none"
-          onPointerDown={(e) => e.preventDefault()}
           cursor="grab"
           pressStyle={{ cursor: 'grabbing' }}
         >
