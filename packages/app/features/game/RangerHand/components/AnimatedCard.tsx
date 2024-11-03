@@ -111,7 +111,13 @@ export const AnimatedCard = React.memo(
 
     return (
       <GestureDetector gesture={dragGesture}>
-        <AnimatedYStack style={baseStyle}>
+        <AnimatedYStack
+          style={baseStyle}
+          userSelect="none"
+          onPointerDown={(e) => e.preventDefault()}
+          cursor="grab"
+          pressStyle={{ cursor: 'grabbing' }}
+        >
           <RangerCard card={card} onPlayCard={onPlayCard} />
         </AnimatedYStack>
       </GestureDetector>

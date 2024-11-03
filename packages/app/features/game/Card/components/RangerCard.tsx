@@ -20,6 +20,7 @@ const RangerCard = ({ card, onPlayCard }: RangerCardProps) => {
       borderWidth={2}
       borderColor={rangerColors[card.color]}
       pressStyle={{ scale: 0.98 }}
+      userSelect="none"
       onPress={() => onPlayCard(card)}
     >
       {/* Card Header */}
