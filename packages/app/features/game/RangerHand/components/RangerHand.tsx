@@ -15,7 +15,7 @@ export const RangerHand: React.FC<RangerHandProps> = ({ hand, onPlayCard }) => {
         <>
           {hand.map((card, index) => (
             <AnimatedCard
-              key={card.id}
+              key={card.name}
               card={card}
               index={index}
               totalCards={hand.length}
