@@ -1,68 +1,75 @@
 import { EnemyCard } from '../../../CardTypes'
 
-const flanking: EnemyCard = {
-  name: 'Flanking',
+const dragonRush: EnemyCard = {
+  name: 'Dragon Rush',
+  type: 'basic',
+  enemyType: 'monster',
+  text: 'Roll 6 dice and deal that much damage to the lead Ranger. Roll 2 dice and deal that much damage to each other Ranger.',
+  owner: 'Evil Green Ranger',
+  health: 4,
+  attacks: [
+    {
+      value: 6,
+      target: 'lead',
+    },
+    {
+      value: 2,
+      target: 'notLead',
+    },
+  ],
+}
+const dragonDagger: EnemyCard = {
+  name: 'Dragon Dagger',
+  type: 'fast',
+  enemyType: 'monster',
+  text: 'Roll 4 dice and deal that much damage to 2 different Rangers.',
+  owner: 'Evil Green Ranger',
+  health: 4,
+  attacks: [
+    {
+      value: 4,
+      target: 2,
+    },
+  ],
+}
+const dragonShield: EnemyCard = {
+  name: 'Dragon Shield',
   type: 'passive',
-  enemyType: 'foot',
-  text: '',
-  owner: 'Putty Patrollers',
-  health: 2,
+  enemyType: 'monster',
+  text: 'While this card is in play, each time a Ranger deals damage to an Evil Green Ranger card (including this one), deal 2 damage to that Ranger',
+  owner: 'Evil Green Ranger',
+  health: 6,
   effects: [
     {
-      type: 'addDamge',
-      value: 1,
+      type: 'counter',
+      value: 2,
       target: 1,
-      description:
-        'While this card is in play, each time another enemy card deals damage, increase that damage by 1.',
     },
   ],
 }
-const leapingAttack: EnemyCard = {
-  name: 'Leaping Attack',
+const swordOfDarkness: EnemyCard = {
+  name: 'Sword of Darkness',
   type: 'basic',
-  enemyType: 'foot',
-  text: 'Deal 3 damage',
-  owner: 'Putty Patrollers',
-  health: 2,
-  attack: { value: 3, fixed: true },
-}
-const swarmAttack: EnemyCard = {
-  name: 'Swarm Attack',
-  type: 'basic',
-  enemyType: 'foot',
-  text: 'Deal 1 damage',
-  owner: 'Putty Patrollers',
-  health: 3,
-  attack: { value: 1, fixed: true },
-  effects: [
+  enemyType: 'monster',
+  text: 'Deal 6 damage to the lead Ranger',
+  owner: 'Evil Green Ranger',
+  health: 6,
+  attacks: [
     {
-      type: 'addDamge',
-      value: -1,
-      target: -1,
-      condition: 'eachFoot',
-      description: 'Increase this damage by 1 for each foot soldier in this location.',
+      value: 6,
+      fixed: true,
+      target: 'lead',
     },
   ],
-}
-const cannonFodder: EnemyCard = {
-  name: 'Cannon Fodder',
-  type: 'guard',
-  enemyType: 'foot',
-  text: 'Deal 2 damage',
-  owner: 'Putty Patrollers',
-  health: 3,
-  attack: { value: 2, fixed: true },
 }
 
 export default [
-  flanking,
-  flanking,
-  leapingAttack,
-  leapingAttack,
-  leapingAttack,
-  swarmAttack,
-  swarmAttack,
-  cannonFodder,
-  cannonFodder,
-  cannonFodder,
+  dragonRush,
+  dragonRush,
+  dragonDagger,
+  dragonDagger,
+  dragonDagger,
+  dragonShield,
+  swordOfDarkness,
+  swordOfDarkness,
 ]

@@ -24,7 +24,7 @@ const leapingAttack: EnemyCard = {
   text: 'Deal 3 damage',
   owner: 'Putty Patrollers',
   health: 2,
-  attack: { value: 3, fixed: true },
+  attacks: [{ value: 3, fixed: true }],
 }
 const swarmAttack: EnemyCard = {
   name: 'Swarm Attack',
@@ -33,7 +33,7 @@ const swarmAttack: EnemyCard = {
   text: 'Deal 1 damage',
   owner: 'Putty Patrollers',
   health: 3,
-  attack: { value: 1, fixed: true },
+  attacks: [{ value: 1, fixed: true }],
   effects: [
     {
       type: 'addDamge',
@@ -51,7 +51,7 @@ const cannonFodder: EnemyCard = {
   text: 'Deal 2 damage',
   owner: 'Putty Patrollers',
   health: 3,
-  attack: { value: 2, fixed: true },
+  attacks: [{ value: 2, fixed: true }],
 }
 
 export default [

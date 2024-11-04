@@ -24,16 +24,17 @@ export type RangerEffectType =
   | 'addEnergy' // Adds energy to the Ranger team
   | 'conditionalBoost' // Provides a bonus if conditions are met (e.g., next Ranger attack)
   | 'allowCardPlay' // Allows another Ranger to play a card immediately
-  | 'blockDamage' // Allows another Ranger to play a card immediately
-  | 'rerollDice' // Allows another Ranger to play a card immediately
-  | 'addDamge' // Allows another Ranger to play a card immediately
+  | 'blockDamage'
+  | 'rerollDice'
+  | 'addDamge'
+  | 'counter'
 
 export interface CardEffect {
   type: RangerEffectType
   value: number // The numeric value for the effect (e.g., number of dice, damage)
   target: number // Target of the effect, how many 0 means none
   condition?: string // Conditional text for when this effect is triggered
-  description: string // User-readable effect description
+  description?: string // User-readable effect description
 }
 
 export interface Enemy {
@@ -52,6 +53,6 @@ export interface EnemyCard {
   text: string
   owner: string // e.g., "Foot Soldier", "Monster"
   health: number
-  attack?: Attack // Optional if attack type varies
+  attacks?: (Attack & { target?: number | 'lead' | 'notLead' })[] // Optional if attack type varies
   effects?: CardEffect[]
 }
