@@ -25,7 +25,17 @@ export interface GameState {
   applyDamage: (value: number) => void
   promptRangerCardPlay: () => void
   // New state management functions
-  setPhase: (phase: 'action' | 'battle') => void
+  setPhase: (phase: 'action' | 'battle') => void 
+  
+  // battle
+  battleMode: boolean;
+  playedCard?: RangerCard;
+  selectedEnemy?: EnemyCard;
+  
+  // Add these new functions
+  enterBattleMode: (card: RangerCard) => void;
+  exitBattleMode: () => void;
+  selectEnemy: (enemy: EnemyCard) => void;
 }
 
 const getDeck = (owner: string) => {
@@ -97,6 +107,24 @@ const useGameStore = create<GameState>((set) => ({
   setPhase: (phase) => set({ phase }),
 
   openSelectRanger: () => set({ selectRanger: true }),
+
+  // battle
+  battleMode: false,
+  playedCard: undefined,
+  selectedEnemy: undefined,
+
+  enterBattleMode: (card) => set({ 
+    battleMode: true, 
+    playedCard: card 
+  }),
+  
+  exitBattleMode: () => set({ 
+    battleMode: false, 
+    playedCard: undefined,
+    selectedEnemy: undefined 
+  }),
+  
+  selectEnemy: (enemy) => set({ selectedEnemy: enemy })
 }))
 
 export default useGameStore

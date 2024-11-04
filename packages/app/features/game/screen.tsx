@@ -22,7 +22,7 @@ const GameScreen: React.FC = () => {
       <EnemyRow enemies={enemies} />
 
       {/* Hand Section */}
-      <RangerHand hand={hand} onPlayCard={() => { }} />
+      <RangerHand hand={hand} />
 
       {/* Ranger Status - Fixed at bottom */}
       <RangerStatusOverview rangers={rangerDecks} />
