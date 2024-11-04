@@ -12,10 +12,10 @@ interface DiceFaceProps {
 
 export const DiceFace: React.FC<DiceFaceProps> = React.memo(({ value, size }) => {
   const cornerRadius = size * 0.15
-  const symbolSize = size * 0.25 // Size for X marks
+  const symbolSize = size * 0.4 // Size for X marks
   const circleSize = size * 0.4 // Larger size specifically for circles
-  const strokeWidth = size * 0.04
-  const padding = size * 0.2
+  const strokeWidth = size * 0.08
+  const padding = size * 0.25
 
   // Helper function to create damage symbol path (X shape)
   const getDamageSymbol = (x: number, y: number) => {
@@ -39,7 +39,9 @@ export const DiceFace: React.FC<DiceFaceProps> = React.memo(({ value, size }) =>
     return `M ${x} ${y - circleSize / 2} 
             a ${circleSize / 2} ${circleSize / 2} 0 1 0 0 ${circleSize} 
             a ${circleSize / 2} ${circleSize / 2} 0 1 0 0 -${circleSize}`
-  } // Get symbols based on dice value
+  }
+
+  // Get symbols based on dice value
   const getSymbols = () => {
     switch (value) {
       case 1: // Value 0 with outline circle
@@ -56,27 +58,59 @@ export const DiceFace: React.FC<DiceFaceProps> = React.memo(({ value, size }) =>
       case 2: // Value 1 with single damage symbol
       case 3:
       case 4:
-        return (
-          <Path
-            d={getDamageSymbol(size / 2, size / 2)}
-            stroke="black"
-            strokeWidth={strokeWidth}
-            fill="none"
-          />
-        )
-
-      case 5: // Value 2 with two diagonal damage symbols
+        const xy = size / 2
         return (
           <>
             <Path
-              d={getDamageSymbol(padding + symbolSize / 2, padding + symbolSize / 2)}
+              d={getDamageSymbol(xy, xy)}
               stroke="black"
+              transform={`rotate(45, ${xy}, ${xy})`}
               strokeWidth={strokeWidth}
               fill="none"
             />
             <Path
-              d={getDamageSymbol(size - padding - symbolSize / 2, size - padding - symbolSize / 2)}
+              d={getDamageSymbol(xy, xy)}
               stroke="black"
+              scale={0.8}
+              translate={[6, 6]}
+              strokeWidth={strokeWidth}
+              fill="none"
+            />
+          </>
+        )
+
+      case 5: // Value 2 with two diagonal damage symbols
+        const topLeft = padding + symbolSize / 4
+        const bottomRight = size - padding - symbolSize / 4
+        return (
+          <>
+            <Path
+              d={getDamageSymbol(topLeft, topLeft)}
+              stroke="black"
+              transform={`rotate(45, ${topLeft}, ${topLeft})`}
+              strokeWidth={strokeWidth}
+              fill="none"
+            />
+            <Path
+              d={getDamageSymbol(topLeft, topLeft)}
+              stroke="black"
+              scale={0.8}
+              translate={[4, 4]}
+              strokeWidth={strokeWidth}
+              fill="none"
+            />
+            <Path
+              d={getDamageSymbol(bottomRight, bottomRight)}
+              stroke="black"
+              transform={`rotate(45, ${bottomRight}, ${bottomRight})`}
+              strokeWidth={strokeWidth}
+              fill="none"
+            />
+            <Path
+              d={getDamageSymbol(bottomRight, bottomRight)}
+              stroke="black"
+              scale={0.8}
+              translate={[8, 8]}
               strokeWidth={strokeWidth}
               fill="none"
             />
