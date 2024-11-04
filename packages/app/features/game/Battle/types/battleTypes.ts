@@ -10,8 +10,6 @@ export interface BattleState {
 }
 
 export interface BattleSequenceProps {
-  isVisible: boolean;
-  playedCard?: RangerCard;
   onBack: () => void;
   handOffsetY: SharedValue<number>;
 }

@@ -21,18 +21,15 @@ export const RangerHand: React.FC<RangerHandProps> = ({ hand }) => {
   const hoveredIndex = useSharedValue(-1)
   const dragTarget = useSharedValue(-1)
   const sharedOffsetY = useSharedValue(0)
-  const [battleCard, setBattleCard] = React.useState<RangerCardType>()
 
   const handlePlayCard = (index: number) => {
     const card = hand[index]
     if (card.type === 'attack') {
-      setBattleCard(card)
       enterBattleMode(card)
     }
   }
 
   const handleBackFromBattle = () => {
-    setBattleCard(undefined)
     exitBattleMode()
   }
 
@@ -56,8 +53,6 @@ export const RangerHand: React.FC<RangerHandProps> = ({ hand }) => {
       </AnimatedYStack>
 
       <BattleSequence
-        isVisible={!!battleCard}
-        playedCard={battleCard}
         onBack={handleBackFromBattle}
         handOffsetY={sharedOffsetY}
         enemies={enemies}

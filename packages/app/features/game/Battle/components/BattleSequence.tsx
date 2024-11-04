@@ -5,6 +5,7 @@ import { withSpring } from 'react-native-reanimated'
 import type { BattleSequenceProps } from '../types/battleTypes'
 import { DiceRoll } from './DiceRoll'
 import { EnemyCard } from '../../Card/CardTypes'
+import useGameStore from '../../gameState'
 
 interface ExtendedBattleSequenceProps extends BattleSequenceProps {
   enemies: {
@@ -14,8 +15,6 @@ interface ExtendedBattleSequenceProps extends BattleSequenceProps {
 }
 
 export const BattleSequence: React.FC<ExtendedBattleSequenceProps> = ({
-  isVisible,
-  playedCard,
   onBack,
   handOffsetY,
   enemies,
@@ -24,16 +23,18 @@ export const BattleSequence: React.FC<ExtendedBattleSequenceProps> = ({
   const [isRolling, setIsRolling] = React.useState(false)
   const [rollComplete, setRollComplete] = React.useState(false)
 
+  const { playedCard } = useGameStore()
+
   // Reset states when battle sequence starts
   React.useEffect(() => {
-    if (isVisible) {
+    if (!!playedCard) {
       setSelectedEnemy(null)
       setIsRolling(false)
       setRollComplete(false)
       // Animate hand away
       handOffsetY.value = withSpring(500)
     }
-  }, [isVisible])
+  }, [playedCard])
 
   const handleEnemySelect = (enemy: EnemyCard) => {
     setSelectedEnemy(enemy)
@@ -51,7 +52,7 @@ export const BattleSequence: React.FC<ExtendedBattleSequenceProps> = ({
     // Handle damage application here
   }
 
-  if (!isVisible) return null
+  if (!playedCard) return null
 
   return (
     <Stack
@@ -112,8 +113,8 @@ export const BattleSequence: React.FC<ExtendedBattleSequenceProps> = ({
       {/* Back Button */}
       <Button
         position="absolute"
-        bottom={40}
-        left={20}
+        top="$6"
+        left="$6"
         onPress={() => {
           handOffsetY.value = withSpring(0)
           setSelectedEnemy(null)
