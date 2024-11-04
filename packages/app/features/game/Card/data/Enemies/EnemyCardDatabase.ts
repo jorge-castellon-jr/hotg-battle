@@ -1,9 +1,13 @@
 import { EnemyCard } from "../../CardTypes"
-import PuttyPotrollers from "./PuttyPotrollers"
+import Bosses from "./Bosses"
+import FootSoldiers from "./FootSoldiers"
+import Monsters from "./Monsters"
 
 
 const cardDatabase: EnemyCard[] = [
-  ...PuttyPotrollers
+  ...FootSoldiers,
+  ...Monsters,
+  ...Bosses,
 ]
 
 export default cardDatabase
