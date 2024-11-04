@@ -12,23 +12,17 @@ const GameScreen: React.FC = () => {
   return (
     <YStack flex={1} backgroundColor="$background" position="relative" overflow="hidden">
       {/* Top Section */}
-      <YStack paddingBottom="$2">
-        <TopBar
-          currentTurn={turn === 'rangers' ? "Ranger's Turn" : "Enemy's Turn"}
-          turn={0}
-          onHistoryRequest={() => { }}
-        />
-      </YStack>
+      <TopBar
+        currentTurn={turn === 'rangers' ? "Ranger's Turn" : "Enemy's Turn"}
+        turn={0}
+        onHistoryRequest={() => { }}
+      />
 
       {/* Enemy Section */}
-      <YStack flex={1} justifyContent="center">
-        <EnemyRow enemies={enemies} />
-      </YStack>
+      <EnemyRow enemies={enemies} />
 
       {/* Hand Section */}
-      <YStack height={240} paddingBottom="$2">
-        <RangerHand hand={hand} onPlayCard={() => { }} />
-      </YStack>
+      <RangerHand hand={hand} onPlayCard={() => { }} />
 
       {/* Ranger Status - Fixed at bottom */}
       <RangerStatusOverview rangers={rangerDecks} />

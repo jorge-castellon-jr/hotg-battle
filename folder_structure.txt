@@ -5,10 +5,21 @@ Directory structure for: /Users/jorgecastellonjr./Dev/personal/hotg-battle/packa
     📁 Card
         📄 CardTypes.ts
         📁 components
+            📄 AnimatedEnemyCard.tsx
             📄 EnemyCard.tsx
             📄 PlayCardModal.tsx
             📄 RangerCard.tsx
         📁 data
+            📁 Enemies
+                📁 Bosses
+                    📄 index.ts
+                📄 EnemyCardDatabase.ts
+                📁 FootSoldiers
+                    📄 PuttyPotrollers.ts
+                    📄 index.ts
+                📁 Monsters
+                    📄 EvilGreenRanger.ts
+                    📄 index.ts
             📁 MightyMorphin
                 📄 red.ts
             📄 cardDatabase.ts
@@ -18,7 +29,6 @@ Directory structure for: /Users/jorgecastellonjr./Dev/personal/hotg-battle/packa
     📁 RangerHand
         📁 components
             📄 AnimatedCard.tsx
-            📄 HandController.tsx
             📄 RangerHand.tsx
     📁 components
         📄 EnemyRow.tsx

@@ -15,7 +15,7 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
   const totalHorizontalPadding = 32
   const totalGaps = 24
   const availableWidth = windowWidth - totalHorizontalPadding - totalGaps
-  const cardWidth = Math.floor(availableWidth / 4)
+  const cardWidth = Math.min(100, Math.floor(availableWidth / 4))
   const cardHeight = Math.floor(cardWidth * 1.5)
 
   // Create arrays for both rows
@@ -31,9 +31,9 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
   })
 
   return (
-    <YStack padding="$4" gap="$2" width="100%">
+    <YStack padding="$2" gap="$2">
       {/* Back row */}
-      <XStack justifyContent="center" gap="$2" width="100%">
+      <XStack justifyContent="center" gap="$2">
         {backRowSlots.map((enemy, index) => (
           <AnimatedEnemyCard
             key={`back-${index}-${enemy ? enemy.name : 'empty'}`}
@@ -45,7 +45,7 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
       </XStack>
 
       {/* Front row */}
-      <XStack justifyContent="center" gap="$2" width="100%">
+      <XStack justifyContent="center" gap="$2">
         {frontRowSlots.map((enemy, index) => (
           <AnimatedEnemyCard
             key={`front-${index}-${enemy ? enemy.name : 'empty'}`}

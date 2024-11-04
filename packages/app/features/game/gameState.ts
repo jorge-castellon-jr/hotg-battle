@@ -64,37 +64,8 @@ const useGameStore = create<GameState>((set) => ({
   }, // Populate with Ranger-specific cards
   hand: [...getDeck('Red').slice(3)],
   enemies: {
-    top: [
-      {
-        name: 'Monster',
-        type: 'passive',
-        enemyType: 'monster',
-        text: 'Strong passive defense',
-        owner: 'Monster',
-        health: 5,
-        attack: { value: 2 },
-      },
-    ],
-    bottom: [
-      {
-        name: 'Foot Soldier 1',
-        type: 'basic',
-        text: 'Basic attack',
-        owner: 'Foot Soldier',
-        enemyType: 'foot',
-        health: 2,
-        attack: { value: 1 },
-      },
-      {
-        name: 'Foot Soldier 2',
-        type: 'guard',
-        enemyType: 'foot',
-        text: 'Guards the area',
-        owner: 'Foot Soldier',
-        health: 3,
-        attack: { value: 1 },
-      },
-    ],
+    top: [...EnemyCardDatabase.filter((card) => card.enemyType === 'monster').slice(0, 4)],
+    bottom: [...EnemyCardDatabase.filter((card) => card.enemyType === 'foot').slice(0, 3)],
   },
   enemyDeck: EnemyCardDatabase,
   energy: 5,

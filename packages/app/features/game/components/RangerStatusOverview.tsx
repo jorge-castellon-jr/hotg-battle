@@ -1,6 +1,5 @@
 import React from 'react'
 import { XStack, YStack, Text, Button, Sheet } from 'tamagui'
-import { ChevronUp } from 'lucide-react'
 import { RangerDecks } from '../GameTypes'
 import { rangerColors } from '../utils/colors'
 import useGameStore from '../gameState'

@@ -59,25 +59,27 @@ const EnemyCard = ({ enemy, width, height }: EnemyCardProps) => {
         justifyContent="space-between"
         alignItems="center"
       >
-        <Text color="white" fontSize={fontSize.medium} fontWeight="bold">
+        <Text color="white" fontSize={fontSize.small} fontWeight="bold">
           {enemy.name}
         </Text>
       </XStack>
 
       {/* Enemy Type */}
-      <XStack
-        padding={headerPadding}
-        backgroundColor="$gray2"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Text fontSize={fontSize.small} color="$gray11" textTransform="capitalize">
-          {enemy.type}
-        </Text>
-      </XStack>
+      {enemy.type !== 'basic' && (
+        <XStack
+          padding={headerPadding}
+          backgroundColor="$gray2"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Text fontSize={fontSize.small} color="$gray11" textTransform="capitalize">
+            {enemy.type}
+          </Text>
+        </XStack>
+      )}
 
       {/* Stats */}
-      <YStack padding={headerPadding} gap="$1">
+      <YStack padding={headerPadding} gap="$1" justifyContent='center' alignItems='center'>
         <XStack gap="$1" alignItems="center" justifyContent="center">
           <Heart size={iconSize} color={enemyColors[enemy.enemyType]} />
           <Text fontSize={fontSize.large} fontWeight="bold">

@@ -13,7 +13,6 @@ const GameTitle: React.FC<GameTitleProps> = ({ currentTurn, turn, onHistoryReque
       alignItems="center"
       padding="$4"
       backgroundColor="$background"
-      borderRadius="$2"
       onPressIn={onHistoryRequest}
     >
       <Text fontSize="$6" fontWeight="bold">
@@ -22,9 +21,6 @@ const GameTitle: React.FC<GameTitleProps> = ({ currentTurn, turn, onHistoryReque
       <Text fontSize="$3" color="$colorHover">
         Turn {turn}
       </Text>
-      {/* <Text fontSize="$3" color="$colorHover" onPressIn={onHistoryRequest}> */}
-      {/*   Tap-hold for History */}
-      {/* </Text> */}
     </YStack>
   )
 }
