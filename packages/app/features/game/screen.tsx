@@ -4,7 +4,7 @@ import useGameStore from './gameState'
 import TopBar from './components/TopBar'
 import EnemyRow from './components/EnemyRow'
 import RangerHand from './RangerHand/components/RangerHand'
-import RangerStatusOverview from './components/RangerStatusOverview'
+import RangerStatusOverview from './RangerStatus/RangerStatusOverview'
 
 const GameScreen: React.FC = () => {
   const { rangerDecks, hand, enemies, enemyDeck, energy, turn } = useGameStore()
