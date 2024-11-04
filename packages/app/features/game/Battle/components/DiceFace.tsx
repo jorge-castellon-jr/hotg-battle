@@ -19,8 +19,19 @@ export const DiceFace: React.FC<DiceFaceProps> = React.memo(({ value, size }) =>
 
   // Helper function to create damage symbol path (X shape)
   const getDamageSymbol = (x: number, y: number) => {
-    const halfSize = symbolSize / 2
-    return `M ${x - halfSize} ${y - halfSize} L ${x + halfSize} ${y + halfSize} M ${x - halfSize} ${y + halfSize} L ${x + halfSize} ${y - halfSize}`
+    const outerSize = symbolSize / 2
+    const centerSize = symbolSize / 4
+
+    return `M ${x} ${y - outerSize}
+            L ${x + centerSize} ${y}
+            L ${x} ${y + outerSize}
+            L ${x - centerSize} ${y}
+            Z
+            M ${x - outerSize} ${y}
+            L ${x} ${y - centerSize}
+            L ${x + outerSize} ${y}
+            L ${x} ${y + centerSize}
+            Z`
   }
 
   // Helper function to create circle path
