@@ -4,16 +4,11 @@ import { Ranger } from '../GameTypes'
 import { rangerColors } from '../utils/colors'
 
 interface RangerStatusCardProps {
-  position: 'left' | 'middle' | 'right'
   ranger: Ranger
   onDrawCard: (position: 'left' | 'middle' | 'right') => void
 }
 
-export const RangerStatusCard: React.FC<RangerStatusCardProps> = ({
-  position,
-  ranger,
-  onDrawCard,
-}) => {
+export const RangerStatusCard: React.FC<RangerStatusCardProps> = ({ ranger, onDrawCard }) => {
   return (
     <YStack
       flex={1}

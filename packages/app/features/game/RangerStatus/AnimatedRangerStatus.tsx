@@ -1,34 +1,40 @@
+// AnimatedRangerStatus/index.tsx
 import React from 'react'
 import { XStack } from 'tamagui'
 import Animated, {
   useAnimatedStyle,
-  useSharedValue,
   withSpring,
-  interpolate,
-  useDerivedValue,
+  withTiming,
+  useSharedValue,
 } from 'react-native-reanimated'
 import { RangerStatusCard } from './RangerStatusCard'
 import { RangerStatusProps } from './types'
-import { SPRING_CONFIG } from './animations'
 import useGameStore from '../gameState'
 
 const AnimatedXStack = Animated.createAnimatedComponent(XStack)
 
+const SPRING_CONFIG = {
+  damping: 15,
+  stiffness: 150,
+  mass: 0.5,
+}
+
 export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers, isVisible }) => {
   const { drawCard } = useGameStore()
-  const animation = useSharedValue(isVisible ? 0 : 1)
+  const translateY = useSharedValue(0)
 
   React.useEffect(() => {
-    animation.value = withSpring(isVisible ? 0 : 1, SPRING_CONFIG)
+    translateY.value = withSpring(
+      isVisible ? 0 : 75, // Move 200 units down when not visible
+      SPRING_CONFIG
+    )
   }, [isVisible])
 
-  const translateY = useDerivedValue(() => {
-    return interpolate(animation.value, [0, 1], [0, 100])
-  })
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: translateY.value }],
-  }),[translateY])
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: translateY.value }],
+    }
+  }, [translateY])
 
   return (
     <AnimatedXStack
@@ -45,9 +51,8 @@ export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers, isV
       {Object.entries(rangers).map(([position, ranger]) => (
         <RangerStatusCard
           key={position}
-          position={position as 'left' | 'middle' | 'right'}
           ranger={ranger}
-          onDrawCard={drawCard}
+          onDrawCard={() => drawCard(position as 'left' | 'middle' | 'right')}
         />
       ))}
     </AnimatedXStack>
