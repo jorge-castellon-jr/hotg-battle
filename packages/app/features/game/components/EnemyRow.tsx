@@ -2,14 +2,14 @@ import React from 'react'
 import { YStack, XStack, useWindowDimensions } from 'tamagui'
 import { EnemyCard as EnemyCardData } from '../Card/CardTypes'
 import AnimatedEnemyCard from '../Card/components/AnimatedEnemyCard'
+import { GameState } from '../gameState'
 
 interface EnemyRowProps {
-  enemies: EnemyCardData[]
+  enemies: GameState['enemies']
 }
 
 const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
   const { width: windowWidth } = useWindowDimensions()
-  const [mountedEnemies] = React.useState(new Set())
 
   // Calculate card sizes
   const totalHorizontalPadding = 32
@@ -23,12 +23,11 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
   const frontRowSlots = Array(4).fill(undefined)
 
   // Fill slots with enemies
-  enemies.forEach((enemy, index) => {
-    if (index < 4) {
-      frontRowSlots[index] = enemy
-    } else if (index < 8) {
-      backRowSlots[index - 4] = enemy
-    }
+  enemies.top.forEach((enemy, index) => {
+    backRowSlots[index] = enemy
+  })
+  enemies.bottom.forEach((enemy, index) => {
+    frontRowSlots[index] = enemy
   })
 
   return (
@@ -37,7 +36,7 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
       <XStack justifyContent="center" gap="$2" width="100%">
         {backRowSlots.map((enemy, index) => (
           <AnimatedEnemyCard
-            key={`back-${index}-${enemy?.id || 'empty'}`}
+            key={`back-${index}-${enemy ? enemy.name : 'empty'}`}
             enemy={enemy}
             width={cardWidth}
             height={cardHeight}
@@ -49,7 +48,7 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
       <XStack justifyContent="center" gap="$2" width="100%">
         {frontRowSlots.map((enemy, index) => (
           <AnimatedEnemyCard
-            key={`front-${index}-${enemy?.id || 'empty'}`}
+            key={`front-${index}-${enemy ? enemy.name : 'empty'}`}
             enemy={enemy}
             width={cardWidth}
             height={cardHeight}

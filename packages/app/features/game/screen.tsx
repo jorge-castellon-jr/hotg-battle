@@ -22,7 +22,7 @@ const GameScreen: React.FC = () => {
 
       {/* Enemy Section */}
       <YStack flex={1} justifyContent="center">
-        <EnemyRow enemies={enemyDeck} />
+        <EnemyRow enemies={enemies} />
       </YStack>
 
       {/* Hand Section */}

@@ -43,10 +43,12 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({ enemy, wid
   const iconSize = Math.min(width, height) * 0.4
 
   const rotateCard = () => {
+    if (!enemy) return
     isRotated.value = !isRotated.value
     rotation.value = withSpring(isRotated.value ? -90 : 0, springConfig)
   }
   const flipCard = () => {
+    if (!enemy) return
     isFlipped.value = !isFlipped.value
     flipRotation.value = withTiming(isFlipped.value ? 180 : 0, flipConfig)
   }
@@ -115,7 +117,11 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({ enemy, wid
             justifyContent="center"
             alignItems="center"
           >
-            <Skull size={iconSize} color="white" strokeWidth={1.5} />
+            <Skull
+              size={iconSize}
+              color={enemy ? `var(--c-${enemyColors[enemy.enemyType].slice(1)}` : 'white'}
+              strokeWidth={1.5}
+            />
           </Stack>
         </AnimatedStack>
       </Stack>

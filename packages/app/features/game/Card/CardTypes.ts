@@ -18,13 +18,6 @@ export interface RangerCard {
   effects?: CardEffect[]
 }
 
-export interface Enemy {
-  id: string
-  name: string
-  health: number
-  attack: number // Attack value
-}
-
 export type RangerEffectType =
   | 'addDice' // Adds extra dice to a Ranger's attack
   | 'fixedDamage' // Deals fixed damage to an enemy
@@ -43,11 +36,16 @@ export interface CardEffect {
   description: string // User-readable effect description
 }
 
+export interface Enemy {
+  id: string
+  name: string
+  health: number
+  attack: number // Attack value
+}
 export type EnemyKeyWordType = 'fast' | 'passive' | 'guard' | 'basic'
 export type EnemyType = 'foot' | 'monster' | 'boss' | 'basic'
 
 export interface EnemyCard {
-  id: string
   name: string
   type: EnemyKeyWordType // Keyword for behavior
   enemyType: EnemyType // Keyword for behavior
@@ -55,4 +53,5 @@ export interface EnemyCard {
   owner: string // e.g., "Foot Soldier", "Monster"
   health: number
   attack?: Attack // Optional if attack type varies
+  effects?: CardEffect[]
 }
