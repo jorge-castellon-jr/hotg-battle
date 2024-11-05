@@ -10,7 +10,6 @@ export interface BattleState {
 }
 
 export interface BattleSequenceProps {
-  onBack: () => void;
   handOffsetY: SharedValue<number>;
 }
 

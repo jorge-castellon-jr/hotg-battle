@@ -1,12 +1,11 @@
-// src/features/game/RangerHand/components/RangerHand.tsx
 import React from 'react'
 import { YStack } from 'tamagui'
 import Animated, { useSharedValue } from 'react-native-reanimated'
 import { useWindowDimensions } from 'react-native'
 import { RangerCard as RangerCardType } from '../../Card/CardTypes'
 import { AnimatedCard } from './AnimatedCard'
-import { BattleSequence } from '../../Battle/components/BattleSequence'
 import useGameStore from '../../gameState'
+import { BattleSequence } from '../../Battle/components/BattleSequence'
 
 const AnimatedYStack = Animated.createAnimatedComponent(YStack)
 
@@ -16,21 +15,14 @@ interface RangerHandProps {
 
 export const RangerHand: React.FC<RangerHandProps> = ({ hand }) => {
   const { width: windowWidth } = useWindowDimensions()
-  const { enterBattleMode, exitBattleMode, enemies } = useGameStore()
+  const { enterBattleMode, exitBattleMode, battleMode, playedCardIndex, enemies } = useGameStore()
 
   const hoveredIndex = useSharedValue(-1)
   const dragTarget = useSharedValue(-1)
   const sharedOffsetY = useSharedValue(0)
 
   const handlePlayCard = (index: number) => {
-    const card = hand[index]
-    if (card.type === 'attack') {
-      enterBattleMode(card)
-    }
-  }
-
-  const handleBackFromBattle = () => {
-    exitBattleMode()
+    enterBattleMode(index)
   }
 
   return (
@@ -47,16 +39,12 @@ export const RangerHand: React.FC<RangerHandProps> = ({ hand }) => {
             hoveredIndex={hoveredIndex}
             dragTarget={dragTarget}
             sharedOffsetY={sharedOffsetY}
+            selectedCardIndex={playedCardIndex}
+            isInBattleMode={battleMode}
             onPlayCard={handlePlayCard}
           />
         ))}
       </AnimatedYStack>
-
-      <BattleSequence
-        onBack={handleBackFromBattle}
-        handOffsetY={sharedOffsetY}
-        enemies={enemies}
-      />
     </>
   )
 }

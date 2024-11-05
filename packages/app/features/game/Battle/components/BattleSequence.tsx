@@ -1,44 +1,22 @@
-// src/features/game/battle/components/BattleSequence.tsx
 import React from 'react'
-import { Stack, Button, Text } from 'tamagui'
-import { withSpring } from 'react-native-reanimated'
-import type { BattleSequenceProps } from '../types/battleTypes'
-import { DiceRoll } from './DiceRoll'
-import { EnemyCard } from '../../Card/CardTypes'
+import { Stack, Button, Text, XStack, YStack } from 'tamagui'
 import useGameStore from '../../gameState'
+import { DiceRoll } from '../../Dice/DiceRoll'
 
-interface ExtendedBattleSequenceProps extends BattleSequenceProps {
-  enemies: {
-    top: EnemyCard[]
-    bottom: EnemyCard[]
-  }
-}
-
-export const BattleSequence: React.FC<ExtendedBattleSequenceProps> = ({
-  onBack,
-  handOffsetY,
-  enemies,
-}) => {
-  const [selectedEnemy, setSelectedEnemy] = React.useState<EnemyCard | null>(null)
+export const BattleSequence = () => {
   const [isRolling, setIsRolling] = React.useState(false)
   const [rollComplete, setRollComplete] = React.useState(false)
 
-  const { playedCard } = useGameStore()
+  const { playedCard, exitBattleMode, enemies, selectedEnemy, setSelectedEnemy } = useGameStore()
 
   // Reset states when battle sequence starts
   React.useEffect(() => {
     if (!!playedCard) {
-      setSelectedEnemy(null)
       setIsRolling(false)
       setRollComplete(false)
       // Animate hand away
-      handOffsetY.value = withSpring(500)
     }
   }, [playedCard])
-
-  const handleEnemySelect = (enemy: EnemyCard) => {
-    setSelectedEnemy(enemy)
-  }
 
   const handleStartRoll = () => {
     setIsRolling(true)
@@ -65,49 +43,39 @@ export const BattleSequence: React.FC<ExtendedBattleSequenceProps> = ({
       justifyContent="center"
       alignItems="center"
     >
-      {!selectedEnemy ? (
-        // Enemy Selection Phase
-        <Stack flex={1} justifyContent="center" alignItems="center" padding={20}>
-          <Text color="white" fontSize={20} marginBottom={20}>
-            Select an enemy to attack
-          </Text>
-          <Stack gap={10}>
-            {[...enemies.top, ...enemies.bottom].map((enemy, index) => (
-              <Button
-                key={index}
-                onPress={() => handleEnemySelect(enemy)}
-                backgroundColor="$gray8"
-                pressStyle={{ scale: 0.98 }}
-              >
-                {enemy.name} (Health: {enemy.health})
-              </Button>
-            ))}
-          </Stack>
-        </Stack>
-      ) : !isRolling && !rollComplete ? (
-        // Pre-Roll Phase
-        <Stack alignItems="center" gap={20}>
-          <Text color="white" fontSize={20}>
-            Attacking {selectedEnemy.name}
-          </Text>
-          <Button onPress={handleStartRoll}>Roll Dice</Button>
-        </Stack>
-      ) : (
-        // Rolling or Results Phase
-        <Stack alignItems="center" gap={20}>
-          {playedCard?.attack?.value && (
-            <DiceRoll
-              numDice={playedCard.attack.value}
-              isRolling={isRolling}
-              onRollComplete={handleRollComplete}
-            />
+      {!selectedEnemy ? null : (
+        <YStack
+          height={300}
+          width={350}
+          borderRadius="$10"
+          justifyContent="center"
+          alignItems="center"
+          gap={20}
+          zIndex={100}
+          backgroundColor="$background"
+        >
+          {!isRolling && !rollComplete ? (
+            // Pre-Roll Phase
+            <>
+              <Text color="$accentColor" fontSize={20}>
+                Attacking {selectedEnemy.name}
+              </Text>
+              <Button onPress={handleStartRoll}>Roll Dice</Button>
+            </>
+          ) : (
+            <>
+              {playedCard?.attack?.value && (
+                // Rolling or Results Phase
+                <DiceRoll
+                  numDice={playedCard.attack.value}
+                  isRolling={isRolling}
+                  onRollComplete={handleRollComplete}
+                />
+              )}
+              <Button disabled={!rollComplete} onPress={exitBattleMode}>Continue</Button>
+            </>
           )}
-          {rollComplete && (
-            <Text color="white" fontSize={20}>
-              Attack Complete!
-            </Text>
-          )}
-        </Stack>
+        </YStack>
       )}
 
       {/* Back Button */}
@@ -116,11 +84,9 @@ export const BattleSequence: React.FC<ExtendedBattleSequenceProps> = ({
         top="$6"
         left="$6"
         onPress={() => {
-          handOffsetY.value = withSpring(0)
-          setSelectedEnemy(null)
           setIsRolling(false)
           setRollComplete(false)
-          onBack()
+          exitBattleMode()
         }}
       >
         Back

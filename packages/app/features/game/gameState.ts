@@ -3,6 +3,7 @@ import { RangerCard, EnemyCard } from './Card/CardTypes'
 import cardDatabase from './Card/data/cardDatabase'
 import EnemyCardDatabase from './Card/data/Enemies/EnemyCardDatabase'
 import { RangerDecks } from './GameTypes'
+import { SharedValue, useSharedValue } from 'react-native-reanimated'
 
 export interface GameState {
   rangerDecks: RangerDecks
@@ -25,17 +26,19 @@ export interface GameState {
   applyDamage: (value: number) => void
   promptRangerCardPlay: () => void
   // New state management functions
-  setPhase: (phase: 'action' | 'battle') => void 
-  
+  setPhase: (phase: 'action' | 'battle') => void
+
   // battle
-  battleMode: boolean;
-  playedCard?: RangerCard;
-  selectedEnemy?: EnemyCard;
-  
+  battleMode: boolean
+  playedCard: RangerCard | null
+  playedCardIndex: number
+  selectedEnemy: EnemyCard | null
+  selectedEnemyIndex: number
+
   // Add these new functions
-  enterBattleMode: (card: RangerCard) => void;
-  exitBattleMode: () => void;
-  selectEnemy: (enemy: EnemyCard) => void;
+  enterBattleMode: (index: number) => void
+  exitBattleMode: () => void
+  setSelectedEnemy: (enemy: EnemyCard | null, index: number) => void
 }
 
 const getDeck = (owner: string) => {
@@ -110,21 +113,28 @@ const useGameStore = create<GameState>((set) => ({
 
   // battle
   battleMode: false,
-  playedCard: undefined,
-  selectedEnemy: undefined,
+  playedCardIndex: -1,
+  playedCard: null,
+  selectedEnemy: null,
+  selectedEnemyIndex: -1,
 
-  enterBattleMode: (card) => set({ 
-    battleMode: true, 
-    playedCard: card 
-  }),
-  
-  exitBattleMode: () => set({ 
-    battleMode: false, 
-    playedCard: undefined,
-    selectedEnemy: undefined 
-  }),
-  
-  selectEnemy: (enemy) => set({ selectedEnemy: enemy })
+  enterBattleMode: (index) =>
+    set(({ hand }) => ({
+      battleMode: true,
+      playedCard: hand[index],
+      playedCardIndex: index,
+    })),
+
+  exitBattleMode: () =>
+    set({
+      battleMode: false,
+      playedCard: undefined,
+      playedCardIndex: -1,
+      selectedEnemy: undefined,
+      selectedEnemyIndex: -1,
+    }),
+
+  setSelectedEnemy: (enemy, index) => set({ selectedEnemy: enemy, selectedEnemyIndex: index }),
 }))
 
 export default useGameStore

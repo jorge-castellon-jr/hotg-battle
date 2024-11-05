@@ -5,9 +5,10 @@ import TopBar from './components/TopBar'
 import EnemyRow from './components/EnemyRow'
 import RangerHand from './RangerHand/components/RangerHand'
 import RangerStatusOverview from './RangerStatus/RangerStatusOverview'
+import { BattleSequence } from './Battle/components/BattleSequence'
 
 const GameScreen: React.FC = () => {
-  const { rangerDecks, hand, enemies, enemyDeck, energy, turn } = useGameStore()
+  const { rangerDecks, hand, enemies, turn } = useGameStore()
 
   return (
     <YStack flex={1} backgroundColor="$background" position="relative" overflow="hidden">
@@ -17,6 +18,8 @@ const GameScreen: React.FC = () => {
         turn={0}
         onHistoryRequest={() => { }}
       />
+
+      <BattleSequence />
 
       {/* Enemy Section */}
       <EnemyRow enemies={enemies} />

@@ -37,6 +37,7 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
         {backRowSlots.map((enemy, index) => (
           <AnimatedEnemyCard
             key={`back-${index}-${enemy ? enemy.name : 'empty'}`}
+            index={index}
             enemy={enemy}
             width={cardWidth}
             height={cardHeight}
@@ -49,6 +50,7 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
         {frontRowSlots.map((enemy, index) => (
           <AnimatedEnemyCard
             key={`front-${index}-${enemy ? enemy.name : 'empty'}`}
+            index={index}
             enemy={enemy}
             width={cardWidth}
             height={cardHeight}
