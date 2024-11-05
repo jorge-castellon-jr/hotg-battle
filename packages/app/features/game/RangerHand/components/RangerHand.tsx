@@ -5,7 +5,6 @@ import { useWindowDimensions } from 'react-native'
 import { RangerCard as RangerCardType } from '../../Card/CardTypes'
 import { AnimatedCard } from './AnimatedCard'
 import useGameStore from '../../gameState'
-import { BattleSequence } from '../../Battle/components/BattleSequence'
 
 const AnimatedYStack = Animated.createAnimatedComponent(YStack)
 
@@ -15,7 +14,7 @@ interface RangerHandProps {
 
 export const RangerHand: React.FC<RangerHandProps> = ({ hand }) => {
   const { width: windowWidth } = useWindowDimensions()
-  const { enterBattleMode, exitBattleMode, battleMode, playedCardIndex, enemies } = useGameStore()
+  const { enterBattleMode, battleMode, playedCardIndex } = useGameStore()
 
   const hoveredIndex = useSharedValue(-1)
   const dragTarget = useSharedValue(-1)
@@ -26,26 +25,24 @@ export const RangerHand: React.FC<RangerHandProps> = ({ hand }) => {
   }
 
   return (
-    <>
-      <AnimatedYStack height={200} width="100%" position="absolute" bottom={0} zIndex={0}>
-        {hand.map((card, index) => (
-          <AnimatedCard
-            key={card.name}
-            card={card}
-            index={index}
-            totalCards={hand.length}
-            cardWidth={140}
-            screenWidth={windowWidth}
-            hoveredIndex={hoveredIndex}
-            dragTarget={dragTarget}
-            sharedOffsetY={sharedOffsetY}
-            selectedCardIndex={playedCardIndex}
-            isInBattleMode={battleMode}
-            onPlayCard={handlePlayCard}
-          />
-        ))}
-      </AnimatedYStack>
-    </>
+    <AnimatedYStack height={200} width="100%" position="absolute" bottom={0} zIndex={0}>
+      {hand.map((card, index) => (
+        <AnimatedCard
+          key={`${card.name}-${index}`}
+          card={card}
+          index={index}
+          totalCards={hand.length}
+          cardWidth={140}
+          screenWidth={windowWidth}
+          hoveredIndex={hoveredIndex}
+          dragTarget={dragTarget}
+          sharedOffsetY={sharedOffsetY}
+          selectedCardIndex={playedCardIndex}
+          isInBattleMode={battleMode}
+          onPlayCard={handlePlayCard}
+        />
+      ))}
+    </AnimatedYStack>
   )
 }
 

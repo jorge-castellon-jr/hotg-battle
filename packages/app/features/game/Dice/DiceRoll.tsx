@@ -1,6 +1,6 @@
 import React from 'react'
 import { YStack, Text } from 'tamagui'
-import { useSharedValue, withSequence, withSpring, withTiming } from 'react-native-reanimated'
+import { useSharedValue } from 'react-native-reanimated'
 import { DiceGrid } from './DiceGrid'
 import { useDiceRoll } from './useDiceRoll'
 

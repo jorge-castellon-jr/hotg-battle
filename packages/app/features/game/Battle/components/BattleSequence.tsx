@@ -32,6 +32,7 @@ export const BattleSequence = () => {
 
   if (!playedCard) return null
 
+  const canReroll = true
   return (
     <Stack
       position="absolute"
@@ -39,18 +40,27 @@ export const BattleSequence = () => {
       left={0}
       right={0}
       bottom={0}
-      backgroundColor="rgba(0, 0, 0, 0.7)"
       justifyContent="center"
       alignItems="center"
     >
+      <Stack
+        backgroundColor="$accentColor"
+        position="absolute"
+        top={0}
+        left={0}
+        right={0}
+        bottom={0}
+        opacity={.5}
+      />
       {!selectedEnemy ? null : (
         <YStack
           height={300}
           width={350}
-          borderRadius="$10"
-          justifyContent="center"
+          borderRadius="$6"
+          justifyContent={isRolling || rollComplete ? 'flex-end' : 'center'}
           alignItems="center"
           gap={20}
+          paddingBottom="$5"
           zIndex={100}
           backgroundColor="$background"
         >
@@ -72,7 +82,16 @@ export const BattleSequence = () => {
                   onRollComplete={handleRollComplete}
                 />
               )}
-              <Button disabled={!rollComplete} onPress={exitBattleMode}>Continue</Button>
+              <XStack width="100%" gap="$2" justifyContent="center" px="$5">
+                {canReroll && (
+                  <Button flexBasis="50%" disabled={!rollComplete} onPress={handleStartRoll}>
+                    Reroll
+                  </Button>
+                )}
+                <Button flexBasis="50%" disabled={!rollComplete} onPress={exitBattleMode}>
+                  Continue
+                </Button>
+              </XStack>
             </>
           )}
         </YStack>

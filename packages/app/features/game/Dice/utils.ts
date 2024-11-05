@@ -1,3 +1,5 @@
+import { DiceResult } from "./diceTypes"
+
 export const getDiceValue = (face: number): number => {
   switch (face) {
     case 1:

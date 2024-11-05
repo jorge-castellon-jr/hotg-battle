@@ -4,6 +4,7 @@ import cardDatabase from './Card/data/cardDatabase'
 import EnemyCardDatabase from './Card/data/Enemies/EnemyCardDatabase'
 import { RangerDecks } from './GameTypes'
 import { SharedValue, useSharedValue } from 'react-native-reanimated'
+import { getDeck } from './Card/utils/deckfutils'
 
 export interface GameState {
   rangerDecks: RangerDecks
@@ -18,6 +19,8 @@ export interface GameState {
   turn: 'rangers' | 'enemies'
   phase: 'action' | 'battle'
   selectRanger: boolean
+  canDraw: boolean
+  setCanDraw: (canIt: boolean) => void
 
   drawCard: (position: 'left' | 'middle' | 'right') => void
   setEnergy: (energy: number) => void
@@ -39,10 +42,6 @@ export interface GameState {
   enterBattleMode: (index: number) => void
   exitBattleMode: () => void
   setSelectedEnemy: (enemy: EnemyCard | null, index: number) => void
-}
-
-const getDeck = (owner: string) => {
-  return cardDatabase.filter((card) => card.owner === owner)
 }
 
 const useGameStore = create<GameState>((set) => ({
@@ -75,7 +74,7 @@ const useGameStore = create<GameState>((set) => ({
       discard: [],
     },
   }, // Populate with Ranger-specific cards
-  hand: [...getDeck('Red').slice(3)],
+  hand: [],
   enemies: {
     top: [...EnemyCardDatabase.filter((card) => card.enemyType === 'monster').slice(0, 4)],
     bottom: [...EnemyCardDatabase.filter((card) => card.enemyType === 'foot').slice(0, 3)],
@@ -135,6 +134,8 @@ const useGameStore = create<GameState>((set) => ({
     }),
 
   setSelectedEnemy: (enemy, index) => set({ selectedEnemy: enemy, selectedEnemyIndex: index }),
+  canDraw: false,
+  setCanDraw: (canIt) => set({ canDraw: canIt }),
 }))
 
 export default useGameStore

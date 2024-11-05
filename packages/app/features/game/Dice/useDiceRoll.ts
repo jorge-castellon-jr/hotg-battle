@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { withSequence, withSpring, withTiming } from 'react-native-reanimated'
 import type { SharedValue } from 'react-native-reanimated'
 import { generateDiceRolls } from './utils'
-import { DiceResult } from './diceTyes'
+import { DiceResult } from './diceTypes'
 
 export const useDiceRoll = (
   numDice: number,
