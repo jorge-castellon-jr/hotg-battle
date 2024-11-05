@@ -1,4 +1,4 @@
-import useGameStore from '../gameState'
+import useGameStore from '../gameStateStore'
 import { EnemyCard } from '../Card/CardTypes'
 
 export function performEnemyActions() {

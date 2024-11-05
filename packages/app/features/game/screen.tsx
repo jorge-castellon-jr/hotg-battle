@@ -1,11 +1,12 @@
 import React from 'react'
 import { YStack } from 'tamagui'
-import useGameStore from './gameState'
+import useGameStore from './gameStateStore'
 import TopBar from './components/TopBar'
 import EnemyRow from './components/EnemyRow'
 import RangerHand from './RangerHand/components/RangerHand'
 import RangerStatusOverview from './RangerStatus/RangerStatusOverview'
 import { BattleSequence } from './Battle/components/BattleSequence'
+import { UiOverlay } from './components/UiOverlay'
 
 const GameScreen: React.FC = () => {
   const { rangerDecks, hand, enemies, turn } = useGameStore()
@@ -29,6 +30,7 @@ const GameScreen: React.FC = () => {
 
       {/* Ranger Status - Fixed at bottom */}
       <RangerStatusOverview rangers={rangerDecks} />
+      <UiOverlay />
     </YStack>
   )
 }

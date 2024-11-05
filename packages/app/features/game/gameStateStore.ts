@@ -1,9 +1,7 @@
 import { create } from 'zustand'
 import { RangerCard, EnemyCard } from './Card/CardTypes'
-import cardDatabase from './Card/data/cardDatabase'
 import EnemyCardDatabase from './Card/data/Enemies/EnemyCardDatabase'
 import { RangerDecks } from './GameTypes'
-import { SharedValue, useSharedValue } from 'react-native-reanimated'
 import { getDeck } from './Card/utils/deckfutils'
 
 export interface GameState {
@@ -16,7 +14,7 @@ export interface GameState {
   enemyDeck: EnemyCard[] // Enemy card deck
   energy: number
   bonusDice: number
-  turn: 'rangers' | 'enemies'
+  turn: 'playerSetup' | 'enemySetup' | 'rangers' | 'enemies'
   phase: 'action' | 'battle'
   selectRanger: boolean
   canDraw: boolean
@@ -68,7 +66,7 @@ const useGameStore = create<GameState>((set) => ({
       name: 'Green Ranger',
       abilities: [{ name: 'Red Power' }],
       color: 'green',
-      cards: getDeck('Green Ranger'),
+      cards: getDeck('Green'),
       energyUsed: false,
       abilityUsed: false,
       discard: [],
@@ -82,15 +80,24 @@ const useGameStore = create<GameState>((set) => ({
   enemyDeck: EnemyCardDatabase,
   energy: 5,
   bonusDice: 0,
-  turn: 'rangers',
+  turn: 'playerSetup',
   phase: 'action',
   selectRanger: false,
 
-  drawCard: (position) =>
+  drawCard: (position) => {
+    set((state) => {
+      // not setup phase
+      if (state.turn !== 'playerSetup') return state
+      // not have 7 cards yet
+      if (state.hand.length < 6) return state
+
+      return { ...state, canDraw: false, turn: 'enemySetup' }
+    })
     set((state) => {
       const card = state.rangerDecks[position].cards.pop()
       return card ? { hand: [...state.hand, card] } : state
-    }),
+    })
+  },
   setEnergy: (energy) => set({ energy }),
   setBonusDice: (dice) => set({ bonusDice: dice }),
   nextTurn: () =>
@@ -134,7 +141,7 @@ const useGameStore = create<GameState>((set) => ({
     }),
 
   setSelectedEnemy: (enemy, index) => set({ selectedEnemy: enemy, selectedEnemyIndex: index }),
-  canDraw: false,
+  canDraw: true,
   setCanDraw: (canIt) => set({ canDraw: canIt }),
 }))
 

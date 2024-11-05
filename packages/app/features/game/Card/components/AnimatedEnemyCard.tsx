@@ -13,7 +13,7 @@ import { Skull } from 'lucide-react'
 import { EnemyCard as EnemyCardType } from '../CardTypes'
 import EnemyCard from './EnemyCard'
 import { enemyColors } from '../../utils/colors'
-import useGameStore from '../../gameState'
+import useGameStore from '../../gameStateStore'
 
 const AnimatedStack = Animated.createAnimatedComponent(Stack)
 

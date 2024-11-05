@@ -1,6 +1,6 @@
 import React from 'react'
 import { Dialog, View, Text, Button } from 'tamagui'
-import useGameStore from '../../gameState'
+import useGameStore from '../../gameStateStore'
 import RangerDeck from './RangerDeck'
 
 const PlayCardModal: React.FC = () => {

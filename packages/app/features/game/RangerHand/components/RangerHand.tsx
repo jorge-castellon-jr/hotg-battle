@@ -4,7 +4,7 @@ import Animated, { useSharedValue } from 'react-native-reanimated'
 import { useWindowDimensions } from 'react-native'
 import { RangerCard as RangerCardType } from '../../Card/CardTypes'
 import { AnimatedCard } from './AnimatedCard'
-import useGameStore from '../../gameState'
+import useGameStore from '../../gameStateStore'
 
 const AnimatedYStack = Animated.createAnimatedComponent(YStack)
 

@@ -1,5 +1,5 @@
 import { CardEffect } from '../CardTypes'
-import useGameStore from '../../gameState'
+import useGameStore from '../../gameStateStore'
 
 export function applyEffect(effect: CardEffect) {
   const gameStore = useGameStore.getState()

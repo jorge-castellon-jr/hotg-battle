@@ -1,6 +1,6 @@
 import React from 'react'
 import { Stack, Button, Text, XStack, YStack } from 'tamagui'
-import useGameStore from '../../gameState'
+import useGameStore from '../../gameStateStore'
 import { DiceRoll } from '../../Dice/DiceRoll'
 
 export const BattleSequence = () => {

@@ -2,7 +2,7 @@ import React from 'react'
 import { YStack, XStack, useWindowDimensions } from 'tamagui'
 import { EnemyCard as EnemyCardData } from '../Card/CardTypes'
 import AnimatedEnemyCard from '../Card/components/AnimatedEnemyCard'
-import { GameState } from '../gameState'
+import { GameState } from '../gameStateStore'
 
 interface EnemyRowProps {
   enemies: GameState['enemies']
