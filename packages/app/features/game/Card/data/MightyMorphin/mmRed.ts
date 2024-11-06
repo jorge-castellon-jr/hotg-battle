@@ -79,7 +79,7 @@ const tyrannoSlash: RangerCard = {
   color: 'red',
   energy: 1,
   attack: {
-    value: 5,
+    value: 3,
   },
   effects: [rerollEffect],
 }

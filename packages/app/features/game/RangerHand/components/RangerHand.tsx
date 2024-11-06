@@ -14,14 +14,14 @@ interface RangerHandProps {
 
 export const RangerHand: React.FC<RangerHandProps> = ({ hand }) => {
   const { width: windowWidth } = useWindowDimensions()
-  const { enterBattleMode, battleMode, playedCardIndex } = useGameStore()
+  const { setShowCardOptions, showCardOptions, battleMode, playedCardIndex } = useGameStore()
 
   const hoveredIndex = useSharedValue(-1)
   const dragTarget = useSharedValue(-1)
   const sharedOffsetY = useSharedValue(0)
 
   const handlePlayCard = (index: number) => {
-    enterBattleMode(index)
+    setShowCardOptions(index)
   }
 
   return (
@@ -38,7 +38,7 @@ export const RangerHand: React.FC<RangerHandProps> = ({ hand }) => {
           dragTarget={dragTarget}
           sharedOffsetY={sharedOffsetY}
           selectedCardIndex={playedCardIndex}
-          isInBattleMode={battleMode}
+          isInBattleMode={showCardOptions || battleMode}
           onPlayCard={handlePlayCard}
         />
       ))}

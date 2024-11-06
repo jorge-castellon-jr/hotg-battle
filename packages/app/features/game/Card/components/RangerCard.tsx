@@ -25,6 +25,13 @@ interface DiceIconProps {
   color: string
 }
 
+const EnergyStats = memo(({ value }: { value: number }) => (
+  <StatContainer position="absolute" left="$2">
+    <Zap size={10} color="white" strokeWidth={2.5} />
+    <StatText>{value >= 0 ? value : "X"}</StatText>
+  </StatContainer>
+))
+
 const ShieldStats = memo(({ value }: { value: number }) => (
   <StatContainer>
     <Shield size={10} color="white" strokeWidth={2.5} />
@@ -72,6 +79,7 @@ const RangerCard: React.FC<RangerCardProps> = ({ card }) => {
 
       {/* Type Banner */}
       <TypeBanner color={card.color as RangerColors}>
+        <EnergyStats value={card.energy} />
         <TypeText>{card.type}</TypeText>
       </TypeBanner>
 

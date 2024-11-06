@@ -30,6 +30,7 @@ export interface GameState {
   setPhase: (phase: 'action' | 'battle') => void
 
   // battle
+  showCardOptions: boolean
   battleMode: boolean
   playedCard: RangerCard | null
   playedCardIndex: number
@@ -37,7 +38,8 @@ export interface GameState {
   selectedEnemyIndex: number
 
   // Add these new functions
-  enterBattleMode: (index: number) => void
+  setShowCardOptions: (index: number) => void
+  enterBattleMode: () => void
   exitBattleMode: () => void
   setSelectedEnemy: (enemy: EnemyCard | null, index: number) => void
 }
@@ -118,21 +120,31 @@ const useGameStore = create<GameState>((set) => ({
   openSelectRanger: () => set({ selectRanger: true }),
 
   // battle
+  showCardOptions: false,
   battleMode: false,
   playedCardIndex: -1,
   playedCard: null,
   selectedEnemy: null,
   selectedEnemyIndex: -1,
 
-  enterBattleMode: (index) =>
+  setShowCardOptions: (index) =>
     set(({ hand }) => ({
-      battleMode: true,
+      canDraw: false,
+      showCardOptions: true,
       playedCard: hand[index],
       playedCardIndex: index,
     })),
 
+  enterBattleMode: () =>
+    set({
+      canDraw: false,
+      showCardOptions: false,
+      battleMode: true,
+    }),
+
   exitBattleMode: () =>
     set({
+      showCardOptions: false,
       battleMode: false,
       playedCard: undefined,
       playedCardIndex: -1,

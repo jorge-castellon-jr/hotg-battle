@@ -33,7 +33,7 @@ export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers }) =
   }, [playedCard])
   React.useEffect(() => {
     drawTranslateY.value = withSpring(
-      canDraw ? -69 : 0, // Move 200 units down when not visible
+      canDraw ? -69 : 69, // Move 200 units down when not visible
       SPRING_CONFIG
     )
   }, [canDraw])
