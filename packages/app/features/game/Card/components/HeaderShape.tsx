@@ -4,7 +4,7 @@ interface HeaderShapeProps {
   color: 'red' | 'blue' | 'green'
 }
 
-export const CardHeaderShape: React.FC<HeaderShapeProps> = ({ color }) => {
+export const CardCutOutShape: React.FC<HeaderShapeProps> = ({ color }) => {
   const topStartX = -20
   const bottomEndX = 40
 
@@ -38,4 +38,4 @@ export const CardHeaderShape: React.FC<HeaderShapeProps> = ({ color }) => {
   )
 }
 
-export default CardHeaderShape
+export default CardCutOutShape

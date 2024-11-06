@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Shield, Sword, Zap } from 'lucide-react'
 import { RangerCard as RangerCardType } from '../CardTypes'
 import {
   CardContainer,
   CardHeader,
   CardTitle,
-  StatsRow,
   StatContainer,
   StatText,
   TypeBanner,
@@ -16,18 +15,24 @@ import {
   FooterText,
   DiceContainer,
   FixedAttackContainer,
-  CardHeaderCutout,
-  HeaderTitle,
+  CardCutout,
 } from './cardStyles'
 import { YStack, Text } from '@my/ui'
-import { CardHeaderShape } from './HeaderShape'
+import { CardCutOutShape } from './HeaderShape'
 
 interface DiceIconProps {
   size: number
   color: string
 }
 
-const DiceIcon: React.FC<DiceIconProps> = ({ size = 14, color = '#374151' }) => (
+const ShieldStats = memo(({ value }: { value: number }) => (
+  <StatContainer>
+    <Shield size={10} color="white" strokeWidth={2.5} />
+    <StatText>{value}</StatText>
+  </StatContainer>
+))
+
+const DiceIcon: React.FC<DiceIconProps> = memo(({ size = 14, color = '#374151' }) => (
   <svg
     width={size}
     height={size}
@@ -42,7 +47,7 @@ const DiceIcon: React.FC<DiceIconProps> = ({ size = 14, color = '#374151' }) => 
     <path d="M3.3 7l8.7 5 8.7-5" />
     <path d="M12 22V12" />
   </svg>
-)
+))
 
 interface RangerCardProps {
   card: RangerCardType
@@ -59,9 +64,9 @@ const RangerCard: React.FC<RangerCardProps> = ({ card }) => {
     <CardContainer color={card.color as RangerColors}>
       {/* Header */}
       <CardHeader>
-        <CardHeaderCutout bottom={-2}>
-          <CardHeaderShape color={card.color as RangerColors} />
-        </CardHeaderCutout>
+        <CardCutout bottom={-2}>
+          <CardCutOutShape color={card.color as RangerColors} />
+        </CardCutout>
         <CardTitle>{card.name}</CardTitle>
       </CardHeader>
 
@@ -72,9 +77,9 @@ const RangerCard: React.FC<RangerCardProps> = ({ card }) => {
 
       {/* Main Content */}
       <ContentContainer>
-        <CardHeaderCutout top={-2} rotate="180deg">
-          <CardHeaderShape color={card.color as RangerColors} />
-        </CardHeaderCutout>
+        <CardCutout top={-2} rotate="180deg">
+          <CardCutOutShape color={card.color as RangerColors} />
+        </CardCutout>
         {card.attack && (
           <>
             {card.attack.fixed ? (
@@ -110,12 +115,23 @@ const RangerCard: React.FC<RangerCardProps> = ({ card }) => {
         <YStack flex={1} justifyContent="center">
           <CardDescription>{card.text}</CardDescription>
         </YStack>
+        <CardCutout bottom={-2}>
+          <CardCutOutShape color={card.color as RangerColors} />
+        </CardCutout>
       </ContentContainer>
 
       {/* Footer */}
-      <CardFooter>
-        <FooterText>{card.team}</FooterText>
-        <FooterText>{card.owner}</FooterText>
+      <CardFooter color={card.color as RangerColors}>
+        <FooterText>
+          {card.team} {card.owner}
+        </FooterText>
+        <FooterText>
+          <ShieldStats value={card.shields} />
+          {/* <StatContainer> */}
+          {/*   <Shield size={10} color="white" strokeWidth={2.5} /> */}
+          {/*   <StatText>{card.shields}</StatText> */}
+          {/* </StatContainer> */}
+        </FooterText>
       </CardFooter>
     </CardContainer>
   )

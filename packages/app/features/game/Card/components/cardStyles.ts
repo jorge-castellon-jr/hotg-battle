@@ -35,7 +35,7 @@ export const CardHeader = styled(Stack, {
   justifyContent: 'center',
 })
 
-export const CardHeaderCutout = styled(Stack, {
+export const CardCutout = styled(Stack, {
   position: 'absolute',
   left: 0,
   right: 0,
@@ -127,13 +127,22 @@ export const StatValue = styled(Text, {
 
 // Footer
 export const CardFooter = styled(XStack, {
-  padding: '$1',
-  paddingVertical: 4,
+  paddingVertical: '$1',
+  paddingHorizontal: '$2',
   justifyContent: 'space-between',
   alignItems: 'center',
+  backfaceVisibility: "hidden",
+  transform: "translateZ(0)",
   backgroundColor: '$gray9',
   borderBottomLeftRadius: '$2',
   borderBottomRightRadius: '$2',
+  variants: {
+    color: {
+      red: { backgroundColor: '$red9Dark' },
+      blue: { backgroundColor: '$blue9Dark' },
+      green: { backgroundColor: '$green9Dark' },
+    },
+  } as const,
 })
 
 export const FooterText = styled(Text, {
