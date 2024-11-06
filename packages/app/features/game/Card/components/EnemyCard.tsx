@@ -61,7 +61,7 @@ const EnemyCard = ({ enemy, width, height }: EnemyCardProps) => {
   }
 
   return (
-    <CardContainer width={width} height={height}>
+    <CardContainer width={width} height={height} pressStyle={{ scale: 0.98 }}>
       {/* Header */}
       <CardHeader height={20} pr="$1">
         <CardCutout bottom={-2}>
@@ -84,12 +84,7 @@ const EnemyCard = ({ enemy, width, height }: EnemyCardProps) => {
       {/* Main Content */}
       <ContentContainer>
         <CardCutout top={-2} rotate="180deg">
-          <CardCutOutShape
-            top={-15}
-            bottom={60}
-            color={getColor(enemy.enemyType)}
-            left={false}
-          />
+          <CardCutOutShape top={-15} bottom={60} color={getColor(enemy.enemyType)} left={false} />
         </CardCutout>
         <XStack gap="$2">
           {enemy.attacks &&
@@ -97,7 +92,7 @@ const EnemyCard = ({ enemy, width, height }: EnemyCardProps) => {
               <>
                 {attack.fixed ? (
                   <FixedAttackContainer>
-                    <Sword size={14} strokeWidth={2.5} />
+                    <Sword color="black" size={14} strokeWidth={2.5} />
                     <StatText color="black" fontSize={12} fontWeight="bold">
                       {attack.value}
                     </StatText>

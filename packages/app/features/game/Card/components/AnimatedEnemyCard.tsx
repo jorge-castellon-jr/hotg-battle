@@ -68,14 +68,12 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({
   }
 
   // FIXME: the tap should zoom in card and get info later
-  const tapGesture = Gesture.Tap().onStart(() => {
-    rotateCard()
-  })
+  const tapGesture = Gesture.Tap().onStart(() => { })
   // FIXME: dis will not be needed
   const longPressGesture = Gesture.LongPress()
     .minDuration(200)
     .onStart(() => {
-      flipCard()
+      rotateCard()
     })
 
   const gesture = Gesture.Exclusive(tapGesture, longPressGesture)

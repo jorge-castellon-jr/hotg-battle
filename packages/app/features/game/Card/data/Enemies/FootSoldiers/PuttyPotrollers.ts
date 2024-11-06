@@ -4,7 +4,7 @@ const flanking: EnemyCard = {
   name: 'Flanking',
   type: 'passive',
   enemyType: 'foot',
-  text: '',
+  text: 'While this card is in play, each time another enemy card deals damage, increase that damage by 1.',
   owner: 'Putty Patrollers',
   health: 2,
   effects: [

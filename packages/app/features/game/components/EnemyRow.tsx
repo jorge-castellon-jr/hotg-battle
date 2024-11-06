@@ -1,10 +1,10 @@
 import React from 'react'
 import { YStack, XStack, useWindowDimensions } from 'tamagui'
 import AnimatedEnemyCard from '../Card/components/AnimatedEnemyCard'
-import useGameStore, { GameState } from '../gameStateStore'
+import useGameStore, { GameStoreState, Turn } from '../gameStateStore'
 
 interface EnemyRowProps {
-  enemies: GameState['enemies']
+  enemies: GameStoreState['enemies']
 }
 
 const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
@@ -14,7 +14,7 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
   const totalHorizontalPadding = 32
   const totalGaps = 24
   const availableWidth = windowWidth - totalHorizontalPadding - totalGaps
-  const cardWidth = Math.min(100, Math.floor(availableWidth / 4))
+  const cardWidth = Math.min(120, Math.floor(availableWidth / 4))
   const cardHeight = Math.floor(cardWidth * 1.5)
 
   // Create arrays for both rows
@@ -31,13 +31,13 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
 
   const { turn, setupEnemy } = useGameStore()
   React.useEffect(() => {
-    if (turn !== 'enemySetup') return
+    if (turn !== Turn.enemySetup) return
 
     setupEnemy('Putty Patrollers', 'Evil Green Ranger')
   }, [turn])
 
   return (
-    <YStack padding="$2" gap="$2">
+    <YStack padding="$1" gap="$2">
       {/* Back row */}
       <XStack justifyContent="center" gap="$2">
         {backRowSlots.map((enemy, index) => (
