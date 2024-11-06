@@ -1,37 +1,31 @@
+import { ShadowStyleIOS } from 'react-native'
 import { styled } from 'tamagui'
 import { Stack, XStack, YStack, Text } from 'tamagui'
 
+export const cardShadow: ShadowStyleIOS = {
+  shadowColor: '$shadowColor',
+  shadowRadius: 5,
+  shadowOffset: { width: -3, height: 2 },
+  shadowOpacity: 1,
+}
+
 // Card Container
 export const CardContainer = styled(Stack, {
+  shadowColor: '$shadowColor',
+  shadowRadius: 5,
+  shadowOffset: { width: -3, height: 2 },
+  shadowOpacity: 1,
   width: 150,
   height: 200,
   overflow: 'hidden',
   borderRadius: '$3',
   userSelect: 'none',
   backgroundColor: 'white',
-  shadowColor: '$shadowColor',
-  shadowRadius: 5,
-  shadowOffset: { width: -4, height: 2 },
-  shadowOpacity: 1,
-  variants: {
-    color: {
-      red: {
-        borderColor: '$red9Dark',
-      },
-      blue: {
-        borderColor: '$blue9Dark',
-      },
-      green: {
-        borderColor: '$green9Dark',
-      },
-    },
-  } as const,
 })
 
 export const CardHeader = styled(Stack, {
   height: 30,
   position: 'relative',
-  alignItems: 'center',
   justifyContent: 'center',
 })
 
@@ -71,6 +65,7 @@ export const StatText = styled(Text, {
 
 // Type Banner
 export const TypeBanner = styled(XStack, {
+  height: 20,
   paddingVertical: 4,
   justifyContent: 'center',
   alignItems: 'center',
@@ -79,6 +74,9 @@ export const TypeBanner = styled(XStack, {
       red: { backgroundColor: '$red9Dark' },
       blue: { backgroundColor: '$blue9Dark' },
       green: { backgroundColor: '$green9Dark' },
+      foot: { backgroundColor: '$green9Dark' },
+      monster: { backgroundColor: '$orange9Dark' },
+      boss: { backgroundColor: '$purple9Dark' },
     },
   } as const,
 })
@@ -131,8 +129,8 @@ export const CardFooter = styled(XStack, {
   paddingHorizontal: '$2',
   justifyContent: 'space-between',
   alignItems: 'center',
-  backfaceVisibility: "hidden",
-  transform: "translateZ(0)",
+  backfaceVisibility: 'hidden',
+  transform: 'translateZ(0)',
   backgroundColor: '$gray9',
   borderBottomLeftRadius: '$2',
   borderBottomRightRadius: '$2',

@@ -39,7 +39,7 @@ const ShieldStats = memo(({ value }: { value: number }) => (
   </StatContainer>
 ))
 
-const DiceIcon: React.FC<DiceIconProps> = memo(({ size = 14, color = '#374151' }) => (
+export const DiceIcon: React.FC<DiceIconProps> = memo(({ size = 14, color = '#374151' }) => (
   <svg
     width={size}
     height={size}
@@ -135,10 +135,6 @@ const RangerCard: React.FC<RangerCardProps> = ({ card }) => {
         </FooterText>
         <FooterText>
           <ShieldStats value={card.shields} />
-          {/* <StatContainer> */}
-          {/*   <Shield size={10} color="white" strokeWidth={2.5} /> */}
-          {/*   <StatText>{card.shields}</StatText> */}
-          {/* </StatContainer> */}
         </FooterText>
       </CardFooter>
     </CardContainer>

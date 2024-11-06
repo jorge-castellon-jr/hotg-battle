@@ -2,38 +2,48 @@ import React from 'react'
 
 interface HeaderShapeProps {
   color: 'red' | 'blue' | 'green'
+  top?: number
+  bottom?: number
+  left?: boolean
+  right?: boolean
 }
 
-export const CardCutOutShape: React.FC<HeaderShapeProps> = ({ color }) => {
-  const topStartX = -20
-  const bottomEndX = 40
-
+export const CardCutOutShape: React.FC<HeaderShapeProps> = ({
+  color,
+  left = true,
+  right = true,
+  top = -20,
+  bottom = 40,
+}) => {
   return (
     <svg width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 300 30">
-
       {/* Left triangle */}
-      <path
-        d={`
+      {left && (
+        <path
+          d={`
           M0 0 
-          H${topStartX}
-          L${bottomEndX} 30
+          H${top}
+          L${bottom} 30
           H0 
           Z
         `}
-        fill={`var(--c-${color}9Dark)`}
-      />
+          fill={`var(--c-${color}9Dark)`}
+        />
+      )}
 
       {/* Right triangle */}
-      <path
-        d={`
-          M${300 - topStartX} 0
+      {right && (
+        <path
+          d={`
+          M${300 - top} 0
           H300
           V30
-          H${300 - bottomEndX}
+          H${300 - bottom}
           Z
         `}
-        fill={`var(--c-${color}9Dark)`}
-      />
+          fill={`var(--c-${color}9Dark)`}
+        />
+      )}
     </svg>
   )
 }

@@ -1,8 +1,23 @@
 import React from 'react'
-import { Stack, XStack, YStack, Text } from 'tamagui'
+import { Stack, YStack, Text, XStack } from 'tamagui'
 import { Heart, Sword } from 'lucide-react'
 import { EnemyCard as EnemyCardType } from '../CardTypes'
-import { enemyColors } from '../../utils/colors'
+import {
+  CardContainer,
+  CardCutout,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  ContentContainer,
+  DiceContainer,
+  FixedAttackContainer,
+  StatContainer,
+  StatText,
+  TypeBanner,
+  TypeText,
+} from './cardStyles'
+import CardCutOutShape from './HeaderShape'
+import { DiceIcon } from './RangerCard'
 
 interface EnemyCardProps {
   enemy?: EnemyCardType
@@ -12,13 +27,11 @@ interface EnemyCardProps {
 
 const EnemyCard = ({ enemy, width, height }: EnemyCardProps) => {
   // Calculate responsive sizes based on card dimensions
-  const headerPadding = Math.max(4, Math.floor(width * 0.03))
   const fontSize = {
-    small: Math.max(10, Math.floor(width * 0.06)),
+    small: Math.min(10, Math.floor(width * 0.08)),
     medium: Math.max(12, Math.floor(width * 0.08)),
     large: Math.max(14, Math.floor(width * 0.1)),
   }
-  const iconSize = Math.max(12, Math.floor(width * 0.1))
 
   // If no enemy, render an empty slot
   if (!enemy) {
@@ -41,74 +54,73 @@ const EnemyCard = ({ enemy, width, height }: EnemyCardProps) => {
     )
   }
 
+  const getColor = (type: string) => {
+    if (type === 'foot') return 'green'
+    if (type === 'monster') return 'orange'
+    return 'purple'
+  }
+
   return (
-    <Stack
-      width={width}
-      height={height}
-      backgroundColor="$background"
-      borderRadius="$4"
-      overflow="hidden"
-      borderWidth={2}
-      borderColor={enemyColors[enemy.enemyType]}
-      pressStyle={{ scale: 0.98 }}
-    >
-      {/* Card Header */}
-      <XStack
-        backgroundColor={enemyColors[enemy.enemyType]}
-        padding={headerPadding}
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Text color="white" fontSize={fontSize.small} fontWeight="bold">
+    <CardContainer width={width} height={height}>
+      {/* Header */}
+      <CardHeader height={20} pr="$1">
+        <CardCutout bottom={-2}>
+          <CardCutOutShape top={-15} bottom={60} color={getColor(enemy.enemyType)} right={false} />
+        </CardCutout>
+        <CardTitle fontSize={fontSize.small} justifyContent="flex-end" textAlign="right">
           {enemy.name}
-        </Text>
-      </XStack>
+        </CardTitle>
+      </CardHeader>
 
-      {/* Enemy Type */}
-      {enemy.type !== 'basic' && (
-        <XStack
-          padding={headerPadding}
-          backgroundColor="$gray2"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Text fontSize={fontSize.small} color="$gray11" textTransform="capitalize">
-            {enemy.type}
-          </Text>
+      {/* Type Banner */}
+      <TypeBanner color={enemy.enemyType} justifyContent="flex-end" pr="$1">
+        <StatContainer position="absolute" left="$2">
+          <Heart size={10} color="white" strokeWidth={2.5} />
+          <StatText>{enemy.health}</StatText>
+        </StatContainer>
+        {enemy.type !== 'basic' && <TypeText>{enemy.type}</TypeText>}
+      </TypeBanner>
+
+      {/* Main Content */}
+      <ContentContainer>
+        <CardCutout top={-2} rotate="180deg">
+          <CardCutOutShape
+            top={-15}
+            bottom={60}
+            color={getColor(enemy.enemyType)}
+            left={false}
+          />
+        </CardCutout>
+        <XStack gap="$2">
+          {enemy.attacks &&
+            enemy.attacks.map((attack) => (
+              <>
+                {attack.fixed ? (
+                  <FixedAttackContainer>
+                    <Sword size={14} strokeWidth={2.5} />
+                    <StatText color="black" fontSize={12} fontWeight="bold">
+                      {attack.value}
+                    </StatText>
+                  </FixedAttackContainer>
+                ) : (
+                  <DiceContainer>
+                    <DiceIcon size={16} color={`var(--c-${getColor(enemy.enemyType)}9Dark`} />
+                    <StatText color="black" fontSize={12} fontWeight="bold">
+                      {attack.value}
+                    </StatText>
+                  </DiceContainer>
+                )}
+              </>
+            ))}
         </XStack>
-      )}
-
-      {/* Stats */}
-      <YStack padding={headerPadding} gap="$1" justifyContent='center' alignItems='center'>
-        <XStack gap="$1" alignItems="center" justifyContent="center">
-          <Heart size={iconSize} color={enemyColors[enemy.enemyType]} />
-          <Text fontSize={fontSize.large} fontWeight="bold">
-            {enemy.health}
-          </Text>
-        </XStack>
-
-        {enemy.attack && (
-          <XStack gap="$1" alignItems="center" justifyContent="center">
-            <Sword size={iconSize} />
-            <Text fontSize={fontSize.medium}>{enemy.attack.value}</Text>
-          </XStack>
-        )}
-      </YStack>
-
-      {/* Description */}
-      <YStack flex={1} padding={headerPadding}>
-        <Text fontSize={fontSize.small} textAlign="center" numberOfLines={2}>
-          {enemy.text}
-        </Text>
-      </YStack>
-
-      {/* Footer */}
-      <XStack padding={headerPadding} backgroundColor="$gray2" justifyContent="flex-end">
-        <Text fontSize={fontSize.small} color="$gray11">
-          {enemy.owner}
-        </Text>
-      </XStack>
-    </Stack>
+        <YStack flex={1} justifyContent="center">
+          <CardDescription fontSize={fontSize.small}>{enemy.text}</CardDescription>
+        </YStack>
+        <CardCutout bottom={-2}>
+          <CardCutOutShape top={-15} bottom={60} color={getColor(enemy.enemyType)} right={false} />
+        </CardCutout>
+      </ContentContainer>
+    </CardContainer>
   )
 }
 
