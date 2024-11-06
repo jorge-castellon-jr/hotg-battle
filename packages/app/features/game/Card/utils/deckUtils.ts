@@ -1,5 +1,6 @@
-import { RangerCard } from "../CardTypes";
+import { EnemyCard, RangerCard } from "../CardTypes";
 import cardDatabase from "../data/cardDatabase";
+import EneyCardDatabase from "../data/Enemies/EnemyCardDatabase";
 
 /**
  * Fisher-Yates shuffle algorithm
@@ -24,6 +25,10 @@ export const shuffleArray = <T>(array: T[]): T[] => {
  */
 export const getDeck = (owner: string): RangerCard[] => {
   const ownerCards = cardDatabase.filter((card) => card.owner === owner)
+  return shuffleArray(ownerCards)
+}
+export const getEnemyDeck = (owner: string): EnemyCard[] => {
+  const ownerCards = EneyCardDatabase.filter((card) => card.owner === owner)
   return shuffleArray(ownerCards)
 }
 

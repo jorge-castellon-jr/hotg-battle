@@ -10,6 +10,7 @@ export const UiOverlay = () => {
     enterBattleMode,
     exitBattleMode,
     playedCard,
+    discardCard
   } = useGameStore()
   return (
     <>
@@ -39,7 +40,7 @@ export const UiOverlay = () => {
             shadowOpacity={1}
           >
             {playedCard?.attack && <Button onPress={enterBattleMode}>Attack</Button>}
-            <Button onPress={() => setCanDraw(false)}>Discard</Button>
+            <Button onPress={discardCard}>Discard</Button>
             <Button onPress={exitBattleMode}>Cancel</Button>
           </YStack>
         </Stack>

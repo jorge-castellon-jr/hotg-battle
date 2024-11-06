@@ -1,8 +1,7 @@
 import React from 'react'
 import { YStack, XStack, useWindowDimensions } from 'tamagui'
-import { EnemyCard as EnemyCardData } from '../Card/CardTypes'
 import AnimatedEnemyCard from '../Card/components/AnimatedEnemyCard'
-import { GameState } from '../gameStateStore'
+import useGameStore, { GameState } from '../gameStateStore'
 
 interface EnemyRowProps {
   enemies: GameState['enemies']
@@ -29,6 +28,13 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
   enemies.bottom.forEach((enemy, index) => {
     frontRowSlots[index] = enemy
   })
+
+  const { turn, setupEnemy } = useGameStore()
+  React.useEffect(() => {
+    if (turn !== 'enemySetup') return
+
+    setupEnemy('Putty Patrollers', 'Evil Green Ranger')
+  }, [turn])
 
   return (
     <YStack padding="$2" gap="$2">

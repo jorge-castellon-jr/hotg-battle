@@ -2,7 +2,8 @@ import { create } from 'zustand'
 import { RangerCard, EnemyCard } from './Card/CardTypes'
 import EnemyCardDatabase from './Card/data/Enemies/EnemyCardDatabase'
 import { RangerDecks } from './GameTypes'
-import { getDeck } from './Card/utils/deckfutils'
+import { getDeck, getEnemyDeck } from './Card/utils/deckUtils'
+import { addCardToDiscard, findRangerByCard, removeCardFromHand } from './utils/cardOperations'
 
 export interface GameState {
   rangerDecks: RangerDecks
@@ -19,8 +20,10 @@ export interface GameState {
   selectRanger: boolean
   canDraw: boolean
   setCanDraw: (canIt: boolean) => void
+  setupEnemy: (foot: string, monster?: string) => void
 
   drawCard: (position: 'left' | 'middle' | 'right') => void
+  discardCard: () => void
   setEnergy: (energy: number) => void
   nextTurn: () => void
   setBonusDice: (dice: number) => void
@@ -44,7 +47,16 @@ export interface GameState {
   setSelectedEnemy: (enemy: EnemyCard | null, index: number) => void
 }
 
-const useGameStore = create<GameState>((set) => ({
+const RESET = {
+  showCardOptions: false,
+  battleMode: false,
+  playedCard: undefined,
+  playedCardIndex: -1,
+  selectedEnemy: undefined,
+  selectedEnemyIndex: -1,
+}
+
+const useGameStore = create<GameState>((set, get) => ({
   rangerDecks: {
     left: {
       name: 'Red Ranger',
@@ -59,7 +71,7 @@ const useGameStore = create<GameState>((set) => ({
       name: 'Blue Ranger',
       abilities: [{ name: 'Red Power' }],
       color: 'blue',
-      cards: getDeck('Blue Ranger'),
+      cards: getDeck('Blue'),
       energyUsed: false,
       abilityUsed: false,
       discard: [],
@@ -76,8 +88,8 @@ const useGameStore = create<GameState>((set) => ({
   }, // Populate with Ranger-specific cards
   hand: [],
   enemies: {
-    top: [...EnemyCardDatabase.filter((card) => card.enemyType === 'monster').slice(0, 4)],
-    bottom: [...EnemyCardDatabase.filter((card) => card.enemyType === 'foot').slice(0, 3)],
+    top: [],
+    bottom: [],
   },
   enemyDeck: EnemyCardDatabase,
   energy: 5,
@@ -85,6 +97,15 @@ const useGameStore = create<GameState>((set) => ({
   turn: 'playerSetup',
   phase: 'action',
   selectRanger: false,
+
+  setupEnemy: (foot, monster) => {
+    set({
+      enemies: {
+        top: monster ? getEnemyDeck(monster).slice(0, 4) : [],
+        bottom: getEnemyDeck(foot).slice(0, 4),
+      },
+    })
+  },
 
   drawCard: (position) => {
     set((state) => {
@@ -99,6 +120,23 @@ const useGameStore = create<GameState>((set) => ({
       const card = state.rangerDecks[position].cards.pop()
       return card ? { hand: [...state.hand, card] } : state
     })
+  },
+  discardCard() {
+    const state = get()
+
+    const card = state.playedCard
+    const cardIndex = state.playedCardIndex
+
+    if (!card) return
+
+    const rangerInfo = findRangerByCard(card, state.rangerDecks)
+    if (!rangerInfo) return false
+
+    set((state) => ({
+      ...RESET,
+      hand: removeCardFromHand(state.hand, cardIndex),
+      rangerDecks: addCardToDiscard(state.rangerDecks, rangerInfo.position, card),
+    }))
   },
   setEnergy: (energy) => set({ energy }),
   setBonusDice: (dice) => set({ bonusDice: dice }),
@@ -142,15 +180,7 @@ const useGameStore = create<GameState>((set) => ({
       battleMode: true,
     }),
 
-  exitBattleMode: () =>
-    set({
-      showCardOptions: false,
-      battleMode: false,
-      playedCard: undefined,
-      playedCardIndex: -1,
-      selectedEnemy: undefined,
-      selectedEnemyIndex: -1,
-    }),
+  exitBattleMode: () => set(RESET),
 
   setSelectedEnemy: (enemy, index) => set({ selectedEnemy: enemy, selectedEnemyIndex: index }),
   canDraw: true,

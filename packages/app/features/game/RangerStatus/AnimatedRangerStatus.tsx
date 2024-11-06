@@ -66,7 +66,7 @@ export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers }) =
         style={drawAnimatedStyle}
       >
         {Object.entries(rangers).map(([position, ranger]) => (
-          <YStack flexBasis="32.5%">
+          <YStack key={`${position}-draw`} flexBasis="32.5%">
             <DrawButton
               key={position}
               onPress={() => drawCard(position as 'left' | 'middle' | 'right')}
