@@ -33,20 +33,13 @@ export const CardHeader = styled(Stack, {
   position: 'relative',
   alignItems: 'center',
   justifyContent: 'center',
-  variants: {
-    color: {
-      red: { backgroundColor: '$red9Dark' },
-      blue: { backgroundColor: '$blue9Dark' },
-      green: { backgroundColor: '$green9Dark' },
-    },
-  } as const,
 })
 
 export const CardHeaderCutout = styled(Stack, {
   position: 'absolute',
   left: 0,
   right: 0,
-  height: 32,
+  height: 30,
   overflow: 'hidden',
 })
 

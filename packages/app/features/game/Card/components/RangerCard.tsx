@@ -58,8 +58,8 @@ const RangerCard: React.FC<RangerCardProps> = ({ card }) => {
   return (
     <CardContainer color={card.color as RangerColors}>
       {/* Header */}
-      <CardHeader color={card.color as RangerColors}>
-        <CardHeaderCutout bottom={-1}>
+      <CardHeader>
+        <CardHeaderCutout bottom={-2}>
           <CardHeaderShape color={card.color as RangerColors} />
         </CardHeaderCutout>
         <CardTitle>{card.name}</CardTitle>
@@ -72,7 +72,7 @@ const RangerCard: React.FC<RangerCardProps> = ({ card }) => {
 
       {/* Main Content */}
       <ContentContainer>
-        <CardHeaderCutout top={-1} rotate='180deg'>
+        <CardHeaderCutout top={-2} rotate="180deg">
           <CardHeaderShape color={card.color as RangerColors} />
         </CardHeaderCutout>
         {card.attack && (
