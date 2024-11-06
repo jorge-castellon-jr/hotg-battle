@@ -78,6 +78,9 @@ const tyrannoSlash: RangerCard = {
   owner: 'Red',
   color: 'red',
   energy: 1,
+  attack: {
+    value: 5,
+  },
   effects: [rerollEffect],
 }
 
@@ -85,7 +88,8 @@ const energyToDamgeEffect: CardEffect = {
   type: 'addDamge',
   value: -1,
   target: -1,
-  description: 'This attack deals an amount of damage equal to the amount of energy spent to play this card. You May divide this damage among any number of targets.',
+  description:
+    'This attack deals an amount of damage equal to the amount of energy spent to play this card. You May divide this damage among any number of targets.',
 }
 const bladeBlaster: RangerCard = {
   name: 'Blade Blaster',

@@ -1,92 +1,123 @@
 import React from 'react'
-import { Stack, XStack, YStack, Text } from 'tamagui'
 import { Shield, Sword, Zap } from 'lucide-react'
-import { RangerCard } from '../CardTypes'
-import { rangerColors } from '../../utils/colors'
+import { RangerCard as RangerCardType } from '../CardTypes'
+import {
+  CardContainer,
+  CardHeader,
+  CardTitle,
+  StatsRow,
+  StatContainer,
+  StatText,
+  TypeBanner,
+  TypeText,
+  ContentContainer,
+  CardDescription,
+  CardFooter,
+  FooterText,
+  DiceContainer,
+  FixedAttackContainer,
+  CardHeaderCutout,
+  HeaderTitle,
+} from './cardStyles'
+import { YStack, Text } from '@my/ui'
+import { CardHeaderShape } from './HeaderShape'
 
-interface RangerCardProps {
-  card: RangerCard
+interface DiceIconProps {
+  size: number
+  color: string
 }
 
-const RangerCard = ({ card }: RangerCardProps) => {
+const DiceIcon: React.FC<DiceIconProps> = ({ size = 14, color = '#374151' }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke={color}
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+    <path d="M3.3 7l8.7 5 8.7-5" />
+    <path d="M12 22V12" />
+  </svg>
+)
+
+interface RangerCardProps {
+  card: RangerCardType
+}
+
+enum RangerColors {
+  red = 'red',
+  blue = 'blue',
+  green = 'green',
+}
+
+const RangerCard: React.FC<RangerCardProps> = ({ card }) => {
   return (
-    <Stack
-      width={140}
-      height={200}
-      backgroundColor="$background"
-      borderRadius="$6"
-      overflow="hidden"
-      borderWidth={2}
-      borderColor={rangerColors[card.color]}
-      pressStyle={{ scale: 0.98 }}
-      userSelect="none"
-    >
-      {/* Card Header */}
-      <XStack
-        backgroundColor={rangerColors[card.color]}
-        padding="$2"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Text color="white" fontSize="$3" fontWeight="bold">
-          {card.name}
-        </Text>
-        <XStack alignItems="center" gap="$1">
-          <Shield size={14} color="white" />
-          <Text color="white" fontSize="$2">
-            {card.shields}
-          </Text>
-        </XStack>
-      </XStack>
+    <CardContainer color={card.color as RangerColors}>
+      {/* Header */}
+      <CardHeader color={card.color as RangerColors}>
+        <CardHeaderCutout bottom={-1}>
+          <CardHeaderShape color={card.color as RangerColors} />
+        </CardHeaderCutout>
+        <CardTitle>{card.name}</CardTitle>
+      </CardHeader>
 
-      {/* Card Type */}
-      <XStack padding="$1" backgroundColor="$gray2" alignItems="center" gap="$2">
-        <Text fontSize="$2" color="$gray11">
-          {card.type.toUpperCase()}
-        </Text>
+      {/* Type Banner */}
+      <TypeBanner color={card.color as RangerColors}>
+        <TypeText>{card.type}</TypeText>
+      </TypeBanner>
+
+      {/* Main Content */}
+      <ContentContainer>
+        <CardHeaderCutout top={-1} rotate='180deg'>
+          <CardHeaderShape color={card.color as RangerColors} />
+        </CardHeaderCutout>
         {card.attack && (
-          <XStack gap="$1" alignItems="center">
-            <Sword size={14} />
-            <Text fontSize="$2">{card.attack.value}</Text>
-          </XStack>
+          <>
+            {card.attack.fixed ? (
+              <FixedAttackContainer>
+                <Sword size={14} strokeWidth={2.5} />
+                <StatText color="black" fontSize={12} fontWeight="bold">
+                  {card.attack.value}
+                </StatText>
+              </FixedAttackContainer>
+            ) : (
+              <DiceContainer>
+                {card.attack.value < 0 ? (
+                  <Text>Special</Text>
+                ) : (
+                  [...Array(card.attack.value)].map((_, index) => (
+                    <DiceIcon
+                      key={index}
+                      size={16}
+                      color={
+                        card.color === 'red'
+                          ? '#ef4444'
+                          : card.color === 'blue'
+                            ? '#3b82f6'
+                            : '#22c55e'
+                      }
+                    />
+                  ))
+                )}
+              </DiceContainer>
+            )}
+          </>
         )}
-      </XStack>
+        <YStack flex={1} justifyContent="center">
+          <CardDescription>{card.text}</CardDescription>
+        </YStack>
+      </ContentContainer>
 
-      {/* Card Content */}
-      <YStack flex={1} padding="$2" gap="$1" justifyContent="center">
-        <Text fontSize={10} textAlign="center">
-          {card.text}
-        </Text>
-
-        {/* Effects Section */}
-        {/* {card.effects && card.effects.length > 0 && ( */}
-        {/*   <YStack gap="$1"> */}
-        {/*     {card.effects.map((effect, index) => ( */}
-        {/*       <XStack */}
-        {/*         key={index} */}
-        {/*         backgroundColor="$gray2" */}
-        {/*         padding="$1" */}
-        {/*         borderRadius="$2" */}
-        {/*         alignItems="center" */}
-        {/*         gap="$1" */}
-        {/*       > */}
-        {/*         <Zap size={12} /> */}
-        {/*         <Text fontSize="$1" flex={1}> */}
-        {/*           {effect.description} */}
-        {/*         </Text> */}
-        {/*       </XStack> */}
-        {/*     ))} */}
-        {/*   </YStack> */}
-        {/* )} */}
-      </YStack>
-
-      {/* Card Footer */}
-      <XStack padding="$1" backgroundColor="$gray2" justifyContent="flex-end">
-        <Text fontSize="$1" color="$gray11">
-          {card.owner}
-        </Text>
-      </XStack>
-    </Stack>
+      {/* Footer */}
+      <CardFooter>
+        <FooterText>{card.team}</FooterText>
+        <FooterText>{card.owner}</FooterText>
+      </CardFooter>
+    </CardContainer>
   )
 }
 
