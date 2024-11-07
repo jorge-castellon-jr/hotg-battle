@@ -7,7 +7,7 @@ export const BattleSequence = () => {
   const [isRolling, setIsRolling] = React.useState(false)
   const [rollComplete, setRollComplete] = React.useState(false)
 
-  const { playedCard, exitBattleMode, enemies, selectedEnemy, setSelectedEnemy } = useGameStore()
+  const { gameState, playedCard, exitBattleMode, selectedEnemy } = useGameStore()
 
   // Reset states when battle sequence starts
   React.useEffect(() => {
@@ -96,20 +96,6 @@ export const BattleSequence = () => {
           )}
         </YStack>
       )}
-
-      {/* Back Button */}
-      <Button
-        position="absolute"
-        top="$6"
-        left="$6"
-        onPress={() => {
-          setIsRolling(false)
-          setRollComplete(false)
-          exitBattleMode()
-        }}
-      >
-        Back
-      </Button>
     </Stack>
   )
 }
