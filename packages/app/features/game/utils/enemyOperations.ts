@@ -5,14 +5,11 @@ interface EnemyRows {
   bottom: EnemyCard[]
 }
 
-export const updateEnemyStatus = (
+export const toggleEnemyStatus = (
   enemies: EnemyRows,
   enemyIndex: number,
   row: 'top' | 'bottom',
-  status: {
-    activated?: boolean
-    defeated?: boolean
-  }
+  statusKey: 'activated' | 'defeated'
 ): EnemyRows => {
   return {
     ...enemies,
@@ -20,7 +17,7 @@ export const updateEnemyStatus = (
       index === enemyIndex
         ? {
           ...enemy,
-          ...status,
+          [statusKey]: !enemy[statusKey],
         }
         : enemy
     ),

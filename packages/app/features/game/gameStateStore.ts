@@ -4,7 +4,7 @@ import EnemyCardDatabase from './Card/data/Enemies/EnemyCardDatabase'
 import { RangerDecks } from './GameTypes'
 import { getDeck, getEnemyDeck } from './Card/utils/deckUtils'
 import { addCardToDiscard, findRangerByCard, removeCardFromHand } from './utils/cardOperations'
-import { findEnemyCard, updateEnemyStatus } from './utils/enemyOperations'
+import { findEnemyCard, toggleEnemyStatus, updateEnemyStatus } from './utils/enemyOperations'
 
 export enum GameState {
   default,
@@ -177,24 +177,15 @@ const useGameStore = create<GameStoreState>((set, get) => ({
     top: [],
     bottom: [],
   },
-  markEnemyAsActivated: (active) =>
+  markEnemyAsActivated: () =>
     set(({ enemies, selectedEnemyIndex, selectedEnemyRow }) => ({
-      enemies: updateEnemyStatus(enemies, selectedEnemyIndex, selectedEnemyRow!, { activated: true }),
+      enemies: toggleEnemyStatus(enemies, selectedEnemyIndex, selectedEnemyRow!, 'activated'),
     })),
 
   markEnemyAsDefeated: () =>
-    set((state) => {
-      const index = state.selectedEnemyIndex
-      const row = state.selectedEnemyRow
-      if (!row) return state
-
-      const enemy = findEnemyCard(state.enemies, index, row)
-      if (!enemy || enemy.defeated) return state
-
-      return {
-        enemies: updateEnemyStatus(state.enemies, index, row, { defeated: true }),
-      }
-    }),
+    set(({ enemies, selectedEnemyIndex, selectedEnemyRow }) => ({
+      enemies: toggleEnemyStatus(enemies, selectedEnemyIndex, selectedEnemyRow!, 'defeated'),
+    })),
 
   applyDamage: (value) => {
     // do something

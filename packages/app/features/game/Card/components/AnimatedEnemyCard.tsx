@@ -128,14 +128,9 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({
   }
 
   useEffect(() => {
-    if (enemy?.defeated) {
-      flipCard(enemy.defeated)
-      hideUI()
-    }
-    if (enemy?.activated) {
-      rotateCard(enemy.activated)
-      hideUI()
-    }
+    flipCard(enemy?.defeated ?? false)
+    rotateCard(enemy?.activated ?? false)
+    hideUI()
   }, [enemy])
 
   return (
