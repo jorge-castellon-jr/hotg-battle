@@ -2,7 +2,8 @@ import { Button, Stack, YStack } from 'tamagui'
 import useGameStore, { GameState } from '../gameStateStore'
 
 export const EnemyOptionsUI = () => {
-  const { gameState, exitBattleMode, markEnemyAsActivated, markEnemyAsDefeated } = useGameStore()
+  const { gameState, exitBattleMode, markEnemyAsActivated, markEnemyAsDefeated, selectedEnemy } =
+    useGameStore()
 
   if (gameState !== GameState.enemyCardOptions) return null
 
@@ -32,7 +33,7 @@ export const EnemyOptionsUI = () => {
         shadowOpacity={1}
       >
         <Button onPress={markEnemyAsActivated}>Rotate</Button>
-        <Button onPress={markEnemyAsDefeated}>Defeat</Button>
+        <Button onPress={markEnemyAsDefeated}>{selectedEnemy?.defeated && 'Undo'}Defeat</Button>
         <Button onPress={exitBattleMode}>Cancel</Button>
       </YStack>
     </Stack>
