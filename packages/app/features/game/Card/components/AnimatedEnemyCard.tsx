@@ -13,7 +13,7 @@ import { Skull } from 'lucide-react'
 import { EnemyCard as EnemyCardType } from '../CardTypes'
 import EnemyCard from './EnemyCard'
 import { enemyColors } from '../../utils/colors'
-import useGameStore from '../../gameStateStore'
+import useGameStore, { GameState } from '../../gameStateStore'
 
 const AnimatedStack = Animated.createAnimatedComponent(Stack)
 
@@ -41,8 +41,7 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({
   height,
   index,
 }) => {
-  const { showCardOptions, battleMode, selectedEnemy, setSelectedEnemy, selectedEnemyIndex } =
-    useGameStore()
+  const { gameState, selectedEnemy, setSelectedEnemy, selectedEnemyIndex } = useGameStore()
 
   const rotation = useSharedValue(0)
   const flipRotation = useSharedValue(0)
@@ -54,15 +53,15 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({
 
   const rotateCard = () => {
     if (!enemy) return
-    if (battleMode) return
-    if (showCardOptions) return
+    if (gameState === GameState.rangerBattle) return
+    if (gameState === GameState.rangerCardOptions) return
     isRotated.value = !isRotated.value
     rotation.value = withSpring(isRotated.value ? -90 : 0, springConfig)
   }
   const flipCard = () => {
     if (!enemy) return
-    if (battleMode) return
-    if (showCardOptions) return
+    if (gameState === GameState.rangerBattle) return
+    if (gameState === GameState.rangerCardOptions) return
     isFlipped.value = !isFlipped.value
     flipRotation.value = withTiming(isFlipped.value ? 180 : 0, flipConfig)
   }
@@ -81,18 +80,6 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({
   const animatedStyle = useAnimatedStyle(() => {
     const scale = interpolate(Math.abs(rotation.value), [0, 90], [1, 0.8], 'clamp')
 
-    if (showCardOptions)
-      return {
-        transform: [
-          { perspective: 1000 },
-          { scale },
-          { rotateZ: `${rotation.value}deg` },
-          { rotateY: `${flipRotation.value}deg` },
-        ],
-        opacity: 0.5,
-        backfaceVisibility: 'hidden',
-      }
-
     return {
       transform: [
         { perspective: 1000 },
@@ -100,14 +87,18 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({
         { rotateZ: `${rotation.value}deg` },
         { rotateY: `${flipRotation.value}deg` },
       ],
-      opacity: !selectedEnemy
-        ? 1
-        : (selectedEnemy.name === enemy?.name && selectedEnemyIndex === index) || !showCardOptions
-          ? 1
-          : 0.5,
+      opacity: 1,
+      zIndex:
+        gameState === GameState.selectedEnemy
+          ? 10
+          : !selectedEnemy
+            ? 0
+            : selectedEnemy.name === enemy?.name
+              ? 10
+              : 0,
       backfaceVisibility: 'hidden',
     }
-  }, [rotation, flipRotation, selectedEnemy, selectedEnemyIndex, showCardOptions])
+  }, [rotation, flipRotation, selectedEnemy, selectedEnemyIndex, gameState])
 
   const backAnimatedStyle = useAnimatedStyle(() => {
     const scale = interpolate(Math.abs(rotation.value), [0, 90], [1, 0.8], 'clamp')
@@ -128,7 +119,8 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({
 
   const handleBattleTarget = () => {
     if (!enemy) return
-    if (!battleMode) return
+    if (gameState !== GameState.selectedEnemy) return
+
     setSelectedEnemy(enemy, index)
   }
 
@@ -138,7 +130,7 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({
         {/* Front of card */}
         <AnimatedStack
           disabled={
-            !selectedEnemy || showCardOptions
+            !selectedEnemy
               ? false
               : selectedEnemy.name === enemy?.name && selectedEnemyIndex === index
           }

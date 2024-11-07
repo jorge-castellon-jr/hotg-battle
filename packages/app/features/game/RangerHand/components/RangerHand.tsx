@@ -39,7 +39,9 @@ export const RangerHand: React.FC<RangerHandProps> = ({ hand }) => {
           sharedOffsetY={sharedOffsetY}
           selectedCardIndex={playedCardIndex}
           isCardSelected={
-            gameState === GameState.rangerCardOptions || gameState === GameState.rangerBattle
+            gameState === GameState.rangerCardOptions ||
+            gameState === GameState.rangerBattle ||
+            gameState === GameState.selectedEnemy
           }
           onPlayCard={handlePlayCard}
         />

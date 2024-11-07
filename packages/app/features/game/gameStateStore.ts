@@ -9,6 +9,7 @@ export enum GameState {
   default,
   draw,
   rangerCardOptions,
+  selectedEnemy,
   rangerBattle,
   enemyCardOptions,
 }
@@ -52,7 +53,6 @@ export interface GameStoreState {
 
   showCardOptions: (index: number) => void
 
-  battleMode: boolean
   playedCard: RangerCard | null
   playedCardIndex: number
   selectedEnemy: EnemyCard | null
@@ -64,7 +64,6 @@ export interface GameStoreState {
 
 const RESET = {
   gameState: GameState.default,
-  battleMode: false,
   playedCard: undefined,
   playedCardIndex: -1,
   selectedEnemy: undefined,
@@ -188,18 +187,16 @@ const useGameStore = create<GameStoreState>((set, get) => ({
     })),
 
   // battle
-  battleMode: false,
   playedCardIndex: -1,
   playedCard: null,
   selectedEnemy: null,
   selectedEnemyIndex: -1,
   enterBattleMode: () =>
     set({
-      gameState: GameState.rangerBattle,
-      battleMode: true,
+      gameState: GameState.selectedEnemy,
     }),
   exitBattleMode: () => set(RESET),
-  setSelectedEnemy: (enemy, index) => set({ selectedEnemy: enemy, selectedEnemyIndex: index }),
+  setSelectedEnemy: (enemy, index) => set({ selectedEnemy: enemy, selectedEnemyIndex: index, gameState: GameState.rangerBattle }),
 }))
 
 export default useGameStore

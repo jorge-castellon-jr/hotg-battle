@@ -11,7 +11,13 @@ export const DrawUI = () => {
   } = useGameStore()
 
   if (!setupCompleted) return null
-  if (gameState == GameState.rangerBattle || gameState === GameState.rangerCardOptions) return null
+  if (
+    gameState == GameState.rangerBattle ||
+    gameState === GameState.rangerCardOptions ||
+    gameState == GameState.selectedEnemy
+  ) {
+    return null
+  }
 
   return (
     <XStack position="absolute" top="50%" right="$3" justifyContent="flex-end" padding="$3">
