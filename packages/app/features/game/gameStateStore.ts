@@ -4,6 +4,7 @@ import EnemyCardDatabase from './Card/data/Enemies/EnemyCardDatabase'
 import { RangerDecks } from './GameTypes'
 import { getDeck, getEnemyDeck } from './Card/utils/deckUtils'
 import { addCardToDiscard, findRangerByCard, removeCardFromHand } from './utils/cardOperations'
+import { findEnemyCard, updateEnemyStatus } from './utils/enemyOperations'
 
 export enum GameState {
   default,
@@ -48,6 +49,8 @@ export interface GameStoreState {
     top: EnemyCard[] // Enemy team members (Foot Soldiers, Monster)
     bottom: EnemyCard[] // Enemy team members (Foot Soldiers, Monster)
   }
+  markEnemyAsActivated: () => void
+  markEnemyAsDefeated: () => void
 
   applyDamage: (value: number) => void
 
@@ -57,9 +60,10 @@ export interface GameStoreState {
   playedCardIndex: number
   selectedEnemy: EnemyCard | null
   selectedEnemyIndex: number
+  selectedEnemyRow: 'top' | 'bottom' | null
   enterBattleMode: () => void
   exitBattleMode: () => void
-  setSelectedEnemy: (enemy: EnemyCard | null, index: number) => void
+  setSelectedEnemy: (enemy: EnemyCard | null, index: number, row: 'top' | 'bottom') => void
 }
 
 const RESET = {
@@ -173,6 +177,24 @@ const useGameStore = create<GameStoreState>((set, get) => ({
     top: [],
     bottom: [],
   },
+  markEnemyAsActivated: (active) =>
+    set(({ enemies, selectedEnemyIndex, selectedEnemyRow }) => ({
+      enemies: updateEnemyStatus(enemies, selectedEnemyIndex, selectedEnemyRow!, { activated: true }),
+    })),
+
+  markEnemyAsDefeated: () =>
+    set((state) => {
+      const index = state.selectedEnemyIndex
+      const row = state.selectedEnemyRow
+      if (!row) return state
+
+      const enemy = findEnemyCard(state.enemies, index, row)
+      if (!enemy || enemy.defeated) return state
+
+      return {
+        enemies: updateEnemyStatus(state.enemies, index, row, { defeated: true }),
+      }
+    }),
 
   applyDamage: (value) => {
     // do something
@@ -191,12 +213,14 @@ const useGameStore = create<GameStoreState>((set, get) => ({
   playedCard: null,
   selectedEnemy: null,
   selectedEnemyIndex: -1,
+  selectedEnemyRow: null,
   enterBattleMode: () =>
     set({
       gameState: GameState.selectedEnemy,
     }),
   exitBattleMode: () => set(RESET),
-  setSelectedEnemy: (enemy, index) => set({ selectedEnemy: enemy, selectedEnemyIndex: index, gameState: GameState.rangerBattle }),
+  setSelectedEnemy: (enemy, index, row) =>
+    set({ selectedEnemy: enemy, selectedEnemyIndex: index, selectedEnemyRow: row }),
 }))
 
 export default useGameStore

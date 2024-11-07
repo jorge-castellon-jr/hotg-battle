@@ -47,6 +47,7 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
             enemy={enemy}
             width={cardWidth}
             height={cardHeight}
+            row="top"
           />
         ))}
       </XStack>
@@ -60,6 +61,7 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
             enemy={enemy}
             width={cardWidth}
             height={cardHeight}
+            row="bottom"
           />
         ))}
       </XStack>

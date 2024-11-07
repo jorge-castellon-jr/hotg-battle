@@ -55,4 +55,6 @@ export interface EnemyCard {
   health: number
   attacks?: (Attack & { target?: number | 'lead' | 'notLead' })[] // Optional if attack type varies
   effects?: CardEffect[]
+  activated?: boolean
+  defeated?: boolean
 }

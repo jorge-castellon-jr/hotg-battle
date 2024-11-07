@@ -2,6 +2,7 @@ import { Stack } from '@my/ui'
 import { DrawUI } from './DrawUI'
 import { RangerOptionsUI } from './RangerOptionsUI'
 import useGameStore, { GameState } from '../gameStateStore'
+import { EnemyOptionsUI } from './EnemyOptionsUI'
 
 export const UiOverlay = () => {
   const { gameState } = useGameStore()
@@ -20,6 +21,7 @@ export const UiOverlay = () => {
         opacity={0.5}
       />
       <RangerOptionsUI />
+      <EnemyOptionsUI />
 
       <DrawUI />
     </>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Stack } from 'tamagui'
 import Animated, {
   useAnimatedStyle,
@@ -22,6 +22,7 @@ interface AnimatedEnemyCardProps {
   width: number
   height: number
   index: number
+  row: 'top' | 'bottom'
 }
 
 const springConfig = {
@@ -40,8 +41,10 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({
   width,
   height,
   index,
+  row,
 }) => {
-  const { gameState, selectedEnemy, setSelectedEnemy, selectedEnemyIndex } = useGameStore()
+  const { gameState, showUI, hideUI, selectedEnemy, setSelectedEnemy, selectedEnemyIndex } =
+    useGameStore()
 
   const rotation = useSharedValue(0)
   const flipRotation = useSharedValue(0)
@@ -51,31 +54,27 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({
   // Calculate icon size based on card dimensions
   const iconSize = Math.min(width, height) * 0.4
 
-  const rotateCard = () => {
+  const rotateCard = (rotate: boolean) => {
     if (!enemy) return
     if (gameState === GameState.rangerBattle) return
     if (gameState === GameState.rangerCardOptions) return
-    isRotated.value = !isRotated.value
+    isRotated.value = rotate
     rotation.value = withSpring(isRotated.value ? -90 : 0, springConfig)
   }
-  const flipCard = () => {
+  const flipCard = (flip: boolean) => {
     if (!enemy) return
     if (gameState === GameState.rangerBattle) return
     if (gameState === GameState.rangerCardOptions) return
-    isFlipped.value = !isFlipped.value
+    isFlipped.value = flip
     flipRotation.value = withTiming(isFlipped.value ? 180 : 0, flipConfig)
   }
 
-  // FIXME: the tap should zoom in card and get info later
-  const tapGesture = Gesture.Tap().onStart(() => { })
   // FIXME: dis will not be needed
-  const longPressGesture = Gesture.LongPress()
-    .minDuration(200)
-    .onStart(() => {
-      rotateCard()
-    })
+  const longPressGesture = Gesture.Tap().onStart(() => {
+    handleBattleTarget()
+  })
 
-  const gesture = Gesture.Exclusive(tapGesture, longPressGesture)
+  const gesture = Gesture.Exclusive(longPressGesture)
 
   const animatedStyle = useAnimatedStyle(() => {
     const scale = interpolate(Math.abs(rotation.value), [0, 90], [1, 0.8], 'clamp')
@@ -93,7 +92,7 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({
           ? 10
           : !selectedEnemy
             ? 0
-            : selectedEnemy.name === enemy?.name
+            : selectedEnemy.name === enemy?.name && index === selectedEnemyIndex
               ? 10
               : 0,
       backfaceVisibility: 'hidden',
@@ -119,10 +118,25 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({
 
   const handleBattleTarget = () => {
     if (!enemy) return
-    if (gameState !== GameState.selectedEnemy) return
+    setSelectedEnemy(enemy, index, row)
+    if (gameState !== GameState.selectedEnemy) {
+      showUI(GameState.enemyCardOptions)
+      return
+    }
 
-    setSelectedEnemy(enemy, index)
+    showUI(GameState.rangerBattle)
   }
+
+  useEffect(() => {
+    if (enemy?.defeated) {
+      flipCard(enemy.defeated)
+      hideUI()
+    }
+    if (enemy?.activated) {
+      rotateCard(enemy.activated)
+      hideUI()
+    }
+  }, [enemy])
 
   return (
     <GestureDetector gesture={gesture}>
@@ -135,7 +149,6 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({
               : selectedEnemy.name === enemy?.name && selectedEnemyIndex === index
           }
           style={animatedStyle}
-          onPress={handleBattleTarget}
         >
           <EnemyCard enemy={enemy} width={width} height={height} />
         </AnimatedStack>
