@@ -1,12 +1,12 @@
-// AnimatedRangerStatus/index.tsx
-import React from 'react'
-import { XStack, YStack } from 'tamagui'
+import React, { useState } from 'react'
+import { Button, Sheet, Text, XStack, YStack } from 'tamagui'
 import Animated, { useAnimatedStyle, withSpring, useSharedValue } from 'react-native-reanimated'
 import { RangerStatusCard } from './RangerStatusCard'
 import useGameStore, { GameState, Turn } from '../gameStateStore'
 import { DrawButton } from './DrawButton'
 import { rangerColors } from '../utils/colors'
 import { RangerDecks } from '../GameTypes'
+import RangerSheetContent from './RangerSheetContent'
 
 const AnimatedXStack = Animated.createAnimatedComponent(XStack)
 
@@ -38,7 +38,7 @@ export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers }) =
       canDraw ? -69 : 69, // Move 200 units down when not visible
       SPRING_CONFIG
     )
-  }, [gameState,turn, setupCompleted])
+  }, [gameState, turn, setupCompleted])
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
@@ -51,6 +51,10 @@ export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers }) =
       transform: [{ translateY: drawTranslateY.value }],
     }
   }, [drawTranslateY])
+
+  const [position, setPosition] = useState(0)
+  const [open, setOpen] = useState(false)
+  const [selectedRanger, setSelectedRanger] = useState<RangerDecks['left'] | null>(null)
 
   return (
     <>
@@ -90,9 +94,44 @@ export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers }) =
         style={animatedStyle}
       >
         {Object.entries(rangers).map(([position, ranger]) => (
-          <RangerStatusCard key={position} ranger={ranger} />
+          <RangerStatusCard
+            key={position}
+            ranger={ranger}
+            onPress={() => {
+              setOpen(true)
+              setSelectedRanger(ranger)
+            }}
+          />
         ))}
       </AnimatedXStack>
+
+      <Sheet
+        modal
+        animation="quick"
+        open={open}
+        onOpenChange={setOpen}
+        snapPoints={[70]}
+        position={position}
+        onPositionChange={setPosition}
+        dismissOnSnapToBottom
+      >
+        <Sheet.Overlay animation="lazy" enterStyle={{ opacity: 0 }} exitStyle={{ opacity: 0 }} />
+        <Sheet.Handle bg="$gray8" />
+        <Sheet.Frame ai="center" jc="flex-end" gap="$10" bg="$color2">
+          {selectedRanger && <RangerSheetContent ranger={selectedRanger} />}
+
+          <XStack padding="$2" width="100%">
+            <Button
+              flex={1}
+              onPress={() => {
+                setOpen(false)
+              }}
+            >
+              Cancel
+            </Button>
+          </XStack>
+        </Sheet.Frame>
+      </Sheet>
     </>
   )
 }

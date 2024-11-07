@@ -4,7 +4,7 @@ import EnemyCardDatabase from './Card/data/Enemies/EnemyCardDatabase'
 import { RangerDecks } from './GameTypes'
 import { getDeck, getEnemyDeck } from './Card/utils/deckUtils'
 import { addCardToDiscard, findRangerByCard, removeCardFromHand } from './utils/cardOperations'
-import { findEnemyCard, toggleEnemyStatus, updateEnemyStatus } from './utils/enemyOperations'
+import { toggleEnemyStatus } from './utils/enemyOperations'
 
 export enum GameState {
   default,
@@ -99,27 +99,39 @@ const useGameStore = create<GameStoreState>((set, get) => ({
 
   rangerDecks: {
     left: {
-      name: 'Red Ranger',
-      abilities: [{ name: 'Red Power' }],
+      name: 'Jason Lee Scott',
+      ability: {
+        name: 'Leadership',
+        text: 'Once per battle, a Ranger of your choice may reroll any number of dice during an attack.',
+      },
       color: 'red',
+      team: 'Mighty Morphin',
       cards: getDeck('Red'),
       energyUsed: false,
       abilityUsed: false,
       discard: [],
     },
     middle: {
-      name: 'Blue Ranger',
-      abilities: [{ name: 'Red Power' }],
+      name: 'Billy Cranston',
+      ability: {
+        name: 'Strategize',
+        text: 'Once per battle, a Ranger of your choice may draw 1 card and then place 1 card from their hand back on top of their deck.',
+      },
       color: 'blue',
+      team: 'Mighty Morphin',
       cards: getDeck('Blue'),
       energyUsed: false,
       abilityUsed: false,
       discard: [],
     },
     right: {
-      name: 'Green Ranger',
-      abilities: [{ name: 'Red Power' }],
+      name: 'Tommy Oliver',
+      ability: {
+        name: 'Loner',
+        text: 'If you are the only player with a Ranger in your location, you may add 1 die to each of your attacks.',
+      },
       color: 'green',
+      team: 'Mighty Morphin',
       cards: getDeck('Green'),
       energyUsed: false,
       abilityUsed: false,

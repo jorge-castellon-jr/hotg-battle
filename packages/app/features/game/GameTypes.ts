@@ -2,12 +2,14 @@ import { EnemyCard, RangerCard } from './Card/CardTypes'
 
 interface RangerAbility {
   name: string
+  text: string
 }
 
 export interface Ranger {
   // id: string
   name: string
-  abilities: RangerAbility[] // List of abilities or effects
+  team: string
+  ability: RangerAbility // List of abilities or effects
   cards: RangerCard[]
   energyUsed: boolean
   abilityUsed: boolean

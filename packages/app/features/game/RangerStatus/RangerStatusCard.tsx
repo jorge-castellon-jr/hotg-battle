@@ -5,11 +5,12 @@ import { rangerColors } from '../utils/colors'
 
 interface RangerStatusCardProps {
   ranger: Ranger
+  onPress: () => void
 }
 
-export const RangerStatusCard: React.FC<RangerStatusCardProps> = ({ ranger }) => {
+export const RangerStatusCard: React.FC<RangerStatusCardProps> = ({ ranger, onPress }) => {
   return (
-    <YStack flexBasis="32.5%" borderRadius="$4">
+    <YStack flexBasis="32.5%" borderRadius="$4" onPress={onPress}>
       <YStack
         flex={1}
         backgroundColor={rangerColors[ranger.color]}
