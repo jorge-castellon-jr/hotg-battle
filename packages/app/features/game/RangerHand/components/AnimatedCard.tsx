@@ -11,7 +11,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import { ANIMATION_CONFIG, getCardAnimation } from '../utils/animations'
-import useGameStore, { Turn } from '../../gameStateStore'
+import useGameStore from '../../gameStateStore'
 
 const AnimatedYStack = Animated.createAnimatedComponent(YStack)
 
@@ -26,7 +26,7 @@ interface AnimatedCardProps {
   dragTarget: SharedValue<number>
   sharedOffsetY: SharedValue<number>
   selectedCardIndex: number
-  isInBattleMode: boolean
+  isCardSelected: boolean
 }
 
 export const AnimatedCard = React.memo(
@@ -41,7 +41,7 @@ export const AnimatedCard = React.memo(
     dragTarget,
     sharedOffsetY,
     selectedCardIndex,
-    isInBattleMode,
+    isCardSelected,
   }: AnimatedCardProps) => {
     const isPressed = useSharedValue(false)
     const startY = useSharedValue(0)
@@ -62,12 +62,12 @@ export const AnimatedCard = React.memo(
     const { setupCompleted } = useGameStore()
 
     React.useEffect(() => {
-      if (!isInBattleMode) sharedOffsetY.value = 0
-    }, [isInBattleMode])
+      if (!isCardSelected) sharedOffsetY.value = 0
+    }, [isCardSelected])
 
     const dragGesture = Gesture.Pan()
       .onBegin((event) => {
-        if (isInBattleMode) return
+        if (isCardSelected) return
         if (!setupCompleted) return
 
         isPressed.value = true
@@ -78,7 +78,7 @@ export const AnimatedCard = React.memo(
         sharedOffsetY.value = initialOffset.value
       })
       .onUpdate((event) => {
-        if (isInBattleMode) return
+        if (isCardSelected) return
         if (!setupCompleted) return
 
         const touchX = event.absoluteX
@@ -96,7 +96,7 @@ export const AnimatedCard = React.memo(
         }
       })
       .onFinalize(() => {
-        if (isInBattleMode) return
+        if (isCardSelected) return
 
         if (sharedOffsetY.value > CARD_HEIGHT) {
           onPlayCard(hoveredIndex.value)
@@ -125,7 +125,7 @@ export const AnimatedCard = React.memo(
 
       // Calculate vertical position based on battle mode and selection
       let yOffset = 0
-      if (isInBattleMode) {
+      if (isCardSelected) {
         yOffset = getCardAnimation(
           index,
           selectedCardIndex,
@@ -136,7 +136,7 @@ export const AnimatedCard = React.memo(
         yOffset = isSelected ? -sharedOffsetY.value : isHovered ? HOVER_LIFT_AMOUNT : 0
       }
 
-      const scale = withSpring(isHovered && !isInBattleMode ? HOVER_SCALE : 1, ANIMATION_CONFIG)
+      const scale = withSpring(isHovered && !isCardSelected ? HOVER_SCALE : 1, ANIMATION_CONFIG)
 
       return {
         position: 'absolute',
@@ -144,17 +144,17 @@ export const AnimatedCard = React.memo(
         top: withSpring(yOffset, ANIMATION_CONFIG),
         transform: [{ scale }],
         zIndex: isSelected ? 2 : isHovered ? 1 : 0,
-        opacity: withSpring(isInBattleMode && !isSelected ? 0.5 : 1, ANIMATION_CONFIG),
+        opacity: withSpring(isCardSelected && !isSelected ? 0.5 : 1, ANIMATION_CONFIG),
       }
-    }, [hoveredIndex, index, spacing, dragTarget, sharedOffsetY, selectedCardIndex, isInBattleMode])
+    }, [hoveredIndex, index, spacing, dragTarget, sharedOffsetY, selectedCardIndex, isCardSelected])
 
     return (
       <GestureDetector gesture={dragGesture}>
         <AnimatedYStack
           style={baseStyle}
           userSelect="none"
-          cursor={isInBattleMode ? 'default' : 'grab'}
-          pressStyle={{ cursor: isInBattleMode ? 'default' : 'grabbing' }}
+          cursor={isCardSelected ? 'default' : 'grab'}
+          pressStyle={{ cursor: isCardSelected ? 'default' : 'grabbing' }}
         >
           <RangerCard card={card} />
         </AnimatedYStack>

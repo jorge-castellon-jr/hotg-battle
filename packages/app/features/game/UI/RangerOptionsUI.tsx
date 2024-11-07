@@ -1,11 +1,10 @@
 import { Button, Stack, YStack } from 'tamagui'
-import useGameStore from '../gameStateStore'
+import useGameStore, { GameState } from '../gameStateStore'
 
 export const RangerOptionsUI = () => {
-  const { showCardOptions, enterBattleMode, exitBattleMode, playedCard, discardCard } =
-    useGameStore()
+  const { gameState, enterBattleMode, exitBattleMode, playedCard, discardCard } = useGameStore()
 
-  if (!showCardOptions) return null
+  if (gameState !== GameState.rangerCardOptions) return null
 
   return (
     <Stack

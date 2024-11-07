@@ -4,7 +4,7 @@ import Animated, { useSharedValue } from 'react-native-reanimated'
 import { useWindowDimensions } from 'react-native'
 import { RangerCard as RangerCardType } from '../../Card/CardTypes'
 import { AnimatedCard } from './AnimatedCard'
-import useGameStore from '../../gameStateStore'
+import useGameStore, { GameState } from '../../gameStateStore'
 
 const AnimatedYStack = Animated.createAnimatedComponent(YStack)
 
@@ -14,14 +14,14 @@ interface RangerHandProps {
 
 export const RangerHand: React.FC<RangerHandProps> = ({ hand }) => {
   const { width: windowWidth } = useWindowDimensions()
-  const { setShowCardOptions, showCardOptions, battleMode, playedCardIndex } = useGameStore()
+  const { gameState, showCardOptions, playedCardIndex } = useGameStore()
 
   const hoveredIndex = useSharedValue(-1)
   const dragTarget = useSharedValue(-1)
   const sharedOffsetY = useSharedValue(0)
 
   const handlePlayCard = (index: number) => {
-    setShowCardOptions(index)
+    showCardOptions(index)
   }
 
   return (
@@ -38,7 +38,9 @@ export const RangerHand: React.FC<RangerHandProps> = ({ hand }) => {
           dragTarget={dragTarget}
           sharedOffsetY={sharedOffsetY}
           selectedCardIndex={playedCardIndex}
-          isInBattleMode={showCardOptions || battleMode}
+          isCardSelected={
+            gameState === GameState.rangerCardOptions || gameState === GameState.rangerBattle
+          }
           onPlayCard={handlePlayCard}
         />
       ))}

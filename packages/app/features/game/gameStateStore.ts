@@ -9,6 +9,7 @@ export enum GameState {
   default,
   draw,
   rangerCardOptions,
+  rangerBattle,
   enemyCardOptions,
 }
 export enum Turn {
@@ -49,8 +50,7 @@ export interface GameStoreState {
 
   applyDamage: (value: number) => void
 
-  showCardOptions: boolean
-  setShowCardOptions: (index: number) => void
+  showCardOptions: (index: number) => void
 
   battleMode: boolean
   playedCard: RangerCard | null
@@ -63,7 +63,7 @@ export interface GameStoreState {
 }
 
 const RESET = {
-  showCardOptions: false,
+  gameState: GameState.default,
   battleMode: false,
   playedCard: undefined,
   playedCardIndex: -1,
@@ -180,10 +180,9 @@ const useGameStore = create<GameStoreState>((set, get) => ({
     console.log(value)
   },
 
-  showCardOptions: false,
-  setShowCardOptions: (index) =>
+  showCardOptions: (index) =>
     set(({ hand }) => ({
-      showCardOptions: true,
+      gameState: GameState.rangerCardOptions,
       playedCard: hand[index],
       playedCardIndex: index,
     })),
@@ -196,7 +195,7 @@ const useGameStore = create<GameStoreState>((set, get) => ({
   selectedEnemyIndex: -1,
   enterBattleMode: () =>
     set({
-      showCardOptions: false,
+      gameState: GameState.rangerBattle,
       battleMode: true,
     }),
   exitBattleMode: () => set(RESET),
