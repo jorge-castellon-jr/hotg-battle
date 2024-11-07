@@ -1,16 +1,19 @@
 import { Button, Stack, XStack, YStack } from 'tamagui'
-import useGameStore from '../gameStateStore'
+import useGameStore, { GameState, Turn } from '../gameStateStore'
 
 export const UiOverlay = () => {
   const {
     turn,
-    canDraw,
-    setCanDraw,
+    gameState,
+
+    showUI,
+    hideUI,
+
     showCardOptions,
     enterBattleMode,
     exitBattleMode,
     playedCard,
-    discardCard
+    discardCard,
   } = useGameStore()
   return (
     <>
@@ -46,12 +49,12 @@ export const UiOverlay = () => {
         </Stack>
       )}
 
-      {turn != 'playerSetup' && (
+      {turn != Turn.playerSetup && (
         <XStack position="absolute" top="50%" right="$3" justifyContent="flex-end" padding="$3">
-          {canDraw ? (
-            <Button onPress={() => setCanDraw(false)}>Cancel</Button>
+          {gameState !== GameState.draw ? (
+            <Button onPress={() => showUI(GameState.draw)}>Draw</Button>
           ) : (
-            <Button onPress={() => setCanDraw(true)}>Draw</Button>
+            <Button onPress={hideUI}>Cancel</Button>
           )}
         </XStack>
       )}

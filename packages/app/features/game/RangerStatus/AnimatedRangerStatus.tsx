@@ -3,7 +3,7 @@ import React from 'react'
 import { XStack, YStack } from 'tamagui'
 import Animated, { useAnimatedStyle, withSpring, useSharedValue } from 'react-native-reanimated'
 import { RangerStatusCard } from './RangerStatusCard'
-import useGameStore from '../gameStateStore'
+import useGameStore, { GameState, Turn } from '../gameStateStore'
 import { DrawButton } from './DrawButton'
 import { rangerColors } from '../utils/colors'
 import { RangerDecks } from '../GameTypes'
@@ -21,7 +21,7 @@ interface RangerStatusProps {
 }
 
 export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers }) => {
-  const { drawCard, canDraw, playedCard } = useGameStore()
+  const { drawCard, turn, gameState, playedCard } = useGameStore()
   const translateY = useSharedValue(0)
   const drawTranslateY = useSharedValue(0)
 
@@ -32,11 +32,12 @@ export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers }) =
     )
   }, [playedCard])
   React.useEffect(() => {
+    const canDraw = gameState === GameState.draw || turn === Turn.playerSetup
     drawTranslateY.value = withSpring(
       canDraw ? -69 : 69, // Move 200 units down when not visible
       SPRING_CONFIG
     )
-  }, [canDraw])
+  }, [gameState, turn])
 
   const animatedStyle = useAnimatedStyle(() => {
     return {

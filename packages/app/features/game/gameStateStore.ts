@@ -5,43 +5,59 @@ import { RangerDecks } from './GameTypes'
 import { getDeck, getEnemyDeck } from './Card/utils/deckUtils'
 import { addCardToDiscard, findRangerByCard, removeCardFromHand } from './utils/cardOperations'
 
-export interface GameState {
+export enum GameState {
+  default,
+  draw,
+  rangerCardOptions,
+  enemyCardOptions,
+}
+export enum Turn {
+  playerSetup,
+  enemySetup,
+  player,
+  enemy,
+}
+
+export interface GameStoreState {
+  turn: Turn
+  gameState: GameState
+  showUI: (gameState: GameState) => void
+  hideUI: () => void
+
+  nextTurn: () => void
+
+  setupEnemy: (foot: string, monster?: string) => void
+
   rangerDecks: RangerDecks
+  enemyDeck: EnemyCard[] // Enemy card deck
+
+  energy: number
+  addEnergy: () => void
+  removeEnergy: () => void
+
+  bonusDice: number
+  addDice: () => void
+  removeDice: () => void
+
   hand: RangerCard[] // Cards currently in play
+  drawCard: (position: 'left' | 'middle' | 'right') => void
+  discardCard: () => void
+
   enemies: {
     top: EnemyCard[] // Enemy team members (Foot Soldiers, Monster)
     bottom: EnemyCard[] // Enemy team members (Foot Soldiers, Monster)
   }
-  enemyDeck: EnemyCard[] // Enemy card deck
-  energy: number
-  bonusDice: number
-  turn: 'playerSetup' | 'enemySetup' | 'rangers' | 'enemies'
-  phase: 'action' | 'battle'
-  selectRanger: boolean
-  canDraw: boolean
-  setCanDraw: (canIt: boolean) => void
-  setupEnemy: (foot: string, monster?: string) => void
 
-  drawCard: (position: 'left' | 'middle' | 'right') => void
-  discardCard: () => void
-  setEnergy: (energy: number) => void
-  nextTurn: () => void
-  setBonusDice: (dice: number) => void
   applyDamage: (value: number) => void
-  promptRangerCardPlay: () => void
-  // New state management functions
-  setPhase: (phase: 'action' | 'battle') => void
 
-  // battle
   showCardOptions: boolean
+  setShowCardOptions: (index: number) => void
+
   battleMode: boolean
   playedCard: RangerCard | null
   playedCardIndex: number
   selectedEnemy: EnemyCard | null
   selectedEnemyIndex: number
-
-  // Add these new functions
-  setShowCardOptions: (index: number) => void
   enterBattleMode: () => void
   exitBattleMode: () => void
   setSelectedEnemy: (enemy: EnemyCard | null, index: number) => void
@@ -56,7 +72,27 @@ const RESET = {
   selectedEnemyIndex: -1,
 }
 
-const useGameStore = create<GameState>((set, get) => ({
+const useGameStore = create<GameStoreState>((set, get) => ({
+  turn: Turn.playerSetup,
+  gameState: GameState.default,
+
+  showUI: (gameState) => set({ gameState }),
+  hideUI: () => set({ gameState: GameState.default }),
+
+  nextTurn: () =>
+    set((state) => ({
+      turn: state.turn === Turn.player ? Turn.enemy : Turn.player,
+    })),
+
+  setupEnemy: (foot, monster) => {
+    set({
+      enemies: {
+        top: monster ? getEnemyDeck(monster).slice(0, 4) : [],
+        bottom: getEnemyDeck(foot).slice(0, 4),
+      },
+    })
+  },
+
   rangerDecks: {
     left: {
       name: 'Red Ranger',
@@ -86,35 +122,25 @@ const useGameStore = create<GameState>((set, get) => ({
       discard: [],
     },
   }, // Populate with Ranger-specific cards
-  hand: [],
-  enemies: {
-    top: [],
-    bottom: [],
-  },
   enemyDeck: EnemyCardDatabase,
+
   energy: 5,
+  addEnergy: () => set(({ energy }) => ({ energy: energy + 1 })),
+  removeEnergy: () => set(({ energy }) => ({ energy: energy - 1 })),
+
   bonusDice: 0,
-  turn: 'playerSetup',
-  phase: 'action',
-  selectRanger: false,
+  addDice: () => set(({ bonusDice }) => ({ bonusDice: bonusDice + 1 })),
+  removeDice: () => set(({ bonusDice }) => ({ bonusDice: bonusDice - 1 })),
 
-  setupEnemy: (foot, monster) => {
-    set({
-      enemies: {
-        top: monster ? getEnemyDeck(monster).slice(0, 4) : [],
-        bottom: getEnemyDeck(foot).slice(0, 4),
-      },
-    })
-  },
-
+  hand: [],
   drawCard: (position) => {
     set((state) => {
       // not setup phase
-      if (state.turn !== 'playerSetup') return state
+      if (state.turn !== Turn.playerSetup) return state
       // not have 7 cards yet
       if (state.hand.length < 6) return state
 
-      return { ...state, canDraw: false, turn: 'enemySetup' }
+      return { ...state, canDraw: false, turn: Turn.enemySetup }
     })
     set((state) => {
       const card = state.rangerDecks[position].cards.pop()
@@ -138,33 +164,18 @@ const useGameStore = create<GameState>((set, get) => ({
       rangerDecks: addCardToDiscard(state.rangerDecks, rangerInfo.position, card),
     }))
   },
-  setEnergy: (energy) => set({ energy }),
-  setBonusDice: (dice) => set({ bonusDice: dice }),
-  nextTurn: () =>
-    set((state) => ({
-      turn: state.turn === 'rangers' ? 'enemies' : 'rangers',
-    })),
+
+  enemies: {
+    top: [],
+    bottom: [],
+  },
+
   applyDamage: (value) => {
     // do something
     console.log(value)
   },
 
-  promptRangerCardPlay: () => {
-    // Implement UI logic for allowing a Ranger to play a card
-    // This might involve displaying a modal with options for the player
-  },
-  setPhase: (phase) => set({ phase }),
-
-  openSelectRanger: () => set({ selectRanger: true }),
-
-  // battle
   showCardOptions: false,
-  battleMode: false,
-  playedCardIndex: -1,
-  playedCard: null,
-  selectedEnemy: null,
-  selectedEnemyIndex: -1,
-
   setShowCardOptions: (index) =>
     set(({ hand }) => ({
       canDraw: false,
@@ -173,18 +184,20 @@ const useGameStore = create<GameState>((set, get) => ({
       playedCardIndex: index,
     })),
 
+  // battle
+  battleMode: false,
+  playedCardIndex: -1,
+  playedCard: null,
+  selectedEnemy: null,
+  selectedEnemyIndex: -1,
   enterBattleMode: () =>
     set({
       canDraw: false,
       showCardOptions: false,
       battleMode: true,
     }),
-
   exitBattleMode: () => set(RESET),
-
   setSelectedEnemy: (enemy, index) => set({ selectedEnemy: enemy, selectedEnemyIndex: index }),
-  canDraw: true,
-  setCanDraw: (canIt) => set({ canDraw: canIt }),
 }))
 
 export default useGameStore

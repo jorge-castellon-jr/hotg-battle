@@ -11,7 +11,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import { ANIMATION_CONFIG, getCardAnimation } from '../utils/animations'
-import useGameStore from '../../gameStateStore'
+import useGameStore, { Turn } from '../../gameStateStore'
 
 const AnimatedYStack = Animated.createAnimatedComponent(YStack)
 
@@ -68,7 +68,7 @@ export const AnimatedCard = React.memo(
     const dragGesture = Gesture.Pan()
       .onBegin((event) => {
         if (isInBattleMode) return
-        if (turn == 'playerSetup') return
+        if (turn == Turn.playerSetup) return
 
         isPressed.value = true
         hoveredIndex.value = index
@@ -79,7 +79,7 @@ export const AnimatedCard = React.memo(
       })
       .onUpdate((event) => {
         if (isInBattleMode) return
-        if (turn == 'playerSetup') return
+        if (turn == Turn.playerSetup) return
 
         const touchX = event.absoluteX
         const cardIndex = Math.floor((touchX - EDGE_PADDING) / spacing)
