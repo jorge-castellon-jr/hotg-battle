@@ -21,7 +21,7 @@ interface RangerStatusProps {
 }
 
 export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers }) => {
-  const { drawCard, turn, gameState, playedCard } = useGameStore()
+  const { drawCard, turn, setupCompleted, gameState, playedCard } = useGameStore()
   const translateY = useSharedValue(0)
   const drawTranslateY = useSharedValue(0)
 
@@ -31,13 +31,14 @@ export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers }) =
       SPRING_CONFIG
     )
   }, [playedCard])
+
   React.useEffect(() => {
-    const canDraw = gameState === GameState.draw || turn === Turn.playerSetup
+    const canDraw = (gameState === GameState.draw || !setupCompleted) && turn === Turn.player
     drawTranslateY.value = withSpring(
       canDraw ? -69 : 69, // Move 200 units down when not visible
       SPRING_CONFIG
     )
-  }, [gameState, turn])
+  }, [gameState,turn, setupCompleted])
 
   const animatedStyle = useAnimatedStyle(() => {
     return {

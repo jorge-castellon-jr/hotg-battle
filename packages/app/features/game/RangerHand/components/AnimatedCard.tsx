@@ -59,7 +59,7 @@ export const AnimatedCard = React.memo(
     const overlap = Math.max(0, (totalCardsWidth - totalContentWidth) / (totalCards - 1))
     const spacing = cardWidth - overlap
 
-    const { turn } = useGameStore()
+    const { setupCompleted } = useGameStore()
 
     React.useEffect(() => {
       if (!isInBattleMode) sharedOffsetY.value = 0
@@ -68,7 +68,7 @@ export const AnimatedCard = React.memo(
     const dragGesture = Gesture.Pan()
       .onBegin((event) => {
         if (isInBattleMode) return
-        if (turn == Turn.playerSetup) return
+        if (!setupCompleted) return
 
         isPressed.value = true
         hoveredIndex.value = index
@@ -79,7 +79,7 @@ export const AnimatedCard = React.memo(
       })
       .onUpdate((event) => {
         if (isInBattleMode) return
-        if (turn == Turn.playerSetup) return
+        if (!setupCompleted) return
 
         const touchX = event.absoluteX
         const cardIndex = Math.floor((touchX - EDGE_PADDING) / spacing)

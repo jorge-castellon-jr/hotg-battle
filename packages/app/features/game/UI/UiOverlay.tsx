@@ -3,7 +3,7 @@ import useGameStore, { GameState, Turn } from '../gameStateStore'
 
 export const UiOverlay = () => {
   const {
-    turn,
+    setupCompleted,
     gameState,
 
     showUI,
@@ -49,7 +49,7 @@ export const UiOverlay = () => {
         </Stack>
       )}
 
-      {turn != Turn.playerSetup && (
+      {setupCompleted && (
         <XStack position="absolute" top="50%" right="$3" justifyContent="flex-end" padding="$3">
           {gameState !== GameState.draw ? (
             <Button onPress={() => showUI(GameState.draw)}>Draw</Button>

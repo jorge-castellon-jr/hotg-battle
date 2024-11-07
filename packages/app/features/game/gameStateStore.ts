@@ -12,13 +12,12 @@ export enum GameState {
   enemyCardOptions,
 }
 export enum Turn {
-  playerSetup,
-  enemySetup,
   player,
   enemy,
 }
 
 export interface GameStoreState {
+  setupCompleted: boolean
   turn: Turn
   gameState: GameState
   showUI: (gameState: GameState) => void
@@ -73,7 +72,8 @@ const RESET = {
 }
 
 const useGameStore = create<GameStoreState>((set, get) => ({
-  turn: Turn.playerSetup,
+  setupCompleted: false,
+  turn: Turn.player,
   gameState: GameState.default,
 
   showUI: (gameState) => set({ gameState }),
@@ -82,6 +82,7 @@ const useGameStore = create<GameStoreState>((set, get) => ({
   nextTurn: () =>
     set((state) => ({
       turn: state.turn === Turn.player ? Turn.enemy : Turn.player,
+      gameState: GameState.default,
     })),
 
   setupEnemy: (foot, monster) => {
@@ -134,14 +135,18 @@ const useGameStore = create<GameStoreState>((set, get) => ({
 
   hand: [],
   drawCard: (position) => {
+    //logic for setup
     set((state) => {
+      console.log(state.setupCompleted)
       // not setup phase
-      if (state.turn !== Turn.playerSetup) return state
+      if (state.setupCompleted) return state
       // not have 7 cards yet
       if (state.hand.length < 6) return state
 
-      return { ...state, canDraw: false, turn: Turn.enemySetup }
+      return { ...state, setupCompleted: true }
     })
+
+    // regular draw card logic
     set((state) => {
       const card = state.rangerDecks[position].cards.pop()
       return card ? { hand: [...state.hand, card] } : state
@@ -178,7 +183,6 @@ const useGameStore = create<GameStoreState>((set, get) => ({
   showCardOptions: false,
   setShowCardOptions: (index) =>
     set(({ hand }) => ({
-      canDraw: false,
       showCardOptions: true,
       playedCard: hand[index],
       playedCardIndex: index,
@@ -192,7 +196,6 @@ const useGameStore = create<GameStoreState>((set, get) => ({
   selectedEnemyIndex: -1,
   enterBattleMode: () =>
     set({
-      canDraw: false,
       showCardOptions: false,
       battleMode: true,
     }),

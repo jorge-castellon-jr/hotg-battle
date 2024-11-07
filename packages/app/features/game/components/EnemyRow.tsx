@@ -29,12 +29,12 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
     frontRowSlots[index] = enemy
   })
 
-  const { turn, setupEnemy } = useGameStore()
+  const { setupCompleted, setupEnemy } = useGameStore()
   React.useEffect(() => {
-    if (turn !== Turn.enemySetup) return
+    if (!setupCompleted) return
 
     setupEnemy('Putty Patrollers', 'Evil Green Ranger')
-  }, [turn])
+  }, [setupCompleted])
 
   return (
     <YStack padding="$1" gap="$2">
