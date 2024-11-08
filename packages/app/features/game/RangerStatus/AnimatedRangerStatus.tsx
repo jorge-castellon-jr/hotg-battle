@@ -7,7 +7,7 @@ import { DrawButton } from './DrawButton'
 import { rangerColors } from '../utils/colors'
 import { RangerDecks } from '../GameTypes'
 
-const AnimatedXStack = Animated.createAnimatedComponent(XStack)
+const AnimatedYStack = Animated.createAnimatedComponent(YStack)
 
 const SPRING_CONFIG = {
   damping: 15,
@@ -39,8 +39,8 @@ export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers }) =
     )
   }, [playedCard])
 
+  const canDraw = (gameState === GameState.draw || !setupCompleted) && turn === Turn.player
   React.useEffect(() => {
-    const canDraw = (gameState === GameState.draw || !setupCompleted) && turn === Turn.player
     drawTranslateY.value = withSpring(
       canDraw ? -69 : 69, // Move 200 units down when not visible
       SPRING_CONFIG
@@ -53,62 +53,48 @@ export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers }) =
     }
   }, [translateY])
 
-  const drawAnimatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{ translateY: drawTranslateY.value }],
-    }
-  }, [drawTranslateY])
-
   return (
     <>
-      <AnimatedXStack
-        position="absolute"
-        left={0}
-        right={0}
-        bottom={0}
-        width="100%"
-        backgroundColor="$background"
-        borderTopWidth={1}
-        borderTopColor="$borderColor"
-        padding="$2"
-        justifyContent="space-between"
-        style={drawAnimatedStyle}
-      >
-        {Object.entries(rangers).map(([position, ranger]) => (
-          <YStack key={`${position}-draw`} flexBasis="32.5%">
-            <DrawButton
-              key={position}
-              onPress={() => {
-                setSelectedPosition(position as 'left' | 'middle' | 'right')
-                drawCard()
-              }}
-              color={rangerColors[ranger.color]}
-            />
-          </YStack>
-        ))}
-      </AnimatedXStack>
-
-      <AnimatedXStack
+      <AnimatedYStack
         position="absolute"
         bottom={0}
         width="100%"
-        backgroundColor="$background"
-        borderTopWidth={1}
-        borderTopColor="$borderColor"
         padding="$2"
         gap="$2"
+        backgroundColor="$background"
+        borderTopWidth={1}
+        borderTopColor="$borderColor"
         style={animatedStyle}
       >
-        {Object.entries(rangers).map(([position, ranger]) => (
-          <RangerStatusCard
-            key={position}
-            ranger={ranger}
-            onPress={() => {
-              showRangerInfo(position as 'left' | 'middle' | 'right')
-            }}
-          />
-        ))}
-      </AnimatedXStack>
+        {canDraw && (
+          <XStack gap="$2">
+            {Object.entries(rangers).map(([position, ranger]) => (
+              <YStack key={`${position}-draw`} flex={1} flexBasis="100%">
+                <DrawButton
+                  key={position}
+                  onPress={() => {
+                    setSelectedPosition(position as 'left' | 'middle' | 'right')
+                    drawCard()
+                  }}
+                  color={rangerColors[ranger.color]}
+                />
+              </YStack>
+            ))}
+          </XStack>
+        )}
+
+        <XStack gap="$2">
+          {Object.entries(rangers).map(([position, ranger]) => (
+            <RangerStatusCard
+              key={position}
+              ranger={ranger}
+              onPress={() => {
+                showRangerInfo(position as 'left' | 'middle' | 'right')
+              }}
+            />
+          ))}
+        </XStack>
+      </AnimatedYStack>
     </>
   )
 }

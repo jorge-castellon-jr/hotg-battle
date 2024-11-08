@@ -10,7 +10,7 @@ interface RangerStatusCardProps {
 
 export const RangerStatusCard: React.FC<RangerStatusCardProps> = ({ ranger, onPress }) => {
   return (
-    <YStack flexBasis="32.5%" borderRadius="$4" onPress={onPress}>
+    <YStack flex={1} flexBasis="100%" borderRadius="$4" onPress={onPress}>
       <YStack
         flex={1}
         backgroundColor={rangerColors[ranger.color]}
