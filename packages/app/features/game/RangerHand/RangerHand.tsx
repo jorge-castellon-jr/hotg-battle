@@ -2,9 +2,9 @@ import React from 'react'
 import { YStack } from 'tamagui'
 import Animated, { useSharedValue } from 'react-native-reanimated'
 import { useWindowDimensions } from 'react-native'
-import { RangerCard as RangerCardType } from '../../Card/CardTypes'
+import { RangerCard as RangerCardType } from '../Card/CardTypes'
 import { AnimatedCard } from './AnimatedCard'
-import useGameStore, { GameState } from '../../gameStateStore'
+import useGameStore, { GameState } from '../gameStateStore'
 
 const AnimatedYStack = Animated.createAnimatedComponent(YStack)
 

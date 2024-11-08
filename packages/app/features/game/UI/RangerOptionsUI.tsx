@@ -1,7 +1,7 @@
 import { Button, Sheet, Text, XStack, YStack } from 'tamagui'
 import useGameStore, { GameState } from '../gameStateStore'
 import { useEffect, useState } from 'react'
-import RangerCard from '../Card/components/RangerCard'
+import RangerCard from '../Card/RangerCard'
 
 export const RangerOptionsUI = () => {
   const { gameState, enterBattleMode, exitBattleMode, playedCard, discardCard } = useGameStore()

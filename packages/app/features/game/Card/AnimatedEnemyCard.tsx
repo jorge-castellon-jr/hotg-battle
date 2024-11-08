@@ -10,10 +10,10 @@ import Animated, {
 } from 'react-native-reanimated'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import { Skull } from 'lucide-react'
-import { EnemyCard as EnemyCardType } from '../CardTypes'
+import { EnemyCard as EnemyCardType } from './CardTypes'
 import EnemyCard from './EnemyCard'
-import { enemyColors } from '../../utils/colors'
-import useGameStore, { GameState } from '../../gameStateStore'
+import useGameStore, { GameState } from '../gameStateStore'
+import { enemyColors } from '../utils/colors'
 
 const AnimatedStack = Animated.createAnimatedComponent(Stack)
 

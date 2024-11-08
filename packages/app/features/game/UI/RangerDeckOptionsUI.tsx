@@ -1,7 +1,7 @@
 import { Button, Sheet, Stack, Text, XStack, YStack } from 'tamagui'
 import useGameStore, { GameState } from '../gameStateStore'
 import { useEffect } from 'react'
-import RangerCard from '../Card/components/RangerCard'
+import RangerCard from '../Card/RangerCard'
 
 export const RangerDeckOptionsUI = ({
   open,

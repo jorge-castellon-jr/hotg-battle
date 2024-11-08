@@ -1,7 +1,7 @@
 import React from 'react'
 import { YStack } from 'tamagui'
-import { RangerCard as RangerCardType } from '../../Card/CardTypes'
-import RangerCard from '../../Card/components/RangerCard'
+import { RangerCard as RangerCardType } from '../Card/CardTypes'
+import RangerCard from '../Card/RangerCard'
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -10,8 +10,8 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
-import { ANIMATION_CONFIG, getCardAnimation } from '../utils/animations'
-import useGameStore from '../../gameStateStore'
+import { ANIMATION_CONFIG, getCardAnimation } from './animations'
+import useGameStore from '../gameStateStore'
 
 const AnimatedYStack = Animated.createAnimatedComponent(YStack)
 

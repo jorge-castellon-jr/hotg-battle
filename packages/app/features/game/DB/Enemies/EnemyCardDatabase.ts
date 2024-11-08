@@ -1,4 +1,4 @@
-import { EnemyCard } from "../../CardTypes"
+import { EnemyCard } from "../../Card/CardTypes"
 import Bosses from "./Bosses"
 import FootSoldiers from "./FootSoldiers"
 import Monsters from "./Monsters"

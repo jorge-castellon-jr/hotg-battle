@@ -1,4 +1,4 @@
-import { RangerCard, CardEffect } from '../../CardTypes'
+import { RangerCard, CardEffect } from '../../Card/CardTypes'
 
 const soloStrike: RangerCard = {
   name: 'Solo Strike',

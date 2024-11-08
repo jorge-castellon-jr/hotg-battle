@@ -2,44 +2,75 @@ Directory structure for: /Users/jorgecastellonjr./Dev/personal/hotg-battle/packa
 ==================================================
 
 📁 game
+    📁 Battle
+        📄 BattleOverlay.tsx
+        📄 BattleSequence.tsx
+        📄 battleManager.ts
+        📄 battleTypes.ts
     📁 Card
+        📄 AnimatedEnemyCard.tsx
         📄 CardTypes.ts
-        📁 components
-            📄 AnimatedEnemyCard.tsx
-            📄 EnemyCard.tsx
-            📄 PlayCardModal.tsx
-            📄 RangerCard.tsx
-        📁 data
-            📁 Enemies
-                📁 Bosses
-                    📄 index.ts
-                📄 EnemyCardDatabase.ts
-                📁 FootSoldiers
-                    📄 PuttyPotrollers.ts
-                    📄 index.ts
-                📁 Monsters
-                    📄 EvilGreenRanger.ts
-                    📄 index.ts
-            📁 MightyMorphin
-                📄 red.ts
-            📄 cardDatabase.ts
-        📁 utils
-            📄 effectProcessor.ts
+        📄 EnemyCard.tsx
+        📄 HeaderShape.tsx
+        📄 PlayCardModal.tsx
+        📄 RangerCard.tsx
+        📄 cardStyles.ts
+        📄 deckUtils.ts
+        📄 effectProcessor.ts
+    📁 DB
+        📁 Enemies
+            📁 Bosses
+                📄 index.ts
+            📄 EnemyCardDatabase.ts
+            📁 FootSoldiers
+                📄 PuttyPotrollers.ts
+                📄 index.ts
+            📁 Monsters
+                📄 EvilGreenRanger.ts
+                📄 index.ts
+        📁 MightyMorphin
+            📄 mmBlue.ts
+            📄 mmGreen.ts
+            📄 mmRed.ts
+        📄 cardDatabase.ts
+    📁 Dice
+        📄 DiceFace.tsx
+        📄 DiceGrid.tsx
+        📄 DiceRoll.tsx
+        📄 DiceSvg.tsx
+        📄 diceTypes.ts
+        📄 useDiceRoll.ts
+        📄 utils.ts
     📄 GameTypes.ts
     📁 RangerHand
-        📁 components
-            📄 AnimatedCard.tsx
-            📄 RangerHand.tsx
+        📄 AnimatedCard.tsx
+        📄 RangerHand.tsx
+        📄 animations.ts
+    📁 RangerStatus
+        📄 AnimatedRangerStatus.tsx
+        📄 DrawButton.tsx
+        📄 RangerCardSheet.tsx
+        📄 RangerSheetContent.tsx
+        📄 RangerStatusCard.tsx
+        📄 RangerStatusOverview.tsx
+        📄 animations.ts
+    📁 UI
+        📄 DrawUI.tsx
+        📄 EnemyOptionsUI.tsx
+        📄 RangerDeckOptionsUI.tsx
+        📄 RangerInfoUI.tsx
+        📄 RangerOptionsUI.tsx
+        📄 UiOverlay.tsx
     📁 components
         📄 EnemyRow.tsx
-        📄 RangerStatus.tsx
-        📄 RangerStatusOverview.tsx
         📄 TopBar.tsx
-    📄 gameState.ts
+    📄 gameStateStore.ts
     📄 screen.tsx
     📁 utils
+        📄 cardOperations.ts
         📄 colors.ts
         📄 enemyActions.ts
+        📄 enemyOperations.ts
 📁 home
     📄 screen.tsx
 📁 user

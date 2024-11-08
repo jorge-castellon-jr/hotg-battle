@@ -3,9 +3,9 @@ import { YStack } from 'tamagui'
 import useGameStore, { Turn } from './gameStateStore'
 import TopBar from './components/TopBar'
 import EnemyRow from './components/EnemyRow'
-import RangerHand from './RangerHand/components/RangerHand'
+import RangerHand from './RangerHand/RangerHand'
 import RangerStatusOverview from './RangerStatus/RangerStatusOverview'
-import { BattleSequence } from './Battle/components/BattleSequence'
+import { BattleSequence } from './Battle/BattleSequence'
 import { UiOverlay } from './UI/UiOverlay'
 
 const GameScreen: React.FC = () => {

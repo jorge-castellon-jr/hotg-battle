@@ -1,6 +1,6 @@
 import React from 'react'
 import { YStack, XStack, useWindowDimensions } from 'tamagui'
-import AnimatedEnemyCard from '../Card/components/AnimatedEnemyCard'
+import AnimatedEnemyCard from '../Card/AnimatedEnemyCard'
 import useGameStore, { GameStoreState, Turn } from '../gameStateStore'
 
 interface EnemyRowProps {

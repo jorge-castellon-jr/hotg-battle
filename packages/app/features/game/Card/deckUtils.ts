@@ -1,6 +1,6 @@
-import { EnemyCard, RangerCard } from "../CardTypes";
-import cardDatabase from "../data/cardDatabase";
-import EneyCardDatabase from "../data/Enemies/EnemyCardDatabase";
+import { EnemyCard, RangerCard } from "./CardTypes";
+import cardDatabase from "../DB/cardDatabase";
+import EneyCardDatabase from "../DB/Enemies/EnemyCardDatabase";
 
 /**
  * Fisher-Yates shuffle algorithm

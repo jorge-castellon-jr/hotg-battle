@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Sheet, Stack, Text, XStack, YStack, ScrollView, Button } from 'tamagui'
 import { RangerCard as RangerCardType } from '../Card/CardTypes'
-import RangerCard from '../Card/components/RangerCard'
+import RangerCard from '../Card/RangerCard'
 import useGameStore, { GameState } from '../gameStateStore'
 import { RangerDeckOptionsUI } from '../UI/RangerDeckOptionsUI'
 

@@ -1,8 +1,8 @@
 import { create } from 'zustand'
 import { RangerCard, EnemyCard } from './Card/CardTypes'
-import EnemyCardDatabase from './Card/data/Enemies/EnemyCardDatabase'
+import EnemyCardDatabase from './DB/Enemies/EnemyCardDatabase'
 import { RangerDecks } from './GameTypes'
-import { getDeck, getEnemyDeck } from './Card/utils/deckUtils'
+import { getDeck, getEnemyDeck } from './Card/deckUtils'
 import {
   addCardToDiscard,
   findRangerByCard,

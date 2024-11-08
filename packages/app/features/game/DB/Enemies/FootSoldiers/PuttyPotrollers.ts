@@ -1,4 +1,4 @@
-import { EnemyCard } from '../../../CardTypes'
+import { EnemyCard } from '../../../Card/CardTypes'
 
 const flanking: EnemyCard = {
   name: 'Flanking',

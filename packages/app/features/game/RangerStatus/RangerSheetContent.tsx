@@ -4,7 +4,7 @@ import { Ranger } from '../GameTypes'
 import { Layers, ZapOff, Zap, Star, StarOff, BookOpen } from 'lucide-react'
 import { rangerColors } from '../utils/colors'
 import useGameStore from '../gameStateStore'
-import RangerCardSheet from './RangerCardSheeet'
+import RangerCardSheet from './RangerCardSheet'
 
 interface RangerSheetContentProps {
   ranger: Ranger
