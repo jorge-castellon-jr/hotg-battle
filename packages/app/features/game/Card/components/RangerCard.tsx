@@ -28,7 +28,7 @@ interface DiceIconProps {
 const EnergyStats = memo(({ value }: { value: number }) => (
   <StatContainer position="absolute" left="$2">
     <Zap size={10} color="white" strokeWidth={2.5} />
-    <StatText>{value >= 0 ? value : "X"}</StatText>
+    <StatText>{value >= 0 ? value : 'X'}</StatText>
   </StatContainer>
 ))
 
@@ -58,6 +58,7 @@ export const DiceIcon: React.FC<DiceIconProps> = memo(({ size = 14, color = '#37
 
 interface RangerCardProps {
   card: RangerCardType
+  onPress?: () => void
 }
 
 enum RangerColors {
@@ -66,9 +67,9 @@ enum RangerColors {
   green = 'green',
 }
 
-const RangerCard: React.FC<RangerCardProps> = ({ card }) => {
+const RangerCard: React.FC<RangerCardProps> = ({ card, onPress }) => {
   return (
-    <CardContainer color={card.color as RangerColors}>
+    <CardContainer color={card.color as RangerColors} onPress={onPress}>
       {/* Header */}
       <CardHeader>
         <CardCutout bottom={-2}>

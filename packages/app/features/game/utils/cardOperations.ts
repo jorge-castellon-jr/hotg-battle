@@ -20,6 +20,10 @@ export const removeCardFromHand = (hand: RangerCard[], cardIndex: number): Range
   return hand.filter((_, index) => index !== cardIndex)
 }
 
+export const removeCardFromDeck = (deck: RangerCard[], cardIndex: number): RangerCard[] => {
+  return deck.filter((_, index) => index !== cardIndex)
+}
+
 export const addCardToDiscard = (
   rangerDecks: RangerDecks,
   position: 'left' | 'middle' | 'right',
@@ -30,6 +34,22 @@ export const addCardToDiscard = (
     [position]: {
       ...rangerDecks[position],
       discard: [...rangerDecks[position].discard, card],
+      cards: rangerDecks[position].cards.filter((c) => c !== card), // Remove card from deck
+    },
+  }
+}
+
+// New utility function to update ranger deck
+export const updateRangerDeck = (
+  rangerDecks: RangerDecks,
+  position: 'left' | 'middle' | 'right',
+  cardIndex: number
+): RangerDecks => {
+  return {
+    ...rangerDecks,
+    [position]: {
+      ...rangerDecks[position],
+      cards: removeCardFromDeck(rangerDecks[position].cards, cardIndex),
     },
   }
 }

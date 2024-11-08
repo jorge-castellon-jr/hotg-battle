@@ -144,6 +144,7 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
 
       {/* Card Sheets */}
       <RangerCardSheet
+        type='deck'
         open={showDeck}
         onOpenChange={setShowDeck}
         cards={ranger.cards}
@@ -152,6 +153,7 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
       />
 
       <RangerCardSheet
+        type='discard'
         open={showDiscard}
         onOpenChange={setShowDiscard}
         cards={ranger.discard}

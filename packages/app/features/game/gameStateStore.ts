@@ -3,13 +3,20 @@ import { RangerCard, EnemyCard } from './Card/CardTypes'
 import EnemyCardDatabase from './Card/data/Enemies/EnemyCardDatabase'
 import { RangerDecks } from './GameTypes'
 import { getDeck, getEnemyDeck } from './Card/utils/deckUtils'
-import { addCardToDiscard, findRangerByCard, removeCardFromHand } from './utils/cardOperations'
+import {
+  addCardToDiscard,
+  findRangerByCard,
+  removeCardFromDeck,
+  removeCardFromHand,
+} from './utils/cardOperations'
 import { toggleEnemyStatus } from './utils/enemyOperations'
 
 export enum GameState {
   default,
   draw,
+  rangerInfo,
   rangerCardOptions,
+  rangerDeckCardOptions,
   selectedEnemy,
   rangerBattle,
   enemyCardOptions,
@@ -32,6 +39,8 @@ export interface GameStoreState {
 
   rangerDecks: RangerDecks
   selectedRanger: (position: 'left' | 'middle' | 'right') => RangerDecks['left']
+  selectedPosition: 'left' | 'middle' | 'right' | null
+  showRangerInfo: (position: 'left' | 'middle' | 'right') => void
   toggleEnergy: (position: 'left' | 'middle' | 'right') => void
   toggleAbility: (position: 'left' | 'middle' | 'right') => void
 
@@ -48,6 +57,7 @@ export interface GameStoreState {
   hand: RangerCard[] // Cards currently in play
   drawCard: (position: 'left' | 'middle' | 'right') => void
   discardCard: () => void
+  discardDeckCard: () => void
 
   enemies: {
     top: EnemyCard[] // Enemy team members (Foot Soldiers, Monster)
@@ -59,9 +69,12 @@ export interface GameStoreState {
   applyDamage: (value: number) => void
 
   showCardOptions: (index: number) => void
+  showDeckCardOptions: (position: 'left' | 'middle' | 'right', index: number) => void
 
   playedCard: RangerCard | null
+  setPlayedCard: (card: RangerCard) => void
   playedCardIndex: number
+  setPlayedCardIndex: (index: number) => void
   selectedEnemy: EnemyCard | null
   selectedEnemyIndex: number
   selectedEnemyRow: 'top' | 'bottom' | null
@@ -210,6 +223,29 @@ const useGameStore = create<GameStoreState>((set, get) => ({
       rangerDecks: addCardToDiscard(state.rangerDecks, rangerInfo.position, card),
     }))
   },
+  discardDeckCard: () => {
+    const state = get()
+    const card = state.playedCard
+    const cardIndex = state.playedCardIndex
+
+    if (!card) return
+
+    const rangerInfo = findRangerByCard(card, state.rangerDecks)
+    if (!rangerInfo) return false
+
+    set((state) => ({
+      ...RESET,
+      gameState: GameState.rangerInfo,
+      rangerDecks: {
+        ...state.rangerDecks,
+        [rangerInfo.position]: {
+          ...state.rangerDecks[rangerInfo.position],
+          cards: removeCardFromDeck(state.rangerDecks[rangerInfo.position].cards, cardIndex),
+          discard: [...state.rangerDecks[rangerInfo.position].discard, card],
+        },
+      },
+    }))
+  },
 
   enemies: {
     top: [],
@@ -230,16 +266,27 @@ const useGameStore = create<GameStoreState>((set, get) => ({
     console.log(value)
   },
 
+  selectedPosition: null,
+  showRangerInfo: (position) =>
+    set({ gameState: GameState.rangerInfo, selectedPosition: position }),
+
   showCardOptions: (index) =>
     set(({ hand }) => ({
       gameState: GameState.rangerCardOptions,
       playedCard: hand[index],
       playedCardIndex: index,
     })),
+  showDeckCardOptions: (index) =>
+    set(({ selectedRanger, selectedPosition }) => ({
+      gameState: GameState.rangerDeckCardOptions,
+      playedCard: selectedRanger(selectedPosition ?? 'left').cards[index],
+    })),
 
   // battle
   playedCardIndex: -1,
   playedCard: null,
+  setPlayedCard: (card) => set({ playedCard: card }),
+  setPlayedCardIndex: (index) => set({ playedCardIndex: index }),
   selectedEnemy: null,
   selectedEnemyIndex: -1,
   selectedEnemyRow: null,
