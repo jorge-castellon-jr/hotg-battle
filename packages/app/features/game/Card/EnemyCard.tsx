@@ -1,7 +1,7 @@
 import React from 'react'
 import { Stack, YStack, Text, XStack } from 'tamagui'
 import { Heart, Sword } from 'lucide-react'
-import { EnemyCard as EnemyCardType } from '../CardTypes'
+import { EnemyCard as EnemyCardType } from './CardTypes'
 import {
   CardContainer,
   CardCutout,
@@ -21,11 +21,11 @@ import { DiceIcon } from './RangerCard'
 
 interface EnemyCardProps {
   enemy?: EnemyCardType
-  width: number
-  height: number
+  width?: number
+  height?: number
 }
 
-const EnemyCard = ({ enemy, width, height }: EnemyCardProps) => {
+const EnemyCard = ({ enemy, width = 150, height = 200 }: EnemyCardProps) => {
   // Calculate responsive sizes based on card dimensions
   const fontSize = {
     small: Math.min(10, Math.floor(width * 0.08)),

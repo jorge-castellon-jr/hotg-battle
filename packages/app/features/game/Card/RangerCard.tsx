@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import { Shield, Sword, Zap } from 'lucide-react'
-import { RangerCard as RangerCardType } from '../CardTypes'
+import { RangerCard as RangerCardType } from './CardTypes'
 import {
   CardContainer,
   CardHeader,
