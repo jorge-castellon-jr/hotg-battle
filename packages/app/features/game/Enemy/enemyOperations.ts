@@ -5,6 +5,42 @@ interface EnemyRows {
   bottom: EnemyCard[]
 }
 
+export const updateEnemyDamage = (
+  enemies: EnemyRows,
+  enemyIndex: number,
+  row: 'top' | 'bottom',
+  newDamage: number
+): EnemyRows => {
+  return {
+    ...enemies,
+    [row]: enemies[row].map((enemy, index) =>
+      index === enemyIndex
+        ? {
+          ...enemy,
+          currentDamage: newDamage,
+          // Automatically mark as defeated if damage equals or exceeds health
+          defeated: newDamage >= enemy.health,
+        }
+        : enemy
+    ),
+  }
+}
+
+// Function to check if enemy is at max health
+export const isEnemyAtMaxHealth = (enemy: EnemyCard): boolean => {
+  return enemy.currentDamage === 0
+}
+
+// Function to check if enemy is defeated by damage
+export const isEnemyDefeatedByDamage = (enemy: EnemyCard): boolean => {
+  return enemy.currentDamage >= enemy.health
+}
+
+// Function to get remaining health
+export const getRemainingHealth = (enemy: EnemyCard): number => {
+  return Math.max(0, enemy.health - enemy.currentDamage)
+}
+
 export const toggleEnemyStatus = (
   enemies: EnemyRows,
   enemyIndex: number,

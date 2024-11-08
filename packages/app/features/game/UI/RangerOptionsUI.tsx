@@ -10,6 +10,8 @@ export const RangerOptionsUI = () => {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
+    console.log('gameState changed', gameState)
+
     if (gameState === GameState.rangerCardOptions) {
       setOpen(true)
     } else setOpen(false)

@@ -24,7 +24,6 @@ export const BaseSheet = ({ children, open, onOpenChange, disableDrag }: BaseShe
       <Sheet.Handle bg="$gray8" />
       <Sheet.Frame jc="space-between" bg="$color2">
         {children}
-
         <SheetFooter onClose={onOpenChange} />
       </Sheet.Frame>
     </Sheet>

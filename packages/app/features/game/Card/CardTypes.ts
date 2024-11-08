@@ -53,6 +53,7 @@ export interface EnemyCard {
   text: string
   owner: string // e.g., "Foot Soldier", "Monster"
   health: number
+  currentDamage: number
   attacks?: (Attack & { target?: number | 'lead' | 'notLead' })[] // Optional if attack type varies
   effects?: CardEffect[]
   activated?: boolean

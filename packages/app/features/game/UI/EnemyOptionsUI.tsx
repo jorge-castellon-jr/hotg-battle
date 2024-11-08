@@ -1,12 +1,21 @@
-import { Button, Text, XStack, YStack } from 'tamagui'
+import { Text, XStack, YStack, Button } from 'tamagui'
 import useGameStore, { GameState } from '../gameStateStore'
 import { BaseSheet } from './BaseSheet'
 import { useEffect, useState } from 'react'
 import EnemyCard from '../Card/EnemyCard'
+import { DamageCounter } from '../Enemy/DamageCounter'
 
 export const EnemyOptionsUI = () => {
-  const { gameState, exitBattleMode, markEnemyAsActivated, markEnemyAsDefeated, selectedEnemy } =
-    useGameStore()
+  const {
+    gameState,
+    exitBattleMode,
+    markEnemyAsActivated,
+    markEnemyAsDefeated,
+    selectedEnemy,
+    updateEnemyDamage,
+    selectedEnemyIndex,
+    selectedEnemyRow,
+  } = useGameStore()
 
   const [open, setOpen] = useState(false)
 
@@ -21,6 +30,12 @@ export const EnemyOptionsUI = () => {
     exitBattleMode()
   }
 
+  const handleDamageChange = (newDamage: number) => {
+    if (selectedEnemy && selectedEnemyRow && selectedEnemyIndex !== undefined) {
+      updateEnemyDamage(selectedEnemyIndex, selectedEnemyRow, newDamage)
+    }
+  }
+
   return (
     <BaseSheet open={open} onOpenChange={onOpenChange}>
       <YStack padding="$4" gap="$4">
@@ -31,8 +46,22 @@ export const EnemyOptionsUI = () => {
         <XStack flex={1} justifyContent="center">
           {selectedEnemy && <EnemyCard enemy={selectedEnemy} />}
         </XStack>
-        <Button onPress={markEnemyAsActivated}>Rotate</Button>
-        <Button onPress={markEnemyAsDefeated}>{selectedEnemy?.defeated && 'Undo'}Defeat</Button>
+
+        {selectedEnemy && (
+          <DamageCounter
+            currentDamage={selectedEnemy.currentDamage}
+            onDamageChange={handleDamageChange}
+          />
+        )}
+
+        <XStack gap="$4">
+          <Button flex={1} flexBasis="100%" onPress={markEnemyAsActivated}>
+            {selectedEnemy?.activated ? 'Undo Rotation' : 'Rotate'}
+          </Button>
+          <Button flex={1} flexBasis="100%" onPress={markEnemyAsDefeated}>
+            {selectedEnemy?.defeated ? 'Undo Defeat' : 'Defeat'}
+          </Button>
+        </XStack>
       </YStack>
     </BaseSheet>
   )

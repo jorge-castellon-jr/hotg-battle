@@ -1,13 +1,9 @@
-import { EnemyCard } from "../../Card/CardTypes"
-import Bosses from "./Bosses"
-import FootSoldiers from "./FootSoldiers"
-import Monsters from "./Monsters"
+import { EnemyCard } from '../../Card/CardTypes'
+import Bosses from './Bosses'
+import { normalizeEnemyDatabase } from './enemyDatabaseUtils'
+import FootSoldiers from './FootSoldiers'
+import Monsters from './Monsters'
 
+const cardDatabase: EnemyCard[] = [...FootSoldiers, ...Monsters, ...Bosses]
 
-const cardDatabase: EnemyCard[] = [
-  ...FootSoldiers,
-  ...Monsters,
-  ...Bosses,
-]
-
-export default cardDatabase
+export default normalizeEnemyDatabase(cardDatabase)

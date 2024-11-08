@@ -11,7 +11,7 @@ import {
   returnCardFromDiscard,
   ReturnLocation,
 } from './utils/cardOperations'
-import { toggleEnemyStatus } from './utils/enemyOperations'
+import { toggleEnemyStatus, updateEnemyDamage } from './Enemy/enemyOperations'
 
 export enum GameState {
   default,
@@ -86,6 +86,7 @@ export interface GameStoreState {
   enterBattleMode: () => void
   exitBattleMode: () => void
   setSelectedEnemy: (enemy: EnemyCard | null, index: number, row: 'top' | 'bottom') => void
+  updateEnemyDamage: (index: number, row: 'top' | 'bottom', newHealth: number) => void
 }
 
 const RESET = {
@@ -252,7 +253,7 @@ const useGameStore = create<GameStoreState>((set, get) => ({
     }))
   },
 
-  returnCardFromDiscard: ( location) => {
+  returnCardFromDiscard: (location) => {
     const state = get()
     const card = state.playedCard
     const position = state.selectedPosition!
@@ -284,11 +285,13 @@ const useGameStore = create<GameStoreState>((set, get) => ({
   },
   markEnemyAsActivated: () =>
     set(({ enemies, selectedEnemyIndex, selectedEnemyRow }) => ({
+      gameState: GameState.default,
       enemies: toggleEnemyStatus(enemies, selectedEnemyIndex, selectedEnemyRow!, 'activated'),
     })),
 
   markEnemyAsDefeated: () =>
     set(({ enemies, selectedEnemyIndex, selectedEnemyRow }) => ({
+      gameState: GameState.default,
       enemies: toggleEnemyStatus(enemies, selectedEnemyIndex, selectedEnemyRow!, 'defeated'),
     })),
 
@@ -328,6 +331,26 @@ const useGameStore = create<GameStoreState>((set, get) => ({
   exitBattleMode: () => set(RESET),
   setSelectedEnemy: (enemy, index, row) =>
     set({ selectedEnemy: enemy, selectedEnemyIndex: index, selectedEnemyRow: row }),
+  updateEnemyDamage: (index, row, newDamage) =>
+    set((state) => {
+      const updatedEnemies = updateEnemyDamage(state.enemies, index, row, newDamage)
+
+      // Also update the selected enemy if it's the one being modified
+      const updatedSelectedEnemy =
+        state.selectedEnemy && state.selectedEnemyIndex === index && state.selectedEnemyRow === row
+          ? {
+            ...state.selectedEnemy,
+            currentDamage: newDamage,
+            defeated: newDamage >= state.selectedEnemy.health,
+          }
+          : state.selectedEnemy
+
+      return {
+        ...state,
+        enemies: updatedEnemies,
+        selectedEnemy: updatedSelectedEnemy,
+      }
+    }),
 }))
 
 export default useGameStore

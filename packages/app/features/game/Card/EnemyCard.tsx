@@ -18,6 +18,7 @@ import {
 } from './cardStyles'
 import CardCutOutShape from './HeaderShape'
 import { DiceIcon } from './RangerCard'
+import { DamageCounterBadge } from './DamageCounterBadge'
 
 interface EnemyCardProps {
   enemy?: EnemyCardType
@@ -114,6 +115,11 @@ const EnemyCard = ({ enemy, width = 150, height = 200 }: EnemyCardProps) => {
         <CardCutout bottom={-2}>
           <CardCutOutShape top={-15} bottom={60} color={getColor(enemy.enemyType)} right={false} />
         </CardCutout>
+          
+        <DamageCounterBadge
+          damage={enemy.currentDamage}
+          size={Math.min(width, height) * 0.2} // Make badge size relative to card size
+        />
       </ContentContainer>
     </CardContainer>
   )
