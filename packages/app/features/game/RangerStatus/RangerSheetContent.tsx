@@ -1,24 +1,32 @@
-import React from 'react'
-import { Stack, Text, XStack, YStack } from 'tamagui'
+import React, { useState } from 'react'
+import { Stack, Text, XStack, YStack, Button } from 'tamagui'
 import { Ranger } from '../GameTypes'
 import { Layers, ZapOff, Zap, Star, StarOff, BookOpen } from 'lucide-react'
 import { rangerColors } from '../utils/colors'
+import useGameStore from '../gameStateStore'
+import RangerCardSheet from './RangerCardSheeet'
 
 interface RangerSheetContentProps {
   ranger: Ranger
+  position: 'left' | 'middle' | 'right'
 }
 
-const RangerSheetContent = ({ ranger }: RangerSheetContentProps) => {
-  const StatBox = ({
+const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
+  const [showDeck, setShowDeck] = useState(false)
+  const [showDiscard, setShowDiscard] = useState(false)
+  const toggleEnergy = useGameStore((state) => state.toggleEnergy)
+  const toggleAbility = useGameStore((state) => state.toggleAbility)
+
+  const CountBox = ({
     icon: Icon,
     value,
-    used = false,
     label,
+    onPress,
   }: {
     icon: typeof Layers
     value: number
-    used?: boolean
     label: string
+    onPress: () => void
   }) => (
     <YStack
       backgroundColor="$gray3"
@@ -27,19 +35,52 @@ const RangerSheetContent = ({ ranger }: RangerSheetContentProps) => {
       alignItems="center"
       gap="$1"
       flex={1}
+      flexBasis="100%"
+      pressStyle={{ scale: 0.98 }}
+      onPress={onPress}
     >
-      <Icon
-        size={24}
-        color={used ? 'var(--gray8)' : `var(--${ranger.color}9)`}
-        opacity={used ? 0.5 : 1}
-      />
-      <Text fontSize="$6" fontWeight="bold" color={used ? '$gray8' : `$${ranger.color}9`}>
+      <Icon size={24} color={`var(--${ranger.color}9)`} />
+      <Text fontSize="$6" fontWeight="bold" color={`$${ranger.color}9`}>
         {value}
       </Text>
       <Text fontSize="$2" color="$gray11">
         {label}
       </Text>
     </YStack>
+  )
+
+  const StatusToggle = ({
+    icon: Icon,
+    offIcon: OffIcon,
+    isUsed,
+    label,
+    onToggle,
+  }: {
+    icon: typeof Zap
+    offIcon: typeof ZapOff
+    isUsed: boolean
+    label: string
+    onToggle: () => void
+  }) => (
+    <Button
+      backgroundColor="$gray3"
+      borderRadius="$4"
+      flex={1}
+      flexBasis="100%"
+      pressStyle={{
+        scale: 0.98,
+      }}
+      onPress={onToggle}
+    >
+      {isUsed ? (
+        <OffIcon size={24} color="var(--gray8)" />
+      ) : (
+        <Icon size={24} color={`var(--c-${ranger.color}9Dark)`} />
+      )}
+      <Text fontSize="$3" color={isUsed ? '$gray8' : '$gray11'}>
+        {label}
+      </Text>
+    </Button>
   )
 
   return (
@@ -64,23 +105,59 @@ const RangerSheetContent = ({ ranger }: RangerSheetContentProps) => {
         </Text>
       </YStack>
 
-      {/* Stats Grid */}
-      <XStack gap="$2" flexWrap="wrap">
-        <StatBox icon={Layers} value={ranger.cards.length} label="Deck" />
-        <StatBox icon={BookOpen} value={ranger.discard.length} label="Discard" />
-        <StatBox
-          icon={ranger.energyUsed ? ZapOff : Zap}
-          value={1}
-          used={ranger.energyUsed}
-          label="Energy"
+      {/* Card Counts */}
+      <XStack gap="$4">
+        <CountBox
+          icon={Layers}
+          value={ranger.cards.length}
+          label="Deck"
+          onPress={() => setShowDeck(true)}
         />
-        <StatBox
-          icon={ranger.abilityUsed ? StarOff : Star}
-          value={1}
-          used={ranger.abilityUsed}
-          label="Ability"
+        <CountBox
+          icon={BookOpen}
+          value={ranger.discard.length}
+          label="Discard"
+          onPress={() => {
+            if (!ranger.discard.length) return
+            setShowDiscard(true)
+          }}
         />
       </XStack>
+
+      {/* Status Toggles */}
+      <XStack gap="$4">
+        <StatusToggle
+          icon={Zap}
+          offIcon={ZapOff}
+          isUsed={ranger.energyUsed}
+          label="Energy"
+          onToggle={() => toggleEnergy(position)}
+        />
+        <StatusToggle
+          icon={Star}
+          offIcon={StarOff}
+          isUsed={ranger.abilityUsed}
+          label="Ability"
+          onToggle={() => toggleAbility(position)}
+        />
+      </XStack>
+
+      {/* Card Sheets */}
+      <RangerCardSheet
+        open={showDeck}
+        onOpenChange={setShowDeck}
+        cards={ranger.cards}
+        title="Deck"
+        color={ranger.color}
+      />
+
+      <RangerCardSheet
+        open={showDiscard}
+        onOpenChange={setShowDiscard}
+        cards={ranger.discard}
+        title="Discard Pile"
+        color={ranger.color}
+      />
     </YStack>
   )
 }

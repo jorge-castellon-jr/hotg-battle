@@ -21,7 +21,7 @@ interface RangerStatusProps {
 }
 
 export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers }) => {
-  const { drawCard, turn, setupCompleted, gameState, playedCard } = useGameStore()
+  const { drawCard, turn, setupCompleted, gameState, playedCard, selectedRanger } = useGameStore()
   const translateY = useSharedValue(0)
   const drawTranslateY = useSharedValue(0)
 
@@ -54,7 +54,7 @@ export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers }) =
 
   const [position, setPosition] = useState(0)
   const [open, setOpen] = useState(false)
-  const [selectedRanger, setSelectedRanger] = useState<RangerDecks['left'] | null>(null)
+  const [selectedPosition, setSelectedPosition] = useState<'left' | 'middle' | 'right' | null>(null)
 
   return (
     <>
@@ -99,7 +99,7 @@ export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers }) =
             ranger={ranger}
             onPress={() => {
               setOpen(true)
-              setSelectedRanger(ranger)
+              setSelectedPosition(position as 'left' | 'middle' | 'right')
             }}
           />
         ))}
@@ -107,27 +107,31 @@ export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers }) =
 
       <Sheet
         modal
-        animation="quick"
         open={open}
         onOpenChange={setOpen}
-        snapPoints={[70]}
+        snapPoints={[80]}
         position={position}
         onPositionChange={setPosition}
         dismissOnSnapToBottom
       >
         <Sheet.Overlay animation="lazy" enterStyle={{ opacity: 0 }} exitStyle={{ opacity: 0 }} />
         <Sheet.Handle bg="$gray8" />
-        <Sheet.Frame ai="center" jc="flex-end" gap="$10" bg="$color2">
-          {selectedRanger && <RangerSheetContent ranger={selectedRanger} />}
+        <Sheet.Frame ai="center" jc="space-between" bg="$color2">
+          {selectedRanger && selectedPosition && (
+            <RangerSheetContent
+              ranger={selectedRanger(selectedPosition)}
+              position={selectedPosition}
+            />
+          )}
 
-          <XStack padding="$2" width="100%">
+          <XStack padding="$4" width="100%">
             <Button
               flex={1}
               onPress={() => {
                 setOpen(false)
               }}
             >
-              Cancel
+              Close
             </Button>
           </XStack>
         </Sheet.Frame>
