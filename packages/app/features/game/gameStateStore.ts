@@ -31,6 +31,10 @@ export interface GameStoreState {
   setupEnemy: (foot: string, monster?: string) => void
 
   rangerDecks: RangerDecks
+  selectedRanger: (position: 'left' | 'middle' | 'right') => RangerDecks['left']
+  toggleEnergy: (position: 'left' | 'middle' | 'right') => void
+  toggleAbility: (position: 'left' | 'middle' | 'right') => void
+
   enemyDeck: EnemyCard[] // Enemy card deck
 
   energy: number
@@ -138,6 +142,28 @@ const useGameStore = create<GameStoreState>((set, get) => ({
       discard: [],
     },
   }, // Populate with Ranger-specific cards
+  selectedRanger: (position) => {
+    return get().rangerDecks[position]
+  },
+  toggleEnergy: (position) =>
+    set((state) => {
+      const updatedRangerDecks = { ...state.rangerDecks }
+      updatedRangerDecks[position] = {
+        ...updatedRangerDecks[position],
+        energyUsed: !updatedRangerDecks[position].energyUsed,
+      }
+      return { rangerDecks: updatedRangerDecks }
+    }),
+  toggleAbility: (position) =>
+    set((state) => {
+      const updatedRangerDecks = { ...state.rangerDecks }
+      updatedRangerDecks[position] = {
+        ...updatedRangerDecks[position],
+        abilityUsed: !updatedRangerDecks[position].abilityUsed,
+      }
+      return { rangerDecks: updatedRangerDecks }
+    }),
+
   enemyDeck: EnemyCardDatabase,
 
   energy: 5,
