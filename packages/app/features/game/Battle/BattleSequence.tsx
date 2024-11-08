@@ -1,38 +1,26 @@
-import React from 'react'
-import { Stack, Button, Text, XStack, YStack } from 'tamagui'
+import { Stack, Button, XStack, YStack } from 'tamagui'
 import useGameStore, { GameState } from '../gameStateStore'
 import { DiceRoll } from '../Dice/DiceRoll'
+import { BattleControls } from './DiceControls'
+import { useBattleState } from './useBattleState'
 
 export const BattleSequence = () => {
-  const [isRolling, setIsRolling] = React.useState(false)
-  const [rollComplete, setRollComplete] = React.useState(false)
+  const { gameState, playedCard, exitBattleMode } = useGameStore()
 
-  const { gameState, playedCard, exitBattleMode, selectedEnemy } = useGameStore()
+  const {
+    isRolling,
+    rollComplete,
+    currentAttack,
+    handleAddDice,
+    handleRemoveDice,
+    handleStartRoll,
+    handleRollComplete,
+  } = useBattleState(playedCard?.attack?.value || 0)
 
-  // Reset states when battle sequence starts
-  React.useEffect(() => {
-    if (!!playedCard) {
-      setIsRolling(false)
-      setRollComplete(false)
-      // Animate hand away
-    }
-  }, [playedCard])
+  if (gameState !== GameState.rangerBattle || !playedCard) return null
 
-  const handleStartRoll = () => {
-    setIsRolling(true)
-  }
+  const baseAttack = playedCard.attack?.value || 0
 
-  const handleRollComplete = (results: number[]) => {
-    setIsRolling(false)
-    setRollComplete(true)
-    const totalDamage = results.reduce((a, b) => a + b, 0)
-    console.log('Total damage:', totalDamage)
-    // Handle damage application here
-  }
-
-  if (gameState !== GameState.rangerBattle) return null
-
-  const canReroll = true
   return (
     <Stack
       position="absolute"
@@ -52,50 +40,47 @@ export const BattleSequence = () => {
         bottom={0}
         opacity={0.5}
       />
-      {!playedCard ? null : (
-        <YStack
-          height={300}
-          width={350}
-          borderRadius="$6"
-          justifyContent={isRolling || rollComplete ? 'flex-end' : 'center'}
-          alignItems="center"
-          gap={20}
-          paddingBottom="$5"
-          zIndex={100}
-          backgroundColor="$background"
-        >
-          {!isRolling && !rollComplete ? (
-            // Pre-Roll Phase
-            <>
-              <Text color="$accentColor" fontSize={20}>
-                Attack: {playedCard.attack?.value}
-              </Text>
-              <Button onPress={handleStartRoll}>Roll Dice</Button>
-            </>
-          ) : (
-            <>
-              {playedCard?.attack?.value && (
-                // Rolling or Results Phase
-                <DiceRoll
-                  numDice={playedCard.attack.value}
-                  isRolling={isRolling}
-                  onRollComplete={handleRollComplete}
-                />
-              )}
-              <XStack width="100%" gap="$2" justifyContent="center" px="$5">
-                {canReroll && (
-                  <Button flexBasis="50%" disabled={!rollComplete} onPress={handleStartRoll}>
-                    Reroll
-                  </Button>
-                )}
-                <Button flexBasis="50%" disabled={!rollComplete} onPress={exitBattleMode}>
-                  Continue
-                </Button>
-              </XStack>
-            </>
-          )}
-        </YStack>
-      )}
+
+      <YStack
+        height={300}
+        width={350}
+        borderRadius="$6"
+        justifyContent={isRolling || rollComplete ? 'flex-end' : 'center'}
+        alignItems="center"
+        gap={20}
+        paddingBottom="$5"
+        zIndex={100}
+        backgroundColor="$color2"
+        padding="$4"
+      >
+        {!isRolling && !rollComplete ? (
+          <BattleControls
+            baseAttack={baseAttack}
+            currentAttack={currentAttack}
+            rangerColor={playedCard.color}
+            onAddDice={handleAddDice}
+            onRemoveDice={handleRemoveDice}
+            onStartRoll={handleStartRoll}
+            onCancel={exitBattleMode}
+          />
+        ) : (
+          <>
+            <DiceRoll
+              numDice={currentAttack}
+              isRolling={isRolling}
+              onRollComplete={handleRollComplete}
+            />
+            <XStack width="100%" gap="$2" justifyContent="center" px="$5">
+              <Button flexBasis="50%" disabled={!rollComplete} onPress={handleStartRoll}>
+                Reroll
+              </Button>
+              <Button flexBasis="50%" disabled={!rollComplete} onPress={exitBattleMode}>
+                Continue
+              </Button>
+            </XStack>
+          </>
+        )}
+      </YStack>
     </Stack>
   )
 }
