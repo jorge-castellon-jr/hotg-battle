@@ -2,6 +2,7 @@ import { DrawUI } from './DrawUI'
 import { RangerOptionsUI } from './RangerOptionsUI'
 import { EnemyOptionsUI } from './EnemyOptionsUI'
 import { RangerInfoUI } from './RangerInfoUI'
+import { EnergyCounter } from './EnergyCounter'
 
 export const UiOverlay = () => {
   return (
@@ -11,6 +12,7 @@ export const UiOverlay = () => {
       <EnemyOptionsUI />
 
       <DrawUI />
+      <EnergyCounter />
     </>
   )
 }
