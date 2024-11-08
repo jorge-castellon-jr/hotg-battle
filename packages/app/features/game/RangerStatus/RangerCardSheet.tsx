@@ -4,6 +4,7 @@ import { RangerCard as RangerCardType } from '../Card/CardTypes'
 import RangerCard from '../Card/RangerCard'
 import useGameStore, { GameState } from '../gameStateStore'
 import { RangerDeckOptionsUI } from '../UI/RangerDeckOptionsUI'
+import { BaseSheet } from '../UI/BaseSheet'
 
 interface RangerCardSheetProps {
   open: boolean
@@ -27,28 +28,25 @@ const RangerCardSheet = ({
 
   return (
     <>
-      <Sheet
-        modal
-        animation="100ms"
-        open={open}
-        onOpenChange={onOpenChange}
-        snapPoints={[90]}
-        disableDrag={true}
-      >
-        <Sheet.Overlay animation="lazy" enterStyle={{ opacity: 0 }} exitStyle={{ opacity: 0 }} />
-        <Sheet.Handle />
-        <Sheet.Frame padding={0} justifyContent="space-between" backgroundColor="$color2">
-          <YStack flex={1} padding="$2">
-            {/* Header */}
-            <Text fontSize="$6" fontWeight="bold" color={`$${color}9`} textAlign="center">
-              {title}
-            </Text>
+      <BaseSheet open={open} onOpenChange={onOpenChange} disableDrag={true}>
+        <YStack flex={1} padding="$2">
+          {/* Header */}
+          <Text fontSize="$6" fontWeight="bold" color={`$${color}9`} textAlign="center">
+            {title}
+          </Text>
 
-            {/* Cards Grid */}
-            <YStack flex={1}>
-              <ScrollView flex={1} showsVerticalScrollIndicator={false}>
-                <XStack flexWrap="wrap" gap="$4" paddingVertical="$4" justifyContent="center" alignItems='center'>
-                  {cards.map((card, index) => (
+          {/* Cards Grid */}
+          <YStack flex={1}>
+            <ScrollView flex={1} height={500} showsVerticalScrollIndicator={false}>
+              <XStack
+                flexWrap="wrap"
+                gap="$4"
+                paddingVertical="$4"
+                justifyContent="center"
+                alignItems="center"
+              >
+                {cards
+                  .map((card, index) => (
                     <Stack key={`${card.name}-${index}`}>
                       <RangerCard
                         card={card}
@@ -59,24 +57,13 @@ const RangerCardSheet = ({
                         }}
                       />
                     </Stack>
-                  )).reverse()}
-                </XStack>
-              </ScrollView>
-            </YStack>
+                  ))
+                  .reverse()}
+              </XStack>
+            </ScrollView>
           </YStack>
-
-          <XStack padding="$4" width="100%">
-            <Button
-              flex={1}
-              onPress={() => {
-                onOpenChange(false)
-              }}
-            >
-              Close
-            </Button>
-          </XStack>
-        </Sheet.Frame>
-      </Sheet>
+        </YStack>
+      </BaseSheet>
 
       <RangerDeckOptionsUI type={type} open={openDeck} setOpen={setOpenDeck} />
     </>
