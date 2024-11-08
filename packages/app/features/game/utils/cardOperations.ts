@@ -53,3 +53,60 @@ export const updateRangerDeck = (
     },
   }
 }
+
+export const removeCardFromDiscard = (discard: RangerCard[], cardIndex: number): RangerCard[] => {
+  return discard.filter((_, index) => index !== cardIndex)
+}
+
+export const addCardToHand = (hand: RangerCard[], card: RangerCard): RangerCard[] => {
+  return [...hand, card]
+}
+
+export const addCardToDeckTop = (deck: RangerCard[], card: RangerCard): RangerCard[] => {
+  return [card, ...deck]
+}
+
+export const addCardToDeckBottom = (deck: RangerCard[], card: RangerCard): RangerCard[] => {
+  return [...deck, card]
+}
+export type ReturnLocation = 'hand' | 'top' | 'bottom'
+
+export const returnCardFromDiscard = (
+  rangerDecks: RangerDecks,
+  position: 'left' | 'middle' | 'right',
+  cardIndex: number,
+  card: RangerCard,
+  returnTo: ReturnLocation,
+  hand?: RangerCard[]
+): { rangerDecks: RangerDecks; hand?: RangerCard[] } => {
+  const updatedRangerDecks = { ...rangerDecks }
+  const ranger = updatedRangerDecks[position]
+
+  // Remove card from discard
+  const updatedDiscard = removeCardFromDiscard(ranger.discard, cardIndex)
+
+  let updatedDeck = [...ranger.cards]
+  let updatedHand = hand ? [...hand] : undefined
+
+  // Add card to specified location
+  switch (returnTo) {
+    case 'hand':
+      if (!updatedHand) throw new Error('Hand array must be provided when returning to hand')
+      updatedHand = addCardToHand(updatedHand, card)
+      break
+    case 'top':
+      updatedDeck = addCardToDeckTop(updatedDeck, card)
+      break
+    case 'bottom':
+      updatedDeck = addCardToDeckBottom(updatedDeck, card)
+      break
+  }
+
+  updatedRangerDecks[position] = {
+    ...ranger,
+    discard: updatedDiscard,
+    cards: updatedDeck,
+  }
+
+  return { rangerDecks: updatedRangerDecks, hand: updatedHand }
+}

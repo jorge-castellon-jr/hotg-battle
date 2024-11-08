@@ -59,7 +59,7 @@ const RangerCardSheet = ({
                         }}
                       />
                     </Stack>
-                  ))}
+                  )).reverse()}
                 </XStack>
               </ScrollView>
             </YStack>

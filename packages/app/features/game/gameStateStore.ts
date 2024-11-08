@@ -8,6 +8,8 @@ import {
   findRangerByCard,
   removeCardFromDeck,
   removeCardFromHand,
+  returnCardFromDiscard,
+  ReturnLocation,
 } from './utils/cardOperations'
 import { toggleEnemyStatus } from './utils/enemyOperations'
 
@@ -75,6 +77,9 @@ export interface GameStoreState {
   setPlayedCard: (card: RangerCard) => void
   playedCardIndex: number
   setPlayedCardIndex: (index: number) => void
+
+  returnCardFromDiscard: (location: ReturnLocation) => void
+
   selectedEnemy: EnemyCard | null
   selectedEnemyIndex: number
   selectedEnemyRow: 'top' | 'bottom' | null
@@ -245,6 +250,32 @@ const useGameStore = create<GameStoreState>((set, get) => ({
         },
       },
     }))
+  },
+
+  returnCardFromDiscard: ( location) => {
+    const state = get()
+    const card = state.playedCard
+    const position = state.selectedPosition!
+    const index = state.playedCardIndex
+
+    if (!card) return
+
+    const { rangerDecks, hand } = returnCardFromDiscard(
+      state.rangerDecks,
+      position,
+      index,
+      card,
+      location,
+      location === 'hand' ? state.hand : undefined
+    )
+
+    set({
+      ...RESET,
+      rangerDecks,
+      hand: hand || state.hand,
+      playedCard: null,
+      playedCardIndex: -1,
+    })
   },
 
   enemies: {

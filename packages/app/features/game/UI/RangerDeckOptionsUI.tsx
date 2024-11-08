@@ -12,7 +12,7 @@ export const RangerDeckOptionsUI = ({
   setOpen: (open: boolean) => void
   type: 'deck' | 'discard'
 }) => {
-  const { gameState, playedCard, discardDeckCard } = useGameStore()
+  const { gameState, playedCard, discardDeckCard,returnCardFromDiscard } = useGameStore()
 
   useEffect(() => {
     if (gameState === GameState.rangerDeckCardOptions) {
@@ -58,10 +58,10 @@ export const RangerDeckOptionsUI = ({
               <Stack gap="$2">
                 <Text>Add to:</Text>
                 <XStack gap="$4">
-                  <Button flex={1} flexBasis="100%" onPress={discard}>
+                  <Button flex={1} flexBasis="100%" onPress={()=>returnCardFromDiscard('bottom')}>
                     Top of Deck
                   </Button>
-                  <Button flex={1} flexBasis="100%" onPress={discard}>
+                  <Button flex={1} flexBasis="100%" onPress={()=>returnCardFromDiscard('top')}>
                     Bottom of Deck
                   </Button>
                 </XStack>
