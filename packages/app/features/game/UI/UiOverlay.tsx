@@ -11,7 +11,7 @@ export const UiOverlay = () => {
       <RangerInfoUI />
       <EnemyOptionsUI />
 
-      <DrawUI />
+      {/* <DrawUI /> */}
       <EnergyCounter />
     </>
   )
