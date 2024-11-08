@@ -1,5 +1,4 @@
-// src/features/game/battle/types/battleTypes.ts
-import { RangerCard, EnemyCard } from '../../Card/CardTypes';
+import { RangerCard, EnemyCard } from '../Card/CardTypes';
 import { SharedValue } from 'react-native-reanimated';
 
 export interface BattleState {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Stack, Button, Text, XStack, YStack } from 'tamagui'
-import useGameStore from '../gameStateStore'
+import useGameStore, { GameState } from '../gameStateStore'
 import { DiceRoll } from '../Dice/DiceRoll'
 
 export const BattleSequence = () => {
@@ -30,7 +30,7 @@ export const BattleSequence = () => {
     // Handle damage application here
   }
 
-  if (!playedCard) return null
+  if (gameState !== GameState.rangerBattle) return null
 
   const canReroll = true
   return (
@@ -52,7 +52,7 @@ export const BattleSequence = () => {
         bottom={0}
         opacity={0.5}
       />
-      {!selectedEnemy ? null : (
+      {!playedCard ? null : (
         <YStack
           height={300}
           width={350}
@@ -68,7 +68,7 @@ export const BattleSequence = () => {
             // Pre-Roll Phase
             <>
               <Text color="$accentColor" fontSize={20}>
-                Attacking {selectedEnemy.name}
+                Attack: {playedCard.attack?.value}
               </Text>
               <Button onPress={handleStartRoll}>Roll Dice</Button>
             </>

@@ -323,7 +323,7 @@ const useGameStore = create<GameStoreState>((set, get) => ({
   selectedEnemyRow: null,
   enterBattleMode: () =>
     set({
-      gameState: GameState.selectedEnemy,
+      gameState: GameState.rangerBattle,
     }),
   exitBattleMode: () => set(RESET),
   setSelectedEnemy: (enemy, index, row) =>

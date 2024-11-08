@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Stack, Text, XStack, YStack, Button } from 'tamagui'
+import { useState } from 'react'
+import { Text, XStack, YStack, Button } from 'tamagui'
 import { Ranger } from '../GameTypes'
 import { Layers, ZapOff, Zap, Star, StarOff, BookOpen } from 'lucide-react'
 import { rangerColors } from '../utils/colors'
@@ -144,7 +144,7 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
 
       {/* Card Sheets */}
       <RangerCardSheet
-        type='deck'
+        type="deck"
         open={showDeck}
         onOpenChange={setShowDeck}
         cards={ranger.cards}
@@ -153,7 +153,7 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
       />
 
       <RangerCardSheet
-        type='discard'
+        type="discard"
         open={showDiscard}
         onOpenChange={setShowDiscard}
         cards={ranger.discard}

@@ -1,5 +1,4 @@
-// src/features/game/battle/battleManager.ts
-import type { BattleState } from './types/battleTypes';
+import type { BattleState } from './battleTypes';
 
 class BattleManager {
   private state: BattleState = {

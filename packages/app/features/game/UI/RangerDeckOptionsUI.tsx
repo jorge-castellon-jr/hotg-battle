@@ -23,6 +23,7 @@ export const RangerDeckOptionsUI = ({
 
   function onOpenChange(open: boolean) {
     setOpen(open)
+
   }
   function discard() {
     discardDeckCard()
