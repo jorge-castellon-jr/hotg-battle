@@ -6,7 +6,6 @@ import useGameStore, { GameState, Turn } from '../gameStateStore'
 import { DrawButton } from './DrawButton'
 import { rangerColors } from '../utils/colors'
 import { RangerDecks } from '../GameTypes'
-import RangerSheetContent from './RangerSheetContent'
 
 const AnimatedXStack = Animated.createAnimatedComponent(XStack)
 
@@ -21,7 +20,15 @@ interface RangerStatusProps {
 }
 
 export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers }) => {
-  const { drawCard, turn, setupCompleted, gameState, playedCard, showRangerInfo } = useGameStore()
+  const {
+    drawCard,
+    turn,
+    setupCompleted,
+    gameState,
+    playedCard,
+    showRangerInfo,
+    setSelectedPosition,
+  } = useGameStore()
   const translateY = useSharedValue(0)
   const drawTranslateY = useSharedValue(0)
 
@@ -71,7 +78,10 @@ export const AnimatedRangerStatus: React.FC<RangerStatusProps> = ({ rangers }) =
           <YStack key={`${position}-draw`} flexBasis="32.5%">
             <DrawButton
               key={position}
-              onPress={() => drawCard(position as 'left' | 'middle' | 'right')}
+              onPress={() => {
+                setSelectedPosition(position as 'left' | 'middle' | 'right')
+                drawCard()
+              }}
               color={rangerColors[ranger.color]}
             />
           </YStack>

@@ -5,6 +5,7 @@ import { Layers, ZapOff, Zap, Star, StarOff, BookOpen } from 'lucide-react'
 import { rangerColors } from '../utils/colors'
 import useGameStore from '../gameStateStore'
 import RangerCardSheet from './RangerCardSheet'
+import { RangerDrawSheet } from './RangerDrawOptions'
 
 interface RangerSheetContentProps {
   ranger: Ranger
@@ -14,8 +15,16 @@ interface RangerSheetContentProps {
 const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
   const [showDeck, setShowDeck] = useState(false)
   const [showDiscard, setShowDiscard] = useState(false)
+  const [showDraw, setShowDraw] = useState(false)
   const toggleEnergy = useGameStore((state) => state.toggleEnergy)
   const toggleAbility = useGameStore((state) => state.toggleAbility)
+
+  const { setupCompleted, openDrawOptions } = useGameStore()
+
+  function openDraw() {
+    openDrawOptions()
+    setShowDraw(true)
+  }
 
   const CountBox = ({
     icon: Icon,
@@ -94,17 +103,15 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
           {ranger.team} {ranger.color} Ranger
         </Text>
       </YStack>
-
       {/* Ability Section */}
       <YStack backgroundColor="$gray3" padding="$4" borderRadius="$4" gap="$2">
-        <Text fontSize="$5" fontWeight="bold" color={`$${ranger.color}9`}>
+        <Text fontSize="$5" fontWeight="bold" color={`$${ranger.color}9Dark`}>
           {ranger.ability.name}
         </Text>
         <Text fontSize="$3" color="$gray11">
           {ranger.ability.text}
         </Text>
       </YStack>
-
       {/* Card Counts */}
       <XStack gap="$4">
         <CountBox
@@ -123,7 +130,6 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
           }}
         />
       </XStack>
-
       {/* Status Toggles */}
       <XStack gap="$4">
         <StatusToggle
@@ -142,6 +148,21 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
         />
       </XStack>
 
+      {/* Draw Button */}
+      <XStack gap="$4">
+        <Button
+          flex={1}
+          backgroundColor={`$${ranger.color}9Dark`}
+          disabled={ranger.cards.length <= 0 || !setupCompleted}
+          disabledStyle={{opacity:0.7}}
+          color="white"
+          fontWeight="bold"
+          onPress={openDraw}
+        >
+          Draw
+        </Button>
+      </XStack>
+
       {/* Card Sheets */}
       <RangerCardSheet
         type="deck"
@@ -151,7 +172,6 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
         title="Deck"
         color={ranger.color}
       />
-
       <RangerCardSheet
         type="discard"
         open={showDiscard}
@@ -160,6 +180,7 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
         title="Discard Pile"
         color={ranger.color}
       />
+      <RangerDrawSheet open={showDraw} setOpen={setShowDraw} />
     </YStack>
   )
 }

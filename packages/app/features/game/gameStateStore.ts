@@ -42,9 +42,11 @@ export interface GameStoreState {
   rangerDecks: RangerDecks
   selectedRanger: (position: 'left' | 'middle' | 'right') => RangerDecks['left']
   selectedPosition: 'left' | 'middle' | 'right' | null
+  setSelectedPosition: (position: 'left' | 'middle' | 'right') => void
   showRangerInfo: (position: 'left' | 'middle' | 'right') => void
   toggleEnergy: (position: 'left' | 'middle' | 'right') => void
   toggleAbility: (position: 'left' | 'middle' | 'right') => void
+  openDrawOptions: () => void
 
   enemyDeck: EnemyCard[] // Enemy card deck
 
@@ -57,7 +59,7 @@ export interface GameStoreState {
   removeDice: () => void
 
   hand: RangerCard[] // Cards currently in play
-  drawCard: (position: 'left' | 'middle' | 'right') => void
+  drawCard: () => void
   discardCard: () => void
   discardDeckCard: () => void
 
@@ -182,6 +184,15 @@ const useGameStore = create<GameStoreState>((set, get) => ({
       }
       return { rangerDecks: updatedRangerDecks }
     }),
+  openDrawOptions: () =>
+    set((state) => {
+      const cards = state.selectedRanger(state.selectedPosition ?? 'left').cards
+      const index = cards.length - 1
+      return {
+        playedCard: cards[index],
+        playedCardIndex: index,
+      }
+    }),
 
   enemyDeck: EnemyCardDatabase,
 
@@ -194,7 +205,8 @@ const useGameStore = create<GameStoreState>((set, get) => ({
   removeDice: () => set(({ bonusDice }) => ({ bonusDice: bonusDice - 1 })),
 
   hand: [],
-  drawCard: (position) => {
+  drawCard: () => {
+    const position = get().selectedPosition!
     //logic for setup
     set((state) => {
       console.log(state.setupCompleted)
@@ -208,7 +220,7 @@ const useGameStore = create<GameStoreState>((set, get) => ({
 
     // regular draw card logic
     set((state) => {
-      const card = state.rangerDecks[position].cards.pop()
+      const card = state.selectedRanger(position).cards.pop()
       return card ? { hand: [...state.hand, card] } : state
     })
   },
@@ -301,6 +313,7 @@ const useGameStore = create<GameStoreState>((set, get) => ({
   },
 
   selectedPosition: null,
+  setSelectedPosition: (position) => set({ selectedPosition: position }),
   showRangerInfo: (position) =>
     set({ gameState: GameState.rangerInfo, selectedPosition: position }),
 
