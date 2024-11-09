@@ -24,6 +24,7 @@ export enum GameState {
   rangerDeckCardOptions,
   selectedEnemy,
   rangerBattle,
+  enemyBattle,
   enemyCardOptions,
 }
 export enum Turn {
@@ -111,6 +112,7 @@ export interface GameStoreActions {
   exitBattleMode: () => void
   setSelectedEnemy: (enemy: EnemyCard | null, index: number, row: 'top' | 'bottom') => void
   updateEnemyDamage: (index: number, row: 'top' | 'bottom', newHealth: number) => void
+  enterEnemyBattle: () => void
 }
 
 const RESET = {
@@ -419,6 +421,9 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
             selectedEnemy: updatedSelectedEnemy,
           }
         }),
+      enterEnemyBattle: () => set({
+        gameState: GameState.enemyBattle,
+      }),
     }),
     {
       name: 'hotg-game-storage',

@@ -1,6 +1,6 @@
 export type RangerCardType = 'attack' | 'maneuver' | 'reaction'
 
-type Attack = {
+export type Attack = {
   value: number
   fixed?: boolean
 }

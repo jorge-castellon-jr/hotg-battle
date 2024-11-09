@@ -16,6 +16,7 @@ export const EnemyOptionsUI = () => {
     updateEnemyDamage,
     selectedEnemyIndex,
     selectedEnemyRow,
+    enterEnemyBattle
   } = useGameStore()
 
   const [open, setOpen] = useState(false)
@@ -80,6 +81,8 @@ export const EnemyOptionsUI = () => {
             Move Right
           </Button>
         </XStack>
+
+        <Button onPress={enterEnemyBattle}>Attack</Button>
       </YStack>
     </BaseSheet>
   )

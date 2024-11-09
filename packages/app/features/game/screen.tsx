@@ -7,6 +7,7 @@ import RangerStatusOverview from './RangerStatus/RangerStatusOverview'
 import { BattleSequence } from './Battle/BattleSequence'
 import { UiOverlay } from './UI/UiOverlay'
 import { AppContainer } from './components/AppContainer'
+import { EnemyBattleSequence } from './Battle/EnemyBattleSequence'
 
 const GameScreen: React.FC = () => {
   const { rangerDecks, hand, enemies, turn } = useGameStore()
@@ -24,6 +25,7 @@ const GameScreen: React.FC = () => {
       <RangerHand hand={hand} />
       <RangerStatusOverview rangers={rangerDecks} />
       <BattleSequence />
+        <EnemyBattleSequence />
       <UiOverlay />
     </AppContainer>
   )
