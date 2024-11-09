@@ -22,7 +22,13 @@ export const AttackSequence: React.FC<AttackSequenceProps> = ({
   onComplete,
 }) => {
   const handleStartRoll = () => {
-    setIsRolling(true)
+    if (!attack.fixed) {
+      setIsRolling(true)
+      return
+    }
+    EnemyBattleManager.processDamage(attack)
+    setIsRolling(false)
+    setRollComplete(true)
   }
 
   const handleRollComplete = (results: number[]) => {
@@ -60,7 +66,18 @@ export const AttackSequence: React.FC<AttackSequenceProps> = ({
         </>
       ) : (
         <>
-          {!attack.fixed && (
+          {attack.fixed ? (
+            // Fixed Damage Display
+            <YStack gap="$2" alignItems="center">
+              <Text fontSize={32} color="$red9" fontWeight="bold">
+                {attack.value}
+              </Text>
+              <Text fontSize={16} color="$gray11">
+                Damage Dealt
+              </Text>
+            </YStack>
+          ) : (
+            // Dice Roll Display
             <DiceRoll
               numDice={attack.value}
               isRolling={isRolling}
