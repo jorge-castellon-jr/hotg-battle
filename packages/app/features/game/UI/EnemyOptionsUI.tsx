@@ -65,11 +65,11 @@ export const EnemyOptionsUI = () => {
         )}
 
         <XStack gap="$4">
-          <Button flex={1} flexBasis="100%" onPress={markEnemyAsActivated}>
-            {selectedEnemy?.activated ? 'Undo Rotation' : 'Rotate'}
-          </Button>
           <Button flex={1} flexBasis="100%" onPress={markEnemyAsDefeated}>
             {selectedEnemy?.defeated ? 'Undo Defeat' : 'Defeat'}
+          </Button>
+          <Button flex={1} flexBasis="100%" onPress={markEnemyAsActivated}>
+            {selectedEnemy?.activated ? 'Undo Rotation' : 'Rotate'}
           </Button>
         </XStack>
         <XStack gap="$4">

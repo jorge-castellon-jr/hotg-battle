@@ -34,6 +34,7 @@ export enum Turn {
 export interface GameStoreState {
   _hasHydrated: boolean
   setupCompleted: boolean
+  enemySetupCompleted: boolean
   turn: Turn
   gameState: GameState
 
@@ -121,9 +122,10 @@ const RESET = {
 }
 
 // Initial state factory to ensure fresh references
-const createInitialState: GameStoreState = {
+const createInitialState = (): GameStoreState => ({
   _hasHydrated: false,
   setupCompleted: false,
+  enemySetupCompleted: false,
   turn: Turn.player,
   gameState: GameState.default,
   rangerDecks: {
@@ -182,12 +184,12 @@ const createInitialState: GameStoreState = {
   selectedEnemyIndex: -1,
   selectedEnemyRow: null,
   gameVersion: '1.0.0',
-}
+})
 
 const useGameStore = create<GameStoreState & GameStoreActions>()(
   persist(
     (set, get) => ({
-      ...createInitialState,
+      ...createInitialState(),
 
       setHasHydrated: (state) => {
         set({
@@ -195,7 +197,7 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
         })
       },
       resetGame: () => {
-        set({ ...createInitialState })
+        set({ ...createInitialState() })
       },
 
       showUI: (gameState) => set({ gameState }),
@@ -213,6 +215,7 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
             top: monster ? getEnemyDeck(monster).slice(0, 4) : [],
             bottom: getEnemyDeck(foot).slice(0, 4),
           },
+          enemySetupCompleted: true,
         })
       },
 
