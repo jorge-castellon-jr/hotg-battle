@@ -6,6 +6,7 @@ import { rangerColors } from '../utils/colors'
 import useGameStore from '../gameStateStore'
 import RangerCardSheet from './RangerCardSheet'
 import { RangerDrawSheet } from './RangerDrawOptions'
+import DiscardIcon from './DiscardIcon'
 
 interface RangerSheetContentProps {
   ranger: Ranger
@@ -121,7 +122,7 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
           onPress={() => setShowDeck(true)}
         />
         <CountBox
-          icon={BookOpen}
+          icon={DiscardIcon}
           value={ranger.discard.length}
           label="Discard"
           onPress={() => {
@@ -154,7 +155,7 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
           flex={1}
           backgroundColor={`$${ranger.color}9Dark`}
           disabled={ranger.cards.length <= 0 || !setupCompleted}
-          disabledStyle={{opacity:0.7}}
+          disabledStyle={{ opacity: 0.7 }}
           color="white"
           fontWeight="bold"
           onPress={openDraw}
