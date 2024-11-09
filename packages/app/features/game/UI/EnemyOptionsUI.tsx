@@ -9,6 +9,7 @@ export const EnemyOptionsUI = () => {
   const {
     gameState,
     exitBattleMode,
+    moveEnemyPosition,
     markEnemyAsActivated,
     markEnemyAsDefeated,
     selectedEnemy,
@@ -36,6 +37,15 @@ export const EnemyOptionsUI = () => {
     }
   }
 
+  const moveEnemyLeft = () => {
+    moveEnemyPosition('left')
+    exitBattleMode()
+  }
+  const moveEnemyRight = () => {
+    moveEnemyPosition('right')
+    exitBattleMode()
+  }
+
   return (
     <BaseSheet open={open} onOpenChange={onOpenChange}>
       <YStack padding="$4" gap="$4">
@@ -60,6 +70,14 @@ export const EnemyOptionsUI = () => {
           </Button>
           <Button flex={1} flexBasis="100%" onPress={markEnemyAsDefeated}>
             {selectedEnemy?.defeated ? 'Undo Defeat' : 'Defeat'}
+          </Button>
+        </XStack>
+        <XStack gap="$4">
+          <Button flex={1} flexBasis="100%" onPress={moveEnemyLeft}>
+            Move Left
+          </Button>
+          <Button flex={1} flexBasis="100%" onPress={moveEnemyRight}>
+            Move Right
           </Button>
         </XStack>
       </YStack>

@@ -12,6 +12,7 @@ import {
   ReturnLocation,
 } from './utils/cardOperations'
 import { toggleEnemyStatus, updateEnemyDamage } from './Enemy/enemyOperations'
+import { moveEnemy } from './Battle/enemyPositionManager'
 
 export enum GameState {
   default,
@@ -67,6 +68,7 @@ export interface GameStoreState {
     top: EnemyCard[] // Enemy team members (Foot Soldiers, Monster)
     bottom: EnemyCard[] // Enemy team members (Foot Soldiers, Monster)
   }
+  moveEnemyPosition: (direction: 'left' | 'right') => void
   markEnemyAsActivated: () => void
   markEnemyAsDefeated: () => void
 
@@ -294,6 +296,18 @@ const useGameStore = create<GameStoreState>((set, get) => ({
   enemies: {
     top: [],
     bottom: [],
+  },
+  moveEnemyPosition: (direction) => {
+    const state = get()
+    const enemies = state.enemies
+    const position = { index: state.selectedEnemyIndex, row: state.selectedEnemyRow! }
+    const newEnemies = moveEnemy(enemies, position, direction)
+    if (newEnemies) {
+      set({
+        enemies: newEnemies,
+        selectedEnemyIndex: direction === 'left' ? position.index - 1 : position.index + 1,
+      })
+    }
   },
   markEnemyAsActivated: () =>
     set(({ enemies, selectedEnemyIndex, selectedEnemyRow }) => ({
