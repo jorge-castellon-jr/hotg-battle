@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { RangerCard, EnemyCard } from './Card/CardTypes'
 import EnemyCardDatabase from './DB/Enemies/EnemyCardDatabase'
-import { RangerDecks } from './GameTypes'
+import { Ranger, RangerDecks } from './GameTypes'
 import { getDeck, getEnemyDeck } from './Card/deckUtils'
 import {
   addCardToDiscard,
@@ -15,6 +15,8 @@ import { toggleEnemyStatus, updateEnemyDamage } from './Enemy/enemyOperations'
 import { moveEnemy } from './Battle/enemyPositionManager'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import { createVersionedStorage } from './Storage/persistentStorage'
+import { RangerPosition } from '../setup/setupTypes'
+import rangerDatabase from './DB/rangerDatabase'
 
 export enum GameState {
   default,
@@ -70,10 +72,12 @@ export interface GameStoreState {
 export interface GameStoreActions {
   setHasHydrated: (state: boolean) => void
   resetGame: () => void
+  resetRangers: () => void
   showUI: (gameState: GameState) => void
   hideUI: () => void
 
   nextTurn: () => void
+  setRanger: (position: RangerPosition, rangerId: string) => void
 
   setupEnemy: (foot: string, monster?: string) => void
 
@@ -124,53 +128,12 @@ const RESET = {
 }
 
 // Initial state factory to ensure fresh references
-const createInitialState = (): GameStoreState => ({
+const createInitialState = (): Omit<GameStoreState, 'rangerDecks'> => ({
   _hasHydrated: false,
   setupCompleted: false,
   enemySetupCompleted: false,
   turn: Turn.player,
   gameState: GameState.default,
-  rangerDecks: {
-    left: {
-      name: 'Jason Lee Scott',
-      ability: {
-        name: 'Leadership',
-        text: 'Once per battle, a Ranger of your choice may reroll any number of dice during an attack.',
-      },
-      color: 'red',
-      team: 'Mighty Morphin',
-      cards: getDeck('Red'),
-      energyUsed: false,
-      abilityUsed: false,
-      discard: [],
-    },
-    middle: {
-      name: 'Billy Cranston',
-      ability: {
-        name: 'Strategize',
-        text: 'Once per battle, a Ranger of your choice may draw 1 card and then place 1 card from their hand back on top of their deck.',
-      },
-      color: 'blue',
-      team: 'Mighty Morphin',
-      cards: getDeck('Blue'),
-      energyUsed: false,
-      abilityUsed: false,
-      discard: [],
-    },
-    right: {
-      name: 'Tommy Oliver',
-      ability: {
-        name: 'Loner',
-        text: 'If you are the only player with a Ranger in your location, you may add 1 die to each of your attacks.',
-      },
-      color: 'green',
-      team: 'Mighty Morphin',
-      cards: getDeck('Green'),
-      energyUsed: false,
-      abilityUsed: false,
-      discard: [],
-    },
-  }, // Populate with Ranger-specific cards
   hand: [],
   enemies: {
     top: [],
@@ -193,18 +156,40 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
     (set, get) => ({
       ...createInitialState(),
 
+      rangerDecks: {
+        left: null,
+        middle: null,
+        right: null,
+      }, // Populate with Ranger-specific cards
+
       setHasHydrated: (state) => {
         set({
           _hasHydrated: state,
         })
       },
       resetGame: () => {
-        set({ ...createInitialState() })
+        set({ ...createInitialState(), _hasHydrated: true })
+      },
+      resetRangers: () => {
+        set({
+          rangerDecks: {
+            left: null,
+            middle: null,
+            right: null,
+          },
+        })
       },
 
       showUI: (gameState) => set({ gameState }),
       hideUI: () => set({ gameState: GameState.default }),
 
+      setRanger: (position, rangerId) =>
+        set(({ rangerDecks }) => ({
+          rangerDecks: {
+            ...rangerDecks,
+            [position]: rangerDatabase.find((ranger) => ranger.id === rangerId),
+          },
+        })),
       nextTurn: () =>
         set((state) => ({
           turn: state.turn === Turn.player ? Turn.enemy : Turn.player,
@@ -421,9 +406,10 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
             selectedEnemy: updatedSelectedEnemy,
           }
         }),
-      enterEnemyBattle: () => set({
-        gameState: GameState.enemyBattle,
-      }),
+      enterEnemyBattle: () =>
+        set({
+          gameState: GameState.enemyBattle,
+        }),
     }),
     {
       name: 'hotg-game-storage',

@@ -6,7 +6,7 @@ interface RangerAbility {
 }
 
 export interface Ranger {
-  // id: string
+  id: string
   name: string
   team: string
   ability: RangerAbility // List of abilities or effects
@@ -18,9 +18,9 @@ export interface Ranger {
 }
 
 export interface RangerDecks {
-  left: Ranger
-  middle: Ranger
-  right: Ranger
+  left: Ranger | null
+  middle: Ranger | null
+  right: Ranger | null
 }
 
 export interface Enemy {

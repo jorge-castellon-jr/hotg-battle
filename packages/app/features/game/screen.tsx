@@ -17,9 +17,9 @@ const GameScreen: React.FC = () => {
     <ClientOnly>
       <AppContainer>
         <TopBar
-          currentTurn={turn === Turn.player ? "Ranger's Turn" : "Enemy's Turn"}
-          turn={0}
-          onHistoryRequest={() => { }}
+          title={turn === Turn.player ? "Ranger's Turn" : "Enemy's Turn"}
+          subtext={`Turn ${0}`}
+          onPress={() => { }}
         />
 
         <EnemyRow enemies={enemies} />

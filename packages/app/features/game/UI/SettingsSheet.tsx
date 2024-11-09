@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Text, YStack } from 'tamagui'
 import useGameStore from '../gameStateStore'
 import { BaseSheet } from './BaseSheet'
+import { useLink } from 'solito/navigation'
 
 interface EnergySheetProps {
   open: boolean
@@ -11,10 +12,13 @@ interface EnergySheetProps {
 export const SettingsSheet: React.FC<EnergySheetProps> = ({ open, onOpenChange }) => {
   const { resetGame } = useGameStore()
 
-  const reset = () => {
+  const reset = (e) => {
     resetGame()
     onOpenChange(false)
   }
+  const link = useLink({
+    href: '/setup',
+  })
 
   return (
     <BaseSheet open={open} onOpenChange={onOpenChange}>
@@ -25,6 +29,7 @@ export const SettingsSheet: React.FC<EnergySheetProps> = ({ open, onOpenChange }
 
         {/* Controls */}
         <Button onPress={reset}>Reset Game</Button>
+        <Button {...link}>Leave Game</Button>
       </YStack>
     </BaseSheet>
   )

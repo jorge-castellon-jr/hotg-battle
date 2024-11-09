@@ -3,7 +3,7 @@ import { useLink } from 'solito/navigation'
 
 export function HomeScreen() {
   const gameLinkProps = useLink({
-    href: '/game',
+    href: '/setup',
   })
 
   return (
@@ -39,7 +39,7 @@ export function HomeScreen() {
         </Paragraph>
       </YStack>
 
-      <Button {...gameLinkProps}>Go to Prototype</Button>
+      <Button {...gameLinkProps}>Go To Setup</Button>
     </YStack>
   )
 }
