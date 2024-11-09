@@ -74,7 +74,8 @@ export const createVersionedStorage = () => {
         state: JSON.parse(value),
         timestamp: Date.now(),
       }
-      return await storage.setItem(name, JSON.stringify(data))
+      await storage.setItem(name, JSON.stringify(data))
+      return
     },
   }
 }

@@ -8,26 +8,29 @@ import { BattleSequence } from './Battle/BattleSequence'
 import { UiOverlay } from './UI/UiOverlay'
 import { AppContainer } from './components/AppContainer'
 import { EnemyBattleSequence } from './Battle/EnemyBattleSequence'
+import { ClientOnly } from './components/ClientOnly'
 
 const GameScreen: React.FC = () => {
   const { rangerDecks, hand, enemies, turn } = useGameStore()
 
   return (
-    <AppContainer>
-      <TopBar
-        currentTurn={turn === Turn.player ? "Ranger's Turn" : "Enemy's Turn"}
-        turn={0}
-        onHistoryRequest={() => { }}
-      />
+    <ClientOnly>
+      <AppContainer>
+        <TopBar
+          currentTurn={turn === Turn.player ? "Ranger's Turn" : "Enemy's Turn"}
+          turn={0}
+          onHistoryRequest={() => { }}
+        />
 
-      <EnemyRow enemies={enemies} />
+        <EnemyRow enemies={enemies} />
 
-      <RangerHand hand={hand} />
-      <RangerStatusOverview rangers={rangerDecks} />
-      <BattleSequence />
+        <RangerHand hand={hand} />
+        <RangerStatusOverview rangers={rangerDecks} />
+        <BattleSequence />
         <EnemyBattleSequence />
-      <UiOverlay />
-    </AppContainer>
+        <UiOverlay />
+      </AppContainer>
+    </ClientOnly>
   )
 }
 
