@@ -32,13 +32,20 @@ export default class Document extends NextDocument {
           }),
         }}
       />,
-      <style
-        jsx
-        global
-        key="tamagui-css"
-      >{`
+      <style jsx global key="tamagui-css">{`
         html {
           font-family: 'Inter';
+          overflow: hidden;
+        }
+        * {
+          touch-action: manipulation;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          -khtml-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          -webkit-tap-highlight-color: transparent;
         }
       `}</style>,
     ]
@@ -50,10 +57,7 @@ export default class Document extends NextDocument {
     return (
       <Html>
         <Head>
-          <meta
-            httpEquiv="X-UA-Compatible"
-            content="IE=edge"
-          />
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         </Head>
         <body>
           <Main />

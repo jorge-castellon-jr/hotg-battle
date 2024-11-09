@@ -54,7 +54,7 @@ export function AppContainer({ children }: { children: React.ReactNode }) {
   )
 
   return (
-    <Stack f={1}>
+    <Stack f={1} overflow="hidden">
       <AnimatedStack style={contentStyle}>{children}</AnimatedStack>
       {isLoading && (
         <AnimatedStack style={loadingStyle}>

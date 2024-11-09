@@ -8,7 +8,6 @@ import Animated, {
   Easing,
   interpolate,
 } from 'react-native-reanimated'
-import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import { Skull } from 'lucide-react'
 import { EnemyCard as EnemyCardType } from './CardTypes'
 import EnemyCard from './EnemyCard'
@@ -43,8 +42,7 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({
   index,
   row,
 }) => {
-  const { gameState, showUI, hideUI, selectedEnemy, setSelectedEnemy, selectedEnemyIndex } =
-    useGameStore()
+  const { gameState, showUI, selectedEnemy, setSelectedEnemy, selectedEnemyIndex } = useGameStore()
 
   const rotation = useSharedValue(0)
   const flipRotation = useSharedValue(0)
@@ -68,13 +66,6 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({
     isFlipped.value = flip
     flipRotation.value = withTiming(isFlipped.value ? 180 : 0, flipConfig)
   }
-
-  // FIXME: dis will not be needed
-  const longPressGesture = Gesture.Tap().onStart(() => {
-    handleBattleTarget()
-  })
-
-  const gesture = Gesture.Exclusive(longPressGesture)
 
   const animatedStyle = useAnimatedStyle(() => {
     const scale = interpolate(Math.abs(rotation.value), [0, 90], [1, 0.8], 'clamp')
@@ -133,41 +124,39 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({
   }, [enemy])
 
   return (
-    <GestureDetector gesture={gesture}>
-      <Stack width={width} height={height}>
-        {/* Front of card */}
-        <AnimatedStack
-          disabled={
-            !selectedEnemy
-              ? false
-              : selectedEnemy.name === enemy?.name && selectedEnemyIndex === index
-          }
-          style={animatedStyle}
-        >
-          <EnemyCard enemy={enemy} width={width} height={height} />
-        </AnimatedStack>
+    <Stack width={width} height={height} onPress={handleBattleTarget}>
+      {/* Front of card */}
+      <AnimatedStack
+        disabled={
+          !selectedEnemy
+            ? false
+            : selectedEnemy.name === enemy?.name && selectedEnemyIndex === index
+        }
+        style={animatedStyle}
+      >
+        <EnemyCard enemy={enemy} width={width} height={height} />
+      </AnimatedStack>
 
-        {/* Back of card */}
-        <AnimatedStack style={backAnimatedStyle}>
-          <Stack
-            width={width}
-            height={height}
-            backgroundColor="$gray8"
-            borderRadius="$4"
-            borderWidth={2}
-            borderColor={enemy ? enemyColors[enemy.enemyType] : '$gray6'}
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Skull
-              size={iconSize}
-              color={enemy ? `var(--c-${enemyColors[enemy.enemyType].slice(1)}` : 'white'}
-              strokeWidth={1.5}
-            />
-          </Stack>
-        </AnimatedStack>
-      </Stack>
-    </GestureDetector>
+      {/* Back of card */}
+      <AnimatedStack style={backAnimatedStyle}>
+        <Stack
+          width={width}
+          height={height}
+          backgroundColor="$gray8"
+          borderRadius="$4"
+          borderWidth={2}
+          borderColor={enemy ? enemyColors[enemy.enemyType] : '$gray6'}
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Skull
+            size={iconSize}
+            color={enemy ? `var(--c-${enemyColors[enemy.enemyType].slice(1)}` : 'white'}
+            strokeWidth={1.5}
+          />
+        </Stack>
+      </AnimatedStack>
+    </Stack>
   )
 }
 
