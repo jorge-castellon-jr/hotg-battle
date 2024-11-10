@@ -1,8 +1,7 @@
-import React from 'react'
-import { Button, Text, XStack, YStack } from 'tamagui'
+import React, { useCallback } from 'react'
+import { Button, Text, YStack } from 'tamagui'
 import { DiceRoll } from '../Dice/DiceRoll'
 import type { Attack } from '../Card/CardTypes'
-import { EnemyBattleManager } from './enemyBattleManager'
 
 interface AttackSequenceProps {
   attack: Attack & { target?: number | 'lead' | 'notLead' }
@@ -21,22 +20,24 @@ export const AttackSequence: React.FC<AttackSequenceProps> = ({
   setRollComplete,
   onComplete,
 }) => {
-  const handleStartRoll = () => {
+  const handleStartRoll = useCallback(() => {
     if (!attack.fixed) {
-      setIsRolling(true)
+      setRollComplete(false)
+      requestAnimationFrame(() => {
+        setIsRolling(true)
+      })
       return
     }
-    EnemyBattleManager.processDamage(attack)
-    setIsRolling(false)
     setRollComplete(true)
-  }
+  }, [attack.fixed, setIsRolling, setRollComplete])
 
-  const handleRollComplete = (results: number[]) => {
-    setIsRolling(false)
-    setRollComplete(true)
-    // Process damage based on target type
-    EnemyBattleManager.processDamage(attack, results)
-  }
+  const handleRollComplete = useCallback(
+    (results: number[]) => {
+      setIsRolling(false)
+      setRollComplete(true)
+    },
+    [setIsRolling, setRollComplete]
+  )
 
   if (!attack) return null
 
@@ -67,7 +68,6 @@ export const AttackSequence: React.FC<AttackSequenceProps> = ({
       ) : (
         <>
           {attack.fixed ? (
-            // Fixed Damage Display
             <YStack gap="$2" alignItems="center">
               <Text fontSize={32} color="$red9" fontWeight="bold">
                 {attack.value}
@@ -77,7 +77,6 @@ export const AttackSequence: React.FC<AttackSequenceProps> = ({
               </Text>
             </YStack>
           ) : (
-            // Dice Roll Display
             <DiceRoll
               numDice={attack.value}
               isRolling={isRolling}
@@ -85,7 +84,7 @@ export const AttackSequence: React.FC<AttackSequenceProps> = ({
             />
           )}
 
-          <Button disabled={!rollComplete} onPress={onComplete}>
+          <Button disabled={!rollComplete || isRolling} onPress={onComplete}>
             Continue
           </Button>
         </>

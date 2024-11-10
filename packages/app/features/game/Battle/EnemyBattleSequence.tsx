@@ -1,5 +1,5 @@
-import React from 'react'
-import { Stack, Button, Text, XStack, YStack } from 'tamagui'
+import React, { useCallback } from 'react'
+import { Stack, Text, YStack } from 'tamagui'
 import Animated, {
   useAnimatedStyle,
   withSpring,
@@ -63,16 +63,18 @@ export const EnemyBattleSequence = () => {
     [translateY, opacity]
   )
 
-  const handleNextAttack = () => {
+  const handleNextAttack = useCallback(() => {
     if (currentAttackIndex < attacks.length - 1) {
       setCurrentAttackIndex((prev) => prev + 1)
       setIsRolling(false)
       setRollComplete(false)
     } else {
-      markEnemyAsActivated()
-      exitBattleMode()
+      requestAnimationFrame(() => {
+        markEnemyAsActivated()
+        exitBattleMode()
+      })
     }
-  }
+  }, [currentAttackIndex, attacks.length, markEnemyAsActivated, exitBattleMode])
 
   if (gameState !== GameState.enemyBattle || !selectedEnemy) return null
 
