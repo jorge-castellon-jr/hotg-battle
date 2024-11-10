@@ -5,17 +5,26 @@ export type Attack = {
   fixed?: boolean
 }
 
-export interface RangerCard {
+export type RangerCard = {
   name: string // Card name
-  type: RangerCardType // Card type keyword
   shields: number // Shield points
   text: string // Description or additional effect text
   owner: string // Ranger who owns the card (e.g., "Red Ranger")
   team: string
   color: string
   energy: number
-  attack?: Attack
   effects?: CardEffect[]
+} & (RangerCardAttack | RangerCardReaction | RangerCardManeuver)
+
+interface RangerCardAttack {
+  type: 'attack'
+  attack: Attack
+}
+interface RangerCardReaction {
+  type: 'reaction'
+}
+interface RangerCardManeuver {
+  type: 'maneuver'
 }
 
 export type RangerEffectType =

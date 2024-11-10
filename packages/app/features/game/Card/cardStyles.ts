@@ -69,16 +69,6 @@ export const TypeBanner = styled(XStack, {
   paddingVertical: 4,
   justifyContent: 'center',
   alignItems: 'center',
-  variants: {
-    color: {
-      red: { backgroundColor: '$red9Dark' },
-      blue: { backgroundColor: '$blue9Dark' },
-      green: { backgroundColor: '$green9Dark' },
-      foot: { backgroundColor: '$green9Dark' },
-      monster: { backgroundColor: '$orange9Dark' },
-      boss: { backgroundColor: '$purple9Dark' },
-    },
-  } as const,
 })
 
 export const TypeText = styled(Text, {
@@ -134,13 +124,6 @@ export const CardFooter = styled(XStack, {
   backgroundColor: '$gray9',
   borderBottomLeftRadius: '$2',
   borderBottomRightRadius: '$2',
-  variants: {
-    color: {
-      red: { backgroundColor: '$red9Dark' },
-      blue: { backgroundColor: '$blue9Dark' },
-      green: { backgroundColor: '$green9Dark' },
-    },
-  } as const,
 })
 
 export const FooterText = styled(Text, {

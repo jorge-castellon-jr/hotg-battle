@@ -1,7 +1,8 @@
 import React from 'react'
+import { EnemyColorKey, RangerColorKey } from '../utils/colors'
 
 interface HeaderShapeProps {
-  color: 'red' | 'blue' | 'green'
+  color: RangerColorKey | EnemyColorKey
   top?: number
   bottom?: number
   left?: boolean
@@ -27,7 +28,7 @@ export const CardCutOutShape: React.FC<HeaderShapeProps> = ({
           H0 
           Z
         `}
-          fill={`var(--c-${color}9Dark)`}
+          fill={color}
         />
       )}
 
@@ -41,7 +42,7 @@ export const CardCutOutShape: React.FC<HeaderShapeProps> = ({
           H${300 - bottom}
           Z
         `}
-          fill={`var(--c-${color}9Dark)`}
+          fill={color}
         />
       )}
     </svg>

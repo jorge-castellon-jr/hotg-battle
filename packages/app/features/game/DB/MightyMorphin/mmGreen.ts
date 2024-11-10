@@ -27,7 +27,7 @@ const dragonShield: RangerCard = {
   name: 'Dragon Shield',
   type: 'reaction',
   shields: 3,
-  text: "Play this card when any Ranger suffers damage to reduce that damage by 3. jthe next time you perform an attack during this battle, add 1 die to that attack",
+  text: "Play this card when any Ranger suffers damage to reduce that damage by 3. The next time you perform an attack during this battle, add 1 die to that attack",
   team: 'Mighty Morphin',
   owner: 'Green',
   color: 'green',

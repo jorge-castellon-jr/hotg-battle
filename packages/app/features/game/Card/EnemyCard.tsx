@@ -1,4 +1,3 @@
-import React from 'react'
 import { Stack, YStack, Text, XStack } from 'tamagui'
 import { Heart, Sword } from 'lucide-react'
 import { EnemyCard as EnemyCardType } from './CardTypes'
@@ -19,6 +18,7 @@ import {
 import CardCutOutShape from './HeaderShape'
 import { DiceIcon } from './RangerCard'
 import { DamageCounterBadge } from './DamageCounterBadge'
+import { enemyColors } from '../utils/colors'
 
 interface EnemyCardProps {
   enemy?: EnemyCardType
@@ -66,7 +66,7 @@ const EnemyCard = ({ enemy, width = 150, height = 200 }: EnemyCardProps) => {
       {/* Header */}
       <CardHeader height={20} pr="$1">
         <CardCutout bottom={-2}>
-          <CardCutOutShape top={-15} bottom={60} color={getColor(enemy.enemyType)} right={false} />
+          <CardCutOutShape top={-15} bottom={60} color={enemyColors[enemy.enemyType]} right={false} />
         </CardCutout>
         <CardTitle fontSize={fontSize.small} justifyContent="flex-end" textAlign="right">
           {enemy.name}
@@ -74,7 +74,7 @@ const EnemyCard = ({ enemy, width = 150, height = 200 }: EnemyCardProps) => {
       </CardHeader>
 
       {/* Type Banner */}
-      <TypeBanner color={enemy.enemyType} justifyContent="flex-end" pr="$1">
+      <TypeBanner backgroundColor={enemyColors[enemy.enemyType]} justifyContent="flex-end" pr="$1">
         <StatContainer position="absolute" left="$2">
           <Heart size={10} color="white" strokeWidth={2.5} />
           <StatText>{enemy.health}</StatText>
@@ -85,7 +85,7 @@ const EnemyCard = ({ enemy, width = 150, height = 200 }: EnemyCardProps) => {
       {/* Main Content */}
       <ContentContainer>
         <CardCutout top={-2} rotate="180deg">
-          <CardCutOutShape top={-15} bottom={60} color={getColor(enemy.enemyType)} left={false} />
+          <CardCutOutShape top={-15} bottom={60} color={enemyColors[enemy.enemyType]} left={false} />
         </CardCutout>
         <XStack gap="$2">
           {enemy.attacks &&
@@ -119,7 +119,7 @@ const EnemyCard = ({ enemy, width = 150, height = 200 }: EnemyCardProps) => {
         />
 
         <CardCutout bottom={-2}>
-          <CardCutOutShape top={-15} bottom={60} color={getColor(enemy.enemyType)} right={false} />
+          <CardCutOutShape top={-15} bottom={60} color={enemyColors[enemy.enemyType]} right={false} />
         </CardCutout>
       </ContentContainer>
     </CardContainer>

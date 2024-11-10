@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Text, XStack, YStack, Button } from 'tamagui'
 import { Ranger } from '../GameTypes'
-import { Layers, ZapOff, Zap, Star, StarOff, BookOpen } from 'lucide-react'
+import { Layers, ZapOff, Zap, Star, StarOff } from 'lucide-react'
 import { rangerColors } from '../utils/colors'
 import useGameStore from '../gameStateStore'
 import RangerCardSheet from './RangerCardSheet'
@@ -49,8 +49,8 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
       pressStyle={{ scale: 0.98 }}
       onPress={onPress}
     >
-      <Icon size={24} color={`var(--${ranger.color}9)`} />
-      <Text fontSize="$6" fontWeight="bold" color={`$${ranger.color}9`}>
+      <Icon size={24} color={rangerColors[ranger.color]} />
+      <Text fontSize="$6" fontWeight="bold" color={rangerColors[ranger.color]}>
         {value}
       </Text>
       <Text fontSize="$2" color="$gray11">
@@ -85,7 +85,7 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
       {isUsed ? (
         <OffIcon size={24} color="var(--gray8)" />
       ) : (
-        <Icon size={24} color={`var(--c-${ranger.color}9Dark)`} />
+        <Icon size={24} color={rangerColors[ranger.color]} />
       )}
       <Text fontSize="$3" color={isUsed ? '$gray8' : '$gray11'}>
         {label}
@@ -106,7 +106,7 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
       </YStack>
       {/* Ability Section */}
       <YStack backgroundColor="$gray3" padding="$4" borderRadius="$4" gap="$2">
-        <Text fontSize="$5" fontWeight="bold" color={`$${ranger.color}9Dark`}>
+        <Text fontSize="$5" fontWeight="bold" color={rangerColors[ranger.color]}>
           {ranger.ability.name}
         </Text>
         <Text fontSize="$3" color="$gray11">
@@ -153,7 +153,7 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
       <XStack gap="$4">
         <Button
           flex={1}
-          backgroundColor={`$${ranger.color}9Dark`}
+          backgroundColor={rangerColors[ranger.color]}
           disabled={ranger.cards.length <= 0 || !setupCompleted}
           disabledStyle={{ opacity: 0.7 }}
           color="white"

@@ -4,7 +4,7 @@ const knowledgeIsPower: RangerCard = {
   name: 'Knowledge Is Power',
   type: 'maneuver',
   shields: 2,
-  text: 'Gain 1 energy. A Ranger of your choice may search their deck for a card and add it to their hand. fif they do, they must shuffle their deck.',
+  text: 'Gain 1 energy. A Ranger of your choice may search their deck for a card and add it to their hand. If they do, they must shuffle their deck.',
   team: 'Mighty Morphin',
   owner: 'Blue',
   color: 'blue',

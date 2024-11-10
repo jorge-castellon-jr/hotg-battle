@@ -1,4 +1,5 @@
 import { EnemyCard, RangerCard } from './Card/CardTypes'
+import { RangerColorKey } from './utils/colors'
 
 interface RangerAbility {
   name: string
@@ -14,7 +15,7 @@ export interface Ranger {
   energyUsed: boolean
   abilityUsed: boolean
   discard: RangerCard[]
-  color: string
+  color: RangerColorKey
 }
 
 export interface RangerDecks {

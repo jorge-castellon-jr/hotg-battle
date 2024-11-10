@@ -3,8 +3,8 @@ import { Button, Sheet, Text, XStack, YStack, styled } from 'tamagui'
 import { RangerStatusCard } from './RangerStatusCard'
 import useGameStore, { GameState, Turn } from '../gameStateStore'
 import { DrawButton } from './DrawButton'
-import { rangerColors } from '../utils/colors'
 import { RangerDecks } from '../GameTypes'
+import { rangerColors } from '../utils/colors'
 
 // Styled components with animation configurations
 const AnimatedContainer = styled(YStack, {
@@ -23,7 +23,7 @@ const DrawButtonsContainer = styled(XStack, {
     isVisible: {
       true: {
         height: 44,
-        marginBottom:"$2"
+        marginBottom: '$2',
       },
       false: {
         height: 0,

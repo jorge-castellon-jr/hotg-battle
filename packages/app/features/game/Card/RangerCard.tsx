@@ -19,6 +19,7 @@ import {
 } from './cardStyles'
 import { YStack, Text } from '@my/ui'
 import { CardCutOutShape } from './HeaderShape'
+import { rangerColors } from '../utils/colors'
 
 interface DiceIconProps {
   size: number
@@ -61,25 +62,19 @@ interface RangerCardProps {
   onPress?: () => void
 }
 
-enum RangerColors {
-  red = 'red',
-  blue = 'blue',
-  green = 'green',
-}
-
 const RangerCard: React.FC<RangerCardProps> = ({ card, onPress }) => {
   return (
-    <CardContainer color={card.color as RangerColors} onPress={onPress}>
+    <CardContainer onPress={onPress}>
       {/* Header */}
       <CardHeader>
         <CardCutout bottom={-2}>
-          <CardCutOutShape color={card.color as RangerColors} />
+          <CardCutOutShape color={rangerColors[card.color]} />
         </CardCutout>
         <CardTitle>{card.name}</CardTitle>
       </CardHeader>
 
       {/* Type Banner */}
-      <TypeBanner color={card.color as RangerColors}>
+      <TypeBanner backgroundColor={rangerColors[card.color]}>
         <EnergyStats value={card.energy} />
         <TypeText>{card.type}</TypeText>
       </TypeBanner>
@@ -87,7 +82,7 @@ const RangerCard: React.FC<RangerCardProps> = ({ card, onPress }) => {
       {/* Main Content */}
       <ContentContainer>
         <CardCutout top={-2} rotate="180deg">
-          <CardCutOutShape color={card.color as RangerColors} />
+          <CardCutOutShape color={rangerColors[card.color]} />
         </CardCutout>
         {card.attack && (
           <>
@@ -104,17 +99,7 @@ const RangerCard: React.FC<RangerCardProps> = ({ card, onPress }) => {
                   <Text>Special</Text>
                 ) : (
                   [...Array(card.attack.value)].map((_, index) => (
-                    <DiceIcon
-                      key={index}
-                      size={16}
-                      color={
-                        card.color === 'red'
-                          ? '#ef4444'
-                          : card.color === 'blue'
-                            ? '#3b82f6'
-                            : '#22c55e'
-                      }
-                    />
+                    <DiceIcon key={index} size={16} color={rangerColors[card.color]} />
                   ))
                 )}
               </DiceContainer>
@@ -125,12 +110,12 @@ const RangerCard: React.FC<RangerCardProps> = ({ card, onPress }) => {
           <CardDescription>{card.text}</CardDescription>
         </YStack>
         <CardCutout bottom={-2}>
-          <CardCutOutShape color={card.color as RangerColors} />
+          <CardCutOutShape color={rangerColors[card.color]} />
         </CardCutout>
       </ContentContainer>
 
       {/* Footer */}
-      <CardFooter color={card.color as RangerColors}>
+      <CardFooter backgroundColor={rangerColors[card.color]}>
         <FooterText>
           {card.team} {card.owner}
         </FooterText>

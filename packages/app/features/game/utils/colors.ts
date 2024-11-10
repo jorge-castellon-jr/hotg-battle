@@ -1,11 +1,22 @@
+// Base ranger colors that match MMPR
 export const rangerColors = {
-  red: '$red9Dark',
-  blue: '$blue9Dark',
-  green: '$green9Dark',
-}
+  red: '#E53E3E', // A strong, vibrant red
+  blue: '#0080FF', // A vibrant true blue
+  green: '#38A169', // A forest green
+  yellow: '#FFC000', // A rich gold, less bright
+  pink: '#D53F8C', // A deep pink
+  black: '#2D3748', // A soft black
+  white: '#F7FAFC', // An off-white
+} as const
 
+// Enemy colors for different types
 export const enemyColors = {
-  foot: '$green7Dark',
-  monster: '$orange9Dark',
-  boss: '$purple9Dark',
-}
+  foot: '#9ACD32', // Yellow-green for foot soldiers
+  monster: '#FF8C00', // A more vibrant dark orange
+  boss: '#9F2BF0', // A more vibrant purple
+  basic: '#A0AEC0', // Gray for basic enemies
+} as const
+
+// Utility type for type-safety when using color keys
+export type RangerColorKey = keyof typeof rangerColors
+export type EnemyColorKey = (typeof enemyColors)[keyof typeof enemyColors]
