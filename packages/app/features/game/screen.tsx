@@ -4,10 +4,10 @@ import TopBar from './components/TopBar'
 import EnemyRow from './components/EnemyRow'
 import RangerHand from './RangerHand/RangerHand'
 import RangerStatusOverview from './RangerStatus/RangerStatusOverview'
-import { BattleSequence } from './Battle/BattleSequence'
 import { UiOverlay } from './UI/UiOverlay'
 import { AppContainer } from './components/AppContainer'
 import { EnemyBattleSequence } from './Battle/EnemyBattleSequence'
+import { RangerBattleSequence } from './Battle/RangerBattleSequence'
 import { ClientOnly } from './components/ClientOnly'
 
 const GameScreen: React.FC = () => {
@@ -26,7 +26,7 @@ const GameScreen: React.FC = () => {
 
         <RangerHand hand={hand} />
         <RangerStatusOverview rangers={rangerDecks} />
-        <BattleSequence />
+        <RangerBattleSequence />
         <EnemyBattleSequence />
         <UiOverlay />
       </AppContainer>

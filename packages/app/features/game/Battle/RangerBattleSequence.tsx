@@ -4,7 +4,7 @@ import { DiceRoll } from '../Dice/DiceRoll'
 import { BattleControls } from './DiceControls'
 import { useBattleState } from './useBattleState'
 
-export const BattleSequence = () => {
+export const RangerBattleSequence = () => {
   const { gameState, playedCard, exitBattleMode } = useGameStore()
 
   const {
