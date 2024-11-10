@@ -65,16 +65,25 @@ export const RangerBattleSequence = () => {
           />
         ) : (
           <>
+            {/* Remove condition for showing DiceRoll */}
             <DiceRoll
               numDice={currentAttack}
               isRolling={isRolling}
               onRollComplete={handleRollComplete}
             />
             <XStack width="100%" gap="$2" justifyContent="center" px="$5">
-              <Button flexBasis="50%" disabled={!rollComplete} onPress={handleStartRoll}>
+              <Button
+                flexBasis="50%"
+                disabled={!rollComplete || isRolling}
+                onPress={handleStartRoll}
+              >
                 Reroll
               </Button>
-              <Button flexBasis="50%" disabled={!rollComplete} onPress={exitBattleMode}>
+              <Button
+                flexBasis="50%"
+                disabled={!rollComplete || isRolling}
+                onPress={exitBattleMode}
+              >
                 Continue
               </Button>
             </XStack>
