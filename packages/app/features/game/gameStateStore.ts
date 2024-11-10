@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { RangerCard, EnemyCard } from './Card/CardTypes'
 import EnemyCardDatabase from './DB/Enemies/EnemyCardDatabase'
 import { Ranger, RangerDecks } from './GameTypes'
-import { getEnemyDeck } from './Card/deckUtils'
+import { getEnemyDeck, resetAllRangerDecks } from './Card/deckUtils'
 import {
   addCardToDiscard,
   findRangerByCard,
@@ -166,7 +166,12 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
         })
       },
       resetGame: () => {
-        set({ ...createInitialState(), _hasHydrated: true })
+        const currentRangers = get().rangerDecks
+        set({
+          ...createInitialState(),
+          _hasHydrated: true,
+          rangerDecks: resetAllRangerDecks(currentRangers),
+        })
       },
       resetRangers: () => {
         set({

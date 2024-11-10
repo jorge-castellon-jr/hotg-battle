@@ -37,7 +37,7 @@ export const RangerStatusCard: React.FC<RangerStatusCardProps> = ({ ranger, onPr
             <XStack gap="$1">
               <DiscardIcon color="white" size={16} />
               <Text color="white" fontSize="$2">
-                {ranger.cards.length}
+                {ranger.discard.length}
               </Text>
             </XStack>
           </XStack>

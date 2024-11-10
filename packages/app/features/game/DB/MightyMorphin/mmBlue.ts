@@ -6,7 +6,7 @@ const knowledgeIsPower: RangerCard = {
   shields: 2,
   text: 'Gain 1 energy. A Ranger of your choice may search their deck for a card and add it to their hand. If they do, they must shuffle their deck.',
   team: 'Mighty Morphin',
-  owner: 'Blue',
+  owner: 'mm2',
   color: 'blue',
   energy: 0,
 }
@@ -17,7 +17,7 @@ const counterJab: RangerCard = {
   shields: 1,
   text: '+1 Damage. Star: If this card is revealed for defense, deal 1 damage to an enemy card of your choice.',
   team: 'Mighty Morphin',
-  owner: 'Blue',
+  owner: 'mm2',
   color: 'blue',
   energy: 0,
   attack: { value: 1 },
@@ -29,7 +29,7 @@ const tacticalStrike: RangerCard = {
   shields: 2,
   text: 'After you play this card, place it on top of your deck instead of discard it.',
   team: 'Mighty Morphin',
-  owner: 'Blue',
+  owner: 'mm2',
   color: 'blue',
   energy: 0,
   attack: {
@@ -43,7 +43,7 @@ const mightyMaces: RangerCard = {
   shields: 3,
   text: 'Star: If this card is revealed for defense, gain 1 energy',
   team: 'Mighty Morphin',
-  owner: 'Blue',
+  owner: 'mm2',
   color: 'blue',
   energy: 1,
   attack: {
@@ -64,7 +64,7 @@ const bladeBlaster: RangerCard = {
   shields: 1,
   text: energyToDamgeEffect.description!,
   team: 'Mighty Morphin',
-  owner: 'Blue',
+  owner: 'mm2',
   color: 'blue',
   energy: -1,
   attack: { value: -1 },
@@ -77,7 +77,7 @@ const powerLance: RangerCard = {
   shields: 3,
   text: 'After you play this card, place it on top of your deck instead of discarding it.',
   team: 'Mighty Morphin',
-  owner: 'Blue',
+  owner: 'mm2',
   color: 'blue',
   energy: 3,
   attack: {

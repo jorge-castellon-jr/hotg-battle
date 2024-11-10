@@ -1,6 +1,7 @@
 import { EnemyCard, RangerCard } from "./CardTypes";
 import cardDatabase from "../DB/cardDatabase";
 import EneyCardDatabase from "../DB/Enemies/EnemyCardDatabase";
+import { RangerDecks } from "../GameTypes";
 
 /**
  * Fisher-Yates shuffle algorithm
@@ -76,4 +77,35 @@ export const deckUtils = {
   draw: (deck: RangerCard[], count: number = 1) => {
     return dealCards(deck, count)
   },
+}
+
+/**
+ * Reset a ranger's deck and discard pile
+ */
+export const resetRangerDeck = (rangerId: string) => {
+  return {
+    cards: getDeck(rangerId),
+    discard: [],
+    energyUsed: false,
+    abilityUsed: false
+  };
+}
+
+/**
+ * Reset all ranger decks in the game
+ */
+export const resetAllRangerDecks = (rangerDecks: RangerDecks) => {
+  const updatedDecks = { ...rangerDecks };
+  
+  // Reset each ranger's deck if they exist
+  Object.entries(updatedDecks).forEach(([position, ranger]) => {
+    if (ranger && ranger.id) {
+      updatedDecks[position] = {
+        ...ranger,
+        ...resetRangerDeck(ranger.id)
+      };
+    }
+  });
+  
+  return updatedDecks;
 }
