@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { RangerCard, EnemyCard } from './Card/CardTypes'
 import EnemyCardDatabase from './DB/Enemies/EnemyCardDatabase'
 import { Ranger, RangerDecks } from './GameTypes'
-import { getDeck, getEnemyDeck } from './Card/deckUtils'
+import { getEnemyDeck } from './Card/deckUtils'
 import {
   addCardToDiscard,
   findRangerByCard,
@@ -81,7 +81,7 @@ export interface GameStoreActions {
 
   setupEnemy: (foot: string, monster?: string) => void
 
-  selectedRanger: (position: 'left' | 'middle' | 'right') => RangerDecks['left']
+  selectedRanger: (position: 'left' | 'middle' | 'right') => Ranger
   setSelectedPosition: (position: 'left' | 'middle' | 'right') => void
   showRangerInfo: (position: 'left' | 'middle' | 'right') => void
   toggleEnergy: (position: 'left' | 'middle' | 'right') => void
@@ -101,8 +101,6 @@ export interface GameStoreActions {
   moveEnemyPosition: (direction: 'left' | 'right') => void
   markEnemyAsActivated: () => void
   markEnemyAsDefeated: () => void
-
-  applyDamage: (value: number) => void
 
   showCardOptions: (index: number) => void
   showDeckCardOptions: (position: 'left' | 'middle' | 'right', index: number) => void
@@ -343,8 +341,11 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
       },
       markEnemyAsActivated: () =>
         set(({ enemies, selectedEnemyIndex, selectedEnemyRow }) => ({
-          gameState: GameState.default,
           enemies: toggleEnemyStatus(enemies, selectedEnemyIndex, selectedEnemyRow!, 'activated'),
+          selectedEnemy: null,
+          selectedEnemyIndex: -1,
+          selectedEnemyRow: null,
+          gameState: GameState.default,
         })),
 
       markEnemyAsDefeated: () =>
@@ -352,11 +353,6 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
           gameState: GameState.default,
           enemies: toggleEnemyStatus(enemies, selectedEnemyIndex, selectedEnemyRow!, 'defeated'),
         })),
-
-      applyDamage: (value) => {
-        // do something
-        console.log(value)
-      },
 
       setSelectedPosition: (position) => set({ selectedPosition: position }),
       showRangerInfo: (position) =>

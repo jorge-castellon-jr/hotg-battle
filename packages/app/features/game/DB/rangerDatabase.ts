@@ -31,6 +31,48 @@ export default [
     discard: [],
   },
   {
+    id: 'mm3',
+    name: 'Zack Taylor',
+    ability: {
+      name: 'Hip-Hop Kido',
+      text: 'Once per battle, after you defeat an enemy card with an attack, you may deal 1 damage to another enemy card adjacent to your target.',
+    },
+    color: 'black',
+    team: 'Mighty Morphin',
+    cards: getDeck('mm3'),
+    energyUsed: false,
+    abilityUsed: false,
+    discard: [],
+  },
+  {
+    id: 'mm4',
+    name: 'Trini Kwan',
+    ability: {
+      name: 'Double Strike',
+      text: 'Once per battle, after you play a card, you may immediately play another card with the same name.',
+    },
+    color: 'yellow',
+    team: 'Mighty Morphin',
+    cards: getDeck('mm4'),
+    energyUsed: false,
+    abilityUsed: false,
+    discard: [],
+  },
+  {
+    id: 'mm5',
+    name: 'Kimberly Ann Hart',
+    ability: {
+      name: 'Quick Shot',
+      text: 'At the start of each battle, you may deal 1 damage to an enemy card of your choice.',
+    },
+    color: 'pink',
+    team: 'Mighty Morphin',
+    cards: getDeck('mm5'),
+    energyUsed: false,
+    abilityUsed: false,
+    discard: [],
+  },
+  {
     id: 'mm6',
     name: 'Tommy Oliver',
     ability: {
