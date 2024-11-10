@@ -17,7 +17,7 @@ export const SettingsSheet: React.FC<EnergySheetProps> = ({ open, onOpenChange }
     onOpenChange(false)
   }
   const link = useLink({
-    href: '/setup',
+    href: '/',
   })
 
   return (
