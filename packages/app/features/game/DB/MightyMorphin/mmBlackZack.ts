@@ -76,7 +76,7 @@ const bladeBlaster: RangerCard = {
 const powerAxe: RangerCard = {
   name: 'Power Axe',
   type: 'attack',
-  text: 'After rolling, choose 2 dice from this attack and deal that much [b]¤[/b] to each enemy card adjacent to the target.',
+  text: 'After rolling, choose 2 dice from this attack and deal that much damage to each enemy card adjacent to the target.',
   team: 'Mighty Morphin',
   owner: 'mm3',
   color: 'black',
