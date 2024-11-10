@@ -94,6 +94,21 @@ export const moveCardToBottom = (deck: RangerCard[], cardIndex: number): RangerC
 }
 
 /**
+ * Moves a card from any position in the deck to the top
+ */
+export const moveCardToTop = (deck: RangerCard[], cardIndex: number): RangerCard[] => {
+  if (cardIndex < 0 || cardIndex >= deck.length) {
+    return deck
+  }
+
+  const newDeck = [...deck]
+  const [card] = newDeck.splice(cardIndex, 1)
+  newDeck.push(card)
+
+  return newDeck
+}
+
+/**
  * Reset a ranger's deck and discard pile
  */
 export const resetRangerDeck = (rangerId: string) => {

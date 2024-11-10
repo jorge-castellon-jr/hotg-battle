@@ -2,10 +2,17 @@ import { create } from 'zustand'
 import { RangerCard, EnemyCard } from './Card/CardTypes'
 import EnemyCardDatabase from './DB/Enemies/EnemyCardDatabase'
 import { Ranger, RangerDecks } from './GameTypes'
-import { getEnemyDeck, moveCardToBottom, resetAllRangerDecks } from './Card/deckUtils'
+import {
+  getEnemyDeck,
+  moveCardToBottom,
+  moveCardToTop,
+  resetAllRangerDecks,
+} from './Card/deckUtils'
 import {
   addCardToDiscard,
   findRangerByCard,
+  moveCardFromHandToBottom,
+  moveCardFromHandToTop,
   removeCardFromDeck,
   removeCardFromHand,
   returnCardFromDiscard,
@@ -95,7 +102,10 @@ export interface GameStoreActions {
   removeDice: () => void
 
   drawCard: () => void
+  moveCardToTop: () => void
   moveCardToBottom: () => void
+  moveHandCardToTop: () => void
+  moveHandCardToBottom: () => void
   discardCard: () => void
   discardDeckCard: () => void
 
@@ -282,6 +292,85 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
           hand: removeCardFromHand(state.hand, cardIndex),
           rangerDecks: addCardToDiscard(state.rangerDecks, rangerInfo.position, card),
         }))
+      },
+      moveHandCardToTop: () => {
+        const state = get()
+        const card = state.playedCard
+        const cardIndex = state.playedCardIndex
+
+        if (!card) return
+
+        const rangerInfo = findRangerByCard(card, state.rangerDecks)
+        if (!rangerInfo) return
+
+        const { rangerDecks, hand } = moveCardFromHandToTop(
+          state.rangerDecks,
+          rangerInfo.position,
+          card,
+          state.hand,
+          cardIndex
+        )
+
+        set({
+          ...RESET,
+          rangerDecks,
+          hand,
+          playedCard: null,
+          playedCardIndex: -1,
+        })
+      },
+
+      moveHandCardToBottom: () => {
+        const state = get()
+        const card = state.playedCard
+        const cardIndex = state.playedCardIndex
+
+        if (!card) return
+
+        const rangerInfo = findRangerByCard(card, state.rangerDecks)
+        if (!rangerInfo) return
+
+        const { rangerDecks, hand } = moveCardFromHandToBottom(
+          state.rangerDecks,
+          rangerInfo.position,
+          card,
+          state.hand,
+          cardIndex
+        )
+
+        set({
+          ...RESET,
+          rangerDecks,
+          hand,
+          playedCard: null,
+          playedCardIndex: -1,
+        })
+      },
+      moveCardToTop: () => {
+        const state = get()
+        const position = state.selectedPosition!
+        const cardIndex = state.playedCardIndex
+
+        if (!position || cardIndex < 0) return
+
+        const ranger = state.rangerDecks[position]
+        if (!ranger) return
+
+        console.log(ranger, position, cardIndex)
+
+        set({
+          ...RESET,
+          rangerDecks: {
+            ...state.rangerDecks,
+            [position]: {
+              ...ranger,
+              cards: moveCardToTop(ranger.cards, cardIndex),
+            },
+          },
+          gameState: GameState.rangerInfo,
+          playedCard: null,
+          playedCardIndex: -1,
+        })
       },
       moveCardToBottom: () => {
         const state = get()

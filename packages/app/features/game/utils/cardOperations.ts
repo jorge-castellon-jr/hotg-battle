@@ -71,6 +71,55 @@ export const addCardToDeckBottom = (deck: RangerCard[], card: RangerCard): Range
 }
 export type ReturnLocation = 'hand' | 'top' | 'bottom'
 
+export const moveCardFromHandToTop = (
+  rangerDecks: RangerDecks,
+  position: 'left' | 'middle' | 'right',
+  card: RangerCard,
+  hand: RangerCard[],
+  cardIndex: number
+): { rangerDecks: RangerDecks; hand: RangerCard[] } => {
+  const updatedRangerDecks = { ...rangerDecks }
+  const ranger = updatedRangerDecks[position]!
+
+  // Remove card from hand
+  const updatedHand = removeCardFromHand(hand, cardIndex)
+
+  // Add to top of deck
+  updatedRangerDecks[position] = {
+    ...ranger,
+    cards: [...ranger.cards, card],
+  }
+
+  return {
+    rangerDecks: updatedRangerDecks,
+    hand: updatedHand,
+  }
+}
+
+export const moveCardFromHandToBottom = (
+  rangerDecks: RangerDecks,
+  position: 'left' | 'middle' | 'right',
+  card: RangerCard,
+  hand: RangerCard[],
+  cardIndex: number
+): { rangerDecks: RangerDecks; hand: RangerCard[] } => {
+  const updatedRangerDecks = { ...rangerDecks }
+  const ranger = updatedRangerDecks[position]!
+
+  // Remove card from hand
+  const updatedHand = removeCardFromHand(hand, cardIndex)
+
+  // Add to bottom of deck
+  updatedRangerDecks[position] = {
+    ...ranger,
+    cards: [card, ...ranger.cards],
+  }
+
+  return {
+    rangerDecks: updatedRangerDecks,
+    hand: updatedHand,
+  }
+}
 export const returnCardFromDiscard = (
   rangerDecks: RangerDecks,
   position: 'left' | 'middle' | 'right',
