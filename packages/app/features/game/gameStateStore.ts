@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { RangerCard, EnemyCard } from './Card/CardTypes'
 import EnemyCardDatabase from './DB/Enemies/EnemyCardDatabase'
 import { Ranger, RangerDecks } from './GameTypes'
-import { getEnemyDeck, resetAllRangerDecks } from './Card/deckUtils'
+import { getEnemyDeck, moveCardToBottom, resetAllRangerDecks } from './Card/deckUtils'
 import {
   addCardToDiscard,
   findRangerByCard,
@@ -95,6 +95,7 @@ export interface GameStoreActions {
   removeDice: () => void
 
   drawCard: () => void
+  moveCardToBottom: () => void
   discardCard: () => void
   discardDeckCard: () => void
 
@@ -282,6 +283,32 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
           rangerDecks: addCardToDiscard(state.rangerDecks, rangerInfo.position, card),
         }))
       },
+      moveCardToBottom: () => {
+        const state = get()
+        const position = state.selectedPosition!
+        const cardIndex = state.playedCardIndex
+
+        if (!position || cardIndex < 0) return
+
+        const ranger = state.rangerDecks[position]
+        if (!ranger) return
+
+        console.log(ranger, position, cardIndex)
+
+        set({
+          ...RESET,
+          rangerDecks: {
+            ...state.rangerDecks,
+            [position]: {
+              ...ranger,
+              cards: moveCardToBottom(ranger.cards, cardIndex),
+            },
+          },
+          gameState: GameState.rangerInfo,
+          playedCard: null,
+          playedCardIndex: -1,
+        })
+      },
       discardDeckCard: () => {
         const state = get()
         const card = state.playedCard
@@ -325,6 +352,7 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
 
         set({
           ...RESET,
+          gameState: GameState.rangerInfo,
           rangerDecks,
           hand: hand || state.hand,
           playedCard: null,

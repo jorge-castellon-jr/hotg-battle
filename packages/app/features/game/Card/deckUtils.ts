@@ -1,7 +1,7 @@
-import { EnemyCard, RangerCard } from "./CardTypes";
-import cardDatabase from "../DB/cardDatabase";
-import EneyCardDatabase from "../DB/Enemies/EnemyCardDatabase";
-import { RangerDecks } from "../GameTypes";
+import { EnemyCard, RangerCard } from './CardTypes'
+import cardDatabase from '../DB/cardDatabase'
+import EneyCardDatabase from '../DB/Enemies/EnemyCardDatabase'
+import { RangerDecks } from '../GameTypes'
 
 /**
  * Fisher-Yates shuffle algorithm
@@ -12,8 +12,8 @@ export const shuffleArray = <T>(array: T[]): T[] => {
   const shuffled = [...array]
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
-    // Swap elements
-    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+      // Swap elements
+      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
   }
   return shuffled
 }
@@ -80,6 +80,20 @@ export const deckUtils = {
 }
 
 /**
+ * Moves a card from any position in the deck to the bottom
+ */
+export const moveCardToBottom = (deck: RangerCard[], cardIndex: number): RangerCard[] => {
+  if (cardIndex < 0 || cardIndex >= deck.length) {
+    return deck
+  }
+
+  const newDeck = [...deck]
+  const [card] = newDeck.splice(cardIndex, 1)
+
+  return [card, ...newDeck]
+}
+
+/**
  * Reset a ranger's deck and discard pile
  */
 export const resetRangerDeck = (rangerId: string) => {
@@ -87,25 +101,25 @@ export const resetRangerDeck = (rangerId: string) => {
     cards: getDeck(rangerId),
     discard: [],
     energyUsed: false,
-    abilityUsed: false
-  };
+    abilityUsed: false,
+  }
 }
 
 /**
  * Reset all ranger decks in the game
  */
 export const resetAllRangerDecks = (rangerDecks: RangerDecks) => {
-  const updatedDecks = { ...rangerDecks };
-  
+  const updatedDecks = { ...rangerDecks }
+
   // Reset each ranger's deck if they exist
   Object.entries(updatedDecks).forEach(([position, ranger]) => {
     if (ranger && ranger.id) {
       updatedDecks[position] = {
         ...ranger,
-        ...resetRangerDeck(ranger.id)
-      };
+        ...resetRangerDeck(ranger.id),
+      }
     }
-  });
-  
-  return updatedDecks;
+  })
+
+  return updatedDecks
 }

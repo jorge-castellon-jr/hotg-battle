@@ -10,7 +10,7 @@ export const RangerDrawSheet = ({
   open: boolean
   setOpen: (open: boolean) => void
 }) => {
-  const { playedCard, discardDeckCard, drawCard, exitBattleMode } = useGameStore()
+  const { playedCard, discardDeckCard, drawCard, exitBattleMode, moveCardToBottom } = useGameStore()
 
   function onOpenChange(open: boolean) {
     setOpen(open)
@@ -19,6 +19,10 @@ export const RangerDrawSheet = ({
     drawCard()
     setOpen(false)
     exitBattleMode()
+  }
+  function toBottom() {
+    moveCardToBottom()
+    setOpen(false)
   }
   function discard() {
     discardDeckCard()
@@ -38,6 +42,7 @@ export const RangerDrawSheet = ({
         </XStack>
 
         <Button onPress={draw}>To Hand</Button>
+        <Button onPress={toBottom}>Bottom of Deck</Button>
         <Button onPress={discard}>Discard</Button>
       </YStack>
     </BaseSheet>
