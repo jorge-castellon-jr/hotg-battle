@@ -1,4 +1,5 @@
 import { RangerCard, CardEffect } from '../../Card/CardTypes'
+import { createDeck } from '../cardUtils'
 
 const leadTheChargeEffect: CardEffect = {
   type: 'addDice',
@@ -125,17 +126,13 @@ const powerSword: RangerCard = {
   effects: [powerSwordEffect],
 }
 
-const deck: RangerCard[] = [
-  leadTheCharge,
-  leadTheCharge,
-  teamTactics,
-  teamTactics,
-  block,
-  block,
-  tyrannoSlash,
-  tyrannoSlash,
-  bladeBlaster,
-  powerSword,
-]
+const deck: RangerCard[] = createDeck([
+  [leadTheCharge, 2],
+  [teamTactics, 2],
+  [block, 2],
+  [tyrannoSlash, 2],
+  [bladeBlaster, 1],
+  [powerSword, 1],
+])
 
 export default deck
