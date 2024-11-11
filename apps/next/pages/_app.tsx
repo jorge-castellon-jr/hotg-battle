@@ -18,8 +18,8 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
   return (
     <>
       <Head>
-        <title>Tamagui • Pages Router</title>
-        <meta name="description" content="Tamagui, Solito, Expo & Next.js" />
+        <title>Heroes Grid • Battle Simulator</title>
+        <meta name="description" content="Fan-made battle simulator for the Power Rangers: Heroes of the Grid board game. Practice combat encounters, test strategies, and master the battle phase mechanics." />
         <link rel="icon" href="/favicon.ico" />
         <script
           dangerouslySetInnerHTML={{
