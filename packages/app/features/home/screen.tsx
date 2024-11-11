@@ -1,5 +1,5 @@
-import { Button, H1, Paragraph, YStack, Text, XStack } from '@my/ui'
-import { AlertCircle, Bug, Construction, Info, Swords } from 'lucide-react'
+import { Button, H1, YStack, Text, XStack } from '@my/ui'
+import { AlertCircle, Bug, Construction, Swords } from 'lucide-react'
 import { useLink } from 'solito/navigation'
 
 interface SectionHeaderProps {
@@ -23,23 +23,6 @@ export function HomeScreen() {
 
   return (
     <YStack f={1} jc="center" ai="center" gap="$8" p="$4" bg="$background">
-      {/* <XStack */}
-      {/*   pos="absolute" */}
-      {/*   w="100%" */}
-      {/*   t="$6" */}
-      {/*   gap="$6" */}
-      {/*   jc="center" */}
-      {/*   fw="wrap" */}
-      {/*   $sm={{ pos: 'relative', t: 0 }} */}
-      {/* > */}
-      {/*   {Platform.OS === 'web' && ( */}
-      {/*     <> */}
-      {/*       <SwitchRouterButton pagesMode={pagesMode} /> */}
-      {/*       <SwitchThemeButton /> */}
-      {/*     </> */}
-      {/*   )} */}
-      {/* </XStack> */}
-
       <YStack gap="$4">
         <YStack>
           <H1 ta="center" col="$color12">
