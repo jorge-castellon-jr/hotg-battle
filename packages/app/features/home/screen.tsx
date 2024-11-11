@@ -83,8 +83,9 @@ export function HomeScreen() {
         <YStack gap="$2">
           <SectionHeader icon={<Bug size={20} />} title="Report Issues" />
           <Text fontSize="$3" color="$gray11">
-            Found a bug or have suggestions? Please reach out to the developer on Facebook. Your
-            feedback is crucial in making this simulator more accurate and useful for the community.
+            Found a bug or have suggestions? Please reach out to the developer on Facebook or click
+            the report bug button on the settings page during playing. Your feedback is crucial in
+            making this simulator more accurate and useful for the community.
           </Text>
         </YStack>
       </YStack>

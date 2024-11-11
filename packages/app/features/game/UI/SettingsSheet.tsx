@@ -1,8 +1,9 @@
 import React from 'react'
-import { Button, Text, YStack } from 'tamagui'
+import { Anchor, Button, Text, YStack } from 'tamagui'
 import useGameStore from '../gameStateStore'
 import { BaseSheet } from './BaseSheet'
 import { useLink } from 'solito/navigation'
+import { SwitchThemeButton } from '@my/ui'
 
 interface EnergySheetProps {
   open: boolean
@@ -19,6 +20,9 @@ export const SettingsSheet: React.FC<EnergySheetProps> = ({ open, onOpenChange }
   const link = useLink({
     href: '/',
   })
+  const bugLink = useLink({
+    href: 'https://forms.gle/s9R3Ln1X96xnh2Zo9',
+  })
 
   return (
     <BaseSheet open={open} onOpenChange={onOpenChange}>
@@ -28,8 +32,14 @@ export const SettingsSheet: React.FC<EnergySheetProps> = ({ open, onOpenChange }
         </Text>
 
         {/* Controls */}
+        <SwitchThemeButton />
         <Button onPress={reset}>Reset Game</Button>
         <Button {...link}>Leave Game</Button>
+        <Anchor href="https://forms.gle/s9R3Ln1X96xnh2Zo9" target="_blank">
+          <Button width="100%" backgroundColor="$red8">
+            Report Bug
+          </Button>
+        </Anchor>
       </YStack>
     </BaseSheet>
   )
