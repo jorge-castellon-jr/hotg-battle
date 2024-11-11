@@ -21,9 +21,9 @@ import {
 import { toggleEnemyStatus, updateEnemyDamage } from './Enemy/enemyOperations'
 import { moveEnemy } from './Battle/enemyPositionManager'
 import { createJSONStorage, persist } from 'zustand/middleware'
-import { createVersionedStorage } from './Storage/persistentStorage'
 import { RangerPosition } from '../setup/setupTypes'
 import rangerDatabase from './DB/rangerDatabase'
+import safeStorage from './Storage/persistentStorage'
 
 export enum GameState {
   default,
@@ -531,7 +531,18 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
     }),
     {
       name: 'hotg-game-storage',
-      storage: createJSONStorage(() => createVersionedStorage()),
+      storage: {
+        getItem: async (name) => {
+          const value = safeStorage.getItem(name)
+          return value ? JSON.parse(value) : null
+        },
+        setItem: async (name, value) => {
+          safeStorage.setItem(name, JSON.stringify(value))
+        },
+        removeItem: async (name) => {
+          safeStorage.removeItem(name)
+        },
+      },
       partialize: (state) => ({
         ...state,
         // Exclude any properties you don't want to persist

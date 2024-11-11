@@ -21,6 +21,7 @@
     "check-tamagui": "tamagui check",
     "test": "vitest run",
     "test:watch": "vitest",
+    "clean": "rm -rf node_modules apps/next/node_modules apps/next/.next apps/expo/node_modules packages/app/node_modules packages/config/node_modules packages/ui/node_modules .yarn/cache yarn.lock",
     "prepare": "husky"
   },
   "resolutions": {

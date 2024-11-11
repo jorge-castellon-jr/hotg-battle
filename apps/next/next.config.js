@@ -10,6 +10,7 @@ const boolVals = {
 const disableExtraction =
   boolVals[process.env.DISABLE_EXTRACTION] ?? process.env.NODE_ENV === 'development'
 
+const withPWA = require('next-pwa')
 const plugins = [
   withTamagui({
     config: '../../packages/config/src/tamagui.config.ts',
@@ -25,6 +26,12 @@ const plugins = [
       }
     },
     excludeReactNativeWebExports: ['Switch', 'ProgressBar', 'Picker', 'CheckBox', 'Touchable'],
+  }),
+  withPWA({
+    dest: 'public',
+    // disable: process.env.NODE_ENV === 'development',
+    register: true,
+    skipWaiting: true,
   }),
 ]
 
@@ -49,6 +56,14 @@ module.exports = () => {
     ],
     experimental: {
       scrollRestoration: true,
+      esmExternals: true, // Enable ESM support
+    },
+    webpack: (config, { isServer }) => {
+      if (!isServer) {
+        // Ensure TypeScript files are processed
+        config.resolve.extensions.push('.ts', '.tsx')
+      }
+      return config
     },
   }
 
