@@ -19,7 +19,6 @@ const SectionHeader = ({ icon, title }: SectionHeaderProps) => (
 export function HomeScreen() {
   const gameLinkProps = useLink({
     href: '/setup',
-    replace: true,
   })
 
   return (

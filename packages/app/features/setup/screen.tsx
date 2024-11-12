@@ -26,7 +26,6 @@ const GameSetupScreen = () => {
 
   const gameLinkProps = useLink({
     href: '/game',
-    replace: true,
   })
 
   useEffect(() => {

@@ -19,7 +19,6 @@ export const SettingsSheet: React.FC<EnergySheetProps> = ({ open, onOpenChange }
   }
   const link = useLink({
     href: '/',
-    replace: true,
   })
   const bugLink = useLink({
     href: 'https://forms.gle/s9R3Ln1X96xnh2Zo9',
