@@ -3,6 +3,7 @@
   "short_name": "HOTG Battle",
   "description": "Fan-made battle simulator for the Power Rangers: Heroes of the Grid board game. Practice combat encounters, test strategies, and master the battle phase mechanics.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",

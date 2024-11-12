@@ -57,6 +57,22 @@ export default class Document extends NextDocument {
     return (
       <Html>
         <Head>
+          <meta
+            name="description"
+            content="Fan-made battle simulator for the Power Rangers: Heroes of the Grid board game. Practice combat encounters, test strategies, and master the battle phase mechanics."
+          />
+          <link rel="icon" href="/favicon.ico" />
+          <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+          <link
+            rel="apple-touch-startup-image"
+            media="screen and (device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+            href="/splash/iPhone_14_Pro_Max_landscape.png"
+          />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+          <meta name="apple-mobile-web-app-title" content="HOTG Battle" />
+          <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         </Head>
         <body>
