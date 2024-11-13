@@ -4,7 +4,8 @@ export type Attack = {
   value: number
   fixed?: boolean
 }
-
+export type BaseRangerCard = Omit<RangerCard, 'owner' | 'team' | 'color'> &
+  (RangerCardAttack | RangerCardReaction | RangerCardManeuver)
 export type RangerCard = {
   name: string // Card name
   shields: number // Shield points
@@ -14,7 +15,16 @@ export type RangerCard = {
   color: string
   energy: number
   effects?: CardEffect[]
-} & (RangerCardAttack | RangerCardReaction | RangerCardManeuver)
+} & (RangerCardColor | RangerCardColorWhite) &
+  (RangerCardAttack | RangerCardReaction | RangerCardManeuver)
+
+interface RangerCardColorWhite {
+  color: 'white'
+  subcolor: string
+}
+interface RangerCardColor {
+  color: 'red' | 'blue' | 'green' | 'yellow' | 'pink' | 'black' | 'silver' | 'gold' | 'shadow'
+}
 
 interface RangerCardAttack {
   type: 'attack'
