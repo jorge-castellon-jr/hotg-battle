@@ -29,58 +29,10 @@ const plugins = [
   }),
   withPWA({
     dest: 'public',
-    // disable: process.env.NODE_ENV === 'development',
+    disable: process.env.NODE_ENV === 'development',
     register: true,
     skipWaiting: true,
-    cacheOnFrontEndNav: true, // This is important for SPA navigation
     scope: '/',
-    runtimeCaching: [
-      {
-        urlPattern: '/',
-        handler: 'NetworkFirst',
-        options: {
-          cacheName: 'start-url',
-          expiration: {
-            maxEntries: 1,
-            maxAgeSeconds: 24 * 60 * 60, // 24 hours
-          },
-        },
-      },
-      {
-        urlPattern: /^https:\/\/[^/]+\/.+/, // Match all internal routes
-        handler: 'NetworkFirst',
-        options: {
-          cacheName: 'pages',
-          expiration: {
-            maxEntries: 32,
-            maxAgeSeconds: 24 * 60 * 60, // 24 hours
-          },
-        },
-      },
-      {
-        urlPattern: /\/_next\/data\/.+\/.+\.json$/,
-        handler: 'NetworkFirst',
-        options: {
-          cacheName: 'next-data',
-          expiration: {
-            maxEntries: 32,
-            maxAgeSeconds: 24 * 60 * 60, // 24 hours
-          },
-        },
-      },
-      {
-        urlPattern: /\.(?:js)$/,
-        handler: 'CacheFirst',
-        options: {
-          cacheName: 'js',
-          expiration: {
-            maxEntries: 32,
-            maxAgeSeconds: 24 * 60 * 60, // 24 hours
-          },
-        },
-      },
-    ],
-    publicExcludes: ['!noprecache/**/*'],
   }),
 ]
 

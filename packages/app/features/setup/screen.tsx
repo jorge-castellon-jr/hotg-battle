@@ -83,12 +83,12 @@ const GameSetupScreen = () => {
       {/* </YStack> */}
       {/**/}
       <Button
-        {...gameLinkProps}
         backgroundColor="$blue9"
         color="white"
         size="$6"
         disabled={!canStartGame}
         opacity={canStartGame ? 1 : 0.5}
+        {...gameLinkProps}
       >
         Start Game
       </Button>
