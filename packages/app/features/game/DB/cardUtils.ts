@@ -1,9 +1,18 @@
-import { RangerCard } from '../Card/CardTypes'
+import { BaseRangerCard, RangerCard } from '../Card/CardTypes'
 
-export const createDeck = (deckList: Array<[RangerCard, number]>): RangerCard[] => {
+interface CardOptions {
+  team: string
+  owner: string
+  color: string
+}
+
+export const createDeck = (
+  deckList: Array<[BaseRangerCard, number]>,
+  cardOptions: CardOptions
+): RangerCard[] => {
   return deckList.flatMap(([card, count]) =>
     Array(count)
       .fill(null)
-      .map(() => ({ ...card }))
+      .map(() => ({ ...card, ...cardOptions }) as RangerCard)
   )
 }

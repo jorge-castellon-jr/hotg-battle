@@ -84,30 +84,34 @@ const RangerCard: React.FC<RangerCardProps> = ({ card, onPress }) => {
         <CardCutout top={-2} rotate="180deg">
           <CardCutOutShape color={rangerColors[card.color]} />
         </CardCutout>
-        {card.attack && (
-          <>
-            {card.attack.fixed ? (
-              <FixedAttackContainer>
-                <Sword size={14} strokeWidth={2.5} />
-                <StatText color="black" fontSize={12} fontWeight="bold">
-                  {card.attack.value}
-                </StatText>
-              </FixedAttackContainer>
-            ) : (
-              <DiceContainer>
-                {card.attack.value < 0 ? (
-                  <Text>Special</Text>
-                ) : (
-                  [...Array(card.attack.value)].map((_, index) => (
-                    <DiceIcon key={index} size={16} color={rangerColors[card.color]} />
-                  ))
-                )}
-              </DiceContainer>
-            )}
-          </>
-        )}
+        {card.type === 'attack' &&
+          card.attack &&
+          card.attack.map((attack) => (
+            <>
+              {attack.fixed ? (
+                <FixedAttackContainer>
+                  <Sword size={14} strokeWidth={2.5} />
+                  <StatText color="black" fontSize={12} fontWeight="bold">
+                    {attack.value}
+                  </StatText>
+                </FixedAttackContainer>
+              ) : (
+                <DiceContainer>
+                  {attack.value < 0 ? (
+                    <Text>Special</Text>
+                  ) : (
+                    [...Array(attack.value)].map((_, index) => (
+                      <DiceIcon key={index} size={16} color={rangerColors[card.color]} />
+                    ))
+                  )}
+                </DiceContainer>
+              )}
+            </>
+          ))}
         <YStack flex={1} justifyContent="center">
-          <CardDescription>{card.text}</CardDescription>
+          {card.text.map((text) => (
+            <CardDescription>{text}</CardDescription>
+          ))}
         </YStack>
         <CardCutout bottom={-2}>
           <CardCutOutShape color={rangerColors[card.color]} />

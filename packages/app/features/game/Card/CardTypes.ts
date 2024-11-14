@@ -9,12 +9,16 @@ export type BaseRangerCard = Omit<RangerCard, 'owner' | 'team' | 'color'> &
 export type RangerCard = {
   name: string // Card name
   shields: number // Shield points
-  text: string // Description or additional effect text
+  text: string[] // Description or additional effect text
   owner: string // Ranger who owns the card (e.g., "Red Ranger")
   team: string
   color: string
   energy: number
   effects?: CardEffect[]
+  symbol?: {
+    effect: string
+    type: 'star' | 'gold' | 'chroma'
+  }
 } & (RangerCardColor | RangerCardColorWhite) &
   (RangerCardAttack | RangerCardReaction | RangerCardManeuver)
 
@@ -22,13 +26,13 @@ interface RangerCardColorWhite {
   color: 'white'
   subcolor: string
 }
-interface RangerCardColor {
+export interface RangerCardColor {
   color: 'red' | 'blue' | 'green' | 'yellow' | 'pink' | 'black' | 'silver' | 'gold' | 'shadow'
 }
 
 interface RangerCardAttack {
   type: 'attack'
-  attack: Attack
+  attack: Attack[]
 }
 interface RangerCardReaction {
   type: 'reaction'
