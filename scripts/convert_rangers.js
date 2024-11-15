@@ -126,6 +126,8 @@ function generateRangerFile(ranger) {
     'gold',
     'silver',
     'shadow',
+    'orange',
+    'purple',
   ]
 
   // Find where color appears in the ID
