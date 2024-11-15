@@ -20,7 +20,7 @@ export const GuardBadge = ({ size = 24 }: GuardBadgeProps) => {
 
   useEffect(() => {
     scale.value = withRepeat(
-      withSequence(withTiming(1.2, { duration: 1000 }), withTiming(1, { duration: 1000 })),
+      withSequence(withTiming(1.1, { duration: 500 }), withTiming(1, { duration: 500 })),
       -1,
       true
     )
@@ -40,20 +40,15 @@ export const GuardBadge = ({ size = 24 }: GuardBadgeProps) => {
       bottom={0}
       left={0}
       right={0}
-      backgroundColor="rgba(0, 0, 0, 0.5)"
+      backgroundColor="rgba(0, 0, 0, 0.2)"
       justifyContent="center"
       alignItems="center"
     >
-      <AnimatedStack
-        zIndex={100}
-        width={size}
-        height={size}
-        borderRadius={size / 2}
-        justifyContent="center"
-        alignItems="center"
-        style={animatedStyle}
-      >
-        <Shield size={size} strokeWidth={2} color="white" />
+      <AnimatedStack zIndex={100} justifyContent="center" alignItems="center" style={animatedStyle}>
+        <Stack position="absolute">
+          <Shield size={size} strokeWidth={2} color="white" />
+        </Stack>
+        <Shield size={size} strokeWidth={4} color="rgba(0,0,0,0.5)" />
       </AnimatedStack>
     </Stack>
   )
