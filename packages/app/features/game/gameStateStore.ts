@@ -201,7 +201,9 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
         set(({ rangerDecks }) => ({
           rangerDecks: {
             ...rangerDecks,
-            [position]: rangerDatabase.find((ranger) => ranger.id === rangerId && ranger.ability.name === ability),
+            [position]: rangerDatabase.find(
+              (ranger) => ranger.id === rangerId && ranger.ability.name === ability
+            ),
           },
         })),
       nextTurn: () =>

@@ -1,6 +1,8 @@
 import { Button, H1, YStack, Text, XStack } from '@my/ui'
 import { AlertCircle, Bug, Construction, Swords } from 'lucide-react'
 import { useLink } from 'solito/navigation'
+import useGameStore from '../game/gameStateStore'
+import { useEffect } from 'react'
 
 interface SectionHeaderProps {
   icon: React.ReactNode
@@ -20,6 +22,12 @@ export function HomeScreen() {
   const gameLinkProps = useLink({
     href: '/setup',
   })
+
+  const { resetRangers, resetGame } = useGameStore()
+  useEffect(() => {
+    resetGame()
+    resetRangers()
+  }, [])
 
   return (
     <YStack f={1} jc="center" ai="center" gap="$8" p="$4" bg="$background">
