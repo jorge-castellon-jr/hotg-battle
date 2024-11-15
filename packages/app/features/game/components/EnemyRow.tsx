@@ -2,6 +2,7 @@ import React from 'react'
 import { YStack, XStack, useWindowDimensions } from 'tamagui'
 import AnimatedEnemyCard from '../Card/AnimatedEnemyCard'
 import useGameStore, { GameStoreState } from '../gameStateStore'
+import { checkEnemyGuardStatus } from '../Enemy/enemyGaurdState'
 
 interface EnemyRowProps {
   enemies: GameStoreState['enemies']
@@ -36,6 +37,10 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
     setupEnemy('Putty Patrollers', 'Evil Green Ranger')
   }, [setupCompleted])
 
+  const isGuarded = (row: 'top' | 'bottom', index: number): boolean => {
+    return checkEnemyGuardStatus(enemies, row, index)
+  }
+
   return (
     <YStack padding="$1" gap="$2">
       {/* Back row */}
@@ -48,6 +53,7 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
             width={cardWidth}
             height={cardHeight}
             row="top"
+            isGuarded={isGuarded('top', index)}
           />
         ))}
       </XStack>
@@ -62,6 +68,7 @@ const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {
             width={cardWidth}
             height={cardHeight}
             row="bottom"
+            isGuarded={isGuarded('bottom', index)}
           />
         ))}
       </XStack>

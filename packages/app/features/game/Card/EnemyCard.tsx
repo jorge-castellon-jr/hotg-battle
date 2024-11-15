@@ -19,14 +19,17 @@ import CardCutOutShape from './HeaderShape'
 import { DiceIcon } from './RangerCard'
 import { DamageCounterBadge } from './DamageCounterBadge'
 import { enemyColors } from '../utils/colors'
+import { checkEnemyGuardStatus } from '../Enemy/enemyGaurdState'
+import { GuardBadge } from '../Enemy/GaurdBadge'
 
 interface EnemyCardProps {
   enemy?: EnemyCardType
   width?: number
   height?: number
+  isGuarded?: boolean
 }
 
-const EnemyCard = ({ enemy, width = 150, height = 200 }: EnemyCardProps) => {
+const EnemyCard = ({ enemy, width = 150, height = 200, isGuarded = false }: EnemyCardProps) => {
   // Calculate responsive sizes based on card dimensions
   const fontSize = {
     small: Math.min(10, Math.floor(width * 0.08)),
@@ -60,13 +63,18 @@ const EnemyCard = ({ enemy, width = 150, height = 200 }: EnemyCardProps) => {
     if (type === 'monster') return 'orange'
     return 'purple'
   }
-
+  
   return (
     <CardContainer width={width} height={height} pressStyle={{ scale: 0.98 }}>
       {/* Header */}
       <CardHeader height={20} pr="$1">
         <CardCutout bottom={-2}>
-          <CardCutOutShape top={-15} bottom={60} color={enemyColors[enemy.enemyType]} right={false} />
+          <CardCutOutShape
+            top={-15}
+            bottom={60}
+            color={enemyColors[enemy.enemyType]}
+            right={false}
+          />
         </CardCutout>
         <CardTitle fontSize={fontSize.small} justifyContent="flex-end" textAlign="right">
           {enemy.name}
@@ -85,7 +93,12 @@ const EnemyCard = ({ enemy, width = 150, height = 200 }: EnemyCardProps) => {
       {/* Main Content */}
       <ContentContainer>
         <CardCutout top={-2} rotate="180deg">
-          <CardCutOutShape top={-15} bottom={60} color={enemyColors[enemy.enemyType]} left={false} />
+          <CardCutOutShape
+            top={-15}
+            bottom={60}
+            color={enemyColors[enemy.enemyType]}
+            left={false}
+          />
         </CardCutout>
         <XStack gap="$2">
           {enemy.attacks &&
@@ -119,9 +132,15 @@ const EnemyCard = ({ enemy, width = 150, height = 200 }: EnemyCardProps) => {
         />
 
         <CardCutout bottom={-2}>
-          <CardCutOutShape top={-15} bottom={60} color={enemyColors[enemy.enemyType]} right={false} />
+          <CardCutOutShape
+            top={-15}
+            bottom={60}
+            color={enemyColors[enemy.enemyType]}
+            right={false}
+          />
         </CardCutout>
       </ContentContainer>
+      {isGuarded && <GuardBadge />}
     </CardContainer>
   )
 }

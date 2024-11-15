@@ -22,6 +22,7 @@ interface AnimatedEnemyCardProps {
   height: number
   index: number
   row: 'top' | 'bottom'
+  isGuarded?: boolean
 }
 
 const springConfig = {
@@ -41,6 +42,7 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({
   height,
   index,
   row,
+  isGuarded = false,
 }) => {
   const { gameState, showUI, selectedEnemy, setSelectedEnemy, selectedEnemyIndex } = useGameStore()
 
@@ -134,7 +136,7 @@ export const AnimatedEnemyCard: React.FC<AnimatedEnemyCardProps> = ({
         }
         style={animatedStyle}
       >
-        <EnemyCard enemy={enemy} width={width} height={height} />
+        <EnemyCard enemy={enemy} width={width} height={height} isGuarded={isGuarded} />
       </AnimatedStack>
 
       {/* Back of card */}
