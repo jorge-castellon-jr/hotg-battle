@@ -47,9 +47,12 @@ const GameSetupScreen = () => {
         overflow="hidden"
         borderColor="$borderColor"
       >
-        <Tabs.List disablePassBorderRadius="bottom">
+        <Tabs.List separator={<Separator vertical />} disablePassBorderRadius="bottom">
           <Tabs.Tab flex={1} flexBasis="100%" value="rangers">
             <SizableText fontFamily="$body">Rangers</SizableText>
+          </Tabs.Tab>
+          <Tabs.Tab flex={1} flexBasis="100%" value="zords">
+            <SizableText fontFamily="$body">Zords</SizableText>
           </Tabs.Tab>
           <Tabs.Tab flex={1} flexBasis="100%" value="enemies">
             <SizableText fontFamily="$body">Enemies</SizableText>
@@ -78,9 +81,19 @@ const GameSetupScreen = () => {
           </YStack>
         </Tabs.Content>
 
+        <Tabs.Content value="zords">
+          <YStack gap="$2" padding="$2">
+            <H5 textAlign="center" paddingVertical="$10">
+              Coming Soon
+            </H5>
+          </YStack>
+        </Tabs.Content>
+
         <Tabs.Content value="enemies">
           <YStack gap="$2" padding="$2">
-            <H5 textAlign='center' paddingVertical="$10">Coming Soon</H5>
+            <H5 textAlign="center" paddingVertical="$10">
+              Coming Soon
+            </H5>
             {/* Enemies Selection */}
             {/* <YStack gap="$4"> */}
             {/*   <Text fontSize="$6" fontWeight="bold"> */}
