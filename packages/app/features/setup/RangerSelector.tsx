@@ -7,7 +7,7 @@ import { rangerColors } from '../game/utils/colors'
 
 export const RangerSelector: React.FC<RangerSelectorProps> = ({ position, selected, onSelect }) => {
   const [open, setOpen] = useState(false)
-  const availableRangers = rangerDatabase
+  const [availableRangers] = useState(rangerDatabase)
 
   const textColor = (color: string) => (color === 'white' ? 'black' : 'white')
   return (
@@ -61,6 +61,9 @@ export const RangerSelector: React.FC<RangerSelectorProps> = ({ position, select
                 >
                   <Text textAlign="center" fontSize="$3" color={textColor(ranger.color)}>
                     {ranger.name}
+                  </Text>
+                  <Text textAlign="center" fontSize="$1" color={textColor(ranger.color)} textTransform='capitalize'>
+                    {ranger.team} {ranger.color}
                   </Text>
                   <Text
                     textAlign="center"
