@@ -13,15 +13,12 @@ interface EnergySheetProps {
 export const SettingsSheet: React.FC<EnergySheetProps> = ({ open, onOpenChange }) => {
   const { resetGame } = useGameStore()
 
-  const reset = (e) => {
+  const reset = () => {
     resetGame()
     onOpenChange(false)
   }
   const link = useLink({
     href: '/',
-  })
-  const bugLink = useLink({
-    href: 'https://forms.gle/s9R3Ln1X96xnh2Zo9',
   })
 
   return (
