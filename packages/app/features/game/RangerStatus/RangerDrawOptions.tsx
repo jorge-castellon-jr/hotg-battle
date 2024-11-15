@@ -10,10 +10,18 @@ export const RangerDrawSheet = ({
   open: boolean
   setOpen: (open: boolean) => void
 }) => {
-  const { playedCard, discardDeckCard, drawCard, exitBattleMode, moveCardToBottom } = useGameStore()
+  const {
+    playedCard,
+    discardDeckCard,
+    drawCard,
+    exitBattleMode,
+    moveCardToBottom,
+    exitDrawOptions,
+  } = useGameStore()
 
   function onOpenChange(open: boolean) {
     setOpen(open)
+    if (!open) exitDrawOptions
   }
   function draw() {
     drawCard()

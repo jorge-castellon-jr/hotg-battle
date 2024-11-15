@@ -108,6 +108,7 @@ export interface GameStoreActions {
   moveHandCardToBottom: () => void
   discardCard: () => void
   discardDeckCard: () => void
+  exitDrawOptions: () => void
 
   moveEnemyPosition: (direction: 'left' | 'right') => void
   markEnemyAsActivated: () => void
@@ -450,6 +451,7 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
           playedCardIndex: -1,
         })
       },
+      exitDrawOptions: () => set({...RESET, gameState: GameState.rangerInfo}),
 
       moveEnemyPosition: (direction) => {
         const state = get()
