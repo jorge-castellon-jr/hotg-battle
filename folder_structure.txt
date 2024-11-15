@@ -3,13 +3,20 @@ Directory structure for: /Users/jorgecastellonjr./Dev/personal/hotg-battle/packa
 
 📁 game
     📁 Battle
+        📄 AttackSequence.tsx
         📄 BattleOverlay.tsx
-        📄 BattleSequence.tsx
+        📄 DiceControls.tsx
+        📄 EnemyBattleSequence.tsx
+        📄 RangerBattleSequence.tsx
         📄 battleManager.ts
         📄 battleTypes.ts
+        📄 enemyBattleManager.ts
+        📄 enemyPositionManager.ts
+        📄 useBattleState.ts
     📁 Card
         📄 AnimatedEnemyCard.tsx
         📄 CardTypes.ts
+        📄 DamageCounterBadge.tsx
         📄 EnemyCard.tsx
         📄 HeaderShape.tsx
         📄 PlayCardModal.tsx
@@ -28,11 +35,136 @@ Directory structure for: /Users/jorgecastellonjr./Dev/personal/hotg-battle/packa
             📁 Monsters
                 📄 EvilGreenRanger.ts
                 📄 index.ts
+            📄 enemyDatabaseUtils.ts
         📁 MightyMorphin
-            📄 mmBlue.ts
-            📄 mmGreen.ts
-            📄 mmRed.ts
+            📄 index.ts
+            📄 mighty_morphin_black_i_zack_taylor.ts
+            📄 mighty_morphin_black_ii_adam_park.ts
+            📄 mighty_morphin_blue_billy_cranston.ts
+            📄 mighty_morphin_green_i_tommy_oliver.ts
+            📄 mighty_morphin_green_i_tommy_oliver_gift_of_the_dragon.ts
+            📄 mighty_morphin_green_i_tommy_oliver_legends_never_die.ts
+            📄 mighty_morphin_green_ii_matthew_cook.ts
+            📄 mighty_morphin_orange_eugene_skull_skullovitch.ts
+            📄 mighty_morphin_pink_i_kimberly_ann_hart.ts
+            📄 mighty_morphin_pink_ii_katherine_hillard.ts
+            📄 mighty_morphin_purple_farkas_bulk_bulkmeier.ts
+            📄 mighty_morphin_red_i_dragon_shield_jason_lee_scott.ts
+            📄 mighty_morphin_red_i_jason_lee_scott.ts
+            📄 mighty_morphin_red_ii_rocky_desantos.ts
+            📄 mighty_morphin_white_tommy_oliver.ts
+            📄 mighty_morphin_yellow_i_trini_kwan.ts
+            📄 mighty_morphin_yellow_ii_aisha_campbell.ts
+        📁 Teams
+            📄 BeastMorphersRangers.ts
+            📄 DinoChargeRangers.ts
+            📄 DinoFuryRangers.ts
+            📄 DinoThunderRangers.ts
+            📄 HyperforceRangers.ts
+            📄 JungleFuryRangers.ts
+            📄 LunarRangers.ts
+            📄 MightyMorphinRangers.ts
+            📄 NinjaSteelRangers.ts
+            📄 OmegaRangers.ts
+            📄 RangerOperatorSeriesRangers.ts
+            📄 Rangers.ts
+            📄 SpdRangers.ts
+            📄 SuperMegaforceRangers.ts
+            📄 SuperSamuraiRangers.ts
+            📄 TimeForceRangers.ts
+            📄 TurboRangers.ts
+            📄 ZeoRangers.ts
+        📁 Zeo
+            📄 index.ts
+            📄 zeo_gold_i_trey_of_triforia.ts
+            📄 zeo_gold_ii_jason_lee_scott.ts
+            📄 zeo_ranger_i_pink_katherine_hillard.ts
+            📄 zeo_ranger_ii_yellow_tanya_sloan.ts
+            📄 zeo_ranger_iii_blue_rocky_desantos.ts
+            📄 zeo_ranger_iv_green_adam_park.ts
+            📄 zeo_ranger_v_red_tommy_oliver.ts
         📄 cardDatabase.ts
+        📄 cardUtils.ts
+        📄 rangerDatabase.ts
+        📄 rangerUtils.ts
+        📁 rangers
+            📄 alpha_5_autonomous_support.ts
+            📄 alpha_5_loyal_robot.ts
+            📄 alpha_5_servant_of_zordon.ts
+            📄 alpha_5_supportive_ai.ts
+            📄 beast_morphers_blue_ravi_shaw.ts
+            📄 beast_morphers_gold_nate_silva.ts
+            📄 beast_morphers_red_devon_daniels.ts
+            📄 beast_morphers_silver_steel.ts
+            📄 beast_morphers_yellow_zoey_reeves.ts
+            📄 black_lion_warrior_jarrod.ts
+            📄 black_space_ranger_carlos_vallerte.ts
+            📄 blue_senturion_defender_of_intergalactic_law.ts
+            📄 blue_space_ranger_tj_johnson.ts
+            📄 crimson_thunder_ranger_hunter_bradley.ts
+            📄 dino_charge_dark_ranger_heckyl.ts
+            📄 dino_charge_purple_kendall_morgan.ts
+            📄 dino_charge_red_ranger_tyler_navarro.ts
+            📄 dino_fury_green_ranger_izzy_garcia.ts
+            📄 dino_thunder_black_tommy_oliver.ts
+            📄 dino_thunder_blue_ethan_james.ts
+            📄 dino_thunder_red_conner_mcknight.ts
+            📄 dino_thunder_white_trent_mercer.ts
+            📄 dino_thunder_yellow_kira_ford.ts
+            📄 doctor_k_genius_scientist.ts
+            📄 dragon_armor_ranger_trini_kwan.ts
+            📄 green_samurai_ranger_cameron_watanabe.ts
+            📄 hyperforce_black_vesper_vasquez.ts
+            📄 hyperforce_blue_eddie_banks_iii.ts
+            📄 hyperforce_green_joe_shih.ts
+            📄 hyperforce_pink_chloe_ashford.ts
+            📄 hyperforce_red_marvin_marv_shih.ts
+            📄 hyperforce_yellow_jack_thomas.ts
+            📄 jungle_fury_wolf_ranger_robert_rj_james.ts
+            📄 lunar_wolf_ranger_merrick_baliton.ts
+            📄 magna_defender_i_nameless_warrior.ts
+            📄 magna_defender_ii_mike_corbett.ts
+            📄 mercury_ranger_tyzonn.ts
+            📄 navy_thunder_ranger_blake_bradley.ts
+            📄 ninja_steel_gold_levi_weston.ts
+            📄 ninjor_creator_of_the_power_coins.ts
+            📄 omega_black_ranger_zack_taylor.ts
+            📄 omega_red_ranger_jason_lee_scott.ts
+            📄 omega_yellow_ranger_trini_kwan.ts
+            📄 phantom_ranger_i_morphinaut.ts
+            📄 phantom_ranger_ii_mysterious_hero.ts
+            📄 pink_galaxy_ranger_ii_karone.ts
+            📄 pink_space_ranger_cassie_chan.ts
+            📄 quantum_ranger_eric_myers.ts
+            📄 ranger_operator_series_black_dillon.ts
+            📄 ranger_operator_series_blue_flynn_mcallistair.ts
+            📄 ranger_operator_series_green_ziggy_grover.ts
+            📄 ranger_operator_series_red_scott_truman.ts
+            📄 ranger_operator_series_yellow_summer_landsdown.ts
+            📄 rebel_ranger_slayer_kimberly_ann_hart.ts
+            📄 red_space_ranger_andros.ts
+            📄 santa_claus_father_christmas.ts
+            📄 silver_space_ranger_zhane.ts
+            📄 spd_blue_ranger_schuyler_sky_tate.ts
+            📄 spd_green_ranger_bridge_carson.ts
+            📄 spd_pink_ranger_sydney_syd_drew.ts
+            📄 spd_red_ranger_jack_landors.ts
+            📄 spd_shadow_ranger_anubis_cruger.ts
+            📄 spd_yellow_ranger_elizabeth_z_delgado.ts
+            📄 super_megaforce_silver_orion.ts
+            📄 super_samurai_red_lauren_shiba.ts
+            📄 time_force_blue_lucas_kendall.ts
+            📄 time_force_green_trip.ts
+            📄 time_force_pink_jen_scotts.ts
+            📄 time_force_red_wes_collins.ts
+            📄 time_force_yellow_katie_walker.ts
+            📄 titanium_ranger_ryan_mitchell.ts
+            📄 turbo_red_i_tommy_oliver.ts
+            📄 violet_solar_ranger_ellarien.ts
+            📄 white_aquitar_ranger_delphine.ts
+            📄 white_mystic_ranger_udonna.ts
+            📄 wolf_warrior_leanbow.ts
+            📄 yellow_space_ranger_ashley_hammond.ts
     📁 Dice
         📄 DiceFace.tsx
         📄 DiceGrid.tsx
@@ -41,6 +173,9 @@ Directory structure for: /Users/jorgecastellonjr./Dev/personal/hotg-battle/packa
         📄 diceTypes.ts
         📄 useDiceRoll.ts
         📄 utils.ts
+    📁 Enemy
+        📄 DamageCounter.tsx
+        📄 enemyOperations.ts
     📄 GameTypes.ts
     📁 RangerHand
         📄 AnimatedCard.tsx
@@ -48,21 +183,37 @@ Directory structure for: /Users/jorgecastellonjr./Dev/personal/hotg-battle/packa
         📄 animations.ts
     📁 RangerStatus
         📄 AnimatedRangerStatus.tsx
+        📄 DiscardIcon.tsx
         📄 DrawButton.tsx
         📄 RangerCardSheet.tsx
+        📄 RangerDrawOptions.tsx
         📄 RangerSheetContent.tsx
         📄 RangerStatusCard.tsx
         📄 RangerStatusOverview.tsx
         📄 animations.ts
+    📁 Storage
+        📄 persistentStorage.ts
+        📄 storagefutils.ts
     📁 UI
+        📄 BaseSheet.tsx
         📄 DrawUI.tsx
         📄 EnemyOptionsUI.tsx
+        📄 EnergyCounter.tsx
+        📄 EnergySheet.tsx
         📄 RangerDeckOptionsUI.tsx
         📄 RangerInfoUI.tsx
         📄 RangerOptionsUI.tsx
+        📄 SettingsSheet.tsx
+        📄 SettingsUI.tsx
+        📄 SheetFooter.tsx
         📄 UiOverlay.tsx
+        📄 usePulseEffects.ts
+    📁 Zords
     📁 components
+        📄 AppContainer.tsx
+        📄 ClientOnly.tsx
         📄 EnemyRow.tsx
+        📄 LoadingScreen.tsx
         📄 TopBar.tsx
     📄 gameStateStore.ts
     📄 screen.tsx
@@ -70,8 +221,12 @@ Directory structure for: /Users/jorgecastellonjr./Dev/personal/hotg-battle/packa
         📄 cardOperations.ts
         📄 colors.ts
         📄 enemyActions.ts
-        📄 enemyOperations.ts
 📁 home
     📄 screen.tsx
+📁 setup
+    📄 EnemySelector.tsx
+    📄 RangerSelector.tsx
+    📄 screen.tsx
+    📄 setupTypes.ts
 📁 user
     📄 detail-screen.tsx
