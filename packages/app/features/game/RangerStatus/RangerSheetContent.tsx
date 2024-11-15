@@ -95,7 +95,7 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
     </Button>
   )
 
-  const textColor= ranger.color === 'white'? 'black':'white'
+  const textColor = ranger.color === 'white' ? 'black' : 'white'
 
   return (
     <YStack padding="$4" gap="$4">
@@ -175,7 +175,7 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
           Draw
         </Button>
       </XStack>
-"white"
+
       {/* Card Sheets */}
       <RangerCardSheet
         type="deck"

@@ -90,7 +90,8 @@ const deck: RangerCard[] = createDeck(
   {
     team: 'Mighty Morphin',
     owner: 'mighty_morphin_white_tommy_oliver',
-    color: 'white'
+    color: 'white',
+    subColor: 'gold'
   }
 );
 

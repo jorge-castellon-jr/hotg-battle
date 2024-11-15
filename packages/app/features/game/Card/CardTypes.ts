@@ -1,3 +1,5 @@
+import { RangerColorKey } from '../utils/colors'
+
 export type RangerCardType = 'attack' | 'maneuver' | 'reaction'
 
 export type Attack = {
@@ -12,7 +14,8 @@ export type RangerCard = {
   text: string[] // Description or additional effect text
   owner: string // Ranger who owns the card (e.g., "Red Ranger")
   team: string
-  color: string
+  color: RangerColorKey
+  subColor?: RangerColorKey
   energy: number
   effects?: CardEffect[]
   symbol?: {

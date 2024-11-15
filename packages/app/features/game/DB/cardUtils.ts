@@ -1,9 +1,11 @@
 import { BaseRangerCard, RangerCard } from '../Card/CardTypes'
+import { RangerColorKey } from '../utils/colors'
 
 interface CardOptions {
   team: string
   owner: string
-  color: string
+  color: RangerColorKey
+  subColor: RangerColorKey
 }
 
 export const createDeck = (

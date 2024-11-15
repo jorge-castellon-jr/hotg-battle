@@ -69,22 +69,28 @@ const RangerCard: React.FC<RangerCardProps> = ({ card, onPress }) => {
     <CardContainer onPress={onPress}>
       {/* Header */}
       <CardHeader>
-        <CardCutout bottom={-2}>
-          <CardCutOutShape color={rangerColors[card.color]} />
+        <CardCutout bottom={-1}>
+          <CardCutOutShape
+            color={rangerColors[card.color]}
+            subColor={card.subColor ? rangerColors[card.subColor] : undefined}
+          />
         </CardCutout>
         <CardTitle>{card.name}</CardTitle>
       </CardHeader>
 
       {/* Type Banner */}
-      <TypeBanner backgroundColor={rangerColors[card.color]}>
+      <TypeBanner backgroundColor={rangerColors[card.color]} zIndex={10}>
         <EnergyStats value={card.energy} textColor={textColor} />
         <TypeText color={textColor}>{card.type}</TypeText>
       </TypeBanner>
 
       {/* Main Content */}
       <ContentContainer>
-        <CardCutout top={-2} rotate="180deg">
-          <CardCutOutShape color={rangerColors[card.color]} />
+        <CardCutout top={-1} rotate="180deg">
+          <CardCutOutShape
+            color={rangerColors[card.color]}
+            subColor={card.subColor ? rangerColors[card.subColor] : undefined}
+          />
         </CardCutout>
         {card.type === 'attack' &&
           card.attack &&
@@ -116,7 +122,10 @@ const RangerCard: React.FC<RangerCardProps> = ({ card, onPress }) => {
           ))}
         </YStack>
         <CardCutout bottom={-2}>
-          <CardCutOutShape color={rangerColors[card.color]} />
+          <CardCutOutShape
+            color={rangerColors[card.color]}
+            subColor={card.subColor ? rangerColors[card.subColor] : undefined}
+          />
         </CardCutout>
       </ContentContainer>
 
