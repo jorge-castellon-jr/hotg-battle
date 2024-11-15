@@ -2,11 +2,12 @@ import React from 'react'
 import { Button, XStack, YStack } from 'tamagui'
 import { Minus, Plus } from 'lucide-react'
 import { DiceIcon } from '../Card/RangerCard'
+import { RangerColorKey, rangerColors } from '../utils/colors'
 
 interface BattleControlsProps {
   baseAttack: number
   currentAttack: number
-  rangerColor: string
+  rangerColor: RangerColorKey
   onAddDice: () => void
   onRemoveDice: () => void
   onStartRoll: () => void
@@ -40,7 +41,7 @@ export const BattleControls: React.FC<BattleControlsProps> = ({
         size={24}
         color={
           isBonus
-            ? `var(--c-${rangerColor}9Dark)`
+            ? rangerColors[rangerColor]
             : isActive
               ? `rgb(55, 65, 81)`
               : `rgba(55, 65, 81, 0.5)`

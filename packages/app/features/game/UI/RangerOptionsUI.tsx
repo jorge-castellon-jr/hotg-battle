@@ -1,4 +1,4 @@
-import { Button, Sheet, Stack, Text, XStack, YStack } from 'tamagui'
+import { Button, Stack, Text, XStack, YStack } from 'tamagui'
 import useGameStore, { GameState } from '../gameStateStore'
 import { useEffect, useState } from 'react'
 import RangerCard from '../Card/RangerCard'
@@ -18,8 +18,6 @@ export const RangerOptionsUI = () => {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    console.log('gameState changed', gameState)
-
     if (gameState === GameState.rangerCardOptions) {
       setOpen(true)
     } else setOpen(false)
@@ -29,6 +27,8 @@ export const RangerOptionsUI = () => {
     setOpen(open)
     if (!open) exitBattleMode()
   }
+
+  if (!playedCard) return null
 
   return (
     <BaseSheet open={open} onOpenChange={onOpenChange}>
@@ -44,7 +44,9 @@ export const RangerOptionsUI = () => {
 
         {/* Cards Grid */}
         <YStack gap="$4">
-          {playedCard?.attack && <Button onPress={enterBattleMode}>Attack</Button>}
+          {playedCard.type === 'attack' && playedCard.attack.length && (
+            <Button onPress={enterBattleMode}>Attack</Button>
+          )}
           <Stack gap="$2">
             <Text>Move to:</Text>
             <XStack gap="$4">
