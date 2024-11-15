@@ -1,5 +1,5 @@
-import { getDeck } from "../Card/deckUtils"
-import { Ranger } from "../GameTypes"
+import { getDeck } from '../Card/deckUtils'
+import { Ranger } from '../GameTypes'
 
 export const createRanger = (ranger: Pick<Ranger, 'id' | 'name' | 'ability'>): Ranger => {
   const cards = getDeck(ranger.id)
@@ -12,5 +12,6 @@ export const createRanger = (ranger: Pick<Ranger, 'id' | 'name' | 'ability'>): R
     energyUsed: false,
     abilityUsed: false,
     discard: [],
+    counters: 0,
   }
 }

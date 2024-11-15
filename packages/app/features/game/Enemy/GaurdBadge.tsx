@@ -48,7 +48,7 @@ export const GuardBadge = ({ size = 24 }: GuardBadgeProps) => {
         <Stack position="absolute">
           <Shield size={size} strokeWidth={2} color="white" />
         </Stack>
-        <Shield size={size} strokeWidth={4} color="rgba(0,0,0,0.5)" />
+        <Shield size={size} strokeWidth={4} color="rgba(0, 0, 0, 0.5)" />
       </AnimatedStack>
     </Stack>
   )

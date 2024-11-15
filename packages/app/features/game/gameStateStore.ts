@@ -20,7 +20,7 @@ import {
 } from './utils/cardOperations'
 import { toggleEnemyStatus, updateEnemyDamage } from './Enemy/enemyOperations'
 import { moveEnemy } from './Battle/enemyPositionManager'
-import { createJSONStorage, persist } from 'zustand/middleware'
+import { persist } from 'zustand/middleware'
 import { RangerPosition } from '../setup/setupTypes'
 import rangerDatabase from './DB/rangerDatabase'
 import safeStorage from './Storage/persistentStorage'
@@ -49,7 +49,7 @@ export interface GameStoreState {
   gameState: GameState
 
   rangerDecks: RangerDecks
-  selectedPosition: 'left' | 'middle' | 'right' | null
+  selectedPosition: RangerPosition | null
 
   enemyDeck: EnemyCard[] // Enemy card deck
 
@@ -109,6 +109,8 @@ export interface GameStoreActions {
   discardCard: () => void
   discardDeckCard: () => void
   exitDrawOptions: () => void
+
+  setRangerCounter: (counter: number, position: RangerPosition) => void
 
   moveEnemyPosition: (direction: 'left' | 'right') => void
   markEnemyAsActivated: () => void
@@ -451,7 +453,18 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
           playedCardIndex: -1,
         })
       },
-      exitDrawOptions: () => set({...RESET, gameState: GameState.rangerInfo}),
+      exitDrawOptions: () => set({ ...RESET, gameState: GameState.rangerInfo }),
+
+      setRangerCounter: (counter, position) =>
+        set(({ rangerDecks }) => ({
+          rangerDecks: {
+            ...rangerDecks,
+            [position]: {
+              ...rangerDecks[position],
+              counters: counter,
+            },
+          },
+        })),
 
       moveEnemyPosition: (direction) => {
         const state = get()

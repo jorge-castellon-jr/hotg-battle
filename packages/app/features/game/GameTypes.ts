@@ -16,6 +16,7 @@ export interface Ranger {
   abilityUsed: boolean
   discard: RangerCard[]
   color: RangerColorKey
+  counters: number
 }
 
 export interface RangerDecks {

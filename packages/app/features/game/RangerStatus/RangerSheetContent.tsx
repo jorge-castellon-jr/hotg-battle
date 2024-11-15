@@ -1,12 +1,13 @@
 import { useState } from 'react'
-import { Text, XStack, YStack, Button } from 'tamagui'
+import { Text, XStack, YStack, Button, Stack, SizableText } from 'tamagui'
 import { Ranger } from '../GameTypes'
-import { Layers, ZapOff, Zap, Star, StarOff } from 'lucide-react'
+import { Layers, ZapOff, Zap, Star, StarOff, Plus, Minus, Badge } from 'lucide-react'
 import { rangerColors } from '../utils/colors'
 import useGameStore from '../gameStateStore'
 import RangerCardSheet from './RangerCardSheet'
 import { RangerDrawSheet } from './RangerDrawOptions'
 import DiscardIcon from './DiscardIcon'
+import { RangerCounterSheet } from './RangerCounterOptions'
 
 interface RangerSheetContentProps {
   ranger: Ranger
@@ -17,6 +18,7 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
   const [showDeck, setShowDeck] = useState(false)
   const [showDiscard, setShowDiscard] = useState(false)
   const [showDraw, setShowDraw] = useState(false)
+  const [showCounter, setShowCounter] = useState(false)
   const toggleEnergy = useGameStore((state) => state.toggleEnergy)
   const toggleAbility = useGameStore((state) => state.toggleAbility)
 
@@ -106,6 +108,29 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
       </YStack>
       {/* Ability Section */}
       <YStack backgroundColor="$gray3" padding="$4" borderRadius="$4" gap="$2">
+        <XStack position="absolute" top="$2" right="$3" gap="$2" alignItems="center">
+          <Text fontSize="$2">Counter:</Text>
+          <XStack
+            backgroundColor="$color6"
+            width={30}
+            height={16}
+            justifyContent="center"
+            borderRadius="$2"
+            alignItems="center"
+          >
+            <Minus size={16} color={rangerColors[ranger.color]} />
+          </XStack>
+          <XStack
+            backgroundColor="$color6"
+            width={30}
+            height={16}
+            justifyContent="center"
+            borderRadius="$2"
+            alignItems="center"
+          >
+            <Plus size={16} color={rangerColors[ranger.color]} />
+          </XStack>
+        </XStack>
         <Text fontSize="$5" fontWeight="bold" color={rangerColors[ranger.color]}>
           {ranger.ability.name}
         </Text>
@@ -128,6 +153,14 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
           onPress={() => {
             if (!ranger.discard.length) return
             setShowDiscard(true)
+          }}
+        />
+        <CountBox
+          icon={Badge}
+          value={ranger.counters}
+          label="Counters"
+          onPress={() => {
+            setShowCounter(true)
           }}
         />
       </XStack>
@@ -182,6 +215,7 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
         color={ranger.color}
       />
       <RangerDrawSheet open={showDraw} setOpen={setShowDraw} />
+      <RangerCounterSheet open={showCounter} setOpen={setShowCounter} />
     </YStack>
   )
 }
