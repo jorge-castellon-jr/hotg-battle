@@ -95,42 +95,21 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
     </Button>
   )
 
+  const textColor= ranger.color === 'white'? 'black':'white'
+
   return (
     <YStack padding="$4" gap="$4">
       {/* Header with Ranger info */}
       <YStack backgroundColor={rangerColors[ranger.color]} padding="$4" borderRadius="$4" gap="$2">
-        <Text fontSize="$8" fontWeight="bold" color="white">
+        <Text fontSize="$8" fontWeight="bold" color={textColor}>
           {ranger.name}
         </Text>
-        <Text fontSize="$4" color="white" opacity={0.8} textTransform="capitalize">
+        <Text fontSize="$4" color={textColor} opacity={0.8} textTransform="capitalize">
           {ranger.team} {ranger.color} Ranger
         </Text>
       </YStack>
       {/* Ability Section */}
       <YStack backgroundColor="$gray3" padding="$4" borderRadius="$4" gap="$2">
-        <XStack position="absolute" top="$2" right="$3" gap="$2" alignItems="center">
-          <Text fontSize="$2">Counter:</Text>
-          <XStack
-            backgroundColor="$color6"
-            width={30}
-            height={16}
-            justifyContent="center"
-            borderRadius="$2"
-            alignItems="center"
-          >
-            <Minus size={16} color={rangerColors[ranger.color]} />
-          </XStack>
-          <XStack
-            backgroundColor="$color6"
-            width={30}
-            height={16}
-            justifyContent="center"
-            borderRadius="$2"
-            alignItems="center"
-          >
-            <Plus size={16} color={rangerColors[ranger.color]} />
-          </XStack>
-        </XStack>
         <Text fontSize="$5" fontWeight="bold" color={rangerColors[ranger.color]}>
           {ranger.ability.name}
         </Text>
@@ -189,14 +168,14 @@ const RangerSheetContent = ({ ranger, position }: RangerSheetContentProps) => {
           backgroundColor={rangerColors[ranger.color]}
           disabled={ranger.cards.length <= 0 || !setupCompleted}
           disabledStyle={{ opacity: 0.7 }}
-          color="white"
+          color={textColor}
           fontWeight="bold"
           onPress={openDraw}
         >
           Draw
         </Button>
       </XStack>
-
+"white"
       {/* Card Sheets */}
       <RangerCardSheet
         type="deck"

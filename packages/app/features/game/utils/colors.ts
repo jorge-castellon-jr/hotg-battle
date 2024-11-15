@@ -23,4 +23,5 @@ export const enemyColors = {
 
 // Utility type for type-safety when using color keys
 export type RangerColorKey = keyof typeof rangerColors
-export type EnemyColorKey = (typeof enemyColors)[keyof typeof enemyColors]
+export type RangerColorValue = (typeof rangerColors)[keyof typeof rangerColors]
+export type EnemyColorValue = (typeof enemyColors)[keyof typeof enemyColors]

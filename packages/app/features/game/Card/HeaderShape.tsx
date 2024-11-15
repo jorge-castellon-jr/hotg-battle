@@ -1,8 +1,8 @@
 import React from 'react'
-import { EnemyColorKey, RangerColorKey } from '../utils/colors'
+import { EnemyColorValue,  RangerColorValue } from '../utils/colors'
 
 interface HeaderShapeProps {
-  color: RangerColorKey | EnemyColorKey
+  color: RangerColorValue | EnemyColorValue
   top?: number
   bottom?: number
   left?: boolean

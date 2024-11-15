@@ -59,7 +59,6 @@ export const StatContainer = styled(XStack, {
 })
 
 export const StatText = styled(Text, {
-  color: 'white',
   fontSize: '$1',
 })
 
@@ -109,7 +108,6 @@ export const StatsContainer = styled(XStack, {
 
 export const StatValue = styled(Text, {
   fontSize: '$1',
-  color: 'white',
   fontWeight: 'bold',
 })
 
@@ -128,7 +126,6 @@ export const CardFooter = styled(XStack, {
 
 export const FooterText = styled(Text, {
   fontSize: 8,
-  color: 'white',
 })
 
 // New styles for dice container

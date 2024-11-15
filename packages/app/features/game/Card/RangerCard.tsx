@@ -26,17 +26,17 @@ interface DiceIconProps {
   color: string
 }
 
-const EnergyStats = memo(({ value }: { value: number }) => (
+const EnergyStats = memo(({ value, textColor }: { value: number; textColor: string }) => (
   <StatContainer position="absolute" left="$2">
-    <Zap size={10} color="white" strokeWidth={2.5} />
-    <StatText>{value >= 0 ? value : 'X'}</StatText>
+    <Zap size={10} color={textColor} strokeWidth={2.5} />
+    <StatText color={textColor}>{value >= 0 ? value : 'X'}</StatText>
   </StatContainer>
 ))
 
-const ShieldStats = memo(({ value }: { value: number }) => (
+const ShieldStats = memo(({ value, textColor }: { value: number; textColor: string }) => (
   <StatContainer>
-    <Shield size={10} color="white" strokeWidth={2.5} />
-    <StatText>{value}</StatText>
+    <Shield size={10} color={textColor} strokeWidth={2.5} />
+    <StatText color={textColor}>{value}</StatText>
   </StatContainer>
 ))
 
@@ -63,6 +63,8 @@ interface RangerCardProps {
 }
 
 const RangerCard: React.FC<RangerCardProps> = ({ card, onPress }) => {
+  const textColor = card.color === 'white' ? 'black' : 'white'
+
   return (
     <CardContainer onPress={onPress}>
       {/* Header */}
@@ -75,8 +77,8 @@ const RangerCard: React.FC<RangerCardProps> = ({ card, onPress }) => {
 
       {/* Type Banner */}
       <TypeBanner backgroundColor={rangerColors[card.color]}>
-        <EnergyStats value={card.energy} />
-        <TypeText>{card.type}</TypeText>
+        <EnergyStats value={card.energy} textColor={textColor} />
+        <TypeText color={textColor}>{card.type}</TypeText>
       </TypeBanner>
 
       {/* Main Content */}
@@ -120,11 +122,11 @@ const RangerCard: React.FC<RangerCardProps> = ({ card, onPress }) => {
 
       {/* Footer */}
       <CardFooter backgroundColor={rangerColors[card.color]}>
-        <FooterText>
-          {card.team} {card.owner}
+        <FooterText color={textColor}>
+          {card.team} {card.color}
         </FooterText>
         <FooterText>
-          <ShieldStats value={card.shields} />
+          <ShieldStats value={card.shields} textColor={textColor} />
         </FooterText>
       </CardFooter>
     </CardContainer>

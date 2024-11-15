@@ -12,6 +12,8 @@ interface RangerStatusCardProps {
 
 export const RangerStatusCard: React.FC<RangerStatusCardProps> = ({ ranger, onPress }) => {
   const [firstName] = ranger.name.split(' ')
+  const textColor= ranger.color === 'white'? 'black':'white'
+
   return (
     <YStack flex={1} flexBasis="100%" borderRadius="$4" onPress={onPress}>
       <YStack
@@ -22,31 +24,31 @@ export const RangerStatusCard: React.FC<RangerStatusCardProps> = ({ ranger, onPr
         gap="$1"
         zIndex={1}
       >
-        <Text color="white" fontSize="$3" fontWeight="bold" textAlign="center">
+        <Text color={textColor} fontSize="$3" fontWeight="bold" textAlign="center">
           {firstName}
         </Text>
 
         <XStack justifyContent="space-between">
           <XStack gap="$2">
             <XStack gap="$1">
-              <Layers color="white" size={16} />
-              <Text color="white" fontSize="$2">
+              <Layers color={textColor} size={16} />
+              <Text color={textColor} fontSize="$2">
                 {ranger.cards.length}
               </Text>
             </XStack>
             <XStack gap="$1">
-              <DiscardIcon color="white" size={16} />
-              <Text color="white" fontSize="$2">
+              <DiscardIcon color={textColor} size={16} />
+              <Text color={textColor} fontSize="$2">
                 {ranger.discard.length}
               </Text>
             </XStack>
           </XStack>
 
           <XStack gap="$1">
-            <Text color="white" fontSize="$2" opacity={ranger.energyUsed ? 0.5 : 1}>
+            <Text color={textColor} fontSize="$2" opacity={ranger.energyUsed ? 0.5 : 1}>
               {ranger.energyUsed ? <ZapOff size={16} /> : <Zap size={16} />}
             </Text>
-            <Text color="white" fontSize="$2" opacity={ranger.abilityUsed ? 0.5 : 1}>
+            <Text color={textColor} fontSize="$2" opacity={ranger.abilityUsed ? 0.5 : 1}>
               {ranger.abilityUsed ? <StarOff size={16} /> : <Star size={16} />}
             </Text>
           </XStack>
