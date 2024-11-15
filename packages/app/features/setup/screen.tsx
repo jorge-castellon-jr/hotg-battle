@@ -1,4 +1,4 @@
-import { YStack, XStack, Button, Text } from 'tamagui'
+import { YStack, XStack, Button, Text, Tabs, Separator, SizableText, H5, H2 } from 'tamagui'
 import { RangerSelector } from './RangerSelector'
 import useGameStore from '../game/gameStateStore'
 import { RangerPosition, SetupConfig } from './setupTypes'
@@ -39,50 +39,76 @@ const GameSetupScreen = () => {
         Game Setup
       </Text>
 
-      {/* Rangers Selection */}
-      <YStack gap="$4">
-        <Text fontSize="$6" fontWeight="bold">
-          Choose Your Rangers
-        </Text>
-        <YStack gap="$2" justifyContent="space-between">
-          <RangerSelector
-            position="First"
-            selected={rangerDecks.left}
-            onSelect={(ranger, ability) => handleRangerSelect('left', ranger, ability)}
-          />
-          <RangerSelector
-            position="Second"
-            selected={rangerDecks.middle}
-            onSelect={(ranger, ability) => handleRangerSelect('middle', ranger, ability)}
-          />
-          <RangerSelector
-            position="Last"
-            selected={rangerDecks.right}
-            onSelect={(ranger, ability) => handleRangerSelect('right', ranger, ability)}
-          />
-        </YStack>
-      </YStack>
+      <Tabs
+        defaultValue="rangers"
+        flexDirection="column"
+        borderRadius="$4"
+        borderWidth="$0.25"
+        overflow="hidden"
+        borderColor="$borderColor"
+      >
+        <Tabs.List disablePassBorderRadius="bottom">
+          <Tabs.Tab flex={1} flexBasis="100%" value="rangers">
+            <SizableText fontFamily="$body">Rangers</SizableText>
+          </Tabs.Tab>
+          <Tabs.Tab flex={1} flexBasis="100%" value="enemies">
+            <SizableText fontFamily="$body">Enemies</SizableText>
+          </Tabs.Tab>
+        </Tabs.List>
+        <Separator />
 
-      {/* Enemies Selection */}
-      {/* <YStack gap="$4"> */}
-      {/*   <Text fontSize="$6" fontWeight="bold"> */}
-      {/*     Choose Your Enemies */}
-      {/*   </Text> */}
-      {/*   <XStack gap="$2" justifyContent="space-between"> */}
-      {/*     <EnemySelector */}
-      {/*       type="monster" */}
-      {/*       selected={enemies.top} */}
-      {/*       onSelect={(enemy) => handleEnemySelect('monster', enemy)} */}
-      {/*     /> */}
-      {/*     <EnemySelector */}
-      {/*       type="foot" */}
-      {/*       selected={enemies.bottom} */}
-      {/*       onSelect={(enemy) => handleEnemySelect('footSoldiers', enemy)} */}
-      {/*     /> */}
-      {/*   </XStack> */}
-      {/* </YStack> */}
-      {/**/}
+        <Tabs.Content value="rangers">
+          {/* Rangers Selection */}
+          <YStack gap="$2" padding="$2">
+            <RangerSelector
+              position="First"
+              selected={rangerDecks.left}
+              onSelect={(ranger, ability) => handleRangerSelect('left', ranger, ability)}
+            />
+            <RangerSelector
+              position="Second"
+              selected={rangerDecks.middle}
+              onSelect={(ranger, ability) => handleRangerSelect('middle', ranger, ability)}
+            />
+            <RangerSelector
+              position="Last"
+              selected={rangerDecks.right}
+              onSelect={(ranger, ability) => handleRangerSelect('right', ranger, ability)}
+            />
+          </YStack>
+        </Tabs.Content>
+
+        <Tabs.Content value="enemies">
+          <YStack gap="$2" padding="$2">
+            <H5 textAlign='center' paddingVertical="$10">Coming Soon</H5>
+            {/* Enemies Selection */}
+            {/* <YStack gap="$4"> */}
+            {/*   <Text fontSize="$6" fontWeight="bold"> */}
+            {/*     Choose Your Enemies */}
+            {/*   </Text> */}
+            {/*   <XStack gap="$2" justifyContent="space-between"> */}
+            {/*     <EnemySelector */}
+            {/*       type="monster" */}
+            {/*       selected={enemies.top} */}
+            {/*       onSelect={(enemy) => handleEnemySelect('monster', enemy)} */}
+            {/*     /> */}
+            {/*     <EnemySelector */}
+            {/*       type="foot" */}
+            {/*       selected={enemies.bottom} */}
+            {/*       onSelect={(enemy) => handleEnemySelect('footSoldiers', enemy)} */}
+            {/*     /> */}
+            {/*   </XStack> */}
+            {/* </YStack> */}
+            {/**/}
+          </YStack>
+        </Tabs.Content>
+      </Tabs>
+
       <Button
+        position="absolute"
+        bottom="$4"
+        left="$4"
+        right="$4"
         backgroundColor="$blue9"
         color="white"
         size="$6"

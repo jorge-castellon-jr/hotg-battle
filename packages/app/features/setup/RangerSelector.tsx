@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {  YStack, XStack, ScrollView, Text } from 'tamagui'
+import { YStack, XStack, ScrollView, Text, Separator } from 'tamagui'
 import { RangerSelectorProps } from './setupTypes'
 import { BaseSheet } from '../game/UI/BaseSheet'
 import rangerDatabase from '../game/DB/rangerDatabase'
@@ -11,7 +11,7 @@ export const RangerSelector: React.FC<RangerSelectorProps> = ({ position, select
 
   const textColor = (color: string) => (color === 'white' ? 'black' : 'white')
   return (
-    <YStack flex={1} paddingVertical="$2">
+    <>
       <YStack
         onPress={() => setOpen(true)}
         padding="$4"
@@ -26,6 +26,15 @@ export const RangerSelector: React.FC<RangerSelectorProps> = ({ position, select
             <Text
               textAlign="center"
               fontSize="$3"
+              color={textColor(selected.color)}
+              textTransform="capitalize"
+            >
+              {selected.team} {selected.color}
+            </Text>
+            <Separator borderColor="white" marginVertical="$2" />
+            <Text
+              textAlign="center"
+              fontSize="$3"
               fontWeight="bold"
               color={textColor(selected.color)}
             >
@@ -36,7 +45,6 @@ export const RangerSelector: React.FC<RangerSelectorProps> = ({ position, select
           <Text textAlign="center">Select {position} Ranger</Text>
         )}
       </YStack>
-
       <BaseSheet open={open} onOpenChange={setOpen} disableDrag>
         <YStack flex={1} padding="$2">
           {/* Header */}
@@ -62,7 +70,12 @@ export const RangerSelector: React.FC<RangerSelectorProps> = ({ position, select
                   <Text textAlign="center" fontSize="$3" color={textColor(ranger.color)}>
                     {ranger.name}
                   </Text>
-                  <Text textAlign="center" fontSize="$1" color={textColor(ranger.color)} textTransform='capitalize'>
+                  <Text
+                    textAlign="center"
+                    fontSize="$1"
+                    color={textColor(ranger.color)}
+                    textTransform="capitalize"
+                  >
                     {ranger.team} {ranger.color}
                   </Text>
                   <Text
@@ -79,6 +92,6 @@ export const RangerSelector: React.FC<RangerSelectorProps> = ({ position, select
           </ScrollView>
         </YStack>
       </BaseSheet>
-    </YStack>
+    </>
   )
 }
