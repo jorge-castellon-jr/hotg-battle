@@ -7,6 +7,8 @@ export const rangerColors = {
   pink: '#D53F8C', // A deep pink
   black: '#2D3748', // A soft black
   white: '#F7FAFC', // An off-white
+  orange: '#FF8C00', // A more vibrant dark orange
+  purple: '#9F2BF0', // A more vibrant purple
   gold: '#B8860B', // Deep gold (darker darkgoldenrod)
   silver: '#A0AEC0', // Metallic silver
   shadow: '#4A9AB0', // Metallic blue/teal for Shadow Ranger

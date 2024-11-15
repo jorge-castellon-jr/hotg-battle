@@ -95,7 +95,7 @@ const deck: RangerCard[] = createDeck(
   {
     team: 'Mighty Morphin Purple Farkas Bulk',
     owner: 'mighty_morphin_purple_farkas_bulk_bulkmeier',
-    color: 'unknown'
+    color: 'purple'
   }
 );
 

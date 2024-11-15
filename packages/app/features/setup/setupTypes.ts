@@ -15,7 +15,7 @@ export interface SetupConfig {
 export interface RangerSelectorProps {
   position: string
   selected: Ranger | null
-  onSelect: (rangerId: string) => void
+  onSelect: (rangerId: string, ability: string) => void
 }
 
 export interface EnemySelectorProps {

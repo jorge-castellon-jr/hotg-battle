@@ -84,7 +84,7 @@ export interface GameStoreActions {
   hideUI: () => void
 
   nextTurn: () => void
-  setRanger: (position: RangerPosition, rangerId: string) => void
+  setRanger: (position: RangerPosition, rangerId: string, ability: string) => void
 
   setupEnemy: (foot: string, monster?: string) => void
 
@@ -197,11 +197,11 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
       showUI: (gameState) => set({ gameState }),
       hideUI: () => set({ gameState: GameState.default }),
 
-      setRanger: (position, rangerId) =>
+      setRanger: (position, rangerId, ability) =>
         set(({ rangerDecks }) => ({
           rangerDecks: {
             ...rangerDecks,
-            [position]: rangerDatabase.find((ranger) => ranger.id === rangerId),
+            [position]: rangerDatabase.find((ranger) => ranger.id === rangerId && ranger.ability.name === ability),
           },
         })),
       nextTurn: () =>

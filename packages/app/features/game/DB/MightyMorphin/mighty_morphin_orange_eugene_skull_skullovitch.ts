@@ -95,7 +95,7 @@ const deck: RangerCard[] = createDeck(
   {
     team: 'Mighty Morphin Orange Eugene Skull',
     owner: 'mighty_morphin_orange_eugene_skull_skullovitch',
-    color: 'unknown'
+    color: 'orange'
   }
 );
 

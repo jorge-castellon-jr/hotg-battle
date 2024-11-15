@@ -1,7 +1,7 @@
 import { Ranger } from '../GameTypes'
-import MightyMorphinTeam from './MightyMorphin/rangers'
+import MightyMorphinRangers from './Teams/MightyMorphinRangers'
 
 export default [
-  ...MightyMorphinTeam,
+  ...MightyMorphinRangers,
   // more teams later
 ] as Ranger[]

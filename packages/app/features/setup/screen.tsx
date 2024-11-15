@@ -8,8 +8,8 @@ import { useEffect } from 'react'
 const GameSetupScreen = () => {
   const { enemies, setRanger, rangerDecks, resetGame, resetRangers } = useGameStore()
 
-  const handleRangerSelect = (position: RangerPosition, rangerId: string) => {
-    setRanger(position, rangerId)
+  const handleRangerSelect = (position: RangerPosition, rangerId: string, ability: string) => {
+    setRanger(position, rangerId, ability)
   }
 
   const handleEnemySelect = (type: 'footSoldiers' | 'monster', enemyName: string) => {
@@ -48,17 +48,17 @@ const GameSetupScreen = () => {
           <RangerSelector
             position="First"
             selected={rangerDecks.left}
-            onSelect={(ranger) => handleRangerSelect('left', ranger)}
+            onSelect={(ranger, ability) => handleRangerSelect('left', ranger, ability)}
           />
           <RangerSelector
             position="Second"
             selected={rangerDecks.middle}
-            onSelect={(ranger) => handleRangerSelect('middle', ranger)}
+            onSelect={(ranger, ability) => handleRangerSelect('middle', ranger, ability)}
           />
           <RangerSelector
             position="Last"
             selected={rangerDecks.right}
-            onSelect={(ranger) => handleRangerSelect('right', ranger)}
+            onSelect={(ranger, ability) => handleRangerSelect('right', ranger, ability)}
           />
         </YStack>
       </YStack>
