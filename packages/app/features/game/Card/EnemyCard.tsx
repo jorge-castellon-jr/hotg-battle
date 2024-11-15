@@ -62,7 +62,7 @@ const EnemyCard = ({ enemy, width = 150, height = 200, isGuarded = false }: Enem
     if (type === 'monster') return 'orange'
     return 'purple'
   }
-  
+
   return (
     <CardContainer width={width} height={height} pressStyle={{ scale: 0.98 }}>
       {/* Header */}
@@ -139,7 +139,7 @@ const EnemyCard = ({ enemy, width = 150, height = 200, isGuarded = false }: Enem
           />
         </CardCutout>
       </ContentContainer>
-      {isGuarded && <GuardBadge />}
+      {isGuarded && enemy.type !== 'guard' && <GuardBadge />}
     </CardContainer>
   )
 }
