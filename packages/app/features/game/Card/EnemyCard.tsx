@@ -19,7 +19,6 @@ import CardCutOutShape from './HeaderShape'
 import { DiceIcon } from './RangerCard'
 import { DamageCounterBadge } from './DamageCounterBadge'
 import { enemyColors } from '../utils/colors'
-import { checkEnemyGuardStatus } from '../Enemy/enemyGaurdState'
 import { GuardBadge } from '../Enemy/GaurdBadge'
 
 interface EnemyCardProps {

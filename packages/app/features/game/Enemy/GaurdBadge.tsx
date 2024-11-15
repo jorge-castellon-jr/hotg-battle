@@ -34,21 +34,27 @@ export const GuardBadge = ({ size = 24 }: GuardBadgeProps) => {
   )
 
   return (
-
-    <AnimatedStack
+    <Stack
       position="absolute"
-      bottom="$2"
-      right="$2"
-      zIndex={100}
-      width={size}
-      height={size}
-      borderRadius={size / 2}
-      backgroundColor="rgba(0, 0, 0, 0.7)"
+      top={0}
+      bottom={0}
+      left={0}
+      right={0}
+      backgroundColor="rgba(0, 0, 0, 0.5)"
       justifyContent="center"
       alignItems="center"
-      style={animatedStyle}
     >
-      <Shield size={size * 0.6} color="white" />
-    </AnimatedStack>
+      <AnimatedStack
+        zIndex={100}
+        width={size}
+        height={size}
+        borderRadius={size / 2}
+        justifyContent="center"
+        alignItems="center"
+        style={animatedStyle}
+      >
+        <Shield size={size} strokeWidth={2} color="white" />
+      </AnimatedStack>
+    </Stack>
   )
 }
