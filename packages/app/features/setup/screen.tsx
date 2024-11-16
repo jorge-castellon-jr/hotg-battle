@@ -17,7 +17,9 @@ const GameSetupScreen = () => {
   }
 
   const handleEnemySelectTop = (enemy: Enemy) => {
-    Array(4).fill(null).map((_, index) => setEnemy(enemy, index, 'top'))
+    Array(4)
+      .fill(null)
+      .map((_, index) => setEnemy(enemy, index, 'top'))
   }
   const handleEnemyRemoveTop = (index: number) => {
     removeEnemy(index, 'top')
@@ -27,7 +29,13 @@ const GameSetupScreen = () => {
     setEnemy(enemy, index, 'bottom')
   }
 
-  const canStartGame = Object.values(rangerDecks).every((r) => r !== null)
+  const currentRangers = Object.values(rangerDecks)
+  const rangersNeeded = 3 - currentRangers.filter(Boolean).length
+  const hasAllRangers = currentRangers.every((r) => !!r)
+
+  const hasSomeEnemies = enemies.top.some((e) => !!e) || enemies.bottom.some((e) => !!e)
+
+  const canStartGame = hasAllRangers && hasSomeEnemies
 
   const gameLinkProps = useLink({
     href: '/game',
@@ -68,6 +76,9 @@ const GameSetupScreen = () => {
         <Tabs.Content value="rangers">
           {/* Rangers Selection */}
           <YStack gap="$2" padding="$2">
+            {!hasAllRangers && (
+              <H5 textAlign="center">You Need {rangersNeeded} Rangers to start</H5>
+            )}
             <RangerSelector
               position="First"
               selected={rangerDecks.left}
@@ -96,6 +107,7 @@ const GameSetupScreen = () => {
 
         <Tabs.Content value="enemies">
           <YStack gap="$2" padding="$2">
+            <H5 textAlign="center">You need at least 1 enemy to start</H5>
             {/* Enemies Selection */}
             <MonsterSelector
               selected={enemies.top}
@@ -108,20 +120,26 @@ const GameSetupScreen = () => {
         </Tabs.Content>
       </Tabs>
 
-      <Button
-        position="absolute"
-        bottom="$4"
-        left="$4"
-        right="$4"
-        backgroundColor="$blue9"
-        color="white"
-        size="$6"
-        disabled={!canStartGame}
-        opacity={canStartGame ? 1 : 0.5}
-        {...gameLinkProps}
-      >
-        Start Game
-      </Button>
+      <YStack position="absolute" bottom={0} left={0} right={0} padding="$4">
+        {(!hasAllRangers || !hasSomeEnemies) && (
+          <H5 textAlign="center" color="$red9">
+            You still need{' '}
+            {[!hasAllRangers && 'rangers', !hasSomeEnemies && 'enemies']
+              .filter(Boolean)
+              .join(' and ')}
+          </H5>
+        )}
+        <Button
+          backgroundColor="$blue9"
+          color="white"
+          size="$6"
+          disabled={!canStartGame}
+          opacity={canStartGame ? 1 : 0.5}
+          {...gameLinkProps}
+        >
+          Start Game
+        </Button>
+      </YStack>
     </YStack>
   )
 }
