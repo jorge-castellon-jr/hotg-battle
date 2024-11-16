@@ -95,7 +95,7 @@ const deck: RangerCard[] = createDeck(
   {
     team: 'Wolf Warrior',
     owner: 'wolf_warrior_leanbow',
-    color: 'unknown'
+    color: 'red'
   }
 );
 

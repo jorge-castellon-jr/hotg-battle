@@ -75,7 +75,7 @@ const deck: RangerCard[] = createDeck(
   {
     team: 'Alpha 5 Servant Of',
     owner: 'alpha_5_servant_of_zordon',
-    color: 'unknown'
+    color: 'blue'
   }
 );
 

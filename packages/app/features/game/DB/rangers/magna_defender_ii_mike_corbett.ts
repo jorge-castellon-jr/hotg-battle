@@ -95,7 +95,7 @@ const deck: RangerCard[] = createDeck(
   {
     team: 'Magna Defender Ii Mike',
     owner: 'magna_defender_ii_mike_corbett',
-    color: 'unknown'
+    color: 'black'
   }
 );
 

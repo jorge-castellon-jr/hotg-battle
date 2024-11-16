@@ -1,7 +1,7 @@
-import { BaseRangerCard, RangerCard } from '../../Card/CardTypes';
-import { createDeck } from '../cardUtils';
+import { BaseRangerCard, RangerCard } from '../../Card/CardTypes'
+import { createDeck } from '../cardUtils'
 
-const card: Record<string, BaseRangerCard> = { 
+const card: Record<string, BaseRangerCard> = {
   dragonRage: {
     name: 'Dragon Rage',
     type: 'maneuver',
@@ -9,7 +9,7 @@ const card: Record<string, BaseRangerCard> = {
       'Place the Dragon Claw token on an enemy card of your choice. Deal 1 ¤ to that card. If this effect defeats a card, you may spend 1 energy to repeat this effect.',
     ],
     energy: 0,
-    shields: 1, 
+    shields: 1,
   },
 
   jetRush: {
@@ -19,12 +19,12 @@ const card: Record<string, BaseRangerCard> = {
       'After you resolve this attack, place the Dragon Claw token on an enemy card of your choice.',
     ],
     energy: 1,
-    shields: 1, 
+    shields: 1,
     attack: [
       {
-        value: 3, 
-      }, 
-    ], 
+        value: 3,
+      },
+    ],
   },
 
   guardCrush: {
@@ -34,22 +34,20 @@ const card: Record<string, BaseRangerCard> = {
       'Play this card when the enemy card with the Dragon Claw token resolves. Deal 1 ¤ to that card and reduce all damage it deals by 1.',
     ],
     energy: 1,
-    shields: 3, 
+    shields: 3,
   },
 
   vorpalClaws: {
     name: 'Vorpal Claws',
     type: 'attack',
-    text: [
-      'Add 1 die to this attack if the target has the Dragon Claw token.',
-    ],
+    text: ['Add 1 die to this attack if the target has the Dragon Claw token.'],
     energy: 0,
-    shields: 3, 
+    shields: 3,
     attack: [
       {
-        value: 2, 
-      }, 
-    ], 
+        value: 2,
+      },
+    ],
   },
 
   energyHarvest: {
@@ -59,7 +57,7 @@ const card: Record<string, BaseRangerCard> = {
       'Gain 1 energy for each hit token on the enemy card with the Dragon Claw token. Another Ranger may immediately play 1 card.',
     ],
     energy: 0,
-    shields: 1, 
+    shields: 1,
   },
 
   havocLaser: {
@@ -69,8 +67,8 @@ const card: Record<string, BaseRangerCard> = {
       'Immediately defeat the enemy with the Dragon Claw token. Then shuffle your hand into your deck.',
     ],
     energy: 3,
-    shields: 3, 
-  }
+    shields: 3,
+  },
 }
 
 const deck: RangerCard[] = createDeck(
@@ -80,13 +78,14 @@ const deck: RangerCard[] = createDeck(
     [card.guardCrush, 2],
     [card.vorpalClaws, 2],
     [card.energyHarvest, 1],
-    [card.havocLaser, 1] 
+    [card.havocLaser, 1],
   ],
   {
     team: 'Dragon Armor Ranger Trini',
     owner: 'dragon_armor_ranger_trini_kwan',
-    color: 'unknown'
+    color: 'black',
+    subColor: 'yellow',
   }
-);
+)
 
-export default deck;
+export default deck

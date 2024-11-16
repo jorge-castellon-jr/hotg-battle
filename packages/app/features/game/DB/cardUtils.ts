@@ -8,7 +8,7 @@ type RangerCardOptions = {
 type EnemyCardOptions = {
   team: string
   owner: string
-} & ({ color: 'white'; subColor: RangerColorKey } | { color: RangerColorKey })
+} & ({ color: 'white'|'black'|'yellow'; subColor: RangerColorKey } | { color: RangerColorKey })
 
 type CardOptions = RangerCardOptions | EnemyCardOptions
 

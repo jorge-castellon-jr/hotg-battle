@@ -95,7 +95,7 @@ const deck: RangerCard[] = createDeck(
   {
     team: 'Mercury Ranger',
     owner: 'mercury_ranger_tyzonn',
-    color: 'unknown'
+    color: 'silver'
   }
 );
 

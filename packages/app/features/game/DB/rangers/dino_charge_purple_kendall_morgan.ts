@@ -100,7 +100,7 @@ const deck: RangerCard[] = createDeck(
   {
     team: 'Dino Charge Purple Kendall',
     owner: 'dino_charge_purple_kendall_morgan',
-    color: 'unknown'
+    color: 'purple'
   }
 );
 

@@ -90,7 +90,7 @@ const deck: RangerCard[] = createDeck(
   {
     team: 'Ninjor Creator Of The Power',
     owner: 'ninjor_creator_of_the_power_coins',
-    color: 'unknown'
+    color: 'blue'
   }
 );
 

@@ -95,7 +95,7 @@ const deck: RangerCard[] = createDeck(
   {
     team: 'Lunar Wolf Ranger Merrick',
     owner: 'lunar_wolf_ranger_merrick_baliton',
-    color: 'unknown'
+    color: 'silver'
   }
 );
 

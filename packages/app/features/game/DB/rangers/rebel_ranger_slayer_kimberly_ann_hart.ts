@@ -96,7 +96,7 @@ const deck: RangerCard[] = createDeck(
   {
     team: 'Rebel Ranger Slayer Kimberly Ann',
     owner: 'rebel_ranger_slayer_kimberly_ann_hart',
-    color: 'unknown'
+    color: 'pink'
   }
 );
 

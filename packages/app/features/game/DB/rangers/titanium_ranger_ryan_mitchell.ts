@@ -104,7 +104,7 @@ const deck: RangerCard[] = createDeck(
   {
     team: 'Titanium Ranger Ryan',
     owner: 'titanium_ranger_ryan_mitchell',
-    color: 'unknown'
+    color: 'silver'
   }
 );
 

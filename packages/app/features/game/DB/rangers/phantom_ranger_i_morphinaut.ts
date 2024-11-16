@@ -1,7 +1,7 @@
-import { BaseRangerCard, RangerCard } from '../../Card/CardTypes';
-import { createDeck } from '../cardUtils';
+import { BaseRangerCard, RangerCard } from '../../Card/CardTypes'
+import { createDeck } from '../cardUtils'
 
-const card: Record<string, BaseRangerCard> = { 
+const card: Record<string, BaseRangerCard> = {
   specterBarrage: {
     name: 'Specter Barrage',
     type: 'attack',
@@ -9,31 +9,29 @@ const card: Record<string, BaseRangerCard> = {
       'If the target of this attack has the GUARD keyword, you may deal any amount of ¤ from this attack to an enemy card adjacent to the target instead.',
     ],
     energy: 1,
-    shields: 2, 
+    shields: 2,
     attack: [
       {
-        value: 3, 
-      }, 
-    ], 
+        value: 3,
+      },
+    ],
   },
 
   phantomLaser: {
     name: 'Phantom Laser',
     type: 'attack',
-    text: [
-      'You may ignore the GUARD keyword when choosing a target for this attack.',
-    ],
+    text: ['You may ignore the GUARD keyword when choosing a target for this attack.'],
     energy: 1,
-    shields: 3, 
+    shields: 3,
     attack: [
       {
-        value: 2, 
-      }, 
+        value: 2,
+      },
       {
-        value: 1, 
-        fixed: true, 
-      }, 
-    ], 
+        value: 1,
+        fixed: true,
+      },
+    ],
   },
 
   invisibleHero: {
@@ -43,7 +41,7 @@ const card: Record<string, BaseRangerCard> = {
       'Play this card when any Ranger suffers damage to reduce that damage by 2. If your figure is on your character card, you may play this card in any battle, regardless of location.',
     ],
     energy: 0,
-    shields: 1, 
+    shields: 1,
   },
 
   wraithStrike: {
@@ -53,12 +51,12 @@ const card: Record<string, BaseRangerCard> = {
       'If your figure is on your character card, you may play this card in any battle, regardless of location.',
     ],
     energy: 0,
-    shields: 2, 
+    shields: 2,
     attack: [
       {
-        value: 2, 
-      }, 
-    ], 
+        value: 2,
+      },
+    ],
   },
 
   phantomShot: {
@@ -68,12 +66,12 @@ const card: Record<string, BaseRangerCard> = {
       'After you resolve this attack, you may set this card aside. If you do, return it to your hand when your figure leaves a location.',
     ],
     energy: 1,
-    shields: 2, 
+    shields: 2,
     attack: [
       {
-        value: 3, 
-      }, 
-    ], 
+        value: 3,
+      },
+    ],
   },
 
   edgeOfTheGrid: {
@@ -83,17 +81,15 @@ const card: Record<string, BaseRangerCard> = {
       'Play this card when any Ranger performs an maneuver. Draw up to 3 cards. Choose an equal number of cards from your discard pile and shuffle them back into your deck.',
     ],
     energy: 1,
-    shields: 3, 
+    shields: 3,
   },
 
   phantomCloak: {
     name: 'Phantom Cloak',
     type: 'maneuver',
-    text: [
-      'Gain 1 energy. Move your figure from its current location to your character card.',
-    ],
+    text: ['Gain 1 energy. Move your figure from its current location to your character card.'],
     energy: 0,
-    shields: 1, 
+    shields: 1,
   },
 
   powerRubyBlast: {
@@ -103,8 +99,8 @@ const card: Record<string, BaseRangerCard> = {
       'Deal 2 ¤ each to a number of enemy cards equal to the amount of energy spent to play this card.',
     ],
     energy: 0,
-    shields: 3, 
-  }
+    shields: 3,
+  },
 }
 
 const deck: RangerCard[] = createDeck(
@@ -116,13 +112,14 @@ const deck: RangerCard[] = createDeck(
     [card.phantomShot, 2],
     [card.edgeOfTheGrid, 2],
     [card.phantomCloak, 1],
-    [card.powerRubyBlast, 1] 
+    [card.powerRubyBlast, 1],
   ],
   {
     team: 'Phantom Ranger I',
     owner: 'phantom_ranger_i_morphinaut',
-    color: 'unknown'
+    color: 'white',
+    subColor: 'gold',
   }
-);
+)
 
-export default deck;
+export default deck

@@ -95,7 +95,7 @@ const deck: RangerCard[] = createDeck(
   {
     team: 'Jungle Fury Wolf Ranger Robert Rj',
     owner: 'jungle_fury_wolf_ranger_robert_rj_james',
-    color: 'unknown'
+    color: 'purple'
   }
 );
 

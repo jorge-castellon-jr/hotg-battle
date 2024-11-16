@@ -116,7 +116,7 @@ const deck: RangerCard[] = createDeck(
   {
     team: 'Magna Defender I Nameless',
     owner: 'magna_defender_i_nameless_warrior',
-    color: 'unknown'
+    color: 'black'
   }
 );
 

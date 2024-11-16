@@ -91,7 +91,7 @@ const deck: RangerCard[] = createDeck(
   {
     team: 'Santa Claus Father',
     owner: 'santa_claus_father_christmas',
-    color: 'unknown'
+    color: 'red'
   }
 );
 

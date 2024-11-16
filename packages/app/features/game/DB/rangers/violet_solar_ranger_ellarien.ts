@@ -90,7 +90,7 @@ const deck: RangerCard[] = createDeck(
   {
     team: 'Violet Solar Ranger',
     owner: 'violet_solar_ranger_ellarien',
-    color: 'unknown'
+    color: 'purple'
   }
 );
 

@@ -94,7 +94,7 @@ const deck: RangerCard[] = createDeck(
   {
     team: 'Phantom Ranger Ii Mysterious',
     owner: 'phantom_ranger_ii_mysterious_hero',
-    color: 'unknown'
+    color: 'black'
   }
 );
 
