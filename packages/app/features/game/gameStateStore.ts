@@ -61,7 +61,7 @@ export interface GameStoreState {
 
   enemies: {
     top: Enemy[]
-    bottom: Enemy[]
+    bottom: (Enemy | null)[]
   }
 
   enemieCards: {
@@ -91,6 +91,8 @@ export interface GameStoreActions {
   nextTurn: () => void
   setRanger: (position: RangerPosition, rangerId: string, ability: string) => void
 
+  setEnemy: (enemy: Enemy, index: number, position: 'top' | 'bottom') => void
+  removeEnemy: (index: number, position: 'top' | 'bottom') => void
   setupEnemy: (foot: string, monster?: string) => void
 
   selectedRanger: (position: 'left' | 'middle' | 'right') => Ranger
@@ -154,7 +156,7 @@ const createInitialState = (): Omit<GameStoreState, 'rangerDecks' | 'enemies'> =
   hand: [],
   enemieCards: {
     top: [],
-    bottom: [],
+    bottom: Array(4).fill(null),
   },
   enemyDeck: EnemyCardDatabase,
   energy: 2,
@@ -206,7 +208,7 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
           },
           enemies: {
             top: [],
-            bottom: [],
+            bottom: Array(4).fill(null),
           },
         })
       },
@@ -229,6 +231,20 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
           gameState: GameState.default,
         })),
 
+      removeEnemy: (index, position) =>
+        set(({ enemies }) => ({
+          enemies: {
+            ...enemies,
+            [position]: enemies[position].splice(index, 1),
+          },
+        })),
+      setEnemy: (enemy, index, position) =>
+        set(({ enemies }) => ({
+          enemies: {
+            ...enemies,
+            [position]: enemies[position].map((ep, epIndex) => (epIndex === index ? enemy : ep)),
+          },
+        })),
       setupEnemy: (foot, monster) => {
         set({
           enemieCards: {
@@ -240,7 +256,10 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
       },
 
       selectedRanger: (position) => {
-        return get().rangerDecks[position]
+        const ranger = get().rangerDecks[position]
+        if (!ranger) throw new Error('No ranger found')
+
+        return ranger
       },
       toggleEnergy: (position) =>
         set((state) => {

@@ -1,25 +1,31 @@
-import { YStack, XStack, Button, Text, Tabs, Separator, SizableText, H5, H2 } from 'tamagui'
+import { YStack, Button, Text, Tabs, Separator, SizableText, H5, H2 } from 'tamagui'
 import { RangerSelector } from './RangerSelector'
 import useGameStore from '../game/gameStateStore'
-import { RangerPosition, SetupConfig } from './setupTypes'
+import { RangerPosition } from './setupTypes'
 import { useLink } from 'solito/navigation'
 import { useEffect } from 'react'
+import { EnemySelector } from './EnemySelector'
+import { Enemy } from '../game/GameTypes'
+import { MonsterSelector } from './MonsterSelector'
 
 const GameSetupScreen = () => {
-  const { enemies, setRanger, rangerDecks, resetGame, resetRangers } = useGameStore()
+  const { setRanger, rangerDecks, resetGame, resetRangers, setEnemy, removeEnemy, enemies } =
+    useGameStore()
 
   const handleRangerSelect = (position: RangerPosition, rangerId: string, ability: string) => {
     setRanger(position, rangerId, ability)
   }
 
-  const handleEnemySelect = (type: 'footSoldiers' | 'monster', enemyName: string) => {
-    // setSetupConfig((prev) => ({
-    //   ...prev,
-    //   enemies: {
-    //     ...prev.enemies,
-    //     [type]: enemyName,
-    //   },
-    // }))
+  const handleEnemySelectTop = (enemy: Enemy) => {
+    setEnemy(enemy, 0, 'top')
+  }
+  const handleEnemyRemoveTop = (index: number) => {
+    removeEnemy(index, 'top')
+  }
+
+  const handleEnemySelectBottom = (enemy: Enemy, index: number) => {
+    console.log(index, enemy)
+    setEnemy(enemy, index, 'bottom')
   }
 
   const canStartGame = Object.values(rangerDecks).every((r) => r !== null)
@@ -91,28 +97,14 @@ const GameSetupScreen = () => {
 
         <Tabs.Content value="enemies">
           <YStack gap="$2" padding="$2">
-            <H5 textAlign="center" paddingVertical="$10">
-              Coming Soon
-            </H5>
             {/* Enemies Selection */}
-            {/* <YStack gap="$4"> */}
-            {/*   <Text fontSize="$6" fontWeight="bold"> */}
-            {/*     Choose Your Enemies */}
-            {/*   </Text> */}
-            {/*   <XStack gap="$2" justifyContent="space-between"> */}
-            {/*     <EnemySelector */}
-            {/*       type="monster" */}
-            {/*       selected={enemies.top} */}
-            {/*       onSelect={(enemy) => handleEnemySelect('monster', enemy)} */}
-            {/*     /> */}
-            {/*     <EnemySelector */}
-            {/*       type="foot" */}
-            {/*       selected={enemies.bottom} */}
-            {/*       onSelect={(enemy) => handleEnemySelect('footSoldiers', enemy)} */}
-            {/*     /> */}
-            {/*   </XStack> */}
-            {/* </YStack> */}
-            {/**/}
+            {/* <MonsterSelector */}
+            {/*   selected={enemies.top} */}
+            {/*   onSelect={handleEnemySelectTop} */}
+            {/*   onRemove={handleEnemyRemoveTop} */}
+            {/* /> */}
+
+            <EnemySelector selected={enemies.bottom} onSelect={handleEnemySelectBottom} />
           </YStack>
         </Tabs.Content>
       </Tabs>
