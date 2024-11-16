@@ -5,7 +5,7 @@ import useGameStore, { GameStoreState } from '../gameStateStore'
 import { checkEnemyGuardStatus } from '../Enemy/enemyGaurdState'
 
 interface EnemyRowProps {
-  enemies: GameStoreState['enemies']
+  enemies: GameStoreState['enemieCards']
 }
 
 const EnemyRow: React.FC<EnemyRowProps> = ({ enemies }) => {

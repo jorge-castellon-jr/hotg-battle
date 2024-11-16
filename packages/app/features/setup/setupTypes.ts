@@ -1,4 +1,4 @@
-import { Ranger } from "../game/GameTypes"
+import { Enemy, Ranger } from "../game/GameTypes"
 
 export type RangerPosition = 'left' | 'middle' | 'right'
 
@@ -18,8 +18,3 @@ export interface RangerSelectorProps {
   onSelect: (rangerId: string, ability: string) => void
 }
 
-export interface EnemySelectorProps {
-  type: 'foot' | 'monster'
-  selected: string
-  onSelect: (enemy: string) => void
-}

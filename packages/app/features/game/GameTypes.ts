@@ -29,6 +29,5 @@ export interface Enemy {
   id: string
   name: string
   type: 'foot' | 'monster' | 'boss'
-  health: number
   cards: EnemyCard[]
 }

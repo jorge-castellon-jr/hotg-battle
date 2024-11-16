@@ -1,7 +1,8 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 import { RangerCard, EnemyCard } from './Card/CardTypes'
 import EnemyCardDatabase from './DB/Enemies/EnemyCardDatabase'
-import { Ranger, RangerDecks } from './GameTypes'
+import { Enemy, Ranger, RangerDecks } from './GameTypes'
 import {
   getEnemyDeck,
   moveCardToBottom,
@@ -20,7 +21,6 @@ import {
 } from './utils/cardOperations'
 import { toggleEnemyStatus, updateEnemyDamage } from './Enemy/enemyOperations'
 import { moveEnemy } from './Battle/enemyPositionManager'
-import { persist } from 'zustand/middleware'
 import { RangerPosition } from '../setup/setupTypes'
 import rangerDatabase from './DB/rangerDatabase'
 import safeStorage from './Storage/persistentStorage'
@@ -60,6 +60,11 @@ export interface GameStoreState {
   hand: RangerCard[] // Cards currently in play
 
   enemies: {
+    top: Enemy[]
+    bottom: Enemy[]
+  }
+
+  enemieCards: {
     top: EnemyCard[] // Enemy team members (Foot Soldiers, Monster)
     bottom: EnemyCard[] // Enemy team members (Foot Soldiers, Monster)
   }
@@ -140,14 +145,14 @@ const RESET = {
 }
 
 // Initial state factory to ensure fresh references
-const createInitialState = (): Omit<GameStoreState, 'rangerDecks'> => ({
+const createInitialState = (): Omit<GameStoreState, 'rangerDecks' | 'enemies'> => ({
   _hasHydrated: false,
   setupCompleted: false,
   enemySetupCompleted: false,
   turn: Turn.player,
   gameState: GameState.default,
   hand: [],
-  enemies: {
+  enemieCards: {
     top: [],
     bottom: [],
   },
@@ -164,7 +169,7 @@ const createInitialState = (): Omit<GameStoreState, 'rangerDecks'> => ({
 })
 
 const useGameStore = create<GameStoreState & GameStoreActions>()(
-  persist(
+  persist<GameStoreState & GameStoreActions>(
     (set, get) => ({
       ...createInitialState(),
 
@@ -173,6 +178,11 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
         middle: null,
         right: null,
       }, // Populate with Ranger-specific cards
+
+      enemies: {
+        top: [],
+        bottom: [],
+      },
 
       setHasHydrated: (state) => {
         set({
@@ -193,6 +203,10 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
             left: null,
             middle: null,
             right: null,
+          },
+          enemies: {
+            top: [],
+            bottom: [],
           },
         })
       },
@@ -217,7 +231,7 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
 
       setupEnemy: (foot, monster) => {
         set({
-          enemies: {
+          enemieCards: {
             top: monster ? getEnemyDeck(monster).slice(0, 4) : [],
             bottom: getEnemyDeck(foot).slice(0, 4),
           },
@@ -468,19 +482,24 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
 
       moveEnemyPosition: (direction) => {
         const state = get()
-        const enemies = state.enemies
+        const enemies = state.enemieCards
         const position = { index: state.selectedEnemyIndex, row: state.selectedEnemyRow! }
         const newEnemies = moveEnemy(enemies, position, direction)
         if (newEnemies) {
           set({
-            enemies: newEnemies,
+            enemieCards: newEnemies,
             selectedEnemyIndex: direction === 'left' ? position.index - 1 : position.index + 1,
           })
         }
       },
       markEnemyAsActivated: () =>
-        set(({ enemies, selectedEnemyIndex, selectedEnemyRow }) => ({
-          enemies: toggleEnemyStatus(enemies, selectedEnemyIndex, selectedEnemyRow!, 'activated'),
+        set(({ enemieCards: enemies, selectedEnemyIndex, selectedEnemyRow }) => ({
+          enemieCards: toggleEnemyStatus(
+            enemies,
+            selectedEnemyIndex,
+            selectedEnemyRow!,
+            'activated'
+          ),
           selectedEnemy: null,
           selectedEnemyIndex: -1,
           selectedEnemyRow: null,
@@ -488,9 +507,14 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
         })),
 
       markEnemyAsDefeated: () =>
-        set(({ enemies, selectedEnemyIndex, selectedEnemyRow }) => ({
+        set(({ enemieCards: enemies, selectedEnemyIndex, selectedEnemyRow }) => ({
           gameState: GameState.default,
-          enemies: toggleEnemyStatus(enemies, selectedEnemyIndex, selectedEnemyRow!, 'defeated'),
+          enemieCards: toggleEnemyStatus(
+            enemies,
+            selectedEnemyIndex,
+            selectedEnemyRow!,
+            'defeated'
+          ),
         })),
 
       setSelectedPosition: (position) => set({ selectedPosition: position }),
@@ -521,7 +545,7 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
         set({ selectedEnemy: enemy, selectedEnemyIndex: index, selectedEnemyRow: row }),
       updateEnemyDamage: (index, row, newDamage) =>
         set((state) => {
-          const updatedEnemies = updateEnemyDamage(state.enemies, index, row, newDamage)
+          const updatedEnemies = updateEnemyDamage(state.enemieCards, index, row, newDamage)
 
           // Also update the selected enemy if it's the one being modified
           const updatedSelectedEnemy =
@@ -537,7 +561,7 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
 
           return {
             ...state,
-            enemies: updatedEnemies,
+            enemieCards: updatedEnemies,
             selectedEnemy: updatedSelectedEnemy,
           }
         }),
