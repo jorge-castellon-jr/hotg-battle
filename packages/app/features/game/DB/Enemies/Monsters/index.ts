@@ -1,6 +1,16 @@
-import EvilGreenRanger from "./EvilGreenRanger";
+import { createEnemy } from '../enemyDatabaseUtils'
+import EvilGreenRanger from './EvilGreenRanger'
 
 export default [
   // Add all Monsters here
-  ...EvilGreenRanger
+  ...EvilGreenRanger,
+]
+
+export const monsterEnemies = [
+  createEnemy({
+    id: 'evil_green_ranger',
+    name: 'Evil Green Ranger',
+    type: 'monster',
+  }),
+  //
 ]

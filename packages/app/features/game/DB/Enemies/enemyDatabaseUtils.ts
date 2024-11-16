@@ -1,4 +1,5 @@
 import { EnemyCard } from '../../Card/CardTypes'
+import { Enemy } from '../../GameTypes'
 
 /**
  * Ensures all enemy cards have required properties with default values
@@ -24,4 +25,12 @@ export const normalizeEnemyCard = (card: Partial<EnemyCard>): EnemyCard => {
  */
 export const normalizeEnemyDatabase = <T extends Partial<EnemyCard>>(cards: T[]): EnemyCard[] => {
   return cards.map((card) => normalizeEnemyCard(card))
+}
+
+export const createEnemy = (enemy: Omit<Enemy, 'cards'>): Enemy => {
+  const cards = []
+  return {
+    ...enemy,
+    cards,
+  }
 }

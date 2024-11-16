@@ -1,3 +1,7 @@
 export default [
-  // Add all Bosses here
+  // Add all Boss cards here
 ]
+export const bossEnemies = [
+  // add bosses here
+]
+
