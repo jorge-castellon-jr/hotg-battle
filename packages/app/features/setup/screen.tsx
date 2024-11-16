@@ -97,6 +97,9 @@ const GameSetupScreen = () => {
 
         <Tabs.Content value="enemies">
           <YStack gap="$2" padding="$2">
+            <H5 textAlign="center" paddingVertical="$10">
+              Coming Soon
+            </H5>
             {/* Enemies Selection */}
             {/* <MonsterSelector */}
             {/*   selected={enemies.top} */}
@@ -104,7 +107,7 @@ const GameSetupScreen = () => {
             {/*   onRemove={handleEnemyRemoveTop} */}
             {/* /> */}
 
-            <EnemySelector selected={enemies.bottom} onSelect={handleEnemySelectBottom} />
+            {/* <EnemySelector selected={enemies.bottom} onSelect={handleEnemySelectBottom} /> */}
           </YStack>
         </Tabs.Content>
       </Tabs>
