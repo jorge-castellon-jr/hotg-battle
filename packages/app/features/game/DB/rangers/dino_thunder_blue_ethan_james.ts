@@ -21,7 +21,7 @@ const card: Record<string, BaseRangerCard> = {
     name: 'Improvise',
     type: 'reaction',
     text: [
-      'Play this card when any Ranger performs an attack. Reveal the top card of that Ranger\'s deck. If it is an attack card, add 1 die to that Ranger's attack. Otherwise, gain 1 energy.',
+      'Play this card when any Ranger performs an attack. Reveal the top card of that Ranger\'s deck. If it is an attack card, add 1 die to that Ranger\'s attack. Otherwise, gain 1 energy.',
     ],
     energy: 0,
     shields: 2, 

@@ -1,13 +1,32 @@
 import React, { useState } from 'react'
-import { YStack, XStack, ScrollView, Text, Separator } from 'tamagui'
+import { YStack, XStack, ScrollView, Text, Separator, H5 } from 'tamagui'
 import { RangerSelectorProps } from './setupTypes'
 import { BaseSheet } from '../game/UI/BaseSheet'
-import rangerDatabase from '../game/DB/rangerDatabase'
 import { rangerColors } from '../game/utils/colors'
+import { RangerSheetCard } from './RangerSheetCard'
+
+import BeastMorphersRangers from '../game/DB/Teams/BeastMorphersRangers'
+import DinoChargeRangers from '../game/DB/Teams/DinoChargeRangers'
+import DinoFuryRangers from '../game/DB/Teams/DinoFuryRangers'
+import DinoThunderRangers from '../game/DB/Teams/DinoThunderRangers'
+import HyperforceRangers from '../game/DB/Teams/HyperforceRangers'
+import JungleFuryRangers from '../game/DB/Teams/JungleFuryRangers'
+import LunarRangers from '../game/DB/Teams/LunarRangers'
+import MightyMorphinRangers from '../game/DB/Teams/MightyMorphinRangers'
+import NinjaSteelRangers from '../game/DB/Teams/NinjaSteelRangers'
+import OmegaRangers from '../game/DB/Teams/OmegaRangers'
+import RangerOperatorSeriesRangers from '../game/DB/Teams/RangerOperatorSeriesRangers'
+import Rangers from '../game/DB/Teams/Rangers'
+import SpdRangers from '../game/DB/Teams/SpdRangers'
+import SuperMegaforceRangers from '../game/DB/Teams/SuperMegaforceRangers'
+import SuperSamuraiRangers from '../game/DB/Teams/SuperSamuraiRangers'
+import TimeForceRangers from '../game/DB/Teams/TimeForceRangers'
+import TurboRangers from '../game/DB/Teams/TurboRangers'
+import ZeoRangers from '../game/DB/Teams/ZeoRangers'
+import rangerDatabase from '../game/DB/rangerDatabase'
 
 export const RangerSelector: React.FC<RangerSelectorProps> = ({ position, selected, onSelect }) => {
   const [open, setOpen] = useState(false)
-  const [availableRangers] = useState(rangerDatabase)
 
   const textColor = (color: string) => (color === 'white' ? 'black' : 'white')
   return (
@@ -46,48 +65,57 @@ export const RangerSelector: React.FC<RangerSelectorProps> = ({ position, select
         )}
       </YStack>
       <BaseSheet open={open} onOpenChange={setOpen} disableDrag>
-        <YStack flex={1} padding="$2">
+        <YStack flex={1} padding="$4">
           {/* Header */}
           <Text fontSize="$6" fontWeight="bold" textAlign="center">
             Choose Ranger
           </Text>
           <ScrollView flex={1} height={500} showsVerticalScrollIndicator={false}>
-            <XStack gap="$3" padding="$3" flexWrap="wrap">
-              {availableRangers.map((ranger, index) => (
-                <YStack
+            <H5 paddingVertical="$2">Mighty Morphin Rangers</H5>
+            <XStack gap="$3" flexWrap="wrap">
+              {MightyMorphinRangers.map((ranger, index) => (
+                <RangerSheetCard
                   key={`${ranger.id}-${index}`}
-                  flex={1}
-                  flexBasis="40%"
-                  backgroundColor={rangerColors[ranger.color]}
-                  borderRadius="$4"
-                  padding="$2"
-                  justifyContent="center"
+                  ranger={ranger}
                   onPress={() => {
                     onSelect(ranger.id, ranger.ability.name)
                     setOpen(false)
                   }}
-                >
-                  <Text textAlign="center" fontSize="$3" color={textColor(ranger.color)}>
-                    {ranger.name}
-                  </Text>
-                  <Text
-                    textAlign="center"
-                    fontSize="$1"
-                    color={textColor(ranger.color)}
-                    textTransform="capitalize"
-                  >
-                    {ranger.team} {ranger.color}
-                  </Text>
-                  <Text
-                    textAlign="center"
-                    fontSize="$1"
-                    fontWeight="bold"
-                    color={textColor(ranger.color)}
-                  >
-                    {ranger.ability.name}
-                  </Text>
-                </YStack>
+                />
               ))}
+            </XStack>
+
+            <H5 paddingVertical="$2">Zeo Rangers</H5>
+            <XStack gap="$3" flexWrap="wrap">
+              {ZeoRangers.map((ranger, index) => (
+                <RangerSheetCard
+                  key={`${ranger.id}-${index}`}
+                  ranger={ranger}
+                  onPress={() => {
+                    onSelect(ranger.id, ranger.ability.name)
+                    setOpen(false)
+                  }}
+                />
+              ))}
+            </XStack>
+
+            <H5 paddingVertical="$2">Other Rangers</H5>
+            <XStack gap="$3" flexWrap="wrap">
+              {rangerDatabase
+                .slice(
+                  0,
+                  rangerDatabase.length - ZeoRangers.length - MightyMorphinRangers.length - 1
+                )
+                .map((ranger, index) => (
+                  <RangerSheetCard
+                    key={`${ranger.id}-${index}`}
+                    ranger={ranger}
+                    onPress={() => {
+                      onSelect(ranger.id, ranger.ability.name)
+                      setOpen(false)
+                    }}
+                  />
+                ))}
             </XStack>
           </ScrollView>
         </YStack>
