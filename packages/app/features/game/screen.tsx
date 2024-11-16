@@ -11,7 +11,7 @@ import { RangerBattleSequence } from './Battle/RangerBattleSequence'
 import { ClientOnly } from './components/ClientOnly'
 
 const GameScreen: React.FC = () => {
-  const { rangerDecks, hand, enemieCards, turn } = useGameStore()
+  const { rangerDecks, hand, turn } = useGameStore()
 
   return (
     <ClientOnly>
@@ -22,7 +22,7 @@ const GameScreen: React.FC = () => {
           onPress={() => { }}
         />
 
-        <EnemyRow enemies={enemieCards} />
+        <EnemyRow />
 
         <RangerHand hand={hand} />
         <RangerStatusOverview rangers={rangerDecks} />

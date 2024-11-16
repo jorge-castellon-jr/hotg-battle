@@ -4,9 +4,10 @@ import { BaseSheet } from '../game/UI/BaseSheet'
 import EnemyDatabase from '../game/DB/Enemies/EnemyDatabase'
 import { Enemy } from '../game/GameTypes'
 import { enemyColors } from '../game/utils/colors'
+import { EnemySetup } from '../game/Enemy/EnemySetupManager'
 
 interface EnemySelectorProps {
-  selected: (Enemy | null)[]
+  selected: EnemySetup['bottom']
   onSelect: (enemy: Enemy, index: number) => void
 }
 

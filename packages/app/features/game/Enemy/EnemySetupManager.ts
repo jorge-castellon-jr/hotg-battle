@@ -11,7 +11,11 @@ type EnemyDeckMap = Map<string, EnemyCard[]>
 
 export class EnemySetupManager {
   private static getUniqueEnemyIds(enemies: (Enemy | null)[]): string[] {
-    return [...new Set(enemies.filter((enemy) => enemy !== null).map((enemy) => enemy.id))]
+    return [
+      ...new Set(
+        enemies.filter((enemy): enemy is Enemy => enemy !== null).map((enemy) => enemy.id)
+      ),
+    ]
   }
 
   private static createEnemyDeckMap(enemyIds: string[]): EnemyDeckMap {
@@ -22,48 +26,53 @@ export class EnemySetupManager {
       deckMap.set(id, deck)
     })
 
-
     return deckMap
   }
 
   private static distributeCards(
     enemies: (Enemy | null)[],
-    deckMap: EnemyDeckMap,
-    cardsPerEnemy: number
-  ): EnemyCard[] {
-    const result: EnemyCard[] = []
-
-    enemies.forEach((enemy) => {
-      if (!enemy) return
+    deckMap: EnemyDeckMap
+  ): (EnemyCard | null)[] {
+    // Distribute cards maintaining original positions
+    const result = enemies.map((enemy, index) => {
+      if (!enemy) {
+        console.log('no enemy', index, enemy)
+        // Keep null in this position
+        // result[index] = null
+        return null
+      }
 
       const deck = deckMap.get(enemy.id)
-      if (!deck || deck.length < cardsPerEnemy) return
+      if (!deck) {
+        console.log('no cards', deck, deckMap)
+
+        // If no deck or not enough cards, set position to null
+        // result[index] = null
+        return null
+      }
 
       // Take cards for this enemy position
-      const cards = deck.splice(0, cardsPerEnemy)
-      result.push(...cards)
+      return deck.pop() // Take first card for this position
     })
 
-    console.log('distributeCards',result)
-
-    return result
+    return result as (EnemyCard | null)[]
   }
 
-  static setupEnemyCards(enemies: EnemySetup, cardsPerEnemy: number = 4): EnemySetup {
-    console.log('start',enemies)
+  static setupEnemyCards(enemies: EnemySetup): {
+    top: (EnemyCard | null)[]
+    bottom: (EnemyCard | null)[]
+  } {
     // Get unique enemy IDs for each row
     const topEnemyIds = this.getUniqueEnemyIds(enemies.top)
     const bottomEnemyIds = this.getUniqueEnemyIds(enemies.bottom)
-    console.log('ids', topEnemyIds, bottomEnemyIds)
 
     // Create deck maps for both rows
     const topDeckMap = this.createEnemyDeckMap(topEnemyIds)
     const bottomDeckMap = this.createEnemyDeckMap(bottomEnemyIds)
-    console.log('deck maps', topDeckMap, bottomDeckMap)
 
     return {
-      top: this.distributeCards(enemies.top, topDeckMap, cardsPerEnemy),
-      bottom: this.distributeCards(enemies.bottom, bottomDeckMap, cardsPerEnemy),
+      top: this.distributeCards(enemies.top, topDeckMap),
+      bottom: this.distributeCards(enemies.bottom, bottomDeckMap),
     }
   }
 }

@@ -4,10 +4,10 @@ import { BaseSheet } from '../game/UI/BaseSheet'
 import EnemyDatabase from '../game/DB/Enemies/EnemyDatabase'
 import { enemyColors } from '../game/utils/colors'
 import { Enemy } from '../game/GameTypes'
-import useGameStore from '../game/gameStateStore'
+import { EnemySetup } from '../game/Enemy/EnemySetupManager'
 
 interface EnemySelectorProps {
-  selected: Enemy[]
+  selected: EnemySetup['top']
   onSelect: (enemy: Enemy) => void
   onRemove: (index: number) => void
 }
@@ -16,7 +16,7 @@ export const MonsterSelector: React.FC<EnemySelectorProps> = ({ selected, onSele
   const [open, setOpen] = useState(false)
   const availableEnemies = EnemyDatabase.filter((enemy) => enemy.type !== 'foot')
 
-  const hasSelected = !!selected.length
+  const firstSelected = selected[0]
   function handleSelectEnemy(enemy: Enemy): void {
     onSelect(enemy)
     setOpen(false)
@@ -28,9 +28,9 @@ export const MonsterSelector: React.FC<EnemySelectorProps> = ({ selected, onSele
         onPress={() => setOpen(true)}
         padding="$4"
         borderRadius="$4"
-        backgroundColor={hasSelected ? enemyColors[selected[0].type] : '$background'}
+        backgroundColor={firstSelected ? enemyColors[firstSelected.type] : '$background'}
       >
-        {selected.length ? selected[0].name : 'Select Monster'}
+        {firstSelected ? firstSelected.name : 'Select Monster'}
       </Button>
 
       <BaseSheet open={open} onOpenChange={setOpen}>

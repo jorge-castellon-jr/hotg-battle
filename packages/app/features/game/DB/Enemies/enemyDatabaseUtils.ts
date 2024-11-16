@@ -8,7 +8,7 @@ export const normalizeEnemyCard = (card: Partial<EnemyCard>): EnemyCard => {
   return {
     name: card.name || '',
     type: card.type || 'basic',
-    enemyType: card.enemyType || 'basic',
+    enemyType: card.enemyType || 'foot',
     text: card.text || '',
     owner: card.owner || '',
     health: card.health || 0,

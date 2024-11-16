@@ -1,11 +1,10 @@
-import { EnemyCard } from '../../../Card/CardTypes'
+import { BaseEnemyCard, EnemyCard } from '../../../Card/CardTypes'
+import { createDeck } from '../../cardUtils'
 
-const flanking: EnemyCard = {
+const flanking: BaseEnemyCard = {
   name: 'Flanking',
   type: 'passive',
-  enemyType: 'foot',
   text: 'While this card is in play, each time another enemy card deals damage, increase that damage by 1.',
-  owner: 'Putty Patrollers',
   health: 2,
   effects: [
     {
@@ -17,21 +16,17 @@ const flanking: EnemyCard = {
     },
   ],
 }
-const leapingAttack: EnemyCard = {
+const leapingAttack: BaseEnemyCard = {
   name: 'Leaping Attack',
   type: 'basic',
-  enemyType: 'foot',
   text: 'Deal 3 damage',
-  owner: 'Putty Patrollers',
   health: 2,
   attacks: [{ value: 3, fixed: true }],
 }
-const swarmAttack: EnemyCard = {
+const swarmAttack: BaseEnemyCard = {
   name: 'Swarm Attack',
   type: 'basic',
-  enemyType: 'foot',
   text: 'Deal 1 damage',
-  owner: 'Putty Patrollers',
   health: 3,
   attacks: [{ value: 1, fixed: true }],
   effects: [
@@ -44,25 +39,23 @@ const swarmAttack: EnemyCard = {
     },
   ],
 }
-const cannonFodder: EnemyCard = {
+const cannonFodder: BaseEnemyCard = {
   name: 'Cannon Fodder',
   type: 'guard',
-  enemyType: 'foot',
   text: 'Deal 2 damage',
-  owner: 'Putty Patrollers',
   health: 3,
   attacks: [{ value: 2, fixed: true }],
 }
 
-export default [
-  flanking,
-  flanking,
-  leapingAttack,
-  leapingAttack,
-  leapingAttack,
-  swarmAttack,
-  swarmAttack,
-  cannonFodder,
-  cannonFodder,
-  cannonFodder,
-]
+export default createDeck(
+  [
+    [flanking, 2],
+    [leapingAttack, 3],
+    [swarmAttack, 2],
+    [cannonFodder, 3],
+  ],
+  {
+    enemyType: 'foot',
+    owner: 'putty_patrollers',
+  }
+) as EnemyCard[]

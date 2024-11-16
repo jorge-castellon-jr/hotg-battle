@@ -17,14 +17,13 @@ const GameSetupScreen = () => {
   }
 
   const handleEnemySelectTop = (enemy: Enemy) => {
-    setEnemy(enemy, 0, 'top')
+    Array(4).fill(null).map((_, index) => setEnemy(enemy, index, 'top'))
   }
   const handleEnemyRemoveTop = (index: number) => {
     removeEnemy(index, 'top')
   }
 
   const handleEnemySelectBottom = (enemy: Enemy, index: number) => {
-    console.log(index, enemy)
     setEnemy(enemy, index, 'bottom')
   }
 
@@ -97,17 +96,14 @@ const GameSetupScreen = () => {
 
         <Tabs.Content value="enemies">
           <YStack gap="$2" padding="$2">
-            <H5 textAlign="center" paddingVertical="$10">
-              Coming Soon
-            </H5>
             {/* Enemies Selection */}
-            {/* <MonsterSelector */}
-            {/*   selected={enemies.top} */}
-            {/*   onSelect={handleEnemySelectTop} */}
-            {/*   onRemove={handleEnemyRemoveTop} */}
-            {/* /> */}
+            <MonsterSelector
+              selected={enemies.top}
+              onSelect={handleEnemySelectTop}
+              onRemove={handleEnemyRemoveTop}
+            />
 
-            {/* <EnemySelector selected={enemies.bottom} onSelect={handleEnemySelectBottom} /> */}
+            <EnemySelector selected={enemies.bottom} onSelect={handleEnemySelectBottom} />
           </YStack>
         </Tabs.Content>
       </Tabs>

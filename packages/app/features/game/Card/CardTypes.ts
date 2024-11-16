@@ -70,8 +70,12 @@ export interface Enemy {
   attack: number // Attack value
 }
 export type EnemyKeyWordType = 'fast' | 'passive' | 'guard' | 'basic'
-export type EnemyType = 'foot' | 'monster' | 'boss' | 'basic'
+export type EnemyType = 'foot' | 'monster' | 'boss'
 
+export type BaseEnemyCard = Omit<
+  EnemyCard,
+  'owner' | 'enemyType' | 'activated' | 'defeated' | 'currentDamage'
+>
 export interface EnemyCard {
   name: string
   type: EnemyKeyWordType // Keyword for behavior
@@ -79,9 +83,9 @@ export interface EnemyCard {
   text: string
   owner: string // e.g., "Foot Soldier", "Monster"
   health: number
-  currentDamage: number
   attacks?: (Attack & { target?: number | 'lead' | 'notLead' })[] // Optional if attack type varies
   effects?: CardEffect[]
+  currentDamage: number
   activated?: boolean
   defeated?: boolean
 }
