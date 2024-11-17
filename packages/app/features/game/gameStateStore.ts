@@ -112,6 +112,8 @@ export interface GameStoreActions {
   setRangerCounter: (counter: number, position: RangerPosition) => void
 
   moveEnemyPosition: (direction: 'left' | 'right') => void
+  addEnemyCounter: (position: 'left' | 'middle' | 'right') => void
+  removeEnemyCounter: (position: 'left' | 'middle' | 'right') => void
   markEnemyAsActivated: () => void
   markEnemyAsDefeated: () => void
 
@@ -506,6 +508,45 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
             selectedEnemyIndex: direction === 'left' ? position.index - 1 : position.index + 1,
           })
         }
+      },
+      addEnemyCounter: (position) => {
+        const { selectedEnemyIndex, selectedEnemyRow } = get()
+
+        if (selectedEnemyIndex === -1 || !selectedEnemyRow) return
+
+        set((state) => {
+          const updatedEnemyCards = { ...state.enemyCards }
+          const enemyCard = updatedEnemyCards[selectedEnemyRow][selectedEnemyIndex]
+
+          if (enemyCard) {
+            enemyCard.counters[position] = {
+              value: enemyCard.counters[position].value + 1,
+              id: enemyCard.counters[position].id,
+            }
+          }
+
+          return { enemyCards: updatedEnemyCards }
+        })
+      },
+
+      removeEnemyCounter: (position: 'left' | 'middle' | 'right') => {
+        const { selectedEnemyIndex, selectedEnemyRow } = get()
+
+        if (selectedEnemyIndex === -1 || !selectedEnemyRow) return
+
+        set((state) => {
+          const updatedEnemyCards = { ...state.enemyCards }
+          const enemyCard = updatedEnemyCards[selectedEnemyRow][selectedEnemyIndex]
+
+          if (enemyCard && enemyCard.counters[position].value > 0) {
+            enemyCard.counters[position] = {
+              value: enemyCard.counters[position].value - 1,
+              id: enemyCard.counters[position].id,
+            }
+          }
+
+          return { enemyCards: updatedEnemyCards }
+        })
       },
       markEnemyAsActivated: () =>
         set(({ enemyCards: enemies, selectedEnemyIndex, selectedEnemyRow }) => ({

@@ -1,4 +1,4 @@
-import { Stack, YStack, Text, XStack } from 'tamagui'
+import { Stack, YStack, Text, XStack, Circle, Square } from 'tamagui'
 import { Heart, Sword } from 'lucide-react'
 import { EnemyCard as EnemyCardType } from './CardTypes'
 import {
@@ -18,8 +18,9 @@ import {
 import CardCutOutShape from './HeaderShape'
 import { DiceIcon } from './RangerCard'
 import { DamageCounterBadge } from './DamageCounterBadge'
-import { enemyColors } from '../utils/colors'
+import { enemyColors, rangerColors } from '../utils/colors'
 import { GuardBadge } from '../Enemy/GaurdBadge'
+import useGameStore from '../gameStateStore'
 
 interface EnemyCardProps {
   enemy?: EnemyCardType
@@ -56,6 +57,8 @@ const EnemyCard = ({ enemy, width = 150, height = 200, isGuarded = false }: Enem
       </Stack>
     )
   }
+
+  const { rangerDecks } = useGameStore()
 
   const getColor = (type: string) => {
     if (type === 'foot') return 'green'
@@ -125,6 +128,29 @@ const EnemyCard = ({ enemy, width = 150, height = 200, isGuarded = false }: Enem
           <CardDescription fontSize={fontSize.small}>{enemy.text}</CardDescription>
         </YStack>
 
+        <XStack position="absolute" bottom="$2" gap="$1">
+          {Object.entries(enemy.counters).map(([key, counter]) => {
+            if (!counter.value) return
+            return (
+              <Circle
+                backgroundColor={rangerColors[rangerDecks[key].color]}
+                size="$1"
+                justifyContent="center"
+              >
+                <Text
+                  color="white"
+                  fontSize="$1"
+                  fontWeight="bold"
+                  textAlign="center"
+                  lineHeight={1}
+                  zIndex={1}
+                >
+                  {counter.value}
+                </Text>
+              </Circle>
+            )
+          })}
+        </XStack>
         <DamageCounterBadge
           damage={enemy.currentDamage}
           size={Math.min(width, height) * 0.2} // Make badge size relative to card size

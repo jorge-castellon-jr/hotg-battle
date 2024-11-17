@@ -4,6 +4,9 @@ import { BaseSheet } from './BaseSheet'
 import { useEffect, useState } from 'react'
 import EnemyCard from '../Card/EnemyCard'
 import { DamageCounter } from '../Enemy/DamageCounter'
+import { rangerColors } from '../utils/colors'
+import { Minus, Plus } from 'lucide-react'
+import { RangerPosition } from 'app/features/setup/setupTypes'
 
 export const EnemyOptionsUI = () => {
   const {
@@ -16,7 +19,10 @@ export const EnemyOptionsUI = () => {
     updateEnemyDamage,
     selectedEnemyIndex,
     selectedEnemyRow,
-    enterEnemyBattle
+    enterEnemyBattle,
+    rangerDecks,
+    addEnemyCounter,
+    removeEnemyCounter,
   } = useGameStore()
 
   const [open, setOpen] = useState(false)
@@ -47,6 +53,12 @@ export const EnemyOptionsUI = () => {
     exitBattleMode()
   }
 
+  const [openCounters, setOpenCounters] = useState(false)
+  const placeCounterUI = () => {
+    setOpenCounters(true)
+  }
+
+  if (!selectedEnemy) return null
   return (
     <BaseSheet open={open} onOpenChange={onOpenChange}>
       <YStack padding="$4" gap="$4">
@@ -82,8 +94,60 @@ export const EnemyOptionsUI = () => {
           </Button>
         </XStack>
 
+        <Button onPress={placeCounterUI}>Place Counters</Button>
+
         <Button onPress={enterEnemyBattle}>Attack</Button>
       </YStack>
+
+      <BaseSheet open={openCounters} onOpenChange={setOpenCounters}>
+        <YStack padding="$4" gap="$4">
+          <Text fontSize="$6" fontWeight="bold" textAlign="center">
+            Place Counters
+          </Text>
+          <XStack gap="$4">
+            {Object.entries(rangerDecks).map(([key, ranger]) => (
+              <YStack
+                backgroundColor="$gray3"
+                borderRadius="$4"
+                padding="$3"
+                alignItems="center"
+                gap="$1"
+                flex={1}
+                flexBasis="100%"
+              >
+                <Text fontSize="$6" fontWeight="bold" color={rangerColors[ranger.color]}>
+                  {ranger.name}
+                </Text>
+                <Text fontSize="$10" fontWeight="bold" color="$gray9">
+                  {selectedEnemy.counters[key].value}
+                </Text>
+                <XStack gap="$2" width="100%">
+                  <Button
+                    flex={1}
+                    flexBasis="100%"
+                    height="$2"
+                    padding={0}
+                    backgroundColor={rangerColors[ranger.color]}
+                    onPress={() => removeEnemyCounter(key as RangerPosition)}
+                  >
+                    <Minus size={16} />
+                  </Button>
+                  <Button
+                    flex={1}
+                    flexBasis="100%"
+                    height="$2"
+                    padding={0}
+                    backgroundColor={rangerColors[ranger.color]}
+                    onPress={() => addEnemyCounter(key as RangerPosition)}
+                  >
+                    <Plus size={16} />
+                  </Button>
+                </XStack>
+              </YStack>
+            ))}
+          </XStack>
+        </YStack>
+      </BaseSheet>
     </BaseSheet>
   )
 }

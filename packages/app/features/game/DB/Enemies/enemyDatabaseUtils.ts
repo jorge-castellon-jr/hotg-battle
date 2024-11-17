@@ -15,6 +15,11 @@ export const normalizeEnemyCard = (card: Partial<EnemyCard>): EnemyCard => {
     currentDamage: card.currentDamage || 0,
     attacks: card.attacks || [],
     effects: card.effects || [],
+    counters: card.counters || {
+      left: { value: 0, id: '' },
+      middle: { value: 0, id: '' },
+      right: { value: 0, id: '' },
+    },
     activated: card.activated || false,
     defeated: card.defeated || false,
   }

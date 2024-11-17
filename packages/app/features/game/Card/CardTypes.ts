@@ -86,6 +86,11 @@ export interface EnemyCard {
   attacks?: (Attack & { target?: number | 'lead' | 'notLead' })[] // Optional if attack type varies
   effects?: CardEffect[]
   currentDamage: number
+  counters: {
+    left: { value: number; id: string }
+    middle: { value: number; id: string }
+    right: { value: number; id: string }
+  }
   activated?: boolean
   defeated?: boolean
 }
