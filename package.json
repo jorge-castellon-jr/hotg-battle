@@ -6,6 +6,11 @@
     "./packages/*"
   ],
   "scripts": {
+    "json": "node scripts/json_cleaner.js",
+    "filter": "node scripts/json_filter.js",
+    "parse": "node scripts/json_parser.js",
+    "cr": "node scripts/convert_rangers.js",
+    "ct": "node scripts/convert_teams.js",
     "scan": "python3 scan.py --path packages/app/features/",
     "native": "cd apps/expo && yarn start",
     "watch": "yarn workspaces foreach -pi run watch",
