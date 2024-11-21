@@ -109,7 +109,11 @@ const RangerCard: React.FC<RangerCardProps> = ({ card, onPress }) => {
                     <Text>Special</Text>
                   ) : (
                     [...Array(attack.value)].map((_, index) => (
-                      <DiceIcon key={index} size={16} color={rangerColors[card.color]} />
+                      <DiceIcon
+                        key={index}
+                        size={16}
+                        color={rangerColors[card.subColor ? card.subColor : card.color]}
+                      />
                     ))
                   )}
                 </DiceContainer>
