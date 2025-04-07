@@ -638,7 +638,7 @@ const useGameStore = create<GameStoreState & GameStoreActions>()(
       partialize: (state) => ({
         ...state,
         // Exclude any properties you don't want to persist
-        _hasHydrated: undefined,
+        _hasHydrated: false,
       }),
       onRehydrateStorage: () => (state) => {
         if (!state) return

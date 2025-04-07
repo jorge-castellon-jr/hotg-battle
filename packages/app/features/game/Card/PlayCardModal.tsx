@@ -1,14 +1,13 @@
 import React from 'react'
 import { Dialog, View, Text, Button } from 'tamagui'
-import useGameStore from '../../gameStateStore'
-import RangerDeck from './RangerDeck'
+import useGameStore from '../gameStateStore'
 
 const PlayCardModal: React.FC = () => {
   // const { selectedRanger, selectRanger, playSelectedCard } = useGameStore()
-  const { selectRanger } = useGameStore()
+  const { selectedPosition } = useGameStore()
 
   return (
-    <Dialog open={!!selectRanger}>
+    <Dialog open={!!selectedPosition}>
       <Dialog.Portal>
         <Dialog.Content>
           <View padding={20} backgroundColor="white" borderRadius={10}>
