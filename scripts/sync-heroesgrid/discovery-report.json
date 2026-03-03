@@ -1,15 +1,1417 @@
 {
   "heroesGridPath": "/Users/jorgecastellonjr./Dev/personal/HeroesGrid/apps/web/data/export",
-  "hotgRangerOwnerCount": 381,
-  "hotgEnemyOwnerCount": 89,
+  "hotgRangerOwnerCount": 101,
+  "hotgEnemyOwnerCount": 2,
   "hgRangerCount": 304,
   "hgEnemyCount": 103,
-  "missingRangersCount": 0,
-  "missingEnemiesCount": 14,
-  "deckDiffsCount": 131,
-  "missingRangers": [],
-  "missingRangersAllSlugs": [],
+  "missingRangersCount": 304,
+  "missingEnemiesCount": 101,
+  "deckDiffsCount": 0,
+  "missingRangers": [
+    {
+      "slug": "jason-lee-scott-leadership",
+      "slugSnake": "jason_lee_scott_leadership",
+      "name": "Jason Lee Scott",
+      "title": "Mighty Morphin Red",
+      "team_id": "1",
+      "color": "red"
+    },
+    {
+      "slug": "jason-lee-scott-it-s-morphin-time",
+      "slugSnake": "jason_lee_scott_it_s_morphin_time",
+      "name": "Jason Lee Scott",
+      "title": "Mighty Morphin Red",
+      "team_id": "1",
+      "color": "red"
+    },
+    {
+      "slug": "jason-lee-scott-legacy-of-the-dragon",
+      "slugSnake": "jason_lee_scott_legacy_of_the_dragon",
+      "name": "Jason Lee Scott",
+      "title": "Mighty Morphin Red",
+      "team_id": "1",
+      "color": "red"
+    },
+    {
+      "slug": "grace-sterling-the-greater-good",
+      "slugSnake": "grace_sterling_the_greater_good",
+      "name": "Grace Sterling",
+      "title": "Mighty Morphin Red",
+      "team_id": "1",
+      "color": "red"
+    },
+    {
+      "slug": "rocky-desantos-bravery",
+      "slugSnake": "rocky_desantos_bravery",
+      "name": "Rocky DeSantos",
+      "title": "Mighty Morphin Red",
+      "team_id": "1",
+      "color": "red"
+    },
+    {
+      "slug": "trini-kwan-double-strike",
+      "slugSnake": "trini_kwan_double_strike",
+      "name": "Trini Kwan",
+      "title": "Mighty Morphin Yellow",
+      "team_id": "1",
+      "color": "yellow"
+    },
+    {
+      "slug": "trini-kwan-i-ve-seen-that-before-i-m-not-afraid-of-it",
+      "slugSnake": "trini_kwan_i_ve_seen_that_before_i_m_not_afraid_of_it",
+      "name": "Trini Kwan",
+      "title": "Mighty Morphin Yellow",
+      "team_id": "1",
+      "color": "yellow"
+    },
+    {
+      "slug": "mihn-kwan-",
+      "slugSnake": "mihn_kwan_",
+      "name": "Mihn Kwan",
+      "title": "Mighty Morphin Yellow",
+      "team_id": "1",
+      "color": "yellow"
+    },
+    {
+      "slug": "aisha-campbell-momentum",
+      "slugSnake": "aisha_campbell_momentum",
+      "name": "Aisha Campbell",
+      "title": "Mighty Morphin Yellow",
+      "team_id": "1",
+      "color": "yellow"
+    },
+    {
+      "slug": "billy-cranston-strategize",
+      "slugSnake": "billy_cranston_strategize",
+      "name": "Billy Cranston",
+      "title": "Mighty Morphin Blue",
+      "team_id": "1",
+      "color": "blue"
+    },
+    {
+      "slug": "billy-cranston-brains-of-the-team",
+      "slugSnake": "billy_cranston_brains_of_the_team",
+      "name": "Billy Cranston",
+      "title": "Mighty Morphin Blue",
+      "team_id": "1",
+      "color": "blue"
+    },
+    {
+      "slug": "billy-cranston-still",
+      "slugSnake": "billy_cranston_still",
+      "name": "Billy Cranston",
+      "title": "Mighty Morphin Blue",
+      "team_id": "1",
+      "color": "blue"
+    },
+    {
+      "slug": "kimberly-ann-hart-quick-shot",
+      "slugSnake": "kimberly_ann_hart_quick_shot",
+      "name": "Kimberly Ann Hart",
+      "title": "Mighty Morphin Pink",
+      "team_id": "1",
+      "color": "pink"
+    },
+    {
+      "slug": "kimberly-ann-hart-gymnast-s-balance",
+      "slugSnake": "kimberly_ann_hart_gymnast_s_balance",
+      "name": "Kimberly Ann Hart",
+      "title": "Mighty Morphin Pink",
+      "team_id": "1",
+      "color": "pink"
+    },
+    {
+      "slug": "olivia-hart-heart",
+      "slugSnake": "olivia_hart_heart",
+      "name": "Olivia Hart",
+      "title": "Mighty Morphin Pink",
+      "team_id": "1",
+      "color": "pink"
+    },
+    {
+      "slug": "kat-hillard-agile",
+      "slugSnake": "kat_hillard_agile",
+      "name": "Kat Hillard",
+      "title": "Mighty Morphin Pink",
+      "team_id": "1",
+      "color": "pink"
+    },
+    {
+      "slug": "zack-taylor-hip-hop-kido",
+      "slugSnake": "zack_taylor_hip_hop_kido",
+      "name": "Zack Taylor",
+      "title": "Mighty Morphin Black",
+      "team_id": "1",
+      "color": "black"
+    },
+    {
+      "slug": "zack-taylor-time-for-my-slamma-jamma-double-whamma-hip-hoppit-cause-ya-can-t-stop-it-big-disgrace-cause-it-s-in-your-face-long-shot",
+      "slugSnake": "zack_taylor_time_for_my_slamma_jamma_double_whamma_hip_hoppit_cause_ya_can_t_stop_it_big_disgrace_cause_it_s_in_your_face_long_shot",
+      "name": "Zack Taylor",
+      "title": "Mighty Morphin Black",
+      "team_id": "1",
+      "color": "black"
+    },
+    {
+      "slug": "adam-park-adaptable",
+      "slugSnake": "adam_park_adaptable",
+      "name": "Adam Park",
+      "title": "Mighty Morphin Black",
+      "team_id": "1",
+      "color": "black"
+    },
+    {
+      "slug": "adam-park-defender-vest",
+      "slugSnake": "adam_park_defender_vest",
+      "name": "Adam Park",
+      "title": "Mighty Morphin Black",
+      "team_id": "1",
+      "color": "black"
+    },
+    {
+      "slug": "tommy-oliver-loner",
+      "slugSnake": "tommy_oliver_loner",
+      "name": "Tommy Oliver",
+      "title": "Mighty Morphin Green",
+      "team_id": "1",
+      "color": "green"
+    },
+    {
+      "slug": "tommy-oliver-gift-of-the-dragon",
+      "slugSnake": "tommy_oliver_gift_of_the_dragon",
+      "name": "Tommy Oliver",
+      "title": "Mighty Morphin Green",
+      "team_id": "1",
+      "color": "green"
+    },
+    {
+      "slug": "tommy-oliver-legends-never-die",
+      "slugSnake": "tommy_oliver_legends_never_die",
+      "name": "Tommy Oliver",
+      "title": "Mighty Morphin Green",
+      "team_id": "1",
+      "color": "green"
+    },
+    {
+      "slug": "matthew-cook-noble-pursuit",
+      "slugSnake": "matthew_cook_noble_pursuit",
+      "name": "Matthew Cook",
+      "title": "Mighty Morphin Green Ranger",
+      "team_id": "1",
+      "color": "green"
+    },
+    {
+      "slug": "olivia-hart-soul",
+      "slugSnake": "olivia_hart_soul",
+      "name": "Olivia Hart",
+      "title": "Mighty Morphin Green",
+      "team_id": "1",
+      "color": "green"
+    },
+    {
+      "slug": "tommy-oliver-guardian-light",
+      "slugSnake": "tommy_oliver_guardian_light",
+      "name": "Tommy Oliver",
+      "title": "Mighty Morphin White",
+      "team_id": "1",
+      "color": "white"
+    },
+    {
+      "slug": "tommy-oliver-rallying-light",
+      "slugSnake": "tommy_oliver_rallying_light",
+      "name": "Tommy Oliver",
+      "title": "Mighty Morphin White",
+      "team_id": "1",
+      "color": "white"
+    },
+    {
+      "slug": "tommy-oliver-live-fearlessly",
+      "slugSnake": "tommy_oliver_live_fearlessly",
+      "name": "Tommy Oliver",
+      "title": "Mighty Morphin White",
+      "team_id": "1",
+      "color": "white"
+    },
+    {
+      "slug": "farkas-bulk-bulkmeier-big-bully",
+      "slugSnake": "farkas_bulk_bulkmeier_big_bully",
+      "name": "Farkas “Bulk” Bulkmeier",
+      "title": "Mighty Morphin Purple",
+      "team_id": "1",
+      "color": "purple"
+    },
+    {
+      "slug": "eugene-skull-skullovitch-wingman",
+      "slugSnake": "eugene_skull_skullovitch_wingman",
+      "name": "Eugene “Skull” Skullovitch",
+      "title": "Mighty Morphin Orange",
+      "team_id": "1",
+      "color": "orange"
+    },
+    {
+      "slug": "alpha-5-ai-yi-yi",
+      "slugSnake": "alpha_5_ai_yi_yi",
+      "name": "Alpha 5",
+      "title": "Loyal Robot",
+      "team_id": "1",
+      "color": "blue"
+    },
+    {
+      "slug": "alpha-5-recovery-boost",
+      "slugSnake": "alpha_5_recovery_boost",
+      "name": "Alpha 5",
+      "title": "Supportive A.I. (Non-Player Variant)",
+      "team_id": "1",
+      "color": "blue"
+    },
+    {
+      "slug": "alpha-5-mission-control",
+      "slugSnake": "alpha_5_mission_control",
+      "name": "Alpha 5",
+      "title": "Servant of Zordon",
+      "team_id": "1",
+      "color": "blue"
+    },
+    {
+      "slug": "alpha-5-a-friend-indeed",
+      "slugSnake": "alpha_5_a_friend_indeed",
+      "name": "Alpha 5",
+      "title": "Autonomous Support (Non-Player Variant)",
+      "team_id": "1",
+      "color": "blue"
+    },
+    {
+      "slug": "ninjor-the-power-of-ninja",
+      "slugSnake": "ninjor_the_power_of_ninja",
+      "name": "Ninjor",
+      "title": "Creator of the Power Coins",
+      "team_id": "1",
+      "color": "blue"
+    },
+    {
+      "slug": "kimberly-ann-hart-finishing-shot",
+      "slugSnake": "kimberly_ann_hart_finishing_shot",
+      "name": "Kimberly Ann Hart",
+      "title": "Rebel Ranger Slayer",
+      "team_id": "1",
+      "color": "pink"
+    },
+    {
+      "slug": "trini-kwan-black-dragon",
+      "slugSnake": "trini_kwan_black_dragon",
+      "name": "Trini Kwan",
+      "title": "Black Dragon Ranger",
+      "team_id": "1",
+      "color": "black"
+    },
+    {
+      "slug": "zordon-eltrain-wisdom",
+      "slugSnake": "zordon_eltrain_wisdom",
+      "name": "Zordon",
+      "title": "Mentor of the Power Rangers",
+      "team_id": "1",
+      "color": "silver"
+    },
+    {
+      "slug": "nikolai-chukarin-",
+      "slugSnake": "nikolai_chukarin_",
+      "name": "Nikolai Chukarin",
+      "title": "Mighty Morphin Blue",
+      "team_id": "1",
+      "color": "blue"
+    },
+    {
+      "slug": "jamie-gilmore-",
+      "slugSnake": "jamie_gilmore_",
+      "name": "Jamie Gilmore",
+      "title": "Mighty Morphin Black",
+      "team_id": "1",
+      "color": "black"
+    },
+    {
+      "slug": "terona-washington-",
+      "slugSnake": "terona_washington_",
+      "name": "Terona Washington",
+      "title": "Mighty Morphin Yellow",
+      "team_id": "1",
+      "color": "yellow"
+    },
+    {
+      "slug": "daniel-o-halloran-",
+      "slugSnake": "daniel_o_halloran_",
+      "name": "Daniel O'Halloran",
+      "title": "Mighty Morphin Pink",
+      "team_id": "1",
+      "color": "pink"
+    },
+    {
+      "slug": "adam-park-combo-fighter",
+      "slugSnake": "adam_park_combo_fighter",
+      "name": "Adam Park",
+      "title": "Black Ninja Ranger",
+      "team_id": "2",
+      "color": "black"
+    },
+    {
+      "slug": "tommy-oliver-",
+      "slugSnake": "tommy_oliver_",
+      "name": "Tommy Oliver",
+      "title": "White Ninja Ranger",
+      "team_id": "2",
+      "color": "white"
+    },
+    {
+      "slug": "rocky-desantos-",
+      "slugSnake": "rocky_desantos_",
+      "name": "Rocky DeSantos",
+      "title": "Red Ninja Ranger",
+      "team_id": "2",
+      "color": "red"
+    },
+    {
+      "slug": "billy-cranston-",
+      "slugSnake": "billy_cranston_",
+      "name": "Billy Cranston",
+      "title": "Blue Ninja Ranger",
+      "team_id": "2",
+      "color": "blue"
+    },
+    {
+      "slug": "aisha-campbell-",
+      "slugSnake": "aisha_campbell_",
+      "name": "Aisha Campbell",
+      "title": "Yellow Ninja Ranger",
+      "team_id": "2",
+      "color": "yellow"
+    },
+    {
+      "slug": "kimberly-ann-hart-",
+      "slugSnake": "kimberly_ann_hart_",
+      "name": "Kimberly Ann Hart",
+      "title": "Pink Ninja Ranger",
+      "team_id": "2",
+      "color": "pink"
+    },
+    {
+      "slug": "kat-hillard-",
+      "slugSnake": "kat_hillard_",
+      "name": "Kat Hillard",
+      "title": "Pink Ninja Ranger",
+      "team_id": "2",
+      "color": "pink"
+    },
+    {
+      "slug": "jason-lee-scott-omega-fire-power",
+      "slugSnake": "jason_lee_scott_omega_fire_power",
+      "name": "Jason Lee Scott",
+      "title": "Omega Red Ranger",
+      "team_id": "3",
+      "color": "red"
+    }
+  ],
+  "missingRangersAllSlugs": [
+    "jason-lee-scott-leadership",
+    "jason-lee-scott-it-s-morphin-time",
+    "jason-lee-scott-legacy-of-the-dragon",
+    "grace-sterling-the-greater-good",
+    "rocky-desantos-bravery",
+    "trini-kwan-double-strike",
+    "trini-kwan-i-ve-seen-that-before-i-m-not-afraid-of-it",
+    "mihn-kwan-",
+    "aisha-campbell-momentum",
+    "billy-cranston-strategize",
+    "billy-cranston-brains-of-the-team",
+    "billy-cranston-still",
+    "kimberly-ann-hart-quick-shot",
+    "kimberly-ann-hart-gymnast-s-balance",
+    "olivia-hart-heart",
+    "kat-hillard-agile",
+    "zack-taylor-hip-hop-kido",
+    "zack-taylor-time-for-my-slamma-jamma-double-whamma-hip-hoppit-cause-ya-can-t-stop-it-big-disgrace-cause-it-s-in-your-face-long-shot",
+    "adam-park-adaptable",
+    "adam-park-defender-vest",
+    "tommy-oliver-loner",
+    "tommy-oliver-gift-of-the-dragon",
+    "tommy-oliver-legends-never-die",
+    "matthew-cook-noble-pursuit",
+    "olivia-hart-soul",
+    "tommy-oliver-guardian-light",
+    "tommy-oliver-rallying-light",
+    "tommy-oliver-live-fearlessly",
+    "farkas-bulk-bulkmeier-big-bully",
+    "eugene-skull-skullovitch-wingman",
+    "alpha-5-ai-yi-yi",
+    "alpha-5-recovery-boost",
+    "alpha-5-mission-control",
+    "alpha-5-a-friend-indeed",
+    "ninjor-the-power-of-ninja",
+    "kimberly-ann-hart-finishing-shot",
+    "trini-kwan-black-dragon",
+    "zordon-eltrain-wisdom",
+    "nikolai-chukarin-",
+    "jamie-gilmore-",
+    "terona-washington-",
+    "daniel-o-halloran-",
+    "adam-park-combo-fighter",
+    "tommy-oliver-",
+    "rocky-desantos-",
+    "billy-cranston-",
+    "aisha-campbell-",
+    "kimberly-ann-hart-",
+    "kat-hillard-",
+    "jason-lee-scott-omega-fire-power",
+    "trini-kwan-double-fire",
+    "trini-kwan-omega-earth-power",
+    "zack-taylor-omega-air-power",
+    "yale-of-saard-omega-beast-power",
+    "kiya-kyatyl-omega-water-power",
+    "drakkon-",
+    "delphine-honor-of-aquitar",
+    "kat-hillard-one-step-ahead",
+    "tanya-sloan-critical-strike",
+    "rocky-desantos-called-shot",
+    "adam-park-vanguard",
+    "tommy-oliver-shining-star",
+    "trey-of-triforia-power-of-triforia",
+    "jason-lee-scott-heart-of-gold",
+    "tommy-oliver-shift-into-turbo",
+    "t-j-johnson-",
+    "justin-stewart-kid-genius",
+    "blue-senturion-in-the-name-of-the-law",
+    "phantom-ranger-cloaking-device",
+    "morphinaut-agent-of-the-grid",
+    "andros-covert-tactics",
+    "carlos-vallerte-hot-blooded",
+    "t-j-johnson-level-headed",
+    "ashley-hammond-optimism",
+    "cassie-chan-ready-to-rock",
+    "zhane-silver-charm",
+    "karone-know-your-enemy",
+    "mike-corbett-avenging-knight",
+    "magna-defender-old-wounds",
+    "ryan-mitchell-unbreakable",
+    "wes-collins-willful-strength",
+    "lucas-kendall-flexibility",
+    "trip-future-vision",
+    "katie-walker-heavy-force",
+    "jen-scotts-contingency",
+    "eric-meyers-quantum-power",
+    "joe-shih-",
+    "jen-drake-",
+    "alex-drake-",
+    "merrick-baliton-lone-wolf",
+    "hunter-bradley-roaring-thunder",
+    "blake-bradley-crashing-thunder",
+    "cameron-watanabe-super-samurai-mode",
+    "shane-clarke-",
+    "tori-hanson-",
+    "dustin-brooks-",
+    "marah-",
+    "connor-mcknight-swift-striker",
+    "kira-ford-perfect-pitch",
+    "ethan-james-clever-solution",
+    "tommy-oliver-legendary-mentor",
+    "trent-mercer-fierce-impact",
+    "jack-landors-phantom-leader",
+    "schuyler-sky-tate-barrier-field",
+    "bridge-carson-psychometry",
+    "j-j-oliver-heir-of-the-dragon",
+    "elizabeth-z-delgado-replication",
+    "sydney-syd-drew-transmutation",
+    "anubis-doggie-cruger-squad-commander",
+    "schuyler-sky-tate-",
+    "bridge-carson-",
+    "bridge-carson-",
+    "lina-song-",
+    "lina-song-",
+    "nova-",
+    "boom-",
+    "schuyler-sky-tate-",
+    "s-p-d-gold-ranger-",
+    "nick-russell-fearsome-as-fire",
+    "chip-thorn-fast-as-lightning",
+    "madison-rocca-fluid-as-the-sea",
+    "vida-rocca-ever-changing-as-the-wind",
+    "udonna-reserved-strength",
+    "leanbow-for-honor",
+    "daggeron-",
+    "xander-bly-",
+    "tyzonn-mercurial-force",
+    "mack-hartford-",
+    "will-aston-",
+    "dax-lo-",
+    "ronny-robinson-",
+    "rose-ortiz-",
+    "sentinel-knight-",
+    "robert-rj-james-unorthodox-master",
+    "jerrod-ferocity",
+    "casey-rhodes-",
+    "lily-chilman-",
+    "theo-martin-",
+    "dominic-hargan-",
+    "master-phant-",
+    "master-swoop-",
+    "master-finn-",
+    "camille-",
+    "scott-truman-assault-burst",
+    "flynn-mcallistair-time-burst",
+    "summer-landsdown-energy-butst",
+    "ziggy-grover-erratic-teleportation",
+    "dillon-defiant-defense",
+    "doctor-k-mission-control",
+    "gem-",
+    "gemma-",
+    "agent-jade-",
+    "agent-knox-",
+    "agent-luna-",
+    "orion-legendary-sixth-ranger-mode",
+    "lauren-shiba-true-focus",
+    "jayden-shiba-",
+    "kevin-",
+    "mia-watanabe-",
+    "mike-",
+    "emily-",
+    "antonio-garcia-",
+    "troy-burrows-",
+    "emma-goodall-",
+    "jake-holling-",
+    "gia-moran-",
+    "noah-carver-",
+    "robo-knight-",
+    "megaforce-green-",
+    "orion-key-of-sixth-rangers",
+    "troy-burrows-keys-of-red-rangers",
+    "noah-carver-keys-of-blue-rangers",
+    "gia-moran-keys-of-yellow-rangers",
+    "jake-holling-keys-of-green-rangers",
+    "emma-goodall-keys-of-pink-rangers",
+    "orion-merry-christmas",
+    "tyler-navarro-it-s-about-to-get-wild",
+    "kendall-morgan-dig-deeper",
+    "heckyl-dark-price",
+    "chase-randall-",
+    "koda-",
+    "riley-griffin-",
+    "shelby-watkins-",
+    "sir-ivan-of-zandar-",
+    "prince-phillip-iii-",
+    "albert-smith-",
+    "james-navarro-",
+    "zenowing-",
+    "hocux-pocux-",
+    "dino-charge-navy-",
+    "levi-weston-rhythm-star",
+    "brody-romero-",
+    "preston-tien-",
+    "calvin-maxwell-",
+    "hayley-foster-",
+    "sarah-thompson-",
+    "dane-romero-",
+    "mick-kanic-",
+    "ninja-steel-green-",
+    "devon-daniels-quick-wits",
+    "zoey-reeves-problem-solver",
+    "ravi-shaw-grid-battleforce-training",
+    "nate-silva-prodigy",
+    "steel-mr-fantastic-super-handsome-strong-as-steel",
+    "tyler-rinker-",
+    "beast-morphers-black-",
+    "beast-morphers-green-",
+    "izzy-garcia-eye-of-the-tiger",
+    "zayto-",
+    "ollie-akana-",
+    "amelia-jones-",
+    "javi-garcia-",
+    "aiyon-",
+    "zayto-",
+    "tarrick-",
+    "dino-fury-copper-",
+    "zayto-",
+    "amelia-jones-",
+    "ollie-akana-",
+    "izzy-garcia-",
+    "javi-garcia-",
+    "aiyon-",
+    "fern-",
+    "ellarien-a-light-in-the-darkness",
+    "andros-red-dawn",
+    "tanya-sloan-yellow-flare",
+    "heckyl-dark-of-night",
+    "kimberly-ann-hart-rebel-twilight",
+    "mike-corbett-cold-eclipse",
+    "cameron-watanabe-green-zenith",
+    "remi-",
+    "santa-claus-bag-of-gifts",
+    "marvin-shih-determination",
+    "chloe-ashford-impulsive",
+    "jack-thomas-steadfast",
+    "eddie-banks-technician",
+    "vesper-vasquez-cry-havoc",
+    "joe-shih-enduring-strength",
+    "casey-jones-",
+    "leonardo-",
+    "raphael-",
+    "donatello-",
+    "michelangelo-",
+    "april-o-neil-",
+    "farkas-bulk-bulkmeier-",
+    "kiya-kyatyl-",
+    "trini-kwan-",
+    "scorpina-",
+    "kimberly-ann-hart-",
+    "lord-drakkon-",
+    "lauren-shiba-",
+    "junmor-",
+    "markon-zhao-",
+    "valentina-",
+    "orion-",
+    "coach-kumo-sk-gaard-",
+    "peggy-",
+    "captain-magnus-storm-",
+    "braylee-blackthorn-",
+    "lady-penelope-prescott-",
+    "lola-navarro-",
+    "ryu-",
+    "chun-li-",
+    "ken-masters-",
+    "cammy-white-",
+    "william-guile-",
+    "leonardo-",
+    "raphael-",
+    "donatello-",
+    "michelangelo-",
+    "april-o-neil-",
+    "daniel-larusso-",
+    "samantha-larusso-",
+    "johnny-lawrence-",
+    "miguel-diaz-",
+    "kimberly-ann-hart-",
+    "zack-taylor-",
+    "trini-kwan-",
+    "britt-",
+    "serge-",
+    "virgil-",
+    "photon-",
+    "axe-",
+    "yellow-",
+    "nokrea-",
+    "rhian-",
+    "orisonth-",
+    "phiro-",
+    "aleia-",
+    "telosi-",
+    "xev-",
+    "jason-lee-scott-",
+    "zordon-",
+    "zack-taylor-",
+    "william-billy-cranston-",
+    "cenozoic-blue-",
+    "trini-kwan-",
+    "kimberly-hart-",
+    "rocky-desantos-",
+    "aisha-campbell-",
+    "billy-cranston-",
+    "adam-park-",
+    "kimberly-ann-hart-",
+    "tommy-oliver-"
+  ],
   "missingEnemies": [
+    {
+      "id": 80,
+      "slug": "astronema",
+      "name": "Astronema",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "astronema"
+    },
+    {
+      "id": 91,
+      "slug": "cyclopsis",
+      "name": "Cyclopsis",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "cyclopsis"
+    },
+    {
+      "id": 86,
+      "slug": "dai-shi",
+      "name": "Dai Shi",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "dai_shi"
+    },
+    {
+      "id": 93,
+      "slug": "death-ranger",
+      "name": "Death Ranger",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "death_ranger"
+    },
+    {
+      "id": 79,
+      "slug": "divatox",
+      "name": "Divatox",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "divatox"
+    },
+    {
+      "id": 84,
+      "slug": "emperor-gruumm",
+      "name": "Emperor Gruumm",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "emperor_gruumm"
+    },
+    {
+      "id": 94,
+      "slug": "final-drakkon",
+      "name": "Final Drakkon",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "final_drakkon"
+    },
+    {
+      "id": 87,
+      "slug": "final-venjix",
+      "name": "Final Venjix",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "final_venjix"
+    },
+    {
+      "id": 74,
+      "slug": "goldar",
+      "name": "Goldar",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "goldar"
+    },
+    {
+      "id": 103,
+      "slug": "king-mondo-errata",
+      "name": "King Mondo (Errata)",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "king_mondo_errata"
+    },
+    {
+      "id": 77,
+      "slug": "king-mondo-original",
+      "name": "King Mondo (Original)",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "king_mondo_original"
+    },
+    {
+      "id": 90,
+      "slug": "kiya",
+      "name": "Kiya",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "kiya"
+    },
+    {
+      "id": 89,
+      "slug": "lord-drakkon",
+      "name": "Lord Drakkon",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "lord_drakkon"
+    },
+    {
+      "id": 72,
+      "slug": "lord-zedd",
+      "name": "Lord Zedd",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "lord_zedd"
+    },
+    {
+      "id": 78,
+      "slug": "louie-kaboom",
+      "name": "Louie Kaboom",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "louie_kaboom"
+    },
+    {
+      "id": 98,
+      "slug": "madame-odius",
+      "name": "Madame Odius",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "madame_odius"
+    },
+    {
+      "id": 76,
+      "slug": "master-vile",
+      "name": "Master Vile",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "master_vile"
+    },
+    {
+      "id": 95,
+      "slug": "master-zedd",
+      "name": "Master Zedd",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "master_zedd"
+    },
+    {
+      "id": 92,
+      "slug": "mega-goldar",
+      "name": "Mega Goldar",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "mega_goldar"
+    },
+    {
+      "id": 83,
+      "slug": "mesogog",
+      "name": "Mesogog",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "mesogog"
+    },
+    {
+      "id": 88,
+      "slug": "perfect-evox",
+      "name": "Perfect Evox",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "perfect_evox"
+    },
+    {
+      "id": 55,
+      "slug": "psycho-rangers",
+      "name": "Psycho Rangers",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "psycho_rangers"
+    },
+    {
+      "id": 82,
+      "slug": "ransik",
+      "name": "Ransik",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "ransik"
+    },
+    {
+      "id": 68,
+      "slug": "rita-repulsa-1st-printing",
+      "name": "Rita Repulsa (1st Printing)",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "rita_repulsa_1st_printing"
+    },
+    {
+      "id": 69,
+      "slug": "rita-repulsa-2nd-printing",
+      "name": "Rita Repulsa (2nd Printing)",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "rita_repulsa_2nd_printing"
+    },
+    {
+      "id": 70,
+      "slug": "rita-repulsa-vp3",
+      "name": "Rita Repulsa (VP3)",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "rita_repulsa_vp3"
+    },
+    {
+      "id": 75,
+      "slug": "rito-revolto",
+      "name": "Rito Revolto",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "rito_revolto"
+    },
+    {
+      "id": 71,
+      "slug": "scorpina",
+      "name": "Scorpina",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "scorpina"
+    },
+    {
+      "id": 85,
+      "slug": "thrax",
+      "name": "Thrax",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "thrax"
+    },
+    {
+      "id": 81,
+      "slug": "trakeena",
+      "name": "Trakeena",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "trakeena"
+    },
+    {
+      "id": 73,
+      "slug": "wizard-of-deception",
+      "name": "Wizard of Deception",
+      "monster_type": "boss",
+      "nemesis_effect": null,
+      "ownerId": "wizard_of_deception"
+    },
+    {
+      "id": 11,
+      "slug": "blue-head-krybots",
+      "name": "Blue-Head Krybots",
+      "monster_type": "elite",
+      "nemesis_effect": null,
+      "ownerId": "blue_head_krybots"
+    },
+    {
+      "id": 13,
+      "slug": "rinshi-beast",
+      "name": "Rinshi Beast",
+      "monster_type": "elite",
+      "nemesis_effect": null,
+      "ownerId": "rinshi_beast"
+    },
+    {
+      "id": 5,
+      "slug": "chaos-putties",
+      "name": "Chaos Putties",
+      "monster_type": "foot",
+      "nemesis_effect": null,
+      "ownerId": "chaos_putties"
+    },
+    {
+      "id": 6,
+      "slug": "cogs",
+      "name": "Cogs",
+      "monster_type": "foot",
+      "nemesis_effect": null,
+      "ownerId": "cogs"
+    },
+    {
+      "id": 8,
+      "slug": "cyclobots",
+      "name": "Cyclobots",
+      "monster_type": "foot",
+      "nemesis_effect": null,
+      "ownerId": "cyclobots"
+    },
+    {
+      "id": 10,
+      "slug": "krybots",
+      "name": "Krybots",
+      "monster_type": "foot",
+      "nemesis_effect": null,
+      "ownerId": "krybots"
+    },
+    {
+      "id": 15,
+      "slug": "mastodon-troopers",
+      "name": "Mastodon Troopers",
+      "monster_type": "foot",
+      "nemesis_effect": null,
+      "ownerId": "mastodon_troopers"
+    },
+    {
+      "id": 7,
+      "slug": "quantrons",
+      "name": "Quantrons",
+      "monster_type": "foot",
+      "nemesis_effect": null,
+      "ownerId": "quantrons"
+    },
+    {
+      "id": 16,
+      "slug": "ranger-sentries",
+      "name": "Ranger Sentries",
+      "monster_type": "foot",
+      "nemesis_effect": null,
+      "ownerId": "ranger_sentries"
+    },
+    {
+      "id": 12,
+      "slug": "rinshi",
+      "name": "Rinshi",
+      "monster_type": "foot",
+      "nemesis_effect": null,
+      "ownerId": "rinshi"
+    },
+    {
+      "id": 2,
+      "slug": "super-putty-patrollers",
+      "name": "Super Putty Patrollers",
+      "monster_type": "foot",
+      "nemesis_effect": null,
+      "ownerId": "super_putty_patrollers"
+    },
+    {
+      "id": 4,
+      "slug": "tenga-warriors-errata",
+      "name": "Tenga Warriors (Errata)",
+      "monster_type": "foot",
+      "nemesis_effect": null,
+      "ownerId": "tenga_warriors_errata"
+    },
+    {
+      "id": 101,
+      "slug": "tenga-warriors-original",
+      "name": "Tenga Warriors (Original)",
+      "monster_type": "foot",
+      "nemesis_effect": null,
+      "ownerId": "tenga_warriors_original"
+    },
+    {
+      "id": 14,
+      "slug": "tronics",
+      "name": "Tronics",
+      "monster_type": "foot",
+      "nemesis_effect": null,
+      "ownerId": "tronics"
+    },
+    {
+      "id": 9,
+      "slug": "tyrannodrones",
+      "name": "Tyrannodrones",
+      "monster_type": "foot",
+      "nemesis_effect": null,
+      "ownerId": "tyrannodrones"
+    },
+    {
+      "id": 3,
+      "slug": "z-putty-patrollers-errata",
+      "name": "Z Putty Patrollers (Errata)",
+      "monster_type": "foot",
+      "nemesis_effect": null,
+      "ownerId": "z_putty_patrollers_errata"
+    },
+    {
+      "id": 100,
+      "slug": "z-putty-patrollers-original",
+      "name": "Z Putty Patrollers (Original)",
+      "monster_type": "foot",
+      "nemesis_effect": null,
+      "ownerId": "z_putty_patrollers_original"
+    },
+    {
+      "id": 35,
+      "slug": "baboo",
+      "name": "Baboo",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "baboo"
+    },
+    {
+      "id": 54,
+      "slug": "black-dragon",
+      "name": "Black Dragon",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "black_dragon"
+    },
+    {
+      "id": 51,
+      "slug": "blaze",
+      "name": "Blaze",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "blaze"
+    },
+    {
+      "id": 17,
+      "slug": "bones",
+      "name": "Bones",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "bones"
+    },
+    {
+      "id": 29,
+      "slug": "commander-crayfish",
+      "name": "Commander Crayfish",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "commander_crayfish"
+    },
+    {
+      "id": 45,
+      "slug": "cursed-tyzon",
+      "name": "Cursed Tyzon",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "cursed_tyzon"
+    },
+    {
+      "id": 39,
+      "slug": "darkonda",
+      "name": "Darkonda",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "darkonda"
+    },
+    {
+      "id": 40,
+      "slug": "ecliptor",
+      "name": "Ecliptor",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "ecliptor"
+    },
+    {
+      "id": 43,
+      "slug": "elsa",
+      "name": "Elsa",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "elsa"
+    },
+    {
+      "id": 42,
+      "slug": "evil-dino-thunder-white",
+      "name": "Evil Dino Thunder White",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "evil_dino_thunder_white"
+    },
+    {
+      "id": 50,
+      "slug": "evil-robot-tommy",
+      "name": "Evil Robot Tommy",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "evil_robot_tommy"
+    },
+    {
+      "id": 28,
+      "slug": "eye-guy",
+      "name": "Eye Guy",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "eye_guy"
+    },
+    {
+      "id": 23,
+      "slug": "finister",
+      "name": "Finister",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "finister"
+    },
+    {
+      "id": 41,
+      "slug": "frax",
+      "name": "Frax",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "frax"
+    },
+    {
+      "id": 38,
+      "slug": "general-venjix",
+      "name": "General Venjix",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "general_venjix"
+    },
+    {
+      "id": 47,
+      "slug": "heximas",
+      "name": "Heximas",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "heximas"
+    },
+    {
+      "id": 31,
+      "slug": "king-sphinx",
+      "name": "King Sphinx",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "king_sphinx"
+    },
+    {
+      "id": 20,
+      "slug": "knasty-knight",
+      "name": "Knasty Knight",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "knasty_knight"
+    },
+    {
+      "id": 44,
+      "slug": "koragg",
+      "name": "Koragg",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "koragg"
+    },
+    {
+      "id": 21,
+      "slug": "madame-woe",
+      "name": "Madame Woe",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "madame_woe"
+    },
+    {
+      "id": 33,
+      "slug": "pirantishead",
+      "name": "Pirantishead",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "pirantishead"
+    },
+    {
+      "id": 49,
+      "slug": "poisandra",
+      "name": "Poisandra",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "poisandra"
+    },
+    {
+      "id": 30,
+      "slug": "polluticorn",
+      "name": "Polluticorn",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "polluticorn"
+    },
+    {
+      "id": 26,
+      "slug": "primator",
+      "name": "Primator",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "primator"
+    },
+    {
+      "id": 36,
+      "slug": "prince-gasket",
+      "name": "Prince Gasket",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "prince_gasket"
+    },
+    {
+      "id": 37,
+      "slug": "princess-archerina",
+      "name": "Princess Archerina",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "princess_archerina"
+    },
+    {
+      "id": 18,
+      "slug": "pudgy-pig-base",
+      "name": "Pudgy Pig (Base)",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "pudgy_pig_base"
+    },
+    {
+      "id": 19,
+      "slug": "pudgy-pig-vp3",
+      "name": "Pudgy Pig (VP3)",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "pudgy_pig_vp3"
+    },
+    {
+      "id": 24,
+      "slug": "pumpkin-rapper",
+      "name": "Pumpkin Rapper",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "pumpkin_rapper"
+    },
+    {
+      "id": 53,
+      "slug": "ranger-slayer",
+      "name": "Ranger Slayer",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "ranger_slayer"
+    },
+    {
+      "id": 27,
+      "slug": "rhinoblaster",
+      "name": "Rhinoblaster",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "rhinoblaster"
+    },
+    {
+      "id": 25,
+      "slug": "robogoat",
+      "name": "Robogoat",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "robogoat"
+    },
+    {
+      "id": 52,
+      "slug": "roxy",
+      "name": "Roxy",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "roxy"
+    },
+    {
+      "id": 48,
+      "slug": "snide",
+      "name": "Snide",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "snide"
+    },
+    {
+      "id": 34,
+      "slug": "squatt",
+      "name": "Squatt",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "squatt"
+    },
+    {
+      "id": 46,
+      "slug": "tenaya-7",
+      "name": "Tenaya 7",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "tenaya_7"
+    },
+    {
+      "id": 32,
+      "slug": "terror-toad",
+      "name": "Terror Toad",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "terror_toad"
+    },
+    {
+      "id": 97,
+      "slug": "vypra",
+      "name": "Vypra",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "vypra"
+    },
+    {
+      "id": 96,
+      "slug": "zurgane",
+      "name": "Zurgane",
+      "monster_type": "monster",
+      "nemesis_effect": null,
+      "ownerId": "zurgane"
+    },
     {
       "id": 67,
       "slug": "dayne",
@@ -124,531 +1526,10 @@
     }
   ],
   "missingEnemiesByType": {
-    "foot": 0,
-    "monster": 0,
-    "boss": 0,
+    "foot": 15,
+    "monster": 39,
+    "boss": 31,
     "nemesis": 14
   },
-  "deckDiffs": [
-    {
-      "slug": "jason-lee-scott-leadership",
-      "slugSnake": "jason_lee_scott_leadership",
-      "diffs": [
-        {
-          "name": "TEAM TACTICS",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "LEAD THE CHARGE",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "TYRANNO SLASH",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "BLOCK",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "jason-lee-scott-it-s-morphin-time",
-      "slugSnake": "jason_lee_scott_it_s_morphin_time",
-      "diffs": [
-        {
-          "name": "TEAM TACTICS",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "LEAD THE CHARGE",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "TYRANNO SLASH",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "BLOCK",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "jason-lee-scott-legacy-of-the-dragon",
-      "slugSnake": "jason_lee_scott_legacy_of_the_dragon",
-      "diffs": [
-        {
-          "name": "TEAM TACTICS",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "LEAD THE CHARGE",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "TYRANNO SLASH",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "BLOCK",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "grace-sterling-the-greater-good",
-      "slugSnake": "grace_sterling_the_greater_good",
-      "diffs": [
-        {
-          "name": "TEAM TACTICS",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "LEAD THE CHARGE",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "TYRANNO SLASH",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "BLOCK",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "rocky-desantos-bravery",
-      "slugSnake": "rocky_desantos_bravery",
-      "diffs": [
-        {
-          "name": "RISKY MOVES",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "HAYMAKER",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "STURDY BLOW",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "SQUARE UP",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "trini-kwan-double-strike",
-      "slugSnake": "trini_kwan_double_strike",
-      "diffs": [
-        {
-          "name": "PRECISE STRIKE",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "TWIN-FANG TEAMWORK",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "TENACITY",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "SABERTOOTH STRIKE",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "trini-kwan-i-ve-seen-that-before-i-m-not-afraid-of-it",
-      "slugSnake": "trini_kwan_i_ve_seen_that_before_i_m_not_afraid_of_it",
-      "diffs": [
-        {
-          "name": "PRECISE STRIKE",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "TWIN-FANG TEAMWORK",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "TENACITY",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "SABERTOOTH STRIKE",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "mihn-kwan-",
-      "slugSnake": "mihn_kwan_",
-      "diffs": [
-        {
-          "name": "PRECISE STRIKE",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "TWIN-FANG TEAMWORK",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "TENACITY",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "SABERTOOTH STRIKE",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "aisha-campbell-momentum",
-      "slugSnake": "aisha_campbell_momentum",
-      "diffs": [
-        {
-          "name": "SNAP KICK",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "DOUBLE UP",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "UNSTOPPABLE FORCE",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "GRIFFIN STRIKE",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "billy-cranston-strategize",
-      "slugSnake": "billy_cranston_strategize",
-      "diffs": [
-        {
-          "name": "COUNTER JAB",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "KNOWLEDGE IS POWER",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "TACTICAL STRIKE",
-          "hg": 3,
-          "hotg": 2
-        },
-        {
-          "name": "MIGHTY MACES",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "billy-cranston-brains-of-the-team",
-      "slugSnake": "billy_cranston_brains_of_the_team",
-      "diffs": [
-        {
-          "name": "COUNTER JAB",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "KNOWLEDGE IS POWER",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "TACTICAL STRIKE",
-          "hg": 3,
-          "hotg": 2
-        },
-        {
-          "name": "MIGHTY MACES",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "billy-cranston-still",
-      "slugSnake": "billy_cranston_still",
-      "diffs": [
-        {
-          "name": "COUNTER JAB",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "KNOWLEDGE IS POWER",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "TACTICAL STRIKE",
-          "hg": 3,
-          "hotg": 2
-        },
-        {
-          "name": "MIGHTY MACES",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "kimberly-ann-hart-quick-shot",
-      "slugSnake": "kimberly_ann_hart_quick_shot",
-      "diffs": [
-        {
-          "name": "TAKE AIM",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "ARROW SHOT",
-          "hg": 3,
-          "hotg": 2
-        },
-        {
-          "name": "FLYING KICK",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "ACROBATICS",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "kimberly-ann-hart-gymnast-s-balance",
-      "slugSnake": "kimberly_ann_hart_gymnast_s_balance",
-      "diffs": [
-        {
-          "name": "TAKE AIM",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "ARROW SHOT",
-          "hg": 3,
-          "hotg": 2
-        },
-        {
-          "name": "FLYING KICK",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "ACROBATICS",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "olivia-hart-heart",
-      "slugSnake": "olivia_hart_heart",
-      "diffs": [
-        {
-          "name": "TAKE AIM",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "ARROW SHOT",
-          "hg": 3,
-          "hotg": 2
-        },
-        {
-          "name": "FLYING KICK",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "ACROBATICS",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "kat-hillard-agile",
-      "slugSnake": "kat_hillard_agile",
-      "diffs": [
-        {
-          "name": "AGILE SHOT",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "FANCY FOOTWORK",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "CAT’S GRACE",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "TAI-CHI COMBO",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "zack-taylor-hip-hop-kido",
-      "slugSnake": "zack_taylor_hip_hop_kido",
-      "diffs": [
-        {
-          "name": "RECKLESS BLOW",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "SMOOTH MOVES",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "MAMMOTH SLAM",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "SWEEPING STRIKE",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "zack-taylor-time-for-my-slamma-jamma-double-whamma-hip-hoppit-cause-ya-can-t-stop-it-big-disgrace-cause-it-s-in-your-face-long-shot",
-      "slugSnake": "zack_taylor_time_for_my_slamma_jamma_double_whamma_hip_hoppit_cause_ya_can_t_stop_it_big_disgrace_cause_it_s_in_your_face_long_shot",
-      "diffs": [
-        {
-          "name": "RECKLESS BLOW",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "SMOOTH MOVES",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "MAMMOTH SLAM",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "SWEEPING STRIKE",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "adam-park-adaptable",
-      "slugSnake": "adam_park_adaptable",
-      "diffs": [
-        {
-          "name": "RAPID HIT",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "EXPLOIT OPENING",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "LEAPFROG STRIKE",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "COSMIC CANNON",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    },
-    {
-      "slug": "adam-park-defender-vest",
-      "slugSnake": "adam_park_defender_vest",
-      "diffs": [
-        {
-          "name": "RAPID HIT",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "EXPLOIT OPENING",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "LEAPFROG STRIKE",
-          "hg": 2,
-          "hotg": 1
-        },
-        {
-          "name": "COSMIC CANNON",
-          "hg": 2,
-          "hotg": 1
-        }
-      ]
-    }
-  ]
+  "deckDiffs": []
 }
